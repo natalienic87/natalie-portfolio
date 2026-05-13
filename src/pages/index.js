@@ -3,6 +3,7 @@ import Hero from '../components/Hero';
 import LogoScroll from '../components/LogoScroll';
 import Exhibition from '../components/Exhibition';
 import About from '../components/About';
+import Career from '../components/Career';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <LogoScroll />
       <Exhibition />
       <About />
+      <Career />
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const pills = [
   { src: '/images/4-about/3-branding-pill.png',      alt: 'Branding' },
@@ -12,222 +12,239 @@ const pills = [
   { src: '/images/4-about/11-soundesign-pill.png',   alt: 'Sound Design' },
 ];
 
-const testimonials = [
-  {
-    color: '#FDB154',
-    textDark: true,
-    quote: 'I\u2019m convinced she is the next big thing.',
-    name: 'Pinkie',
-    title: 'Branding & Creative Lead',
-    source: 'SUBSTACK',
-    featured: false,
-  },
-  {
-    color: '#D2D7F5',
-    textDark: true,
-    quote: 'Natalie is such a talented, positive and energetic force. Every creative piece she tackles is imbued with a unique and bespoke flair.',
-    name: 'Alyssa J.',
-    title: 'Sr. UX Content Designer',
-    source: 'LINKEDIN',
-    featured: false,
-  },
-  {
-    color: '#E35038',
-    textDark: false,
-    quote: 'I\u2019m convinced she is the next big thing.',
-    name: 'Pinkie',
-    title: 'Branding & Creative Lead',
-    source: 'SUBSTACK',
-    featured: true,
-  },
+const testimonialCards = [
+  '/images/4-about/T1-Taylor Testimonial.png',
+  '/images/4-about/T2-Alyssa J Testimonial.png',
+  '/images/4-about/T3-Pinkie Testimonial.png',
+  '/images/4-about/T4-Nancy C Testinonial.png',
+  '/images/4-about/T5-Alyssa F Testimonial.png',
+  '/images/4-about/T6-Michael G Testimonial.png',
+  '/images/4-about/T7-Halle R Testimonial.png',
+  '/images/4-about/T8-Courtney I Testimonial.png',
 ];
 
-function TestimonialCard({ color, textDark, quote, name, title, source, featured }) {
-  const text  = textDark ? '#101010' : '#FEFEFE';
-  const muted = textDark ? 'rgba(0,0,0,0.45)' : 'rgba(255,255,255,0.55)';
-  const quoteMarkColor = textDark ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.2)';
-  const dividerColor   = textDark ? 'rgba(0,0,0,0.2)'  : 'rgba(255,255,255,0.35)';
+const GAP        = 40;  // px between cards
+const CARD_W_PCT = 30;  // % of container width — cards slightly smaller so hover scale has room
+
+function Carousel({ cards }) {
+  const deck = [...cards, ...cards, ...cards]; // triple for seamless loop
+
+  const containerRef  = useRef(null);
+  const trackRef      = useRef(null);
+  const offsetRef     = useRef(0);
+  const stepRef       = useRef(0);
+  const setWRef       = useRef(0);
+  const dragRef       = useRef({ active: false, startX: 0, startOffset: 0 });
+  const animRef       = useRef(null);
+  const snapTimerRef  = useRef(null);
+  const scrollAccumRef = useRef(0); // total deltaX since last snap, for direction detection
+  const [activeDot, setActiveDot] = useState(0);
+  const [dragging, setDragging]   = useState(false);
+
+  const applyTransform = () => {
+    if (!trackRef.current) return;
+    trackRef.current.style.transform = `translateX(-${offsetRef.current}px)`;
+    const step = stepRef.current;
+    const setW = setWRef.current;
+    if (step > 0) {
+      const dot = Math.floor((offsetRef.current - setW) / step) % cards.length;
+      if (dot >= 0 && dot < cards.length) setActiveDot(dot);
+    }
+  };
+
+  const normalize = () => {
+    const setW = setWRef.current;
+    if (offsetRef.current >= 2 * setW) offsetRef.current -= setW;
+    if (offsetRef.current <      setW) offsetRef.current += setW;
+  };
+
+  const animateTo = (target) => {
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    const start    = offsetRef.current;
+    const diff     = target - start;
+    const duration = 500;
+    const t0       = performance.now();
+
+    const tick = (now) => {
+      const p    = Math.min((now - t0) / duration, 1);
+      const ease = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; // ease-in-out cubic
+      offsetRef.current = start + diff * ease;
+      applyTransform();
+      if (p < 1) { animRef.current = requestAnimationFrame(tick); }
+      else        { normalize(); applyTransform(); }
+    };
+    animRef.current = requestAnimationFrame(tick);
+  };
+
+  const snapDirectional = () => {
+    const step  = stepRef.current;
+    const setW  = setWRef.current;
+    const accum = scrollAccumRef.current;
+    scrollAccumRef.current = 0;
+
+    // cardFloat: fractional position within the card sequence
+    const cardFloat = (offsetRef.current - setW - step * 0.7) / step;
+
+    let target;
+    if (accum > 5) {
+      // scrolled right → always advance to next card, never go back
+      target = Math.floor(cardFloat) + 1;
+    } else if (accum < -5) {
+      // scrolled left → always go to previous card
+      target = Math.ceil(cardFloat) - 1;
+    } else {
+      // tiny nudge → nearest
+      target = Math.round(cardFloat);
+    }
+
+    animateTo(setW + target * step + step * 0.7);
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const cardPx = container.clientWidth * CARD_W_PCT / 100;
+    const step   = cardPx + GAP;
+    const setW   = cards.length * step;
+    stepRef.current = step;
+    setWRef.current = setW;
+    offsetRef.current = setW + step * 0.7; // start with left-peek visible
+    applyTransform();
+
+    // Non-passive wheel listener so we can preventDefault on horizontal swipe.
+    // Mac trackpad sends many small deltaX events during momentum — we wait until
+    // they taper off (< 1.5px) before snapping, so momentum feels uninterrupted.
+    const handleWheel = (e) => {
+      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+      offsetRef.current += e.deltaX;
+      scrollAccumRef.current += e.deltaX;
+      normalize();
+      applyTransform();
+      clearTimeout(snapTimerRef.current);
+      const delay = Math.abs(e.deltaX) < 1.5 ? 80 : 450;
+      snapTimerRef.current = setTimeout(snapDirectional, delay);
+    };
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    return () => container.removeEventListener('wheel', handleWheel);
+  }, [cards.length]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Drag handlers ──────────────────────────────────────────────────────────
+  const onMouseDown = (e) => {
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    dragRef.current = { active: true, startX: e.clientX, startOffset: offsetRef.current };
+    setDragging(true);
+  };
+  const onMouseMove = (e) => {
+    if (!dragRef.current.active) return;
+    offsetRef.current = dragRef.current.startOffset + (dragRef.current.startX - e.clientX);
+    normalize();
+    applyTransform();
+  };
+  const onDragEnd = () => {
+    if (!dragRef.current.active) return;
+    const dragDelta = offsetRef.current - dragRef.current.startOffset;
+    dragRef.current.active = false;
+    setDragging(false);
+    scrollAccumRef.current = dragDelta;
+    snapDirectional();
+  };
+
+  // ── Arrow / dot navigation ─────────────────────────────────────────────────
+  const goNext = () => {
+    const t = offsetRef.current + stepRef.current;
+    animateTo(t >= 2 * setWRef.current ? t - setWRef.current : t);
+  };
+  const goPrev = () => {
+    const t = offsetRef.current - stepRef.current;
+    animateTo(t < setWRef.current ? t + setWRef.current : t);
+  };
+  const goTo = (i) => {
+    animateTo(setWRef.current + stepRef.current * i + stepRef.current * 0.7);
+    setActiveDot(i);
+  };
+
+  const arrowStyle = {
+    width: '40px', height: '40px', borderRadius: '50%',
+    border: '1px solid rgba(255,255,255,0.5)', background: 'transparent',
+    color: '#FEFEFE', fontSize: '16px', cursor: 'pointer',
+    display: 'flex', alignItems: 'center', justifyContent: 'center',
+    flexShrink: 0,
+  };
 
   return (
     <div
-      style={{
-        backgroundColor: color,
-        borderRadius: '20px',
-        padding: '36px 28px 28px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        minHeight: '400px',
-        height: '100%',
-      }}
+      ref={containerRef}
+      onMouseDown={onMouseDown}
+      onMouseMove={onMouseMove}
+      onMouseUp={onDragEnd}
+      onMouseLeave={onDragEnd}
+      style={{ cursor: dragging ? 'grabbing' : 'grab', userSelect: 'none' }}
     >
-      {/* Opening quote mark */}
-      <span
-        style={{
-          fontFamily: 'Georgia, serif',
-          fontSize: '72px',
-          lineHeight: 1,
-          color: quoteMarkColor,
-          marginBottom: '8px',
-          alignSelf: 'flex-start',
-        }}
-      >
-        &#x201C;
-      </span>
-
-      {/* Quote */}
-      <p
-        className="font-heading font-medium text-center"
-        style={{
-          fontSize: featured ? '28px' : '17px',
-          lineHeight: featured ? '1.3' : '1.6',
-          color: text,
-          flex: 1,
-        }}
-      >
-        {quote}
-      </p>
-
-      {/* Dashed divider */}
-      <div
-        style={{
-          width: '48px',
-          borderTop: `1px dashed ${dividerColor}`,
-          margin: '24px 0',
-        }}
-      />
-
-      {/* Name */}
-      <p
-        className="font-body font-bold uppercase tracking-widest"
-        style={{ fontSize: '12px', color: text, letterSpacing: '0.15em' }}
-      >
-        {name}
-      </p>
-
-      {/* Title */}
-      <p
-        className="font-body uppercase"
-        style={{ fontSize: '10px', color: muted, marginTop: '4px', letterSpacing: '0.1em' }}
-      >
-        {title}
-      </p>
-
-      {/* Source */}
-      <div style={{ marginTop: '20px', textAlign: 'center' }}>
-        <p className="font-body uppercase" style={{ fontSize: '10px', color: muted, letterSpacing: '0.15em', lineHeight: 1.8 }}>
-          +<br />{source}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function Carousel({ items }) {
-  const [index, setIndex] = useState(0);
-  const total = items.length;
-
-  const prev = () => setIndex(i => Math.max(0, i - 1));
-  const next = () => setIndex(i => Math.min(total - 1, i + 1));
-
-  return (
-    <div>
-      {/* Track — 3 cards visible, translate by 1 card + gap per step */}
-      <div style={{ overflow: 'hidden' }}>
-        <div
-          style={{
-            display: 'flex',
-            gap: '24px',
-            transition: 'transform 0.5s ease',
-            // Each card is 1/3 of container minus gap share; step = card + gap
-            transform: `translateX(calc(-${index} * (33.333% + 8px)))`,
-          }}
-        >
-          {items.map((item, i) => (
-            <div
-              key={i}
-              style={{ flex: '0 0 calc(33.333% - 16px)', minWidth: 0 }}
-            >
-              <TestimonialCard {...item} />
+      {/* overflowX: clip prevents horizontal scroll without creating a scroll container,
+          so overflowY stays truly visible — shadow/scale never clips top or bottom.
+          Padding gives vertical breathing room; horizontal edge shadow is unavoidable at full-width. */}
+      <div style={{ overflowX: 'clip', padding: '40px 0' }}>
+        <div ref={trackRef} style={{ display: 'flex', gap: `${GAP}px`, willChange: 'transform' }}>
+          {deck.map((src, i) => (
+            <div key={i} className="testimonial-card" style={{ flex: `0 0 ${CARD_W_PCT}%`, minWidth: 0 }}>
+              <img
+                src={src} alt="" draggable={false}
+                style={{
+                  width: '100%', height: 'auto', display: 'block',
+                  borderRadius: '20px',
+                  boxShadow: '0 6px 24px rgba(0,0,0,0.18)',
+                  pointerEvents: 'none',
+                }}
+              />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Arrows + dots */}
+      {/* Arrows + dots — padded back in since carousel is full-width */}
       <div
         className="flex items-center justify-center"
-        style={{ gap: '16px', marginTop: '40px' }}
+        style={{ gap: '16px', marginTop: '40px', paddingBottom: '80px' }}
+        onMouseDown={e => e.stopPropagation()}
       >
-        {/* Prev arrow */}
-        <button
-          onClick={prev}
-          disabled={index === 0}
-          style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            border: '1px solid rgba(255,255,255,0.5)',
-            background: 'transparent',
-            color: '#FEFEFE',
-            fontSize: '16px',
-            cursor: index === 0 ? 'default' : 'pointer',
-            opacity: index === 0 ? 0.3 : 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          ←
-        </button>
+        <button onClick={goPrev} style={arrowStyle}>←</button>
 
-        {/* Dots */}
-        {items.map((_, i) => (
+        {cards.map((_, i) => (
           <button
-            key={i}
-            onClick={() => setIndex(i)}
+            key={i} onClick={() => goTo(i)}
             style={{
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              background: i === index ? '#FEFEFE' : 'transparent',
+              width: '8px', height: '8px', borderRadius: '50%',
+              background: i === activeDot ? '#FEFEFE' : 'transparent',
               border: '1px solid rgba(255,255,255,0.6)',
-              padding: 0,
-              cursor: 'pointer',
-              transition: 'background 0.2s',
+              padding: 0, cursor: 'pointer', transition: 'background 0.2s',
             }}
           />
         ))}
 
-        {/* Next arrow */}
-        <button
-          onClick={next}
-          disabled={index === total - 1}
-          style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            border: '1px solid rgba(255,255,255,0.5)',
-            background: 'transparent',
-            color: '#FEFEFE',
-            fontSize: '16px',
-            cursor: index === total - 1 ? 'default' : 'pointer',
-            opacity: index === total - 1 ? 0.3 : 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          →
-        </button>
+        <button onClick={goNext} style={arrowStyle}>→</button>
       </div>
     </div>
   );
 }
 
 export default function About() {
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { setInView(entry.isIntersecting); },
+      { threshold: 0.15 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       style={{ marginTop: '60px', position: 'relative', overflow: 'hidden' }}
     >
       {/* ── Background ── */}
@@ -243,11 +260,29 @@ export default function About() {
       />
 
       {/* ── Decorative elements ── */}
-      {/* Large ellipse — top right */}
-      <div
-        style={{ position: 'absolute', top: '-40px', right: '-20px', opacity: 0.5, zIndex: 1 }}
-      >
-        <img src="/images/4-about/large-ellipse.svg" alt="" className="animate-spin-ellipse" />
+      {/* Spinning ellipse + starburst — top right */}
+      <div style={{ position: 'absolute', top: '-40px', right: '-20px', zIndex: 1 }}>
+        <img
+          src="/images/4-about/Ellipse 33.svg"
+          alt=""
+          className="animate-spin-ellipse"
+          style={{ opacity: 0.6, display: 'block' }}
+        />
+        {/* Starburst — positioned in the visible quadrant of the ellipse */}
+        <img
+          src="/images/4-about/STARBURST 1.png"
+          alt=""
+          className="animate-pulse-star"
+          style={{
+            position: 'absolute',
+            top: '52%',
+            left: '18%',
+            width: '72px',
+            height: 'auto',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 2,
+          }}
+        />
       </div>
 
       {/* Small ellipse — lower left */}
@@ -273,17 +308,22 @@ export default function About() {
 
         {/* Section label */}
         <p
-          className="font-body font-bold text-center text-off-white"
-          style={{ fontSize: '12px', letterSpacing: '0.28em', marginBottom: '48px' }}
+          className="font-body font-bold text-center"
+          style={{ fontSize: '18px', letterSpacing: '0.3em', marginBottom: '48px', color: '#101010' }}
         >
           PART DIRECTOR. PART BUILDER. FULLY HUMAN.
         </p>
 
         {/* 2-column layout — true 50/50 */}
-        <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
-          {/* Left — headshot, 50% */}
-          <div style={{ flex: '0 0 calc(50% - 30px)' }}>
+          {/* Left — headshot, 50% — crossfades to hover image on mouse over */}
+          <div
+            style={{ flex: '0 0 calc(50% - 30px)', position: 'relative', opacity: inView ? undefined : 0, animation: inView ? 'slide-in-left 0.6s ease-out forwards' : 'none' }}
+            onMouseEnter={e => e.currentTarget.querySelector('.headshot-hover-img').style.opacity = 1}
+            onMouseLeave={e => e.currentTarget.querySelector('.headshot-hover-img').style.opacity = 0}
+          >
+            {/* Base image */}
             <img
               src="/images/4-about/2-headshot.jpg"
               alt="Natalie Nicholson"
@@ -295,10 +335,28 @@ export default function About() {
                 boxShadow: '4px 4px 20px 5px rgba(0,0,0,0.25)',
               }}
             />
+            {/* Hover image — sits on top, fades in on hover */}
+            <img
+              src="/images/4-about/2-Nat headshot-hover.jpg"
+              alt=""
+              aria-hidden="true"
+              className="headshot-hover-img"
+              style={{
+                position: 'absolute',
+                top: 0, left: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: '20px',
+                opacity: 0,
+                transition: 'opacity 0.4s ease',
+                boxShadow: '4px 4px 20px 5px rgba(0,0,0,0.25)',
+              }}
+            />
           </div>
 
           {/* Right — 50% column, text constrained to 430px */}
-          <div style={{ flex: '0 0 calc(50% - 30px)', paddingTop: '8px' }}>
+          <div style={{ flex: '0 0 calc(50% - 30px)', opacity: inView ? undefined : 0, animation: inView ? 'slide-in-right 0.6s ease-out forwards' : 'none' }}>
           <div style={{ maxWidth: '430px' }}>
             <h2
               className="font-heading font-medium"
@@ -320,9 +378,25 @@ export default function About() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '32px' }}>
               {[pills.slice(0, 3), pills.slice(3, 6), pills.slice(6, 9)].map((row, rowIdx) => (
                 <div key={rowIdx} style={{ display: 'flex', gap: '10px' }}>
-                  {row.map(({ src, alt }) => (
-                    <img key={src} src={src} alt={alt} style={{ height: '39px', width: 'auto', display: 'block' }} />
-                  ))}
+                  {row.map(({ src, alt }, colIdx) => {
+                    const delay = (rowIdx * 3 + colIdx) * 0.09;
+                    return (
+                      <div key={src} className="pill-wiggle" style={{ display: 'inline-block' }}>
+                        <img
+                          src={src}
+                          alt={alt}
+                          style={{
+                            height: '39px',
+                            width: 'auto',
+                            display: 'block',
+                            filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.2))',
+                            opacity: inView ? undefined : 0,
+                            animation: inView ? `pop-in 0.6s ease-out ${delay}s forwards` : 'none',
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               ))}
             </div>
@@ -341,24 +415,25 @@ export default function About() {
       </div>
 
       {/* ── PART 2: Testimonials ──────────────────────────────────── */}
-      <div style={{ padding: '60px 80px 80px' }}>
 
-        {/* Labels */}
-        <p
-          className="font-body font-bold text-center text-off-white uppercase"
-          style={{ fontSize: '12px', letterSpacing: '0.28em', marginBottom: '8px' }}
-        >
-          Kind Words on LinkedIn and Substack
-        </p>
-        <p
-          className="font-body text-center uppercase"
-          style={{ fontSize: '11px', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.55)', marginBottom: '48px' }}
-        >
-          From Former Colleagues and Collaborators
-        </p>
+        {/* Labels — padded normally */}
+        <div style={{ padding: '60px 80px 48px' }}>
+          <p
+            className="font-body font-bold text-center uppercase"
+            style={{ fontSize: '18px', letterSpacing: '0.3em', marginBottom: '8px', color: '#101010' }}
+          >
+            Kind Words on LinkedIn and Substack
+          </p>
+          <p
+            className="font-body font-bold text-center uppercase"
+            style={{ fontSize: '10px', letterSpacing: '0.3em', color: '#101010' }}
+          >
+            From Former Colleagues and Collaborators
+          </p>
+        </div>
 
-        <Carousel items={testimonials} />
-      </div>
+        {/* Carousel — full width, no side padding */}
+        <Carousel cards={testimonialCards} />
       </div>{/* end content wrapper */}
     </section>
   );

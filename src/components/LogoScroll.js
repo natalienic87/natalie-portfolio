@@ -1,0 +1,65 @@
+// height values tuned for optical weight, not pixel height
+const logos = [
+  { src: '/images/2-logos/2-addventures-logo.svg',       alt: '(add)ventures',     h: 36 },
+  { src: '/images/2-logos/3-cvshealth-logo.svg',         alt: 'CVS Health',        h: 24 },
+  { src: '/images/2-logos/4-aetna-logo.svg',             alt: 'Aetna',             h: 28 },
+  { src: '/images/2-logos/5-stopnshop-logo.svg',         alt: 'Stop & Shop',       h: 32 },
+  { src: '/images/2-logos/6-mcp-logo.svg',               alt: 'MCP',               h: 36 },
+  { src: '/images/2-logos/7-bob-logo.svg',               alt: 'BOB',               h: 40 },
+  { src: '/images/2-logos/8-active-adventures-logo.svg', alt: 'Active Adventures', h: 32 },
+  { src: '/images/2-logos/9-austin-adventures-logo.svg', alt: 'Austin Adventures', h: 50 },
+  { src: '/images/2-logos/10-collette-logo.svg',         alt: 'Collette',          h: 30 },
+  { src: '/images/2-logos/11-raw-bar-logo.svg',          alt: 'Raw Bar',           h: 36 },
+];
+
+// Gap between every logo — including at the seam between loop repetitions
+const GAP = 80;
+
+export default function LogoScroll() {
+  return (
+    <section
+      className="mt-[60px] overflow-hidden"
+      style={{
+        backgroundImage: "url('/images/2-logos/1-background-paper.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* Label */}
+      <p
+        className="text-center font-body font-bold text-off-white/60"
+        style={{ fontSize: '14px', letterSpacing: '0.3em', paddingTop: '30px' }}
+      >
+        BRANDS I&apos;VE WORKED WITH
+      </p>
+
+      {/* Marquee */}
+      <div className="overflow-hidden" style={{ paddingTop: '24px', paddingBottom: '36px' }}>
+        {/*
+          Two identical sets side-by-side. Each set uses gap for inter-logo spacing
+          and paddingRight equal to the gap so the seam between set 1 and set 2
+          has the same spacing as every other gap. The outer track animates -50%,
+          which equals exactly one set width. Loop is perfectly seamless and even.
+        */}
+        <div className="flex shrink-0 items-center animate-marquee">
+          {[0, 1].map((setIdx) => (
+            <div
+              key={setIdx}
+              className="flex shrink-0 items-center"
+              style={{ gap: `${GAP}px`, paddingRight: `${GAP}px` }}
+            >
+              {logos.map(({ src, alt, h }, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt={alt}
+                  style={{ height: `${h}px`, width: 'auto', flexShrink: 0 }}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

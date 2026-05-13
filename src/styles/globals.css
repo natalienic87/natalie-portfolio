@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  background-color: #101010;
+  color: #FEFEFE;
+  font-family: 'Inter', sans-serif;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes spin-planet {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Whole element drifts horizontally as if carried by wind from the right */
+@keyframes fabric-blow {
+  0%   { transform: translateX(0px)   scaleY(1);    }
+  20%  { transform: translateX(-10px) scaleY(0.97); }
+  50%  { transform: translateX(-6px)  scaleY(1.02); }
+  75%  { transform: translateX(-9px)  scaleY(0.98); }
+  100% { transform: translateX(0px)   scaleY(1);    }
+}
+
+/* Cloud lazy drift — two distinct paths so clouds move independently */
+@keyframes cloud-drift-1 {
+  0%   { transform: translate(0px,   0px);  }
+  25%  { transform: translate(-9px, -6px);  }
+  55%  { transform: translate(-4px,  5px);  }
+  80%  { transform: translate(-8px, -3px);  }
+  100% { transform: translate(0px,   0px);  }
+}
+
+@keyframes cloud-drift-2 {
+  0%   { transform: translate(0px,  0px);  }
+  20%  { transform: translate(6px, -5px);  }
+  50%  { transform: translate(2px,  6px);  }
+  78%  { transform: translate(7px, -2px);  }
+  100% { transform: translate(0px,  0px);  }
+}
+
+/* Plant sway — pivots from base, leans gently side to side */
+@keyframes plant-sway {
+  0%   { transform: rotate(0deg)    translateX(0px);  }
+  28%  { transform: rotate(-2.5deg) translateX(-5px); }
+  60%  { transform: rotate(1.8deg)  translateX(4px);  }
+  82%  { transform: rotate(-1deg)   translateX(-2px); }
+  100% { transform: rotate(0deg)    translateX(0px);  }
+}
+
+/* Bullseye pulses inward — shrinks subtly then returns */
+@keyframes pulse-small {
+  0%, 100% { transform: scale(1);    }
+  50%       { transform: scale(0.88); }
+}
+
+/* Slow heartbeat pulse for star elements */
+@keyframes pulse-star {
+  0%, 100% { transform: scale(1);    }
+  50%       { transform: scale(1.09); }
+}
+
+.animate-float {
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.animate-spin-planet {
+  animation: spin-planet 28s linear infinite;
+}
+
+.animate-spin-ellipse {
+  animation: spin-ellipse 30s linear infinite;
+}
+
+.animate-spin-star {
+  animation: spin-ellipse 45s linear infinite;
+}
+
+@keyframes spin-ellipse {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+.animate-cloud-1 {
+  animation: cloud-drift-1 6s ease-in-out infinite;
+}
+
+/* Different duration + negative delay so it's already mid-cycle at load */
+.animate-cloud-2 {
+  animation: cloud-drift-2 8.5s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.animate-pulse-small {
+  animation: pulse-small 3.8s ease-in-out infinite;
+  animation-delay: -1.2s;
+  transform-origin: center center;
+}
+
+.animate-plant-sway {
+  animation: plant-sway 7s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-fabric-blow {
+  animation: fabric-blow 4.5s ease-in-out infinite;
+  transform-origin: right center;
+}
+
+.animate-pulse-star {
+  animation: pulse-star 2.5s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+/* Offset timing so stars don't pulse in unison */
+.animate-pulse-star-delay {
+  animation: pulse-star 2.5s ease-in-out infinite;
+  animation-delay: 0.8s;
+  transform-origin: center center;
+}
+
+.animate-pulse-star-delay-2 {
+  animation: pulse-star 2.5s ease-in-out infinite;
+  animation-delay: 1.5s;
+  transform-origin: center center;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}

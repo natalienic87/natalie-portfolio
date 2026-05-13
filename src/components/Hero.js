@@ -2,19 +2,19 @@
 const collageElements = [
   // ── Back layer ─────────────────────────────────────────────────────────────
   {
-    src: '/images/1-hero/10-GREN PLANT 1.png',
+    src: '/images/1-hero/GREN PLANT 1.png',
     style: { top: 'calc(12% + 20px)', right: '-3%', width: '22%' },
     z: 0,
     animClass: 'animate-fabric-blow',
   },
   {
-    src: '/images/1-hero/9-Spiral 1.png',
+    src: '/images/1-hero/Spiral 1.png',
     style: { top: '42%', left: '75%', width: '4.5%' },
     z: 10,
     animClass: 'animate-pulse-small',
   },
   {
-    src: '/images/1-hero/1-CLOUDS 1.png',
+    src: '/images/1-hero/CLOUDS 1.png',
     style: { bottom: 0, left: 'calc(-3% + 30px)', width: '16.2%' },
     z: 0,
     animClass: 'animate-cloud-1',
@@ -28,25 +28,25 @@ const collageElements = [
     animClass: 'animate-spin-star',
   },
   {
-    src: '/images/1-hero/4-PURPLE CLOUD 1.png',
+    src: '/images/1-hero/PURPLE CLOUD 1.png',
     style: { top: '8%', left: '26%', width: '10%' },
     z: 10,
     animClass: 'animate-cloud-2',
   },
   {
-    src: '/images/1-hero/7-Ellipse 33.svg',
+    src: '/images/1-hero/Ellipse 33.svg',
     style: { top: 'calc(10% + 40px)', left: '56%', width: '10.5%' },
     z: 12,
     animClass: 'animate-spin-ellipse',
   },
   {
-    src: '/images/1-hero/8-STARBURST 1.png',
+    src: '/images/1-hero/STARBURST 1.png',
     style: { top: '55%', left: '67.65%', width: '11.7%' },
     z: 13,
     animClass: 'animate-pulse-star-delay',
   },
   {
-    src: '/images/1-hero/2-WHITE STAR 1.png',
+    src: '/images/1-hero/WHITE STAR 1.png',
     style: { top: '62%', left: '37%', width: '3.5%' },
     z: 16,
     animClass: 'animate-pulse-star-delay-2',
@@ -61,7 +61,7 @@ export default function Hero() {
 
         {/* Purple plant — far right, full illustration height, bleeds off right edge */}
         <img
-          src="/images/1-hero/11-PURPLE PLANT 1.png"
+          src="/images/1-hero/PURPLE PLANT 1.png"
           alt=""
           className="absolute bottom-0 animate-plant-sway"
           style={{ right: '-2%', height: '54.4%', width: 'auto', zIndex: 20 }}
@@ -70,7 +70,7 @@ export default function Hero() {
         {/* Planet — outer div positions, inner div spins */}
         <div className="absolute" style={{ top: '50%', left: '15%', width: '16%', transform: 'translateY(-50%)', zIndex: 5 }}>
           <div className="animate-spin-planet">
-            <img src="/images/1-hero/3-PLANET 1.png" alt="" className="w-full h-auto" />
+            <img src="/images/1-hero/PLANET 1.png" alt="" className="w-full h-auto" />
           </div>
         </div>
 
@@ -81,7 +81,7 @@ export default function Hero() {
         >
           <div className="animate-float">
             <img
-              src="/images/1-hero/6-DOORWAY 1.png"
+              src="/images/1-hero/DOORWAY 1.png"
               alt="Creative Director standing in doorway"
               className="w-full h-auto"
             />

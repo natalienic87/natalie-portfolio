@@ -1,15 +1,15 @@
 // height values tuned for optical weight, not pixel height
 const logos = [
-  { src: '/images/2-logos/2-addventures-logo.svg',       alt: '(add)ventures',     h: 36 },
-  { src: '/images/2-logos/3-cvshealth-logo.svg',         alt: 'CVS Health',        h: 24 },
-  { src: '/images/2-logos/4-aetna-logo.svg',             alt: 'Aetna',             h: 28 },
-  { src: '/images/2-logos/5-stopnshop-logo.svg',         alt: 'Stop & Shop',       h: 32 },
-  { src: '/images/2-logos/6-mcp-logo.svg',               alt: 'MCP',               h: 36 },
-  { src: '/images/2-logos/7-bob-logo.svg',               alt: 'BOB',               h: 40 },
-  { src: '/images/2-logos/8-active-adventures-logo.svg', alt: 'Active Adventures', h: 32 },
-  { src: '/images/2-logos/9-austin-adventures-logo.svg', alt: 'Austin Adventures', h: 50 },
-  { src: '/images/2-logos/10-collette-logo.svg',         alt: 'Collette',          h: 30 },
-  { src: '/images/2-logos/11-raw-bar-logo.svg',          alt: 'Raw Bar',           h: 36 },
+  { src: '/images/2-logos/addventures logo.svg',       alt: '(add)ventures',     h: 36 },
+  { src: '/images/2-logos/cvs-logo.svg',               alt: 'CVS Health',        h: 24 },
+  { src: '/images/2-logos/aetna-logo.svg',             alt: 'Aetna',             h: 28 },
+  { src: '/images/2-logos/stopnstop-logo.svg',         alt: 'Stop & Shop',       h: 32 },
+  { src: '/images/2-logos/mcp-logo.svg',               alt: 'MCP',               h: 36 },
+  { src: '/images/2-logos/bob-logo.svg',               alt: 'BOB',               h: 40 },
+  { src: '/images/2-logos/activeadventures-logo.svg',  alt: 'Active Adventures', h: 32 },
+  { src: '/images/2-logos/austinadventures-logo.svg',  alt: 'Austin Adventures', h: 50 },
+  { src: '/images/2-logos/collette-logo.svg',          alt: 'Collette',          h: 30 },
+  { src: '/images/2-logos/RawBarLogoWhite 1.svg',      alt: 'Raw Bar',           h: 36 },
 ];
 
 // Gap between every logo — including at the seam between loop repetitions

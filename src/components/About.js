@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 
 const pills = [
   { src: '/images/4-about/3-branding-pill.png',      alt: 'Branding' },
@@ -226,77 +226,33 @@ function Carousel({ items }) {
 }
 
 export default function About() {
-  const sectionRef  = useRef(null);
-  const bgRef       = useRef(null);
-  const ellipse1Ref = useRef(null);
-  const ellipse2Ref = useRef(null);
-
-  useEffect(() => {
-    let rafId;
-
-    const onScroll = () => {
-      rafId = requestAnimationFrame(() => {
-        if (!sectionRef.current) return;
-        const rect = sectionRef.current.getBoundingClientRect();
-
-        // Skip when section is well out of view
-        if (rect.bottom < -100 || rect.top > window.innerHeight + 100) return;
-
-        // rect.top is positive below viewport, negative above.
-        // Multiplying by a small factor and translating opposite to scroll
-        // makes the layer appear to move slower than the content.
-        if (bgRef.current)
-          bgRef.current.style.transform = `translateY(${rect.top * 0.3}px)`;
-
-        if (ellipse1Ref.current)
-          ellipse1Ref.current.style.transform = `translateY(${rect.top * 0.18}px)`;
-
-        if (ellipse2Ref.current)
-          ellipse2Ref.current.style.transform = `translateY(${rect.top * 0.22}px)`;
-      });
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // apply on mount
-
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      cancelAnimationFrame(rafId);
-    };
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       style={{ marginTop: '60px', position: 'relative', overflow: 'hidden' }}
     >
-      {/* ── Parallax background — sits behind everything ── */}
+      {/* ── Background ── */}
       <div
-        ref={bgRef}
         style={{
           position: 'absolute',
-          top: '-30%', bottom: '-30%', left: 0, right: 0,
+          top: 0, bottom: 0, left: 0, right: 0,
           backgroundImage: "url('/images/4-about/1-purple-bg.jpg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           zIndex: 0,
-          willChange: 'transform',
         }}
       />
 
-      {/* ── Decorative elements — parallax at different rates ── */}
+      {/* ── Decorative elements ── */}
       {/* Large ellipse — top right */}
       <div
-        ref={ellipse1Ref}
-        style={{ position: 'absolute', top: '-40px', right: '-20px', opacity: 0.5, zIndex: 1, willChange: 'transform' }}
+        style={{ position: 'absolute', top: '-40px', right: '-20px', opacity: 0.5, zIndex: 1 }}
       >
         <img src="/images/4-about/large-ellipse.svg" alt="" className="animate-spin-ellipse" />
       </div>
 
       {/* Small ellipse — lower left */}
       <div
-        ref={ellipse2Ref}
-        style={{ position: 'absolute', bottom: '160px', left: '40px', opacity: 0.4, zIndex: 1, willChange: 'transform' }}
+        style={{ position: 'absolute', bottom: '160px', left: '40px', opacity: 0.4, zIndex: 1 }}
       >
         <img src="/images/4-about/small-ellipse.svg" alt="" className="animate-spin-ellipse" />
       </div>
@@ -360,10 +316,14 @@ export default function About() {
               </p>
             </div>
 
-            {/* Skill pills — 3 columns × 3 rows */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, max-content)', columnGap: '10px', rowGap: '15px', marginTop: '32px' }}>
-              {pills.map(({ src, alt }) => (
-                <img key={src} src={src} alt={alt} style={{ height: '38px', width: 'auto' }} />
+            {/* Skill pills — 3 explicit rows, 10px column gap, 15px row gap */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '32px' }}>
+              {[pills.slice(0, 3), pills.slice(3, 6), pills.slice(6, 9)].map((row, rowIdx) => (
+                <div key={rowIdx} style={{ display: 'flex', gap: '10px' }}>
+                  {row.map(({ src, alt }) => (
+                    <img key={src} src={src} alt={alt} style={{ height: '39px', width: 'auto', display: 'block' }} />
+                  ))}
+                </div>
               ))}
             </div>
           </div>{/* end 430px inner constraint */}

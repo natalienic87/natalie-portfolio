@@ -14,9 +14,30 @@ body {
   50%       { transform: translateY(-6px); }
 }
 
+@keyframes float-lazy {
+  0%   { transform: translate(0px, 0px); }
+  25%  { transform: translate(-22px, -14px); }
+  50%  { transform: translate(0px, -26px); }
+  75%  { transform: translate(22px, -14px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+.animate-float-lazy {
+  animation: float-lazy 8s linear infinite;
+}
+
 @keyframes spin-planet {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
+}
+
+@keyframes spin-planet-reverse {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+.animate-spin-planet-reverse {
+  animation: spin-planet-reverse 28s linear infinite;
 }
 
 /* Whole element drifts horizontally as if carried by wind from the right */
@@ -63,7 +84,7 @@ body {
 /* Slow heartbeat pulse for star elements */
 @keyframes pulse-star {
   0%, 100% { transform: scale(1);    }
-  50%       { transform: scale(1.09); }
+  50%       { transform: scale(1.22); }
 }
 
 .animate-float {
@@ -114,20 +135,31 @@ body {
 }
 
 .animate-pulse-star {
-  animation: pulse-star 2.5s ease-in-out infinite;
+  animation: pulse-star 2.2s ease-in-out infinite;
   transform-origin: center center;
 }
 
-/* Offset timing so stars don't pulse in unison */
 .animate-pulse-star-delay {
-  animation: pulse-star 2.5s ease-in-out infinite;
-  animation-delay: 0.8s;
+  animation: pulse-star 3.5s ease-in-out infinite;
+  animation-delay: -1.3s;
   transform-origin: center center;
 }
 
 .animate-pulse-star-delay-2 {
-  animation: pulse-star 2.5s ease-in-out infinite;
-  animation-delay: 1.5s;
+  animation: pulse-star 1.8s ease-in-out infinite;
+  animation-delay: -0.6s;
+  transform-origin: center center;
+}
+
+.animate-pulse-star-slow {
+  animation: pulse-star 4.5s ease-in-out infinite;
+  animation-delay: -2.2s;
+  transform-origin: center center;
+}
+
+.animate-pulse-star-fast {
+  animation: pulse-star 1.2s ease-in-out infinite;
+  animation-delay: -0.3s;
   transform-origin: center center;
 }
 

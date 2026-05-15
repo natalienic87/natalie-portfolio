@@ -4,6 +4,7 @@ import LogoScroll from '../components/LogoScroll';
 import Exhibition from '../components/Exhibition';
 import About from '../components/About';
 import Career from '../components/Career';
+import Footer from '../components/Footer';
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Exhibition />
       <About />
       <Career />
+      <Footer />
     </main>
   );
 }

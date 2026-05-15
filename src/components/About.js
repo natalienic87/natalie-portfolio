@@ -37,7 +37,6 @@ function Carousel({ cards }) {
   const dragRef       = useRef({ active: false, startX: 0, startOffset: 0 });
   const animRef       = useRef(null);
   const snapTimerRef  = useRef(null);
-  const scrollAccumRef = useRef(0); // total deltaX since last snap, for direction detection
   const [activeDot, setActiveDot] = useState(0);
   const [dragging, setDragging]   = useState(false);
 
@@ -76,27 +75,11 @@ function Carousel({ cards }) {
     animRef.current = requestAnimationFrame(tick);
   };
 
-  const snapDirectional = () => {
-    const step  = stepRef.current;
-    const setW  = setWRef.current;
-    const accum = scrollAccumRef.current;
-    scrollAccumRef.current = 0;
-
-    // cardFloat: fractional position within the card sequence
+  const snapNearest = () => {
+    const step = stepRef.current;
+    const setW = setWRef.current;
     const cardFloat = (offsetRef.current - setW - step * 0.7) / step;
-
-    let target;
-    if (accum > 5) {
-      // scrolled right → always advance to next card, never go back
-      target = Math.floor(cardFloat) + 1;
-    } else if (accum < -5) {
-      // scrolled left → always go to previous card
-      target = Math.ceil(cardFloat) - 1;
-    } else {
-      // tiny nudge → nearest
-      target = Math.round(cardFloat);
-    }
-
+    const target = Math.round(cardFloat);
     animateTo(setW + target * step + step * 0.7);
   };
 
@@ -119,12 +102,11 @@ function Carousel({ cards }) {
       e.preventDefault();
       if (animRef.current) cancelAnimationFrame(animRef.current);
       offsetRef.current += e.deltaX;
-      scrollAccumRef.current += e.deltaX;
       normalize();
       applyTransform();
       clearTimeout(snapTimerRef.current);
       const delay = Math.abs(e.deltaX) < 1.5 ? 80 : 450;
-      snapTimerRef.current = setTimeout(snapDirectional, delay);
+      snapTimerRef.current = setTimeout(snapNearest, delay);
     };
     container.addEventListener('wheel', handleWheel, { passive: false });
     return () => container.removeEventListener('wheel', handleWheel);
@@ -144,11 +126,9 @@ function Carousel({ cards }) {
   };
   const onDragEnd = () => {
     if (!dragRef.current.active) return;
-    const dragDelta = offsetRef.current - dragRef.current.startOffset;
     dragRef.current.active = false;
     setDragging(false);
-    scrollAccumRef.current = dragDelta;
-    snapDirectional();
+    snapNearest();
   };
 
   // ── Arrow / dot navigation ─────────────────────────────────────────────────
@@ -268,16 +248,16 @@ export default function About() {
           className="animate-spin-ellipse"
           style={{ opacity: 0.6, display: 'block' }}
         />
-        {/* Starburst — positioned in the visible quadrant of the ellipse */}
+        {/* Cloud — positioned in the visible quadrant of the ellipse */}
         <img
-          src="/images/4-about/STARBURST 1.png"
+          src="/images/4-about/Purple Cloud 4.png"
           alt=""
-          className="animate-pulse-star"
+          className="animate-cloud-1"
           style={{
             position: 'absolute',
-            top: '52%',
-            left: '18%',
-            width: '72px',
+            top: 'calc(52% + 120px)',
+            left: 'calc(18% - 120px)',
+            width: '1728px',
             height: 'auto',
             transform: 'translate(-50%, -50%)',
             zIndex: 2,

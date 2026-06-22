@@ -1,26 +1,26 @@
 import { useState, useEffect, useRef } from 'react';
 
 const pills = [
-  { src: '/images/4-about/3-branding-pill.png',      alt: 'Branding' },
-  { src: '/images/4-about/4-artdirection-pill.png',  alt: 'Art Direction' },
-  { src: '/images/4-about/5-designsystems-pill.png', alt: 'Design Systems' },
-  { src: '/images/4-about/6-directing-pill.png',     alt: 'Directing' },
-  { src: '/images/4-about/7-videoediting-pill.png',  alt: 'Video Editing' },
-  { src: '/images/4-about/8-animation-pill.png',     alt: 'Animation' },
-  { src: '/images/4-about/9-vibecoding-pill.png',    alt: 'Vibecoding' },
-  { src: '/images/4-about/10-writing-pill.png',      alt: 'Writing' },
-  { src: '/images/4-about/11-soundesign-pill.png',   alt: 'Sound Design' },
+  { src: '/homepage/4-about/3-branding-pill.png',      alt: 'Branding' },
+  { src: '/homepage/4-about/4-artdirection-pill.png',  alt: 'Art Direction' },
+  { src: '/homepage/4-about/5-designsystems-pill.png', alt: 'Design Systems' },
+  { src: '/homepage/4-about/6-directing-pill.png',     alt: 'Directing' },
+  { src: '/homepage/4-about/7-videoediting-pill.png',  alt: 'Video Editing' },
+  { src: '/homepage/4-about/8-animation-pill.png',     alt: 'Animation' },
+  { src: '/homepage/4-about/9-vibecoding-pill.png',    alt: 'Vibecoding' },
+  { src: '/homepage/4-about/10-writing-pill.png',      alt: 'Writing' },
+  { src: '/homepage/4-about/11-soundesign-pill.png',   alt: 'Sound Design' },
 ];
 
 const testimonialCards = [
-  '/images/4-about/T1-Taylor Testimonial.png',
-  '/images/4-about/T2-Alyssa J Testimonial.png',
-  '/images/4-about/T3-Pinkie Testimonial.png',
-  '/images/4-about/T4-Nancy C Testinonial.png',
-  '/images/4-about/T5-Alyssa F Testimonial.png',
-  '/images/4-about/T6-Michael G Testimonial.png',
-  '/images/4-about/T7-Halle R Testimonial.png',
-  '/images/4-about/T8-Courtney I Testimonial.png',
+  '/homepage/4-about/T1-Taylor Testimonial.png',
+  '/homepage/4-about/T2-Alyssa J Testimonial.png',
+  '/homepage/4-about/T3-Pinkie Testimonial.png',
+  '/homepage/4-about/T4-Nancy C Testinonial.png',
+  '/homepage/4-about/T5-Alyssa F Testimonial.png',
+  '/homepage/4-about/T6-Michael G Testimonial.png',
+  '/homepage/4-about/T7-Halle R Testimonial.png',
+  '/homepage/4-about/T8-Courtney I Testimonial.png',
 ];
 
 const GAP        = 40;  // px between cards
@@ -104,9 +104,6 @@ function Carousel({ cards }) {
       offsetRef.current += e.deltaX;
       normalize();
       applyTransform();
-      clearTimeout(snapTimerRef.current);
-      const delay = Math.abs(e.deltaX) < 1.5 ? 80 : 450;
-      snapTimerRef.current = setTimeout(snapNearest, delay);
     };
     container.addEventListener('wheel', handleWheel, { passive: false });
     return () => container.removeEventListener('wheel', handleWheel);
@@ -128,7 +125,6 @@ function Carousel({ cards }) {
     if (!dragRef.current.active) return;
     dragRef.current.active = false;
     setDragging(false);
-    snapNearest();
   };
 
   // ── Arrow / dot navigation ─────────────────────────────────────────────────
@@ -148,7 +144,7 @@ function Carousel({ cards }) {
   const arrowStyle = {
     width: '40px', height: '40px', borderRadius: '50%',
     border: '1px solid rgba(255,255,255,0.5)', background: 'transparent',
-    color: '#FEFEFE', fontSize: '16px', cursor: 'pointer',
+    color: '#ffffff', fontSize: '16px', cursor: 'pointer',
     display: 'flex', alignItems: 'center', justifyContent: 'center',
     flexShrink: 0,
   };
@@ -196,7 +192,7 @@ function Carousel({ cards }) {
             key={i} onClick={() => goTo(i)}
             style={{
               width: '8px', height: '8px', borderRadius: '50%',
-              background: i === activeDot ? '#FEFEFE' : 'transparent',
+              background: i === activeDot ? '#ffffff' : 'transparent',
               border: '1px solid rgba(255,255,255,0.6)',
               padding: 0, cursor: 'pointer', transition: 'background 0.2s',
             }}
@@ -232,7 +228,7 @@ export default function About() {
         style={{
           position: 'absolute',
           top: 0, bottom: 0, left: 0, right: 0,
-          backgroundImage: "url('/images/4-about/1-purple-bg.jpg')",
+          backgroundImage: "url('/homepage/4-about/1-purple-bg.jpg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           zIndex: 0,
@@ -243,14 +239,14 @@ export default function About() {
       {/* Spinning ellipse + starburst — top right */}
       <div style={{ position: 'absolute', top: '-40px', right: '-20px', zIndex: 1 }}>
         <img
-          src="/images/4-about/Ellipse 33.svg"
+          src="/homepage/4-about/Ellipse 33.svg"
           alt=""
           className="animate-spin-ellipse"
           style={{ opacity: 0.6, display: 'block' }}
         />
         {/* Cloud — positioned in the visible quadrant of the ellipse */}
         <img
-          src="/images/4-about/Purple Cloud 4.png"
+          src="/homepage/4-about/Purple Cloud 4.png"
           alt=""
           className="animate-cloud-1"
           style={{
@@ -269,12 +265,12 @@ export default function About() {
       <div
         style={{ position: 'absolute', bottom: '160px', left: '40px', opacity: 0.4, zIndex: 1 }}
       >
-        <img src="/images/4-about/small-ellipse.svg" alt="" className="animate-spin-ellipse" />
+        <img src="/homepage/4-about/small-ellipse.svg" alt="" className="animate-spin-ellipse" />
       </div>
 
       {/* Star — no separate parallax, rides with content */}
       <img
-        src="/images/4-about/Star 2.png"
+        src="/homepage/4-about/Star 2.png"
         alt=""
         className="absolute animate-pulse-star"
         style={{ top: '60px', right: '180px', width: '28px', opacity: 0.7, zIndex: 1 }}
@@ -305,7 +301,7 @@ export default function About() {
           >
             {/* Base image */}
             <img
-              src="/images/4-about/2-headshot.jpg"
+              src="/homepage/4-about/2-headshot.jpg"
               alt="Natalie Nicholson"
               style={{
                 width: '100%',
@@ -317,7 +313,7 @@ export default function About() {
             />
             {/* Hover image — sits on top, fades in on hover */}
             <img
-              src="/images/4-about/2-Nat headshot-hover.jpg"
+              src="/homepage/4-about/2-Nat headshot-hover.jpg"
               alt=""
               aria-hidden="true"
               className="headshot-hover-img"
@@ -339,17 +335,17 @@ export default function About() {
           <div style={{ flex: '0 0 calc(50% - 30px)', opacity: inView ? undefined : 0, animation: inView ? 'slide-in-right 0.6s ease-out forwards' : 'none' }}>
           <div style={{ maxWidth: '430px' }}>
             <h2
-              className="font-heading font-medium"
+              className="font-heading font-bold"
               style={{ fontSize: '48px', lineHeight: 1.1, color: '#101010' }}
             >
               Brand. Film. AI.
             </h2>
 
             <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <p className="font-body font-medium" style={{ fontSize: '20px', lineHeight: 1.6, color: '#101010' }}>
+              <p className="font-body font-normal" style={{ fontSize: '20px', lineHeight: 1.6, color: '#101010' }}>
                 I work across brand, film, and emerging technology, and have just enough vibe coding skills to be dangerous. 🔥
               </p>
-              <p className="font-body font-medium" style={{ fontSize: '20px', lineHeight: 1.6, color: '#101010' }}>
+              <p className="font-body font-normal" style={{ fontSize: '20px', lineHeight: 1.6, color: '#101010' }}>
                 I&apos;m building with AI the way I&apos;ve always built: with intention, with craft, and storytelling. I have a deep suspicion of anything that looks impressive but says nothing.
               </p>
             </div>
@@ -370,8 +366,6 @@ export default function About() {
                             width: 'auto',
                             display: 'block',
                             filter: 'drop-shadow(0px 2px 4px rgba(0,0,0,0.2))',
-                            opacity: inView ? undefined : 0,
-                            animation: inView ? `pop-in 0.6s ease-out ${delay}s forwards` : 'none',
                           }}
                         />
                       </div>
@@ -388,7 +382,7 @@ export default function About() {
       {/* ── Dashed divider ────────────────────────────────────────── */}
       <div style={{ padding: '0 80px' }}>
         <img
-          src="/images/4-about/Line 7.svg"
+          src="/homepage/4-about/Line 7.svg"
           alt=""
           style={{ width: '100%', display: 'block' }}
         />

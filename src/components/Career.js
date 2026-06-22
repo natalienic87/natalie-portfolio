@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from './Button';
 
 const chapters = [
   {
@@ -12,8 +13,8 @@ const chapters = [
       'Discovered that storytelling was the through-line across every medium',
     ],
     pills: [
-      '/images/6-careerpath/Pill-Journalism.png',
-      '/images/6-careerpath/Pill-Film.png',
+      '/homepage/6-careerpath/Pill-Journalism.png',
+      '/homepage/6-careerpath/Pill-Film.png',
     ],
   },
   {
@@ -27,8 +28,8 @@ const chapters = [
       'Graphic Design Certificate at MassArt',
     ],
     pills: [
-      '/images/6-careerpath/Pill-Design.png',
-      '/images/6-careerpath/Pill-ContentStrategy.png',
+      '/homepage/6-careerpath/Pill-Design.png',
+      '/homepage/6-careerpath/Pill-ContentStrategy.png',
     ],
   },
   {
@@ -42,8 +43,8 @@ const chapters = [
       'Designed across print, digital, and email at Collette travel, for US, CAN, UK, AUS markets',
     ],
     pills: [
-      '/images/6-careerpath/Pill-BrandStrategy.png',
-      '/images/6-careerpath/Pill-Content.png',
+      '/homepage/6-careerpath/Pill-BrandStrategy.png',
+      '/homepage/6-careerpath/Pill-Content.png',
     ],
   },
   {
@@ -57,8 +58,8 @@ const chapters = [
       'Co-led (add)ventures brand refresh; promoted to Art Director, AI Integration',
     ],
     pills: [
-      '/images/6-careerpath/Pill-CreativeDirection.png',
-      '/images/6-careerpath/Pill-ai-Integration.png',
+      '/homepage/6-careerpath/Pill-CreativeDirection.png',
+      '/homepage/6-careerpath/Pill-ai-Integration.png',
     ],
   },
 ];
@@ -81,7 +82,7 @@ function AccordionCard({ chapter, isOpen, onToggle }) {
     >
       {/* Date + chevron */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <p className="font-body" style={{ fontWeight: 500, fontSize: '12px', color: 'rgba(255,255,255,0.4)', margin: 0, letterSpacing: '0.05em' }}>
+        <p className="font-body" style={{ fontWeight: 400, fontSize: '12px', color: 'rgba(255,255,255,0.4)', margin: 0, letterSpacing: '0.05em' }}>
           {dates}
         </p>
         <svg
@@ -94,7 +95,7 @@ function AccordionCard({ chapter, isOpen, onToggle }) {
 
       {/* Title */}
       <div style={{ marginTop: '14px' }}>
-        <h3 className="font-heading" style={{ fontWeight: 500, fontSize: '19px', color: '#FEFEFE', margin: 0, lineHeight: 1.2 }}>
+        <h3 className="font-heading" style={{ fontWeight: 500, fontSize: '19px', color: '#ffffff', margin: 0, lineHeight: 1.2 }}>
           {title}
         </h3>
       </div>
@@ -142,7 +143,7 @@ export default function Career() {
       {/* Background */}
       <div style={{
         position: 'absolute', inset: 0,
-        backgroundImage: "url('/images/6-careerpath/Charcoal-BG1.png')",
+        backgroundImage: "url('/homepage/6-careerpath/Charcoal-BG1.png')",
         backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0,
       }} />
 
@@ -150,13 +151,13 @@ export default function Career() {
       {/* Saturn — moved to cards container */}
 
       {/* Red diamond — above the ellipse, top right */}
-      <img src="/images/6-careerpath/d-Red Diamond 2.png" alt=""
+      <img src="/homepage/6-careerpath/d-Red Diamond 2.png" alt=""
         className="animate-pulse-star"
         style={{ position: 'absolute', top: '330px', right: '115px', width: '36px', zIndex: 2 }} />
 
       {/* White burst — left mid */}
       <div style={{ position: 'absolute', top: '52%', left: '52px', width: '44px', zIndex: 1, transform: 'translateY(-50%)' }}>
-        <img src="/images/6-careerpath/d-White Burst 3.png" alt=""
+        <img src="/homepage/6-careerpath/d-White Burst 3.png" alt=""
           className="animate-pulse-star"
           style={{ width: '100%' }} />
       </div>
@@ -164,12 +165,12 @@ export default function Career() {
       {/* Spiral — moved to cards container */}
 
       {/* Ellipse 33 — upper right */}
-      <img src="/images/6-careerpath/Ellipse 33.svg" alt=""
+      <img src="/homepage/6-careerpath/Ellipse 33.svg" alt=""
         className="animate-spin-ellipse"
         style={{ position: 'absolute', top: '340px', right: '-30px', width: '130px', opacity: 0.55, zIndex: 1 }} />
 
       {/* Ellipse 33 2 — lower left */}
-      <img src="/images/6-careerpath/Ellipse 33 2.svg" alt=""
+      <img src="/homepage/6-careerpath/Ellipse 33 2.svg" alt=""
         className="animate-spin-ellipse"
         style={{ position: 'absolute', bottom: '80px', left: '-30px', width: '150px', opacity: 0.45, zIndex: 1 }} />
 
@@ -183,14 +184,11 @@ export default function Career() {
             Career Path
           </p>
           <h2 className="font-heading"
-            style={{ fontWeight: 500, fontSize: '64px', color: '#FEFEFE', lineHeight: 1, margin: 0 }}>
+            style={{ fontWeight: 500, fontSize: '64px', color: '#ffffff', lineHeight: 1, margin: 0 }}>
             The journey so far
           </h2>
           <div style={{ marginTop: '16px' }}>
-            <a href="#" className="font-body"
-              style={{ fontWeight: 700, fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', textDecoration: 'underline', color: '#E35038' }}>
-              Download My Full Resume
-            </a>
+            <Button variant="text-link" arrow="down" href="#">Download My Resume</Button>
           </div>
         </div>
 
@@ -198,11 +196,11 @@ export default function Career() {
         <div style={{ width: '820px', margin: '0 auto', position: 'relative' }}>
 
           {/* Saturn — nestled top-left of first card, peeking behind it */}
-          <img src="/images/6-careerpath/d-Yellow Satrun 1.png" alt=""
+          <img src="/homepage/6-careerpath/d-Yellow Satrun 1.png" alt=""
             style={{ position: 'absolute', left: '-130px', top: '-94px', width: '200px', zIndex: 0, pointerEvents: 'none' }} />
 
           {/* Spiral — nestled bottom-right of last card, peeking behind it */}
-          <img src="/images/6-careerpath/d-Spiral.png" alt=""
+          <img src="/homepage/6-careerpath/d-Spiral.png" alt=""
             style={{ position: 'absolute', right: '-80px', bottom: '-50px', width: '108px', zIndex: 0, pointerEvents: 'none' }} />
 
           {/* Single vertical dotted line — runs over all cards, pointer-events none so clicks pass through */}

@@ -1,27 +1,29 @@
+import Button from './Button';
+
 const cards = [
   {
-    src: '/images/3-projects/1-rules.jpg',
+    src: '/homepage/3-projects/1-rules.jpg',
     alt: 'Rules We Made Up',
     title: 'Rules We Made Up',
     body: 'Brand identity and campaign design for a tabletop game studio pushing the boundaries of play.',
     cta: 'View Project',
   },
   {
-    src: '/images/3-projects/2-cvs-agencywork (1).jpg',
+    src: '/homepage/3-projects/2-cvs-agencywork (1).jpg',
     alt: 'CVS Agency Work',
     title: 'CVS Agency Work',
     body: 'Integrated agency work spanning brand, broadcast video, and large-scale digital campaigns.',
     cta: 'View Project',
   },
   {
-    src: '/images/3-projects/3-brand-refresh.jpg',
+    src: '/homepage/3-projects/3-brand-refresh.jpg',
     alt: 'Brand Refresh',
     title: 'Brand Refresh',
     body: 'Full identity redesign — from visual language to tone — for a brand ready to evolve.',
     cta: 'View Project',
   },
   {
-    src: '/images/3-projects/4-ai-integration-honey.jpg',
+    src: '/homepage/3-projects/4-ai-integration-honey.jpg',
     alt: 'AI Integration',
     title: 'AI Integration',
     body: 'Blending generative AI with editorial craft to produce a new kind of immersive brand story.',
@@ -47,24 +49,24 @@ function Card({ src, alt, title, body, cta }) {
         />
       </div>
       <h3
-        className="font-heading font-medium text-off-white"
-        style={{ fontSize: '40px', lineHeight: '50px', marginTop: '24px' }}
+        className="font-body font-normal text-off-white"
+        style={{ fontSize: '33px', lineHeight: '40px', marginTop: '24px' }}
       >
         {title}
       </h3>
       <p
-        className="font-body font-medium text-body-grey"
+        className="font-body font-normal text-body-grey"
         style={{ fontSize: '20px', marginTop: '12px', lineHeight: '1.5' }}
       >
         {body}
       </p>
-      <a
+      <Button
+        variant="text-link"
         href="#"
-        className="font-body uppercase text-coral-red underline inline-block"
-        style={{ fontSize: '11px', letterSpacing: '0.18em', marginTop: '16px' }}
+        style={{ marginTop: '16px', position: 'relative', zIndex: 1 }}
       >
         {cta}
-      </a>
+      </Button>
     </div>
   );
 }
@@ -88,7 +90,7 @@ export default function Exhibition() {
             The Exhibition
           </p>
           <h2
-            className="font-heading font-medium text-off-white"
+            className="font-heading font-bold text-off-white"
             style={{ fontSize: '40px', lineHeight: '50px', marginTop: '12px' }}
           >
             Selected works
@@ -102,7 +104,7 @@ export default function Exhibition() {
           style={{ width: '110px', height: '110px' }}
         >
           <img
-            src="/images/3-projects/7-Ellipse 33-2.svg"
+            src="/homepage/3-projects/7-Ellipse 33-2.svg"
             alt=""
             className="absolute inset-0 w-full h-full animate-spin-star"
           />

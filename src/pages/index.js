@@ -1,3 +1,4 @@
+import Cursor from '../components/Cursor';
 import Nav from '../components/Nav';
 import Hero from '../components/Hero';
 import LogoScroll from '../components/LogoScroll';
@@ -9,6 +10,7 @@ import Footer from '../components/Footer';
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-background text-off-white">
+      <Cursor />
       <Nav />
       <Hero />
       <LogoScroll />

@@ -29,7 +29,7 @@ function CaseStudyNav() {
           display:        'inline-flex',
           alignItems:     'center',
           gap:            '8px',
-          fontFamily:     'Inter, sans-serif',
+          fontFamily:     'Poppins, sans-serif',
           fontWeight:     700,
           fontSize:       '11px',
           letterSpacing:  '0.18em',
@@ -56,9 +56,9 @@ function CaseStudyNav() {
         cursor:         'pointer',
         padding:        0,
       }}>
-        <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#FEFEFE' }} />
-        <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#FEFEFE' }} />
-        <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#FEFEFE' }} />
+        <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#ffffff' }} />
+        <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#ffffff' }} />
+        <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#ffffff' }} />
       </button>
     </nav>
   );
@@ -67,7 +67,7 @@ function CaseStudyNav() {
 // ── Metadata label/value pair ─────────────────────────────────────────────────
 function MetaItem({ label, value }) {
   const meta = {
-    fontFamily:    'Inter, sans-serif',
+    fontFamily:    'Poppins, sans-serif',
     fontWeight:    400,
     fontSize:      '14px',
     letterSpacing: '0.08em',
@@ -77,7 +77,7 @@ function MetaItem({ label, value }) {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: '0 16px' }}>
       <span style={{ ...meta, color: 'rgba(255,255,255,0.4)' }}>{label}</span>
-      <span style={{ ...meta, color: '#FEFEFE' }}>{value}</span>
+      <span style={{ ...meta, color: '#ffffff' }}>{value}</span>
     </div>
   );
 }
@@ -87,11 +87,11 @@ function HowItStarted() {
   const [tab, setTab] = useState('overview');
 
   const bodyStyle = {
-    fontFamily: 'Inter, sans-serif',
+    fontFamily: 'Poppins, sans-serif',
     fontWeight: 400,
     fontSize:   '16px',
     lineHeight: 1.7,
-    color:      '#A1989D',
+    color:      '#A9A9A9',
     margin:     '0 0 24px',
   };
 
@@ -115,7 +115,7 @@ function HowItStarted() {
           fontWeight:  500,
           fontSize:    '64px',
           lineHeight:  'normal',
-          color:       '#FEFEFE',
+          color:       '#ffffff',
           margin:      '0 0 32px',
         }}>
           How it started
@@ -153,11 +153,11 @@ function HowItStarted() {
 
         {/* Caption */}
         <p style={{
-          fontFamily: 'Inter, sans-serif',
+          fontFamily: 'Poppins, sans-serif',
           fontWeight: 400,
           fontSize:   '13px',
           lineHeight: 1.5,
-          color:      '#A1989D',
+          color:      '#A9A9A9',
           margin:     0,
         }}>
           Before touching any tool, I needed a map. I adapted the poem into lyrics, built
@@ -215,7 +215,7 @@ function HowItStarted() {
                     border:         'none',
                     borderBottom:   active ? '2px solid #E35038' : '2px solid transparent',
                     cursor:         'pointer',
-                    fontFamily:     'Inter, sans-serif',
+                    fontFamily:     'Poppins, sans-serif',
                     fontWeight:     active ? 600 : 400,
                     fontSize:       '16.5px',
                     color,
@@ -264,7 +264,7 @@ function HowItStarted() {
                 fontWeight:  500,
                 fontSize:    'clamp(20px, 3.8vw, 38px)',
                 lineHeight:  1.2,
-                color:       '#FEFEFE',
+                color:       '#ffffff',
                 margin:      '0 0 40px',
               }}>
                 Know when to stop<br />
@@ -293,11 +293,11 @@ function HowItStarted() {
 
               {/* Subtitle + explore prompt */}
               <p style={{
-                fontFamily: 'Inter, sans-serif',
+                fontFamily: 'Poppins, sans-serif',
                 fontWeight: 400,
                 fontSize:   '15px',
                 lineHeight: 1.7,
-                color:      '#A1989D',
+                color:      '#A9A9A9',
                 margin:     0,
               }}>
                 A line I fought to keep.<br />
@@ -310,7 +310,7 @@ function HowItStarted() {
                     padding:    0,
                     cursor:     'pointer',
                     color:      '#E35038',
-                    fontFamily: 'Inter, sans-serif',
+                    fontFamily: 'Poppins, sans-serif',
                     fontWeight: 400,
                     fontSize:   '15px',
                   }}
@@ -335,7 +335,7 @@ function HowItStarted() {
                 fontWeight:  400,
                 fontSize:    '14px',
                 lineHeight:  2,
-                color:       '#FEFEFE',
+                color:       '#ffffff',
                 margin:      0,
                 whiteSpace:  'pre-wrap',
               }}>{`You shine like the sun, but I shine like the moon
@@ -496,7 +496,7 @@ function CharacterCreation() {
         borderRadius:   '50%',
         border:         '1.5px solid rgba(255,255,255,0.5)',
         background:     'none',
-        color:          '#FEFEFE',
+        color:          '#ffffff',
         fontSize:       '18px',
         cursor:         isAnimating ? 'default' : 'pointer',
         display:        'flex',
@@ -506,7 +506,7 @@ function CharacterCreation() {
         flexShrink:     0,
         opacity:        isAnimating ? 0.4 : 1,
       }}
-      onMouseEnter={e => { if (!isAnimating) e.currentTarget.style.borderColor = '#FEFEFE'; }}
+      onMouseEnter={e => { if (!isAnimating) e.currentTarget.style.borderColor = '#ffffff'; }}
       onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)'}
     >
       {children}
@@ -531,17 +531,17 @@ function CharacterCreation() {
           fontWeight:  500,
           fontSize:    '48px',
           lineHeight:  'normal',
-          color:       '#FEFEFE',
+          color:       '#ffffff',
           margin:      '0 0 20px',
         }}>
           Character Creation
         </h2>
         <p style={{
-          fontFamily: 'Inter, sans-serif',
+          fontFamily: 'Poppins, sans-serif',
           fontWeight: 400,
           fontSize:   '15px',
           lineHeight: 1.7,
-          color:      '#A1989D',
+          color:      '#A9A9A9',
           margin:     '0 0 32px',
         }}>
           I needed references that would actually make me feel something, so I grabbed some
@@ -585,11 +585,11 @@ function CharacterCreation() {
       {/* ── Right: static copy ── */}
       <div style={{ gridColumn: '7 / 9', paddingTop: '80px' }}>
         <p style={{
-          fontFamily: 'Inter, sans-serif',
+          fontFamily: 'Poppins, sans-serif',
           fontWeight: 400,
           fontSize:   '15px',
           lineHeight: 1.8,
-          color:      '#A1989D',
+          color:      '#A9A9A9',
           margin:     '0 0 20px',
         }}>
           Many iterations later, I found her. I locked in my brand color palette on her
@@ -597,11 +597,11 @@ function CharacterCreation() {
           character as she ages.
         </p>
         <p style={{
-          fontFamily: 'Inter, sans-serif',
+          fontFamily: 'Poppins, sans-serif',
           fontWeight: 400,
           fontSize:   '15px',
           lineHeight: 1.8,
-          color:      '#A1989D',
+          color:      '#A9A9A9',
           margin:     0,
         }}>
           High quality polymer clay render, stop-motion aesthetic, hand-made texture.
@@ -643,7 +643,7 @@ function MushroomFriend() {
             fontWeight:  400,
             fontSize:    'clamp(20px, 2vw, 28px)',
             lineHeight:  1.55,
-            color:       '#FEFEFE',
+            color:       '#ffffff',
             margin:      0,
           }}>
             The Mushroom Friend is a symbol for creativity — the kind you have as a kid,
@@ -659,11 +659,11 @@ function MushroomFriend() {
 
         {/* Caption */}
         <p style={{
-          fontFamily:  'Inter, sans-serif',
+          fontFamily:  'Poppins, sans-serif',
           fontWeight:  400,
           fontSize:    '13px',
           lineHeight:  1.6,
-          color:       '#A1989D',
+          color:       '#A9A9A9',
           margin:      '0 0 24px',
           maxWidth:    '320px',
         }}>
@@ -725,7 +725,7 @@ function BlooperReel() {
         fontWeight:  500,
         fontSize:    'clamp(32px, 4vw, 56px)',
         lineHeight:  1.1,
-        color:       '#FEFEFE',
+        color:       '#ffffff',
         textAlign:   'center',
         margin:      '0 0 20px',
       }}>
@@ -733,11 +733,11 @@ function BlooperReel() {
       </h2>
 
       <p style={{
-        fontFamily: 'Inter, sans-serif',
+        fontFamily: 'Poppins, sans-serif',
         fontWeight: 400,
         fontSize:   '16px',
         lineHeight: 1.6,
-        color:      '#A1989D',
+        color:      '#A9A9A9',
         textAlign:  'center',
         margin:     '0 0 48px',
       }}>
@@ -773,14 +773,14 @@ function TheTool() {
             fontWeight:   500,
             fontSize:     'clamp(36px, 4vw, 64px)',
             lineHeight:   1.1,
-            color:        '#FEFEFE',
+            color:        '#ffffff',
             margin:       '0 0 40px',
           }}>
             The Tool: LTX Studio
           </h2>
 
           <p style={{
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: 'Poppins, sans-serif',
             fontWeight: 400,
             fontSize:   '16px',
             lineHeight: 1.75,
@@ -791,7 +791,7 @@ function TheTool() {
           </p>
 
           <p style={{
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: 'Poppins, sans-serif',
             fontWeight: 400,
             fontSize:   '16px',
             lineHeight: 1.75,
@@ -802,7 +802,7 @@ function TheTool() {
           </p>
 
           <p style={{
-            fontFamily: 'Inter, sans-serif',
+            fontFamily: 'Poppins, sans-serif',
             fontWeight: 400,
             fontSize:   '16px',
             lineHeight: 1.75,
@@ -886,7 +886,7 @@ function FilmmakingPrinciples() {
         fontWeight:   500,
         fontSize:     'clamp(32px, 4vw, 56px)',
         lineHeight:   1.1,
-        color:        '#FEFEFE',
+        color:        '#ffffff',
         textAlign:    'center',
         margin:       '0 0 56px',
         paddingLeft:  '80px',
@@ -943,17 +943,17 @@ function FilmmakingPrinciples() {
                   fontWeight: 500,
                   fontSize:   '24px',
                   lineHeight: 1.2,
-                  color:      '#FEFEFE',
+                  color:      '#ffffff',
                   margin:     '0 0 14px',
                 }}>
                   {p.title}
                 </h3>
                 <p style={{
-                  fontFamily: 'Inter, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontWeight: 400,
                   fontSize:   '14px',
                   lineHeight: 1.7,
-                  color:      '#A1989D',
+                  color:      '#A9A9A9',
                   margin:     0,
                 }}>
                   {p.body}
@@ -971,11 +971,11 @@ function FilmmakingPrinciples() {
 // ── Roll Call ─────────────────────────────────────────────────────────────────
 function RollCall() {
   const body = {
-    fontFamily: 'Inter, sans-serif',
+    fontFamily: 'Poppins, sans-serif',
     fontWeight: 400,
     fontSize:   '15px',
     lineHeight: 1.75,
-    color:      '#A1989D',
+    color:      '#A9A9A9',
     margin:     '0 0 20px',
   };
 
@@ -998,7 +998,7 @@ function RollCall() {
           fontWeight:  500,
           fontSize:    'clamp(36px, 4vw, 56px)',
           lineHeight:  1.1,
-          color:       '#FEFEFE',
+          color:       '#ffffff',
           margin:      '0 0 32px',
         }}>
           The roll call: inviting the crowd into the film
@@ -1029,11 +1029,11 @@ function RollCall() {
 
         {/* Caption */}
         <p style={{
-          fontFamily: 'Inter, sans-serif',
+          fontFamily: 'Poppins, sans-serif',
           fontWeight: 400,
           fontSize:   '13px',
           lineHeight: 1.6,
-          color:      '#A1989D',
+          color:      '#A9A9A9',
           margin:     0,
         }}>
           I divided all characters into groups by scene so I could animate each cluster
@@ -1057,11 +1057,11 @@ function RollCall() {
 // ── Cast Gallery ─────────────────────────────────────────────────────────────
 function CastGallery() {
   const caption = {
-    fontFamily: 'Inter, sans-serif',
+    fontFamily: 'Poppins, sans-serif',
     fontWeight: 400,
     fontSize:   '13px',
     lineHeight: 1.6,
-    color:      '#A1989D',
+    color:      '#A9A9A9',
     textAlign:  'center',
     margin:     0,
   };
@@ -1117,7 +1117,7 @@ function CastGallery() {
 // ── Main page ─────────────────────────────────────────────────────────────────
 export default function RulesWeMadeUp() {
   return (
-    <main style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#101010', color: '#FEFEFE' }}>
+    <main style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#101010', color: '#ffffff' }}>
       <Cursor />
       <CaseStudyNav />
 
@@ -1139,7 +1139,7 @@ export default function RulesWeMadeUp() {
             fontWeight:  500,
             fontSize:    '64px',
             lineHeight:  'normal',
-            color:       '#FEFEFE',
+            color:       '#ffffff',
             margin:      0,
           }}>
             On "Rules We Made Up": The Making of an Animated Short
@@ -1187,11 +1187,11 @@ export default function RulesWeMadeUp() {
         {/* Intro text — columns 3–8, 80px right margin from section padding */}
         <div style={{ gridColumn: '3 / 9' }}>
           <p style={{
-            fontFamily:  'Inter, sans-serif',
-            fontWeight:  500,
+            fontFamily:  'Poppins, sans-serif',
+            fontWeight:  400,
             fontSize:    '20px',
             lineHeight:  1.6,
-            color:       '#FEFEFE',
+            color:       '#ffffff',
             margin:      '0 0 20px',
           }}>
             The rules we made up about work, creativity, and value are all shifting. We're being
@@ -1200,11 +1200,11 @@ export default function RulesWeMadeUp() {
             brings you joy, what grounds you, what makes you feel most like yourself.
           </p>
           <p style={{
-            fontFamily:  'Inter, sans-serif',
-            fontWeight:  500,
+            fontFamily:  'Poppins, sans-serif',
+            fontWeight:  400,
             fontSize:    '20px',
             lineHeight:  1.6,
-            color:       '#FEFEFE',
+            color:       '#ffffff',
             margin:      0,
           }}>
             That's what this project is all about.

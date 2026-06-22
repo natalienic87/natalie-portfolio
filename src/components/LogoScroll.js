@@ -1,15 +1,15 @@
 // height values tuned for optical weight, not pixel height
 const logos = [
-  { src: '/images/2-logos/addventures logo.svg',       alt: '(add)ventures',     h: 36 },
-  { src: '/images/2-logos/cvs-logo.svg',               alt: 'CVS Health',        h: 24 },
-  { src: '/images/2-logos/aetna-logo.svg',             alt: 'Aetna',             h: 28 },
-  { src: '/images/2-logos/stopnstop-logo.svg',         alt: 'Stop & Shop',       h: 32 },
-  { src: '/images/2-logos/mcp-logo.svg',               alt: 'MCP',               h: 36 },
-  { src: '/images/2-logos/bob-logo.svg',               alt: 'BOB',               h: 40 },
-  { src: '/images/2-logos/activeadventures-logo.svg',  alt: 'Active Adventures', h: 32 },
-  { src: '/images/2-logos/austinadventures-logo.svg',  alt: 'Austin Adventures', h: 50 },
-  { src: '/images/2-logos/collette-logo.svg',          alt: 'Collette',          h: 30 },
-  { src: '/images/2-logos/RawBarLogoWhite 1.svg',      alt: 'Raw Bar',           h: 36 },
+  { src: '/homepage/2-logos/addventures logo.svg',       alt: '(add)ventures',     h: 36 },
+  { src: '/homepage/2-logos/cvs-logo.svg',               alt: 'CVS Health',        h: 24 },
+  { src: '/homepage/2-logos/aetna-logo.svg',             alt: 'Aetna',             h: 28 },
+  { src: '/homepage/2-logos/stopnstop-logo.svg',         alt: 'Stop & Shop',       h: 32 },
+  { src: '/homepage/2-logos/mcp-logo.svg',               alt: 'MCP',               h: 36 },
+  { src: '/homepage/2-logos/bob-logo.svg',               alt: 'BOB',               h: 40 },
+  { src: '/homepage/2-logos/activeadventures-logo.svg',  alt: 'Active Adventures', h: 32 },
+  { src: '/homepage/2-logos/austinadventures-logo.svg',  alt: 'Austin Adventures', h: 50 },
+  { src: '/homepage/2-logos/collette-logo.svg',          alt: 'Collette',          h: 30 },
+  { src: '/homepage/2-logos/RawBarLogoWhite 1.svg',      alt: 'Raw Bar',           h: 36 },
 ];
 
 // Gap between every logo — including at the seam between loop repetitions
@@ -20,7 +20,7 @@ export default function LogoScroll() {
     <section
       className="mt-[60px] overflow-hidden"
       style={{
-        backgroundImage: "url('/images/2-logos/1-background-paper.png')",
+        backgroundImage: "url('/homepage/2-logos/1-background-paper.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

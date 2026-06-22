@@ -53,8 +53,8 @@
 html,
 body {
   background-color: #101010;
-  color: #FEFEFE;
-  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
 }
 
 @keyframes float {
@@ -254,4 +254,12 @@ body {
 @keyframes pop-in {
   0%   { opacity: 0; transform: translateY(8px) scale(0.95); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── CVS hero image hard-cut cycle (9s total, 1.5s per image) ── */
+@keyframes cvs-cycle {
+  0%      { opacity: 1; }
+  16.67%  { opacity: 1; }
+  16.68%  { opacity: 0; }
+  100%    { opacity: 0; }
 }

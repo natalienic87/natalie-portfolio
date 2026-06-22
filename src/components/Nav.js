@@ -11,13 +11,13 @@ function NavLink({ href, children }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         position:       'relative',
-        fontFamily:     'Inter, sans-serif',
+        fontFamily:     'Poppins, sans-serif',
         fontWeight:     700,
         fontSize:       '11px',
         letterSpacing:  '0.18em',
         textTransform:  'uppercase',
         textDecoration: 'none',
-        color:          hovered ? '#FEFEFE' : '#D9D9D9',
+        color:          hovered ? '#ffffff' : '#D9D9D9',
         paddingBottom:  '5px',
         transition:     'color 0.2s ease',
         display:        'inline-block',

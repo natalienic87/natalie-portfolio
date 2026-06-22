@@ -8,7 +8,7 @@ const row = {
 };
 
 const label = {
-  fontFamily:   'Inter, sans-serif',
+  fontFamily:   'Poppins, sans-serif',
   fontSize:     '11px',
   letterSpacing:'0.15em',
   textTransform:'uppercase',
@@ -20,7 +20,7 @@ export default function ButtonsTest() {
   return (
     <main style={{ minHeight: '100vh', backgroundColor: '#101010', padding: '80px 60px', display: 'flex', flexDirection: 'column', gap: '56px' }}>
 
-      <h1 style={{ fontFamily: 'Inter, sans-serif', fontSize: '13px', fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', margin: 0 }}>
+      <h1 style={{ fontFamily: 'Poppins, sans-serif', fontSize: '13px', fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', margin: 0 }}>
         Button Variants
       </h1>
 

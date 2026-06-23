@@ -68,26 +68,24 @@ function CaseStudyNav() {
 
 // ── Metadata label/value pair ─────────────────────────────────────────────────
 function MetaItem({ label, value }) {
-  const labelStyle = {
-    fontFamily:    'Fira Mono, monospace',
-    fontWeight:    400,
-    fontSize:      '14px',
-    letterSpacing: '0.08em',
-    textTransform: 'uppercase',
-    lineHeight:    1.5,
-    color:         '#404040',
-  };
-  const valueStyle = {
-    fontFamily: 'Poppins, sans-serif',
-    fontWeight: 400,
-    fontSize:   '14px',
-    lineHeight: 1.6,
-    color:      '#404040',
-  };
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr', gap: '0 16px' }}>
-      <span style={labelStyle}>{label}</span>
-      <span style={valueStyle}>{value}</span>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+      <span style={{
+        fontFamily:    'Fira Mono, monospace',
+        fontWeight:    400,
+        fontSize:      '11px',
+        letterSpacing: '0.1em',
+        textTransform: 'uppercase',
+        lineHeight:    1.5,
+        color:         '#888888',
+      }}>{label}</span>
+      <span style={{
+        fontFamily: 'Fira Mono, monospace',
+        fontWeight: 400,
+        fontSize:   '14px',
+        lineHeight: 1.5,
+        color:      '#101010',
+      }}>{value}</span>
     </div>
   );
 }

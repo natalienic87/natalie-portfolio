@@ -700,7 +700,7 @@ function FilmmakingPrinciples() {
 
   return (
     <section id="principles" style={{
-      background:         'linear-gradient(to bottom, #F5F0EC 70%, #FFFBF8 100%)',
+      backgroundColor:    '#F5F0EC',
       paddingTop:         '150px',
       paddingBottom:      '150px',
     }}>
@@ -816,7 +816,7 @@ function RollCall() {
   };
 
   return (
-    <section id="roll-call" style={{ background: 'linear-gradient(to bottom, #F5F0EC 70%, #FFFBF8 100%)' }}>
+    <section id="roll-call" style={{ backgroundColor: '#F5F0EC' }}>
     <CaseStudyLayout style={{
       paddingLeft:   '175px',
       paddingRight:  '175px',
@@ -1358,8 +1358,8 @@ export default function RulesWeMadeUp() {
           display:             'grid',
           gridTemplateColumns: '220px 1fr',
           gap:                 '60px',
-          paddingLeft:         '175px',
-          paddingRight:        '175px',
+          paddingLeft:         '95px',
+          paddingRight:        '95px',
           paddingTop:          '80px',
           paddingBottom:       '150px',
           alignItems:          'start',

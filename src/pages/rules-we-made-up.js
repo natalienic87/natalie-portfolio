@@ -816,7 +816,7 @@ function RollCall() {
   };
 
   return (
-    <section id="roll-call" style={{ backgroundColor: '#F5F0EC' }}>
+    <section id="roll-call" style={{ backgroundColor: '#FFFBF8' }}>
     <CaseStudyLayout style={{
       paddingLeft:   '175px',
       paddingRight:  '175px',

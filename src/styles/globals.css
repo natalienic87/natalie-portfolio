@@ -228,9 +228,9 @@ body {
   80%      { transform: rotate(3deg); }
 }
 
-@keyframes card-enter-prev {
-  from { transform: translateX(-120%) rotate(-15deg); opacity: 0; }
-  to   { transform: translateX(0) rotate(var(--rot, 0deg)); opacity: 1; }
+@keyframes card-enter-right {
+  from { transform: translateX(80%) rotate(calc(var(--rot, 0deg) + 12deg)) scale(0.88); opacity: 0; }
+  to   { transform: translateX(0)   rotate(var(--rot, 0deg))               scale(1);    opacity: 1; }
 }
 
 @keyframes scroll-bounce {

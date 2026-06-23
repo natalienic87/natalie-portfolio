@@ -180,23 +180,34 @@ const slides = [
 const cardRotations = [-2, 3, -4, 1.5, -3];
 
 function CharacterCreation() {
-  const [index,       setIndex]       = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [flyingOut,   setFlyingOut]   = useState(false);
+  const [index,        setIndex]        = useState(0);
+  const [isAnimating,  setIsAnimating]  = useState(false);
+  const [flyingOut,    setFlyingOut]    = useState(false);
+  const [enteringPrev, setEnteringPrev] = useState(false);
 
   const n = slides.length;
 
-  const go = () => {
+  const go = (dir) => {
     if (isAnimating) return;
     setIsAnimating(true);
-    setFlyingOut(true);
 
-    setTimeout(() => {
-      setFlyingOut(false);
-      setIndex(i => (i + 1) % n);
-    }, 400);
-
-    setTimeout(() => setIsAnimating(false), 450);
+    if (dir === 'next') {
+      setFlyingOut(true);
+      setTimeout(() => {
+        setFlyingOut(false);
+        setIndex(i => (i + 1) % n);
+      }, 400);
+      setTimeout(() => setIsAnimating(false), 450);
+    } else {
+      // Change index immediately — old front card steps back smoothly via its
+      // pos=1 transition; new front card enters from the right via CSS keyframe.
+      setIndex(i => (i - 1 + n) % n);
+      setEnteringPrev(true);
+      setTimeout(() => {
+        setEnteringPrev(false);
+        setIsAnimating(false);
+      }, 450);
+    }
   };
 
   // Per-slide card styles — each slide has a persistent DOM node
@@ -204,14 +215,27 @@ function CharacterCreation() {
     const pos = (si - index + n) % n; // 0=front, 1=back1, 2=back2, 3+=hidden
     const rot = cardRotations[si];
 
-    if (pos === 0) return {
-      position: 'absolute', inset: '0', borderRadius: '12px', overflow: 'hidden',
-      zIndex:     3,
-      transform:  flyingOut ? `translateX(120%) rotate(${rot + 15}deg)` : `rotate(${rot}deg)`,
-      opacity:    flyingOut ? 0 : 1,
-      boxShadow:  '0px 12px 32px rgba(0,0,0,0.18)',
-      transition: 'transform 0.4s ease-in, opacity 0.3s ease-in',
-    };
+    if (pos === 0) {
+      // Prev: new front card slides in from the right via CSS keyframe animation.
+      // We can't use a transition here because the card was hidden (transition:none).
+      if (enteringPrev) {
+        return {
+          position: 'absolute', inset: '0', borderRadius: '12px', overflow: 'hidden',
+          zIndex: 3,
+          animation: 'card-enter-right 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+          '--rot': `${rot}deg`,
+          boxShadow: '0px 12px 32px rgba(0,0,0,0.18)',
+        };
+      }
+      return {
+        position: 'absolute', inset: '0', borderRadius: '12px', overflow: 'hidden',
+        zIndex:     3,
+        transform:  flyingOut ? `translateX(120%) rotate(${rot + 15}deg)` : `rotate(${rot}deg)`,
+        opacity:    flyingOut ? 0 : 1,
+        boxShadow:  '0px 12px 32px rgba(0,0,0,0.18)',
+        transition: 'transform 0.4s ease-in, opacity 0.3s ease-in',
+      };
+    }
     if (pos === 1) return {
       position: 'absolute', inset: '0', borderRadius: '12px', overflow: 'hidden',
       zIndex:     2,
@@ -325,7 +349,7 @@ function CharacterCreation() {
           })}
         </div>
 
-        {/* Label + arrow */}
+        {/* Label + arrows */}
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
           <span style={{
             fontFamily:    'Fira Mono, monospace',
@@ -334,7 +358,8 @@ function CharacterCreation() {
             textTransform: 'uppercase',
             color:         '#888',
           }}>flip through the deck</span>
-          <ArrowBtn onClick={go}>→</ArrowBtn>
+          <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
+          <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
         </div>
       </div>
 

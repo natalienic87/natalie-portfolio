@@ -297,7 +297,6 @@ function CharacterCreation() {
       display:       'flex',
       gap:           '60px',
       paddingLeft:   '175px',
-      paddingRight:  '80px',
       paddingTop:    '50px',
       paddingBottom: '50px',
       alignItems:    'center',
@@ -385,7 +384,7 @@ function MoreFriends() {
   const [hovered, setHovered] = useState(null);
   return (
     <section>
-    <CaseStudyLayout style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '50px', paddingBottom: '150px' }}>
+    <CaseStudyLayout style={{ paddingTop: '50px', paddingBottom: '150px' }}>
       <p style={{
         fontFamily:    'Fira Mono, monospace',
         fontWeight:    400,
@@ -396,7 +395,7 @@ function MoreFriends() {
         textAlign:     'center',
         marginBottom:  '40px',
       }}>More friends and family</p>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '32px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', flexWrap: 'nowrap' }}>
         {friends.map(({ file, label }, i) => (
           <Reveal key={file} delay={i * 90} distance={32} style={{ flexShrink: 0, width: '202px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
             <div
@@ -573,7 +572,7 @@ const principles = [
 function BlooperReel() {
   return (
     <section>
-    <CaseStudyLayout style={{ paddingTop: '120px', paddingBottom: '120px', paddingLeft: '80px', paddingRight: '80px' }}>
+    <CaseStudyLayout style={{ paddingTop: '120px', paddingBottom: '120px' }}>
 
       <h2 className="font-body" style={{
         fontWeight:  600,
@@ -692,7 +691,7 @@ function FilmmakingPrinciples() {
     }}>
 
       {/* Centered heading + subtitle */}
-      <CaseStudyLayout style={{ textAlign: 'center', paddingLeft: '80px', paddingRight: '80px', marginBottom: '48px' }}>
+      <CaseStudyLayout style={{ textAlign: 'center', marginBottom: '48px' }}>
         <Reveal>
           <h2 className="font-body" style={{
             fontWeight: 700,

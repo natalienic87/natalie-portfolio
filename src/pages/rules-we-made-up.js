@@ -95,7 +95,7 @@ function MetaItem({ label, value }) {
 // ── But first, a storyboard ───────────────────────────────────────────────────
 function HowItStarted() {
   return (
-    <CaseStudySection id="how-it-started" style={{ display: 'flex', gap: '60px', alignItems: 'flex-start' }}>
+    <CaseStudySection id="how-it-started" style={{ display: 'flex', gap: '60px', alignItems: 'flex-start', paddingBottom: '50px' }}>
 
       {/* Left: photo + caption */}
       <Reveal style={{ flexShrink: 0, width: 'auto' }}>
@@ -283,7 +283,7 @@ function CharacterCreation() {
   );
 
   return (
-    <CaseStudySection id="characters" style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
+    <CaseStudySection id="characters" style={{ display: 'flex', gap: '60px', alignItems: 'center', paddingTop: '50px', paddingBottom: '50px' }}>
 
       {/* ── Left: collage (264px) above heading + text (360px) ── */}
       <div style={{ flex: '0 0 360px', width: '360px' }}>
@@ -370,7 +370,7 @@ const friends = [
 function MoreFriends() {
   const [hovered, setHovered] = useState(null);
   return (
-    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px' }}>
+    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '50px' }}>
       <Reveal delay={0}>
         <p style={{
           fontFamily:    'Fira Mono, monospace',
@@ -558,7 +558,7 @@ const principles = [
 
 function BlooperReel() {
   return (
-    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px' }}>
+    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingBottom: '50px' }}>
 
       <Reveal delay={0}>
         <h2 className="font-body" style={{
@@ -609,7 +609,7 @@ function BlooperReel() {
 
 function TheTool() {
   return (
-    <CaseStudySection id="ltx-studio">
+    <CaseStudySection id="ltx-studio" style={{ paddingTop: '50px' }}>
       <div style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
 
         {/* Left — text */}

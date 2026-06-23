@@ -79,7 +79,7 @@ function MetaItem({ label, value }) {
     fontFamily: 'Poppins, sans-serif',
     fontWeight: 400,
     fontSize:   '14px',
-    lineHeight: 1.5,
+    lineHeight: 1.6,
     color:      '#404040',
   };
   return (
@@ -93,19 +93,19 @@ function MetaItem({ label, value }) {
 // ── But first, a storyboard ───────────────────────────────────────────────────
 function HowItStarted() {
   return (
-    <section style={{
-      display:       'flex',
-      gap:           '60px',
-      paddingLeft:   '80px',
-      paddingRight:  '175px',
-      paddingTop:    '100px',
-      paddingBottom: '0',
-      alignItems:    'flex-start',
+    <section id="how-it-started" style={{
+      display:          'flex',
+      gap:              '60px',
+      paddingLeft:      '175px',
+      paddingRight:     '175px',
+      paddingTop:       '150px',
+      paddingBottom:    '50px',
+      alignItems:       'flex-start',
     }}>
 
       {/* Left: photo + caption */}
-      <div style={{ flexShrink: 0 }}>
-        <div style={{ marginBottom: '12px', width: '515px', height: '387px' }}>
+      <Reveal style={{ flexShrink: 0, width: 'auto' }}>
+        <div style={{ marginBottom: '12px', width: '455px', height: '455px' }}>
           <img
             src="/rules-we-made-up/3-how-it-started/Storyboard 1.jpg"
             alt="Storyboard planning documents"
@@ -116,30 +116,37 @@ function HowItStarted() {
           fontFamily: 'Fira Mono, monospace',
           fontWeight: 400,
           fontSize:   '13px',
-          lineHeight: 1.5,
+          lineHeight: 1.6,
           color:      '#666666',
           margin:     0,
         }}>I printed it out, because I'm old school like that.</p>
-      </div>
+      </Reveal>
 
-      {/* Right: heading + body */}
+      {/* Right: heading + body — staggered after image */}
       <div style={{ flex: 1 }}>
-        <h2 className="font-body" style={{
-          fontWeight: 700,
-          fontSize:   '33px',
-          color:      '#101010',
-          margin:     '0 0 12px',
-        }}>But first, a storyboard</h2>
-        <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: '20px', lineHeight: 1.5, color: '#404040', margin: '0 0 20px' }}>
-          What did I do to start this thing. Before touching any tool, I needed a map. I adapted
-          the poem into lyrics, built the song in Suno to set my runtime, then storyboarded scene
-          by scene before generating a single frame.
-        </p>
-        <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: '20px', lineHeight: 1.5, color: '#404040', margin: 0 }}>
-          The Title "Rules We Made Up" comes from a line in my poem, which I fought to keep in
-          the lyrics. As the rules we make up about work, creativity and value are all shifting,
-          it felt like appropriate timing.
-        </p>
+        <Reveal delay={120}>
+          <h2 className="font-body" style={{
+            fontWeight: 700,
+            fontSize:   '33px',
+            lineHeight: 1.2,
+            color:      '#101010',
+            margin:     '0 0 12px',
+          }}>But first, a storyboard</h2>
+        </Reveal>
+        <Reveal delay={220}>
+          <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+            What did I do to start this thing. Before touching any tool, I needed a map. I adapted
+            the poem into lyrics, built the song in Suno to set my runtime, then storyboarded scene
+            by scene before generating a single frame.
+          </p>
+        </Reveal>
+        <Reveal delay={320}>
+          <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            The Title "Rules We Made Up" comes from a line in my poem, which I fought to keep in
+            the lyrics. As the rules we make up about work, creativity and value are all shifting,
+            it felt like appropriate timing.
+          </p>
+        </Reveal>
       </div>
 
     </section>
@@ -173,22 +180,20 @@ const slides = [
 const cardRotations = [-2, 3, -4, 1.5, -3];
 
 function CharacterCreation() {
-  const [index,      setIndex]      = useState(0);
+  const [index,       setIndex]       = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [flyingOut,   setFlyingOut]   = useState(false);
-  const [direction,   setDirection]   = useState('next');
 
   const n = slides.length;
 
-  const go = (dir) => {
+  const go = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-    setDirection(dir);
     setFlyingOut(true);
 
     setTimeout(() => {
       setFlyingOut(false);
-      setIndex(i => dir === 'next' ? (i + 1) % n : (i - 1 + n) % n);
+      setIndex(i => (i + 1) % n);
     }, 400);
 
     setTimeout(() => setIsAnimating(false), 450);
@@ -198,13 +203,11 @@ function CharacterCreation() {
   const getCardStyle = (si) => {
     const pos = (si - index + n) % n; // 0=front, 1=back1, 2=back2, 3+=hidden
     const rot = cardRotations[si];
-    const flyX  = direction === 'next' ? '120%' : '-120%';
-    const flyRot = direction === 'next' ? rot + 15 : rot - 15;
 
     if (pos === 0) return {
       position: 'absolute', inset: '0', borderRadius: '12px', overflow: 'hidden',
       zIndex:     3,
-      transform:  flyingOut ? `translateX(${flyX}) rotate(${flyRot}deg)` : `rotate(${rot}deg)`,
+      transform:  flyingOut ? `translateX(120%) rotate(${rot + 15}deg)` : `rotate(${rot}deg)`,
       opacity:    flyingOut ? 0 : 1,
       boxShadow:  '0px 12px 32px rgba(0,0,0,0.18)',
       transition: 'transform 0.4s ease-in, opacity 0.3s ease-in',
@@ -225,7 +228,6 @@ function CharacterCreation() {
       boxShadow:  '-8px 8px 24px rgba(0,0,0,0.12)',
       transition: 'transform 0.4s ease-out',
     };
-    // hidden — snap instantly, no transition
     return {
       position: 'absolute', inset: '0', borderRadius: '12px', overflow: 'hidden',
       zIndex:     0,
@@ -263,52 +265,52 @@ function CharacterCreation() {
   );
 
   return (
-    <section style={{
+    <section id="characters" style={{
       display:       'flex',
       gap:           '60px',
-      paddingLeft:   '80px',
+      paddingLeft:   '175px',
       paddingRight:  '80px',
-      paddingTop:    '100px',
-      paddingBottom: '100px',
-      alignItems:    'flex-start',
+      paddingTop:    '50px',
+      paddingBottom: '50px',
+      alignItems:    'center',
     }}>
 
-      {/* ── Left: heading + text + 2×2 photo grid ── */}
-      <div style={{ flex: '0 0 38%' }}>
+      {/* ── Left: collage (264px) above heading + text (360px) ── */}
+      <div style={{ flex: '0 0 360px', width: '360px' }}>
+        {/* Reference photo collage — above heading */}
+        <div style={{ width: '264px', height: '264px', overflow: 'hidden', boxShadow: '0px 4px 20px rgba(0,0,0,0.12)', marginBottom: '28px' }}>
+          <img
+            src="/rules-we-made-up/4-character-creation/collage-nat-photos.jpg"
+            alt="Childhood reference photos"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </div>
         <h2 className="font-body" style={{
           fontWeight: 700,
           fontSize:   '33px',
+          lineHeight: 1.2,
           color:      '#101010',
           margin:     '0 0 12px',
         }}>Creating my characters</h2>
         <p style={{
           fontFamily: 'Fraunces, serif',
-          fontWeight: 400,
-          fontSize:   '20px',
-          lineHeight: 1.5,
+          fontWeight: 300,
+          fontSize:   '18px',
+          lineHeight: 1.6,
           color:      '#404040',
-          margin:     '0 0 32px',
+          margin:     0,
         }}>
           I needed references that would actually make me feel something, so I grabbed some
           old photos of myself as a kid. I used them in Nano Banana Pro to start developing
           my character.
         </p>
-
-        {/* Reference photo collage */}
-        <div style={{ width: '413px', height: '469px', borderRadius: '8px', overflow: 'hidden' }}>
-          <img
-            src="/rules-we-made-up/4-character-creation/collage-nat-photos.jpg"
-            alt="Childhood reference photos"
-            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-          />
-        </div>
       </div>
 
       {/* ── Right: card stack + arrows below ── */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
 
         {/* Stack container */}
-        <div style={{ position: 'relative', width: '518px', height: '628px' }}>
+        <div style={{ position: 'relative', width: '518px', height: '636px' }}>
           {slides.map((s, si) => {
             const base = getCardStyle(si);
             return (
@@ -323,10 +325,16 @@ function CharacterCreation() {
           })}
         </div>
 
-        {/* Arrow buttons */}
+        {/* Label + arrow */}
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-          <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
-          <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
+          <span style={{
+            fontFamily:    'Fira Mono, monospace',
+            fontSize:      '11px',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color:         '#888',
+          }}>flip through the deck</span>
+          <ArrowBtn onClick={go}>→</ArrowBtn>
         </div>
       </div>
 
@@ -346,7 +354,7 @@ const friends = [
 function MoreFriends() {
   const [hovered, setHovered] = useState(null);
   return (
-    <section style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '0', paddingBottom: '100px' }}>
+    <section style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '50px', paddingBottom: '150px' }}>
       <p style={{
         fontFamily:    'Fira Mono, monospace',
         fontWeight:    400,
@@ -358,50 +366,44 @@ function MoreFriends() {
         marginBottom:  '40px',
       }}>More friends and family</p>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '32px', flexWrap: 'wrap' }}>
-        {friends.map(({ file, label }) => (
-          <div
-            key={file}
-            style={{
-              position:   'relative',
-              width:      '198px',
-              height:     '198px',
-              borderRadius: '50%',
-              overflow:   'hidden',
-              flexShrink: 0,
-              transform:  hovered === file ? 'translateY(-8px)' : 'translateY(0px)',
-              transition: 'transform 0.3s ease',
-              cursor:     'pointer',
-            }}
-            onMouseEnter={() => setHovered(file)}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <img
-              src={`/rules-we-made-up/6-family/${file}.png`}
-              alt={label}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            />
-            {/* Name overlay */}
-            <div style={{
-              position:        'absolute',
-              inset:           0,
-              borderRadius:    '50%',
-              backgroundColor: 'rgba(0,0,0,0.45)',
-              display:         'flex',
-              alignItems:      'center',
-              justifyContent:  'center',
-              opacity:         hovered === file ? 1 : 0,
-              transition:      'opacity 0.25s ease',
-            }}>
-              <span style={{
-                fontFamily:    'Fira Mono, monospace',
-                fontWeight:    400,
-                fontSize:      '13px',
-                letterSpacing: '0.08em',
-                color:         '#ffffff',
-                textAlign:     'center',
-              }}>{label}</span>
+        {friends.map(({ file, label }, i) => (
+          <Reveal key={file} delay={i * 90} distance={32} style={{ flexShrink: 0, width: '202px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+            <div
+              style={{
+                width:        '202px',
+                height:       '202px',
+                borderRadius: '50%',
+                overflow:     'hidden',
+                transform:    hovered === file ? 'translateY(-8px)' : 'translateY(0px)',
+                transition:   'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                cursor:       'pointer',
+                flexShrink:   0,
+              }}
+              onMouseEnter={() => setHovered(file)}
+              onMouseLeave={() => setHovered(null)}
+            >
+              <img
+                src={`/rules-we-made-up/6-family/${file}.png`}
+                alt={label}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
             </div>
-          </div>
+
+            {/* Name below circle */}
+            <span style={{
+              fontFamily:    'Fira Mono, monospace',
+              fontWeight:    400,
+              fontSize:      '11px',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color:         '#101010',
+              textAlign:     'center',
+              opacity:       hovered === file ? 1 : 0,
+              transform:     hovered === file ? 'translateY(0px)' : 'translateY(4px)',
+              transition:    'opacity 0.25s ease, transform 0.25s ease',
+              height:        '16px',
+            }}>{label}</span>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -409,11 +411,68 @@ function MoreFriends() {
 }
 
 // ── Mushroom Friend ───────────────────────────────────────────────────────────
-function MushroomFriend() {
-  return (
-    <section style={{ display: 'flex', width: '100%', height: '800px' }}>
+const MUSHROOM_TEXT = "The Mushroom Friend is creativity — the kind you had as a kid, before self-doubt got in the way. The kind that rescues you later.\n\nMushrooms are the earth's greatest underground connectors, linking forests invisibly. Creativity flows the same way.";
 
-      {/* Left — red panel with Fira Mono text */}
+function MushroomFriend() {
+  const sectionRef = useRef(null);
+  const videoRef   = useRef(null);
+  const [typed, setTyped]       = useState('');
+  const [started, setStarted]   = useState(false);
+  const [cursorOn, setCursorOn] = useState(true);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
+      { threshold: 0.25 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const el  = sectionRef.current;
+      const vid = videoRef.current;
+      if (!el || !vid) return;
+      const rect     = el.getBoundingClientRect();
+      const progress = (window.innerHeight / 2 - (rect.top + rect.height / 2)) / (window.innerHeight / 2);
+      const offset   = progress * 80;
+      vid.style.transform = `translateY(${offset}px)`;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!started || typed.length >= MUSHROOM_TEXT.length) return;
+    const t = setTimeout(() => setTyped(MUSHROOM_TEXT.slice(0, typed.length + 1)), 30);
+    return () => clearTimeout(t);
+  }, [started, typed]);
+
+  useEffect(() => {
+    const t = setInterval(() => setCursorOn(v => !v), 530);
+    return () => clearInterval(t);
+  }, []);
+
+  const paragraphs = typed.split('\n\n');
+  const done = typed.length >= MUSHROOM_TEXT.length;
+  const textStyle = {
+    fontFamily: 'Fira Mono, monospace',
+    fontWeight: 400,
+    fontSize:   '22px',
+    lineHeight: 1.8,
+    color:      '#ffffff',
+    margin:     0,
+    whiteSpace: 'pre-wrap',
+  };
+
+  return (
+    <section id="mushroom-friend" ref={sectionRef} style={{ display: 'flex', width: '100%', height: '800px' }}>
+
+      {/* Left — red panel with typewriter text */}
       <div style={{
         flex:            '0 0 50%',
         backgroundColor: '#C2311E',
@@ -424,37 +483,23 @@ function MushroomFriend() {
         boxSizing:       'border-box',
       }}>
         <div>
-          <p style={{
-            fontFamily: 'Fira Mono, monospace',
-            fontWeight: 400,
-            fontSize:   '25px',
-            lineHeight: 1.8,
-            color:      '#ffffff',
-            margin:     '0 0 24px',
-          }}>
-            The Mushroom Friend is a symbol for creativity — the kind you have as a kid,
-            before self-doubt gets in the way, and the kind that rescues you later when
-            you need it most.
-          </p>
-          <p style={{
-            fontFamily: 'Fira Mono, monospace',
-            fontWeight: 400,
-            fontSize:   '25px',
-            lineHeight: 1.8,
-            color:      '#ffffff',
-            margin:     0,
-          }}>
-            Mushrooms are also the earth's greatest underground connectors,
-            linking entire forests invisibly. Creativity flows the same way.
-          </p>
+          {paragraphs.map((p, i) => (
+            <p key={i} style={{ ...textStyle, marginBottom: i < paragraphs.length - 1 ? '32px' : 0 }}>
+              {p}
+              {i === paragraphs.length - 1 && !done && (
+                <span style={{ opacity: cursorOn ? 1 : 0, transition: 'opacity 0.1s', borderRight: '2px solid #fff', marginLeft: '2px' }}>&nbsp;</span>
+              )}
+            </p>
+          ))}
         </div>
       </div>
 
-      {/* Right — looping video, full bleed */}
+      {/* Right — looping video, parallax */}
       <div style={{ flex: '0 0 50%', position: 'relative', overflow: 'hidden' }}>
         <video
+          ref={videoRef}
           autoPlay muted loop playsInline
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+          style={{ position: 'absolute', left: 0, right: 0, top: '-15%', width: '100%', height: '130%', objectFit: 'cover', objectPosition: 'center top', willChange: 'transform' }}
         >
           <source src="/rules-we-made-up/5-mushroom-friend/Mushroom Dance.mp4" type="video/mp4" />
         </video>
@@ -500,7 +545,7 @@ function BlooperReel() {
       <h2 className="font-body" style={{
         fontWeight:  600,
         fontSize:    '33px',
-        lineHeight:  1.1,
+        lineHeight:  1.2,
         color:       '#101010',
         textAlign:   'center',
         margin:      '0 0 12px',
@@ -511,8 +556,8 @@ function BlooperReel() {
       <p style={{
         fontFamily: 'Poppins, sans-serif',
         fontWeight: 400,
-        fontSize:   '20px',
-        lineHeight: 1.5,
+        fontSize:   '18px',
+        lineHeight: 1.6,
         color:      '#404040',
         textAlign:  'center',
         margin:     '0 0 48px',
@@ -540,15 +585,15 @@ function BlooperReel() {
 
 function TheTool() {
   return (
-    <section style={{ paddingTop: '100px', paddingBottom: '100px', paddingLeft: '175px', paddingRight: '175px' }}>
+    <section id="ltx-studio" style={{ paddingTop: '200px', paddingBottom: '150px', paddingLeft: '175px', paddingRight: '175px' }}>
       <div style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
 
         {/* Left — text */}
-        <div style={{ flex: '0 0 30%' }}>
+        <Reveal style={{ flex: '0 0 30%', width: 'auto' }}>
           <h2 className="font-body" style={{
             fontWeight: 700,
             fontSize:   '33px',
-            lineHeight: 1.1,
+            lineHeight: 1.2,
             color:      '#101010',
             margin:     '0 0 12px',
           }}>
@@ -557,25 +602,25 @@ function TheTool() {
 
           <p style={{
             fontFamily: 'Fraunces, serif',
-            fontWeight: 400,
-            fontSize:   '20px',
-            lineHeight: 1.5,
+            fontWeight: 300,
+            fontSize:   '18px',
+            lineHeight: 1.6,
             color:      '#404040',
             margin:     '0 0 20px',
           }}>
             I chose LTX Studio for its built-in storyboarding feature — for a 3-minute film, I needed something that could hold the full sequence together. I learned quickly that uploading everything at once was an expensive mistake. Going scene by scene, slower, was faster in the end.
           </p>
 
-        </div>
+        </Reveal>
 
         {/* Right — screenshot, no rounded corners */}
-        <div style={{ flex: 1 }}>
+        <Reveal delay={180} style={{ flex: 1, width: 'auto', minWidth: 0 }}>
           <img
             src="/rules-we-made-up/9-the-tool/LTX.jpg"
             alt="LTX Studio interface"
             style={{ width: '100%', height: '359px', objectFit: 'cover', display: 'block', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)' }}
           />
-        </div>
+        </Reveal>
 
       </div>
     </section>
@@ -604,34 +649,36 @@ function FilmmakingPrinciples() {
   };
 
   return (
-    <section style={{
-      backgroundImage:    "url('/Medium-beige-darker-bg2.jpg')",
-      backgroundSize:     'cover',
-      backgroundPosition: 'center',
-      paddingTop:         '100px',
-      paddingBottom:      '100px',
+    <section id="principles" style={{
+      background:         'linear-gradient(to bottom, #F5F0EC 70%, #FFFBF8 100%)',
+      paddingTop:         '150px',
+      paddingBottom:      '150px',
     }}>
 
       {/* Centered heading + subtitle */}
       <div style={{ textAlign: 'center', paddingLeft: '80px', paddingRight: '80px', marginBottom: '48px' }}>
-        <h2 className="font-body" style={{
-          fontWeight: 700,
-          fontSize:   '40px',
-          lineHeight: 1.1,
-          color:      '#101010',
-          margin:     '0 0 16px',
-        }}>Nat's 6 AI Filmmaking Principles</h2>
-        <p style={{
-          fontFamily: 'Fraunces, serif',
-          fontWeight: 400,
-          fontSize:   '20px',
-          lineHeight: 1.5,
-          color:      '#404040',
-          margin:     '0 auto',
-          maxWidth:   '560px',
-        }}>
-          Six things I learned making an animated short with AI — things I'd tell anyone starting out.
-        </p>
+        <Reveal>
+          <h2 className="font-body" style={{
+            fontWeight: 700,
+            fontSize:   '40px',
+            lineHeight: 1.2,
+            color:      '#101010',
+            margin:     '0 0 16px',
+          }}>Nat's 6 AI Filmmaking Principles</h2>
+        </Reveal>
+        <Reveal delay={150}>
+          <p style={{
+            fontFamily: 'Fraunces, serif',
+            fontWeight: 300,
+            fontSize:   '18px',
+            lineHeight: 1.6,
+            color:      '#404040',
+            margin:     '0 auto',
+            maxWidth:   '560px',
+          }}>
+            Six things I learned making an animated short with AI — things I'd tell anyone starting out.
+          </p>
+        </Reveal>
       </div>
 
       {/* Scrollable card track */}
@@ -681,9 +728,9 @@ function FilmmakingPrinciples() {
             }}>{p.title}</h3>
             <p style={{
               fontFamily: 'Fraunces, serif',
-              fontWeight: 400,
+              fontWeight: 300,
               fontSize:   '16px',
-              lineHeight: 1.5,
+              lineHeight: 1.6,
               color:      '#404040',
               margin:     0,
             }}>{p.body}</p>
@@ -706,33 +753,34 @@ const festivalImages = [
 
 function RollCall() {
   const [lightboxIdx, setLightboxIdx] = useState(null);
+  const [familyOpen, setFamilyOpen] = useState(false);
   const n = festivalImages.length;
 
   const body = {
     fontFamily: 'Fraunces, serif',
-    fontWeight: 400,
-    fontSize:   '20px',
-    lineHeight: 1.5,
+    fontWeight: 300,
+    fontSize:   '18px',
+    lineHeight: 1.6,
     color:      '#404040',
     margin:     '0 0 20px',
   };
 
   return (
-    <section style={{
-      backgroundColor: '#F5F0EC',
+    <section id="roll-call" style={{
+      background:      'linear-gradient(to bottom, #F5F0EC 70%, #FFFBF8 100%)',
       paddingLeft:     '175px',
       paddingRight:    '175px',
-      paddingTop:      '100px',
-      paddingBottom:   '100px',
+      paddingTop:      '150px',
+      paddingBottom:   '150px',
     }}>
-      <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-start' }}>
+      <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
       {/* Left — phone mockup */}
       <div style={{ flexShrink: 0 }}>
         <img
           src="/rules-we-made-up/7-roll-call/Roll-call-mockup.png"
           alt="Substack roll call post on phone"
-          style={{ height: '775px', width: 'auto', display: 'block', boxShadow: '4px 4px 90px 0px rgba(0,0,0,0.10)' }}
+          style={{ height: '775px', width: 'auto', display: 'block', boxShadow: '4px 4px 90px 0px rgba(0,0,0,0.10)', borderRadius: '30px' }}
         />
       </div>
 
@@ -741,7 +789,7 @@ function RollCall() {
         <h2 className="font-body" style={{
           fontWeight: 700,
           fontSize:   '33px',
-          lineHeight: 1.1,
+          lineHeight: 1.2,
           color:      '#101010',
           margin:     '0 0 12px',
         }}>
@@ -782,20 +830,52 @@ function RollCall() {
       }}>Generated "Family Photo" / in Nano Banana</p>
 
       {/* Family photo — full width within section padding */}
-      <div>
+      <div
+        onClick={() => setFamilyOpen(true)}
+        style={{ cursor: 'pointer', overflow: 'hidden' }}
+        onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.03)'}
+        onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
+      >
         <img
           src="/rules-we-made-up/7-roll-call/GENERATED FAMILY PHOTO 1.jpg"
           alt="The full cast of claymation characters"
-          style={{ width: '100%', display: 'block' }}
+          style={{ width: '100%', display: 'block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)', transformOrigin: 'center center' }}
         />
       </div>
+
+      {/* Family photo lightbox */}
+      {familyOpen && (
+        <div
+          onClick={() => setFamilyOpen(false)}
+          style={{
+            position:        'fixed',
+            inset:           0,
+            backgroundColor: 'rgba(0,0,0,0.88)',
+            zIndex:          1000,
+            display:         'flex',
+            alignItems:      'center',
+            justifyContent:  'center',
+          }}
+        >
+          <img
+            src="/rules-we-made-up/7-roll-call/GENERATED FAMILY PHOTO 1.jpg"
+            alt="The full cast of claymation characters"
+            onClick={e => e.stopPropagation()}
+            style={{ maxHeight: '90vh', maxWidth: '90vw', objectFit: 'contain', display: 'block' }}
+          />
+          <button
+            onClick={() => setFamilyOpen(false)}
+            style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: '#fff', fontSize: '28px', cursor: 'pointer', lineHeight: 1 }}
+          >×</button>
+        </div>
+      )}
 
       {/* Five festival stills */}
       <div style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
         {festivalImages.map(({ src, alt }, i) => (
           <div
             key={src}
-            style={{ flex: 1, overflow: 'hidden', transition: 'transform 0.3s ease', cursor: 'pointer' }}
+            style={{ flex: 1, overflow: 'hidden', cursor: 'pointer', transition: 'transform 0.3s ease' }}
             onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-8px)'}
             onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0px)'}
             onClick={() => setLightboxIdx(i)}
@@ -813,9 +893,9 @@ function RollCall() {
 {/* Caption below stills */}
       <p style={{
         fontFamily: 'Fraunces, serif',
-        fontWeight: 400,
-        fontSize:   '20px',
-        lineHeight: 1.5,
+        fontWeight: 300,
+        fontSize:   '18px',
+        lineHeight: 1.6,
         color:      '#404040',
         margin:     '32px auto 0',
         maxWidth:   '620px',
@@ -841,7 +921,7 @@ function RollCall() {
           {/* Prev */}
           <button
             onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx - 1 + n) % n); }}
-            style={{ position: 'absolute', left: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '20px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            style={{ position: 'absolute', left: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >←</button>
 
           {/* Image */}
@@ -855,7 +935,7 @@ function RollCall() {
           {/* Next */}
           <button
             onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx + 1) % n); }}
-            style={{ position: 'absolute', right: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '20px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            style={{ position: 'absolute', right: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >→</button>
 
           {/* Close */}
@@ -873,21 +953,188 @@ function RollCall() {
 function CastGallery() { return null; }
 
 // ── Main page ─────────────────────────────────────────────────────────────────
+// ── Scroll Reveal ─────────────────────────────────────────────────────────────
+function Reveal({ children, delay = 0, distance = 48, style = {} }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity:    visible ? 1 : 0,
+        transform:  visible ? 'translateY(0px)' : `translateY(${distance}px)`,
+        transition: `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        width:      '100%',
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+// ── Section Nav ───────────────────────────────────────────────────────────────
+const navItems = [
+  { id: 'how-it-started', label: 'How It Started',   dot: '#6366F1' },
+  { id: 'characters',     label: 'Characters',        dot: '#F97316' },
+  { id: 'mushroom-friend',label: 'Mushroom Friend',   dot: '#EC4899' },
+  { id: 'roll-call',      label: 'Roll Call',         dot: '#FDB154' },
+  { id: 'ltx-studio',     label: 'LTX Studio',        dot: '#6366F1' },
+  { id: 'principles',     label: 'Principles',        dot: '#E35038' },
+];
+
+function SectionNav() {
+  const [activeId, setActiveId] = useState(null);
+
+  useEffect(() => {
+    const observers = navItems.map(({ id }) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveId(id); },
+        { threshold: 0.3 }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach(o => o?.disconnect());
+  }, []);
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  return (
+    <div style={{
+      position:        'fixed',
+      right:           '28px',
+      top:             '50%',
+      transform:       'translateY(-50%)',
+      zIndex:          200,
+      display:         'flex',
+      flexDirection:   'column',
+      alignItems:      'flex-end',
+      gap:             0,
+      backgroundColor: 'rgba(255,251,248,0.6)',
+      backdropFilter:  'blur(12px)',
+      WebkitBackdropFilter: 'blur(12px)',
+      borderRadius:    '20px',
+      padding:         '24px 14px',
+      overflow:        'hidden',
+    }}>
+      {/* Vertical dashed line — same DNA as career timeline */}
+      <div style={{
+        position:    'absolute',
+        right:       '5px',
+        top:         0,
+        bottom:      0,
+        borderRight: '2px dashed rgba(16,16,16,0.15)',
+        zIndex:      0,
+        pointerEvents: 'none',
+      }} />
+
+      {navItems.map(({ id, label, dot }) => {
+        const isActive = activeId === id;
+        return (
+          <div
+            key={id}
+            onClick={() => scrollTo(id)}
+            style={{
+              display:     'flex',
+              alignItems:  'center',
+              gap:         '10px',
+              padding:     '7px 0',
+              cursor:      'pointer',
+              position:    'relative',
+              zIndex:      1,
+            }}
+          >
+            {/* Label */}
+            <span style={{
+              fontFamily:    'Fira Mono, monospace',
+              fontSize:      '10px',
+              letterSpacing: isActive ? '0.12em' : '0.08em',
+              textTransform: 'uppercase',
+              color:         '#101010',
+              fontWeight:    400,
+              opacity:       isActive ? 1 : 0.25,
+              transition:    'opacity 0.5s ease, letter-spacing 0.5s ease',
+              whiteSpace:    'nowrap',
+            }}>{label}</span>
+
+            {/* Dot — same size & shadow as career timeline */}
+            <div style={{
+              width:           isActive ? '11px' : '8px',
+              height:          isActive ? '11px' : '8px',
+              borderRadius:    '50%',
+              backgroundColor: isActive ? dot : 'rgba(16,16,16,0.15)',
+              boxShadow:       isActive ? `0 2px 8px ${dot}99` : 'none',
+              transition:      'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              flexShrink:      0,
+            }} />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function RulesWeMadeUp() {
+  const [videoHovered, setVideoHovered] = useState(false);
+
   return (
     <main style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
       <Cursor />
       <CaseStudyNav />
+      <SectionNav />
+
+      {/* ── Floating doodle decoratives ── */}
+      {/* Dotted circle — top right, near hero */}
+      <img src="/homepage/1-hero/Ellipse 33.svg" alt="" className="animate-spin-ellipse"
+        style={{ position: 'absolute', top: '140px', right: '56px', width: '100px', opacity: 0.5, zIndex: 1, pointerEvents: 'none' }} />
+
+      {/* Dotted heart — left side, how-it-started */}
+      <img src="/doodle-heart.svg" alt="" className="animate-float-lazy"
+        style={{ position: 'absolute', top: '900px', left: '36px', width: '72px', opacity: 0.45, zIndex: 1, pointerEvents: 'none' }} />
+
+      {/* Small dotted circle — right side, character creation */}
+      <img src="/homepage/4-about/small-ellipse.svg" alt="" className="animate-spin-ellipse"
+        style={{ position: 'absolute', top: '2100px', right: '52px', width: '60px', opacity: 0.45, zIndex: 1, pointerEvents: 'none' }} />
+
+      {/* Dotted heart — right side, more friends */}
+      <img src="/doodle-heart.svg" alt="" className="animate-float-lazy"
+        style={{ position: 'absolute', top: '3000px', right: '44px', width: '58px', opacity: 0.4, zIndex: 1, pointerEvents: 'none' }} />
+
+      {/* Dotted circle — left side, roll call */}
+      <img src="/homepage/6-careerpath/Ellipse 33 2.svg" alt="" className="animate-spin-ellipse"
+        style={{ position: 'absolute', top: '4400px', left: '-32px', width: '120px', opacity: 0.35, zIndex: 1, pointerEvents: 'none' }} />
+
+      {/* Dotted heart — left side, ltx studio */}
+      <img src="/doodle-heart.svg" alt="" className="animate-float-lazy"
+        style={{ position: 'absolute', top: '5400px', left: '40px', width: '66px', opacity: 0.4, zIndex: 1, pointerEvents: 'none' }} />
+
+      {/* Dotted circle — right side, principles */}
+      <img src="/homepage/1-hero/Ellipse 33.svg" alt="" className="animate-spin-ellipse"
+        style={{ position: 'absolute', top: '6400px', right: '44px', width: '90px', opacity: 0.35, zIndex: 1, pointerEvents: 'none' }} />
 
       {/* ── Hero: 50/50 split ── */}
       <section style={{
         display:             'flex',
+        position:            'relative',
         minHeight:           '760px',
         width:               '100%',
-        backgroundImage:     "url('/Medium-beige-bg1.jpg')",
-        backgroundSize:      'cover',
-        backgroundPosition:  'center',
-        backgroundRepeat:    'no-repeat',
       }}>
 
         {/* Left — 50%, stacked content */}
@@ -936,9 +1183,9 @@ export default function RulesWeMadeUp() {
 
           <p style={{
             fontFamily: 'Fraunces, serif',
-            fontWeight: 400,
-            fontSize:   '20px',
-            lineHeight: 1.5,
+            fontWeight: 300,
+            fontSize:   '18px',
+            lineHeight: 1.6,
             color:      '#404040',
             margin:     0,
           }}>
@@ -951,31 +1198,49 @@ export default function RulesWeMadeUp() {
         <div style={{ flex: '0 0 50%', overflow: 'hidden' }}>
           <video
             autoPlay muted loop playsInline
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', cursor: 'default' }}
           >
             <source src="/rules-we-made-up/1-hero/king-loop.mp4" type="video/mp4" />
           </video>
         </div>
-      </section>
 
-      {/* Dashed section divider */}
-      <div style={{
-        height:          '2px',
-        margin:          '0',
-        backgroundImage: 'repeating-linear-gradient(90deg, #101010 0, #101010 4px, transparent 4px, transparent 8px)',
-      }} />
+        {/* Bouncing scroll cue — bottom left, aligned with text */}
+        <div className="animate-scroll-bounce" style={{
+          position:       'absolute',
+          bottom:         '32px',
+          left:           '80px',
+          display:        'flex',
+          flexDirection:  'column',
+          alignItems:     'flex-start',
+          gap:            '6px',
+          pointerEvents:  'none',
+        }}>
+          <span style={{
+            fontFamily:    'Fira Mono, monospace',
+            fontSize:      '10px',
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+            color:         '#101010',
+            opacity:       0.7,
+          }}>scroll</span>
+          <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 1 L8 18 M2 12 L8 18 L14 12" stroke="#101010" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.7"/>
+          </svg>
+        </div>
+      </section>
 
       {/* ── Video + Intro ── */}
       <section style={{
-        paddingTop:          '100px',
-        backgroundImage:     "url('/Medium-beige-darker-bg2.jpg')",
-        backgroundSize:      'cover',
-        backgroundPosition:  'center',
-        backgroundRepeat:    'no-repeat',
+        paddingTop:          '150px',
+        backgroundColor:     '#F5F0EC',
       }}>
 
         {/* Vimeo — padded, no rounded corners, with title overlay */}
-        <div style={{ position: 'relative', margin: '0 80px', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)' }}>
+        <div
+          style={{ position: 'relative', margin: '0 80px', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)', transform: videoHovered ? 'translateY(-8px)' : 'translateY(0px)', transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
+          onMouseEnter={() => setVideoHovered(true)}
+          onMouseLeave={() => setVideoHovered(false)}
+        >
           <div style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
             <iframe
               src="https://player.vimeo.com/video/1193369686?badge=0&autopause=0&player_id=0&app_id=58479"
@@ -985,18 +1250,54 @@ export default function RulesWeMadeUp() {
               title="Rules We Made Up"
             />
           </div>
+
+          {/* Play overlay — pointer-events none so clicks reach iframe */}
+          <div style={{
+            position:       'absolute',
+            inset:          0,
+            display:        'flex',
+            alignItems:     'center',
+            justifyContent: 'center',
+            opacity:        videoHovered ? 1 : 0,
+            transition:     'opacity 0.3s ease',
+            pointerEvents:  'none',
+          }}>
+            <div style={{
+              display:           'flex',
+              alignItems:        'center',
+              gap:               '12px',
+              backgroundColor:   'rgba(255,251,248,0.18)',
+              backdropFilter:    'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              borderRadius:      '100px',
+              padding:           '16px 28px 16px 22px',
+              border:            '1px solid rgba(255,255,255,0.3)',
+            }}>
+              {/* Triangle play icon */}
+              <svg width="18" height="20" viewBox="0 0 18 20" fill="none">
+                <path d="M2 1.5L16 10L2 18.5V1.5Z" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/>
+              </svg>
+              <span style={{
+                fontFamily:    'Fira Mono, monospace',
+                fontSize:      '12px',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color:         '#ffffff',
+              }}>Watch Film</span>
+            </div>
+          </div>
         </div>
         <Script src="https://player.vimeo.com/api/player.js" />
 
         {/* Metadata (left) + How it started (right) */}
         <div style={{
           display:             'grid',
-          gridTemplateColumns: '360px 1fr',
+          gridTemplateColumns: '220px 1fr',
           gap:                 '60px',
-          paddingLeft:         '80px',
+          paddingLeft:         '175px',
           paddingRight:        '175px',
           paddingTop:          '80px',
-          paddingBottom:       '100px',
+          paddingBottom:       '150px',
           alignItems:          'start',
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
@@ -1014,9 +1315,9 @@ export default function RulesWeMadeUp() {
             }}>How it started</h2>
             <p style={{
               fontFamily: 'Fraunces, serif',
-              fontWeight: 400,
-              fontSize:   '20px',
-              lineHeight: 1.5,
+              fontWeight: 300,
+              fontSize:   '18px',
+              lineHeight: 1.6,
               color:      '#404040',
               margin:     '0 0 20px',
             }}>
@@ -1026,9 +1327,9 @@ export default function RulesWeMadeUp() {
             </p>
             <p style={{
               fontFamily: 'Fraunces, serif',
-              fontWeight: 400,
-              fontSize:   '20px',
-              lineHeight: 1.5,
+              fontWeight: 300,
+              fontSize:   '18px',
+              lineHeight: 1.6,
               color:      '#404040',
               margin:     0,
             }}>
@@ -1040,62 +1341,27 @@ export default function RulesWeMadeUp() {
         </div>
       </section>
 
-      {/* Dashed section divider */}
-      <div style={{
-        height:          '2px',
-        margin:          '0',
-        backgroundImage: 'repeating-linear-gradient(90deg, #101010 0, #101010 4px, transparent 4px, transparent 8px)',
-      }} />
 
       {/* ── How it started ── */}
-      <HowItStarted />
+      <Reveal><HowItStarted /></Reveal>
 
       {/* ── Character Creation ── */}
-      <CharacterCreation />
+      <Reveal delay={100}><CharacterCreation /></Reveal>
 
       {/* ── More Friends ── */}
-      <MoreFriends />
-
-      {/* Dashed section divider */}
-      <div style={{
-        height:          '2px',
-        margin:          '0',
-        backgroundImage: 'repeating-linear-gradient(90deg, #101010 0, #101010 4px, transparent 4px, transparent 8px)',
-      }} />
+      <Reveal delay={80}><MoreFriends /></Reveal>
 
       {/* ── Mushroom Friend ── */}
-      <MushroomFriend />
-
-      {/* Dashed section divider */}
-      <div style={{
-        height:          '2px',
-        margin:          '0',
-        backgroundImage: 'repeating-linear-gradient(90deg, #101010 0, #101010 4px, transparent 4px, transparent 8px)',
-      }} />
+      <Reveal><MushroomFriend /></Reveal>
 
       {/* ── Roll Call ── */}
-      {/* ── Roll Call ── */}
-      <RollCall />
-
-      {/* Dashed section divider */}
-      <div style={{
-        height:          '2px',
-        margin:          '0',
-        backgroundImage: 'repeating-linear-gradient(90deg, #101010 0, #101010 4px, transparent 4px, transparent 8px)',
-      }} />
+      <Reveal><RollCall /></Reveal>
 
       {/* ── The Tool ── */}
-      <TheTool />
-
-      {/* Dashed section divider */}
-      <div style={{
-        height:          '2px',
-        margin:          '0',
-        backgroundImage: 'repeating-linear-gradient(90deg, #101010 0, #101010 4px, transparent 4px, transparent 8px)',
-      }} />
+      <Reveal><TheTool /></Reveal>
 
       {/* ── Filmmaking Principles ── */}
-      <FilmmakingPrinciples />
+      <Reveal><FilmmakingPrinciples /></Reveal>
 
       {/* ── Blooper Reel ── */}
       <BlooperReel />

@@ -228,6 +228,20 @@ body {
   80%      { transform: rotate(3deg); }
 }
 
+@keyframes card-enter-prev {
+  from { transform: translateX(-120%) rotate(-15deg); opacity: 0; }
+  to   { transform: translateX(0) rotate(var(--rot, 0deg)); opacity: 1; }
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(10px); }
+}
+
+.animate-scroll-bounce {
+  animation: scroll-bounce 1.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
 .pill-wiggle:hover {
   animation: wiggle 0.4s ease-in-out;
   cursor: default;

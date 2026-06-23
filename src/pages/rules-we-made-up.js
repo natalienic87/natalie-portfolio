@@ -126,7 +126,7 @@ function HowItStarted() {
 
       {/* Right: heading + body — staggered after image */}
       <div style={{ flex: 1 }}>
-        <Reveal delay={120}>
+        <Reveal delay={0}>
           <h2 className="font-body" style={{
             fontWeight: 700,
             fontSize:   '33px',
@@ -135,14 +135,14 @@ function HowItStarted() {
             margin:     '0 0 12px',
           }}>But first, a storyboard</h2>
         </Reveal>
-        <Reveal delay={220}>
+        <Reveal delay={100}>
           <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
             What did I do to start this thing. Before touching any tool, I needed a map. I adapted
             the poem into lyrics, built the song in Suno to set my runtime, then storyboarded scene
             by scene before generating a single frame.
           </p>
         </Reveal>
-        <Reveal delay={320}>
+        <Reveal delay={200}>
           <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
             The Title "Rules We Made Up" comes from a line in my poem, which I fought to keep in
             the lyrics. As the rules we make up about work, creativity and value are all shifting,
@@ -304,37 +304,42 @@ function CharacterCreation() {
 
       {/* ── Left: collage (264px) above heading + text (360px) ── */}
       <div style={{ flex: '0 0 360px', width: '360px' }}>
-        {/* Reference photo collage — above heading */}
-        <div style={{ width: '264px', height: '264px', overflow: 'hidden', boxShadow: '0px 4px 20px rgba(0,0,0,0.12)', marginBottom: '28px' }}>
-          <img
-            src="/rules-we-made-up/4-character-creation/collage-nat-photos.jpg"
-            alt="Childhood reference photos"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        </div>
-        <h2 className="font-body" style={{
-          fontWeight: 700,
-          fontSize:   '33px',
-          lineHeight: 1.2,
-          color:      '#101010',
-          margin:     '0 0 12px',
-        }}>Creating my characters</h2>
-        <p style={{
-          fontFamily: 'Fraunces, serif',
-          fontWeight: 300,
-          fontSize:   '18px',
-          lineHeight: 1.6,
-          color:      '#404040',
-          margin:     0,
-        }}>
-          I needed references that would actually make me feel something, so I grabbed some
-          old photos of myself as a kid. I used them in Nano Banana Pro to start developing
-          my character.
-        </p>
+        <Reveal delay={0}>
+          <div style={{ width: '264px', height: '264px', overflow: 'hidden', boxShadow: '0px 4px 20px rgba(0,0,0,0.12)', marginBottom: '28px' }}>
+            <img
+              src="/rules-we-made-up/4-character-creation/collage-nat-photos.jpg"
+              alt="Childhood reference photos"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+        </Reveal>
+        <Reveal delay={0}>
+          <h2 className="font-body" style={{
+            fontWeight: 700,
+            fontSize:   '33px',
+            lineHeight: 1.2,
+            color:      '#101010',
+            margin:     '0 0 12px',
+          }}>Creating my characters</h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <p style={{
+            fontFamily: 'Fraunces, serif',
+            fontWeight: 300,
+            fontSize:   '18px',
+            lineHeight: 1.6,
+            color:      '#404040',
+            margin:     0,
+          }}>
+            I needed references that would actually make me feel something, so I grabbed some
+            old photos of myself as a kid. I used them in Nano Banana Pro to start developing
+            my character.
+          </p>
+        </Reveal>
       </div>
 
       {/* ── Right: card stack + arrows below ── */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
+      <Reveal delay={0} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
 
         {/* Stack container */}
         <div style={{ position: 'relative', width: '518px', height: '636px' }}>
@@ -364,7 +369,7 @@ function CharacterCreation() {
           <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
           <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
         </div>
-      </div>
+      </Reveal>
 
     </CaseStudyLayout>
     </section>
@@ -385,19 +390,21 @@ function MoreFriends() {
   return (
     <section>
     <CaseStudyLayout style={{ paddingTop: '50px', paddingBottom: '150px' }}>
-      <p style={{
-        fontFamily:    'Fira Mono, monospace',
-        fontWeight:    400,
-        fontSize:      '13px',
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
-        color:         '#404040',
-        textAlign:     'center',
-        marginBottom:  '40px',
-      }}>More friends and family</p>
+      <Reveal delay={0}>
+        <p style={{
+          fontFamily:    'Fira Mono, monospace',
+          fontWeight:    400,
+          fontSize:      '13px',
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          color:         '#404040',
+          textAlign:     'center',
+          marginBottom:  '40px',
+        }}>More friends and family</p>
+      </Reveal>
       <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', flexWrap: 'nowrap' }}>
         {friends.map(({ file, label }, i) => (
-          <Reveal key={file} delay={i * 90} distance={32} style={{ flexShrink: 0, width: '202px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+          <Reveal key={file} delay={100 + i * 90} distance={32} style={{ flexShrink: 0, width: '202px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
             <div
               style={{
                 width:        '202px',
@@ -574,29 +581,34 @@ function BlooperReel() {
     <section>
     <CaseStudyLayout style={{ paddingTop: '120px', paddingBottom: '120px' }}>
 
-      <h2 className="font-body" style={{
-        fontWeight:  600,
-        fontSize:    '33px',
-        lineHeight:  1.2,
-        color:       '#101010',
-        textAlign:   'center',
-        margin:      '0 0 12px',
-      }}>
-        How it ended: With a Blooper Reel
-      </h2>
+      <Reveal delay={0}>
+        <h2 className="font-body" style={{
+          fontWeight:  600,
+          fontSize:    '33px',
+          lineHeight:  1.2,
+          color:       '#101010',
+          textAlign:   'center',
+          margin:      '0 0 12px',
+        }}>
+          How it ended: With a Blooper Reel
+        </h2>
+      </Reveal>
 
-      <p style={{
-        fontFamily: 'Poppins, sans-serif',
-        fontWeight: 400,
-        fontSize:   '18px',
-        lineHeight: 1.6,
-        color:      '#404040',
-        textAlign:  'center',
-        margin:     '0 0 48px',
-      }}>
-        Every film deserves one. This says more about the process than the final cut does.
-      </p>
+      <Reveal delay={100}>
+        <p style={{
+          fontFamily: 'Poppins, sans-serif',
+          fontWeight: 400,
+          fontSize:   '18px',
+          lineHeight: 1.6,
+          color:      '#404040',
+          textAlign:  'center',
+          margin:     '0 0 48px',
+        }}>
+          Every film deserves one. This says more about the process than the final cut does.
+        </p>
+      </Reveal>
 
+      <Reveal delay={200}>
       <div style={{ maxWidth: '800px', margin: '0 auto' }}>
         <div style={{ borderRadius: '12px', overflow: 'hidden' }}>
           <div style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
@@ -610,6 +622,7 @@ function BlooperReel() {
           </div>
         </div>
       </div>
+      </Reveal>
 
     </CaseStudyLayout>
     </section>
@@ -623,32 +636,34 @@ function TheTool() {
       <div style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
 
         {/* Left — text */}
-        <Reveal style={{ flex: '0 0 30%', width: 'auto' }}>
-          <h2 className="font-body" style={{
-            fontWeight: 700,
-            fontSize:   '33px',
-            lineHeight: 1.2,
-            color:      '#101010',
-            margin:     '0 0 12px',
-          }}>
-            LTX Studio
-          </h2>
+        <div style={{ flex: '0 0 30%' }}>
+          <Reveal delay={0}>
+            <h2 className="font-body" style={{
+              fontWeight: 700,
+              fontSize:   '33px',
+              lineHeight: 1.2,
+              color:      '#101010',
+              margin:     '0 0 12px',
+            }}>
+              LTX Studio
+            </h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <p style={{
+              fontFamily: 'Fraunces, serif',
+              fontWeight: 300,
+              fontSize:   '18px',
+              lineHeight: 1.6,
+              color:      '#404040',
+              margin:     '0 0 20px',
+            }}>
+              I chose LTX Studio for its built-in storyboarding feature — for a 3-minute film, I needed something that could hold the full sequence together. I learned quickly that uploading everything at once was an expensive mistake. Going scene by scene, slower, was faster in the end.
+            </p>
+          </Reveal>
+        </div>
 
-          <p style={{
-            fontFamily: 'Fraunces, serif',
-            fontWeight: 300,
-            fontSize:   '18px',
-            lineHeight: 1.6,
-            color:      '#404040',
-            margin:     '0 0 20px',
-          }}>
-            I chose LTX Studio for its built-in storyboarding feature — for a 3-minute film, I needed something that could hold the full sequence together. I learned quickly that uploading everything at once was an expensive mistake. Going scene by scene, slower, was faster in the end.
-          </p>
-
-        </Reveal>
-
-        {/* Right — screenshot, no rounded corners */}
-        <Reveal delay={180} style={{ flex: 1, width: 'auto', minWidth: 0 }}>
+        {/* Right — screenshot, simultaneous with h2 */}
+        <Reveal delay={0} style={{ flex: 1, width: 'auto', minWidth: 0 }}>
           <img
             src="/rules-we-made-up/9-the-tool/LTX.jpg"
             alt="LTX Studio interface"
@@ -701,7 +716,7 @@ function FilmmakingPrinciples() {
             margin:     '0 0 16px',
           }}>Nat's 6 AI Filmmaking Principles</h2>
         </Reveal>
-        <Reveal delay={150}>
+        <Reveal delay={100}>
           <p style={{
             fontFamily: 'Fraunces, serif',
             fontWeight: 300,
@@ -811,60 +826,67 @@ function RollCall() {
       <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
       {/* Left — phone mockup */}
-      <div style={{ flexShrink: 0 }}>
+      <Reveal delay={0} style={{ flexShrink: 0 }}>
         <img
           src="/rules-we-made-up/7-roll-call/Roll-call-mockup.png"
           alt="Substack roll call post on phone"
           style={{ height: '775px', width: 'auto', display: 'block', boxShadow: '4px 4px 90px 0px rgba(0,0,0,0.10)', borderRadius: '30px' }}
         />
-      </div>
+      </Reveal>
 
       {/* Right — heading + body + groups image */}
       <div style={{ flex: 1 }}>
-        <h2 className="font-body" style={{
-          fontWeight: 700,
-          fontSize:   '33px',
-          lineHeight: 1.2,
-          color:      '#101010',
-          margin:     '0 0 12px',
-        }}>
-          Inviting the Substack community into the film
-        </h2>
-
-        <p style={body}>
-          My film had a festival scene near the end — about 30 seconds of runtime — and I needed
-          a crowd. That's when I invited my Substack community to make themselves a claymation
-          character and I'd put them in the film. I provided the prompt, and eighteen people showed up.
-        </p>
-        <p style={body}>
-          I divided all the characters into groups by scene so I could animate each cluster
-          separately and control the lighting as the night progressed.
-        </p>
-
-        {/* Character groups image */}
-        <img
-          src="/rules-we-made-up/7-roll-call/SupportingCast-groups.png"
-          alt="Supporting cast character groups"
-          style={{ width: '100%', display: 'block', marginBottom: '32px' }}
-        />
-
+        <Reveal delay={0}>
+          <h2 className="font-body" style={{
+            fontWeight: 700,
+            fontSize:   '33px',
+            lineHeight: 1.2,
+            color:      '#101010',
+            margin:     '0 0 12px',
+          }}>
+            Inviting the Substack community into the film
+          </h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <p style={body}>
+            My film had a festival scene near the end — about 30 seconds of runtime — and I needed
+            a crowd. That's when I invited my Substack community to make themselves a claymation
+            character and I'd put them in the film. I provided the prompt, and eighteen people showed up.
+          </p>
+        </Reveal>
+        <Reveal delay={200}>
+          <p style={body}>
+            I divided all the characters into groups by scene so I could animate each cluster
+            separately and control the lighting as the night progressed.
+          </p>
+        </Reveal>
+        <Reveal delay={200}>
+          <img
+            src="/rules-we-made-up/7-roll-call/SupportingCast-groups.png"
+            alt="Supporting cast character groups"
+            style={{ width: '100%', display: 'block', marginBottom: '32px' }}
+          />
+        </Reveal>
       </div>
 
       </div>{/* end flex row */}
 
       {/* Fira Mono label above family photo */}
-      <p style={{
-        fontFamily:    'Fira Mono, monospace',
-        fontWeight:    400,
-        fontSize:      '11px',
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
-        color:         '#404040',
-        margin:        '80px 0 12px',
-        lineHeight:    1.6,
-      }}>Generated "Family Photo" / in Nano Banana</p>
+      <Reveal delay={0}>
+        <p style={{
+          fontFamily:    'Fira Mono, monospace',
+          fontWeight:    400,
+          fontSize:      '11px',
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          color:         '#404040',
+          margin:        '80px 0 12px',
+          lineHeight:    1.6,
+        }}>Generated "Family Photo" / in Nano Banana</p>
+      </Reveal>
 
       {/* Family photo — full width within section padding */}
+      <Reveal delay={100}>
       <div
         onClick={() => setFamilyOpen(true)}
         style={{ cursor: 'pointer', overflow: 'hidden' }}
@@ -877,6 +899,7 @@ function RollCall() {
           style={{ width: '100%', display: 'block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)', transformOrigin: 'center center' }}
         />
       </div>
+      </Reveal>
 
       {/* Family photo lightbox */}
       {familyOpen && (
@@ -906,38 +929,40 @@ function RollCall() {
       )}
 
       {/* Five festival stills */}
-      <div style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
-        {festivalImages.map(({ src, alt }, i) => (
-          <div
-            key={src}
-            style={{ flex: 1, overflow: 'hidden', cursor: 'pointer', transition: 'transform 0.3s ease' }}
-            onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-8px)'}
-            onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0px)'}
-            onClick={() => setLightboxIdx(i)}
-          >
-            <img
-              src={`/rules-we-made-up/7-roll-call/${src}`}
-              alt={alt}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            />
-          </div>
-        ))}
-      </div>
+      <Reveal delay={100}>
+        <div style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
+          {festivalImages.map(({ src, alt }, i) => (
+            <div
+              key={src}
+              style={{ flex: 1, overflow: 'hidden', cursor: 'pointer', transition: 'transform 0.3s ease' }}
+              onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-8px)'}
+              onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0px)'}
+              onClick={() => setLightboxIdx(i)}
+            >
+              <img
+                src={`/rules-we-made-up/7-roll-call/${src}`}
+                alt={alt}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
+          ))}
+        </div>
+      </Reveal>
 
-
-{/* Caption below stills */}
-      <p style={{
-        fontFamily: 'Fraunces, serif',
-        fontWeight: 300,
-        fontSize:   '18px',
-        lineHeight: 1.6,
-        color:      '#404040',
-        margin:     '32px auto 0',
-        maxWidth:   '620px',
-        textAlign:  'center',
-      }}>
-        From there, it was up to me to put all my characters in scene. They brought specific details: a key necklace, a leather bag, a flamingo. Details I wasn't willing to loose. It was the most challenging part of the project and by far, the most rewarding.
-      </p>
+      <Reveal delay={200}>
+        <p style={{
+          fontFamily: 'Fraunces, serif',
+          fontWeight: 300,
+          fontSize:   '18px',
+          lineHeight: 1.6,
+          color:      '#404040',
+          margin:     '32px auto 0',
+          maxWidth:   '620px',
+          textAlign:  'center',
+        }}>
+          From there, it was up to me to put all my characters in scene. They brought specific details: a key necklace, a leather bag, a flamingo. Details I wasn't willing to loose. It was the most challenging part of the project and by far, the most rewarding.
+        </p>
+      </Reveal>
 
       {/* Lightbox */}
       {lightboxIdx !== null && (
@@ -1339,43 +1364,51 @@ export default function RulesWeMadeUp() {
           paddingBottom:       '150px',
           alignItems:          'start',
         }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
-            <MetaItem label="Year"   value="2020 – 2024" />
-            <MetaItem label="Role"   value="Sr. Designer & Art Director" />
-            <MetaItem label="Medium" value="Omnichannel Campaigns" />
-          </div>
+          <Reveal delay={0}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
+              <MetaItem label="Year"   value="2020 – 2024" />
+              <MetaItem label="Role"   value="Sr. Designer & Art Director" />
+              <MetaItem label="Medium" value="Omnichannel Campaigns" />
+            </div>
+          </Reveal>
 
           <div>
-            <h2 className="font-body" style={{
-              fontWeight: 700,
-              fontSize:   '33px',
-              color:      '#101010',
-              margin:     '0 0 12px',
-            }}>How it started</h2>
-            <p style={{
-              fontFamily: 'Fraunces, serif',
-              fontWeight: 300,
-              fontSize:   '18px',
-              lineHeight: 1.6,
-              color:      '#404040',
-              margin:     '0 0 20px',
-            }}>
-              This film is adapted from a poem I wrote years ago, late one night. It's about a specific
-              kind of person: someone who thinks deeply, resists neat categories, and feels perpetually
-              out of step with a world that wants everything linear and labeled.
-            </p>
-            <p style={{
-              fontFamily: 'Fraunces, serif',
-              fontWeight: 300,
-              fontSize:   '18px',
-              lineHeight: 1.6,
-              color:      '#404040',
-              margin:     0,
-            }}>
-              When AI tools emerged, I finally had the means to bring it to life. The title comes from
-              a line I fought to keep in the lyrics. Some rules deserve protecting. Some were never
-              worth following. Right now, it feels like it's all up for renegotiation.
-            </p>
+            <Reveal delay={0}>
+              <h2 className="font-body" style={{
+                fontWeight: 700,
+                fontSize:   '33px',
+                color:      '#101010',
+                margin:     '0 0 12px',
+              }}>How it started</h2>
+            </Reveal>
+            <Reveal delay={100}>
+              <p style={{
+                fontFamily: 'Fraunces, serif',
+                fontWeight: 300,
+                fontSize:   '18px',
+                lineHeight: 1.6,
+                color:      '#404040',
+                margin:     '0 0 20px',
+              }}>
+                This film is adapted from a poem I wrote years ago, late one night. It's about a specific
+                kind of person: someone who thinks deeply, resists neat categories, and feels perpetually
+                out of step with a world that wants everything linear and labeled.
+              </p>
+            </Reveal>
+            <Reveal delay={200}>
+              <p style={{
+                fontFamily: 'Fraunces, serif',
+                fontWeight: 300,
+                fontSize:   '18px',
+                lineHeight: 1.6,
+                color:      '#404040',
+                margin:     0,
+              }}>
+                When AI tools emerged, I finally had the means to bring it to life. The title comes from
+                a line I fought to keep in the lyrics. Some rules deserve protecting. Some were never
+                worth following. Right now, it feels like it's all up for renegotiation.
+              </p>
+            </Reveal>
           </div>
         </div>
       </CaseStudyLayout>
@@ -1383,25 +1416,25 @@ export default function RulesWeMadeUp() {
 
 
       {/* ── How it started ── */}
-      <Reveal><HowItStarted /></Reveal>
+      <HowItStarted />
 
       {/* ── Character Creation ── */}
-      <Reveal delay={100}><CharacterCreation /></Reveal>
+      <CharacterCreation />
 
       {/* ── More Friends ── */}
-      <Reveal delay={80}><MoreFriends /></Reveal>
+      <MoreFriends />
 
       {/* ── Mushroom Friend ── */}
-      <Reveal><MushroomFriend /></Reveal>
+      <MushroomFriend />
 
       {/* ── Roll Call ── */}
-      <Reveal><RollCall /></Reveal>
+      <RollCall />
 
       {/* ── The Tool ── */}
-      <Reveal><TheTool /></Reveal>
+      <TheTool />
 
       {/* ── Filmmaking Principles ── */}
-      <Reveal><FilmmakingPrinciples /></Reveal>
+      <FilmmakingPrinciples />
 
       {/* ── Blooper Reel ── */}
       <BlooperReel />

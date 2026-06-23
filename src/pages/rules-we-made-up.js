@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 import Cursor from '../components/Cursor';
 import Footer from '../components/Footer';
+import CaseStudyLayout from '../components/CaseStudyLayout';
 
 // ── Minimal case-study nav ────────────────────────────────────────────────────
 function CaseStudyNav() {
@@ -93,14 +94,15 @@ function MetaItem({ label, value }) {
 // ── But first, a storyboard ───────────────────────────────────────────────────
 function HowItStarted() {
   return (
-    <section id="how-it-started" style={{
-      display:          'flex',
-      gap:              '60px',
-      paddingLeft:      '175px',
-      paddingRight:     '175px',
-      paddingTop:       '150px',
-      paddingBottom:    '50px',
-      alignItems:       'flex-start',
+    <section id="how-it-started">
+    <CaseStudyLayout style={{
+      display:       'flex',
+      gap:           '60px',
+      paddingLeft:   '175px',
+      paddingRight:  '175px',
+      paddingTop:    '150px',
+      paddingBottom: '50px',
+      alignItems:    'flex-start',
     }}>
 
       {/* Left: photo + caption */}
@@ -149,6 +151,7 @@ function HowItStarted() {
         </Reveal>
       </div>
 
+    </CaseStudyLayout>
     </section>
   );
 }
@@ -289,7 +292,8 @@ function CharacterCreation() {
   );
 
   return (
-    <section id="characters" style={{
+    <section id="characters">
+    <CaseStudyLayout style={{
       display:       'flex',
       gap:           '60px',
       paddingLeft:   '175px',
@@ -363,6 +367,7 @@ function CharacterCreation() {
         </div>
       </div>
 
+    </CaseStudyLayout>
     </section>
   );
 }
@@ -379,7 +384,8 @@ const friends = [
 function MoreFriends() {
   const [hovered, setHovered] = useState(null);
   return (
-    <section style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '50px', paddingBottom: '150px' }}>
+    <section>
+    <CaseStudyLayout style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '50px', paddingBottom: '150px' }}>
       <p style={{
         fontFamily:    'Fira Mono, monospace',
         fontWeight:    400,
@@ -431,6 +437,7 @@ function MoreFriends() {
           </Reveal>
         ))}
       </div>
+    </CaseStudyLayout>
     </section>
   );
 }
@@ -565,7 +572,8 @@ const principles = [
 
 function BlooperReel() {
   return (
-    <section style={{ paddingTop: '120px', paddingBottom: '120px', paddingLeft: '80px', paddingRight: '80px' }}>
+    <section>
+    <CaseStudyLayout style={{ paddingTop: '120px', paddingBottom: '120px', paddingLeft: '80px', paddingRight: '80px' }}>
 
       <h2 className="font-body" style={{
         fontWeight:  600,
@@ -604,13 +612,15 @@ function BlooperReel() {
         </div>
       </div>
 
+    </CaseStudyLayout>
     </section>
   );
 }
 
 function TheTool() {
   return (
-    <section id="ltx-studio" style={{ paddingTop: '200px', paddingBottom: '150px', paddingLeft: '175px', paddingRight: '175px' }}>
+    <section id="ltx-studio">
+    <CaseStudyLayout style={{ paddingTop: '200px', paddingBottom: '150px', paddingLeft: '175px', paddingRight: '175px' }}>
       <div style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
 
         {/* Left — text */}
@@ -648,6 +658,7 @@ function TheTool() {
         </Reveal>
 
       </div>
+    </CaseStudyLayout>
     </section>
   );
 }
@@ -681,7 +692,7 @@ function FilmmakingPrinciples() {
     }}>
 
       {/* Centered heading + subtitle */}
-      <div style={{ textAlign: 'center', paddingLeft: '80px', paddingRight: '80px', marginBottom: '48px' }}>
+      <CaseStudyLayout style={{ textAlign: 'center', paddingLeft: '80px', paddingRight: '80px', marginBottom: '48px' }}>
         <Reveal>
           <h2 className="font-body" style={{
             fontWeight: 700,
@@ -704,7 +715,7 @@ function FilmmakingPrinciples() {
             Six things I learned making an animated short with AI — things I'd tell anyone starting out.
           </p>
         </Reveal>
-      </div>
+      </CaseStudyLayout>
 
       {/* Scrollable card track */}
       <div
@@ -791,12 +802,12 @@ function RollCall() {
   };
 
   return (
-    <section id="roll-call" style={{
-      background:      'linear-gradient(to bottom, #F5F0EC 70%, #FFFBF8 100%)',
-      paddingLeft:     '175px',
-      paddingRight:    '175px',
-      paddingTop:      '150px',
-      paddingBottom:   '150px',
+    <section id="roll-call" style={{ background: 'linear-gradient(to bottom, #F5F0EC 70%, #FFFBF8 100%)' }}>
+    <CaseStudyLayout style={{
+      paddingLeft:   '175px',
+      paddingRight:  '175px',
+      paddingTop:    '150px',
+      paddingBottom: '150px',
     }}>
       <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
@@ -971,6 +982,7 @@ function RollCall() {
         </div>
       )}
 
+    </CaseStudyLayout>
     </section>
   );
 }
@@ -1255,10 +1267,8 @@ export default function RulesWeMadeUp() {
       </section>
 
       {/* ── Video + Intro ── */}
-      <section style={{
-        paddingTop:          '150px',
-        backgroundColor:     '#F5F0EC',
-      }}>
+      <section style={{ paddingTop: '150px', backgroundColor: '#F5F0EC' }}>
+      <CaseStudyLayout>
 
         {/* Vimeo — padded, no rounded corners, with title overlay */}
         <div
@@ -1364,6 +1374,7 @@ export default function RulesWeMadeUp() {
             </p>
           </div>
         </div>
+      </CaseStudyLayout>
       </section>
 
 

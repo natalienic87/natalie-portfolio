@@ -826,7 +826,7 @@ function RollCall() {
       <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
       {/* Left — phone mockup */}
-      <Reveal delay={0} style={{ flexShrink: 0 }}>
+      <Reveal delay={0} style={{ flexShrink: 0, width: 'auto' }}>
         <img
           src="/rules-we-made-up/7-roll-call/Roll-call-mockup.png"
           alt="Substack roll call post on phone"

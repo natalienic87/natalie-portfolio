@@ -93,7 +93,7 @@ function MetaItem({ label, value }) {
 // ── But first, a storyboard ───────────────────────────────────────────────────
 function HowItStarted() {
   return (
-    <CaseStudySection id="how-it-started" style={{ display: 'flex', gap: '60px', alignItems: 'flex-start', paddingBottom: '50px' }}>
+    <CaseStudySection id="how-it-started" style={{ display: 'flex', gap: '60px', alignItems: 'center', paddingBottom: '50px' }}>
 
       {/* Left: photo + caption */}
       <Reveal style={{ flexShrink: 0, width: 'auto' }}>

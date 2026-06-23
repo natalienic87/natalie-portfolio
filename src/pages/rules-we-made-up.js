@@ -3,7 +3,8 @@ import Link from 'next/link';
 import Script from 'next/script';
 import Cursor from '../components/Cursor';
 import Footer from '../components/Footer';
-import CaseStudyLayout from '../components/CaseStudyLayout';
+import CaseStudySection  from '../components/CaseStudySection';
+import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
 
 // ── Minimal case-study nav ────────────────────────────────────────────────────
 function CaseStudyNav() {
@@ -94,16 +95,7 @@ function MetaItem({ label, value }) {
 // ── But first, a storyboard ───────────────────────────────────────────────────
 function HowItStarted() {
   return (
-    <section id="how-it-started">
-    <CaseStudyLayout style={{
-      display:       'flex',
-      gap:           '60px',
-      paddingLeft:   '175px',
-      paddingRight:  '175px',
-      paddingTop:    '150px',
-      paddingBottom: '50px',
-      alignItems:    'flex-start',
-    }}>
+    <CaseStudySection id="how-it-started" style={{ display: 'flex', gap: '60px', alignItems: 'flex-start' }}>
 
       {/* Left: photo + caption */}
       <Reveal style={{ flexShrink: 0, width: 'auto' }}>
@@ -151,8 +143,7 @@ function HowItStarted() {
         </Reveal>
       </div>
 
-    </CaseStudyLayout>
-    </section>
+    </CaseStudySection>
   );
 }
 
@@ -292,15 +283,7 @@ function CharacterCreation() {
   );
 
   return (
-    <section id="characters">
-    <CaseStudyLayout style={{
-      display:       'flex',
-      gap:           '60px',
-      paddingLeft:   '175px',
-      paddingTop:    '50px',
-      paddingBottom: '50px',
-      alignItems:    'center',
-    }}>
+    <CaseStudySection id="characters" style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
       {/* ── Left: collage (264px) above heading + text (360px) ── */}
       <div style={{ flex: '0 0 360px', width: '360px' }}>
@@ -371,8 +354,7 @@ function CharacterCreation() {
         </div>
       </Reveal>
 
-    </CaseStudyLayout>
-    </section>
+    </CaseStudySection>
   );
 }
 
@@ -388,8 +370,7 @@ const friends = [
 function MoreFriends() {
   const [hovered, setHovered] = useState(null);
   return (
-    <section>
-    <CaseStudyLayout style={{ paddingTop: '50px', paddingBottom: '150px' }}>
+    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px' }}>
       <Reveal delay={0}>
         <p style={{
           fontFamily:    'Fira Mono, monospace',
@@ -443,8 +424,7 @@ function MoreFriends() {
           </Reveal>
         ))}
       </div>
-    </CaseStudyLayout>
-    </section>
+    </CaseStudySection>
   );
 }
 
@@ -578,8 +558,7 @@ const principles = [
 
 function BlooperReel() {
   return (
-    <section>
-    <CaseStudyLayout style={{ paddingTop: '120px', paddingBottom: '120px' }}>
+    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px' }}>
 
       <Reveal delay={0}>
         <h2 className="font-body" style={{
@@ -624,15 +603,13 @@ function BlooperReel() {
       </div>
       </Reveal>
 
-    </CaseStudyLayout>
-    </section>
+    </CaseStudySection>
   );
 }
 
 function TheTool() {
   return (
-    <section id="ltx-studio">
-    <CaseStudyLayout style={{ paddingTop: '200px', paddingBottom: '150px', paddingLeft: '175px', paddingRight: '175px' }}>
+    <CaseStudySection id="ltx-studio">
       <div style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
 
         {/* Left — text */}
@@ -672,8 +649,7 @@ function TheTool() {
         </Reveal>
 
       </div>
-    </CaseStudyLayout>
-    </section>
+    </CaseStudySection>
   );
 }
 
@@ -706,7 +682,7 @@ function FilmmakingPrinciples() {
     }}>
 
       {/* Centered heading + subtitle */}
-      <CaseStudyLayout style={{ textAlign: 'center', marginBottom: '48px' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', width: '100%', paddingLeft: '80px', paddingRight: '80px', textAlign: 'center', marginBottom: '48px', boxSizing: 'border-box' }}>
         <Reveal>
           <h2 className="font-body" style={{
             fontWeight: 700,
@@ -729,7 +705,7 @@ function FilmmakingPrinciples() {
             Six things I learned making an animated short with AI — things I'd tell anyone starting out.
           </p>
         </Reveal>
-      </CaseStudyLayout>
+      </div>
 
       {/* Scrollable card track */}
       <div
@@ -816,13 +792,7 @@ function RollCall() {
   };
 
   return (
-    <section id="roll-call" style={{ backgroundColor: '#FFFBF8' }}>
-    <CaseStudyLayout style={{
-      paddingLeft:   '175px',
-      paddingRight:  '175px',
-      paddingTop:    '150px',
-      paddingBottom: '150px',
-    }}>
+    <CaseStudySection id="roll-call">
       <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
       {/* Left — phone mockup */}
@@ -1006,8 +976,7 @@ function RollCall() {
         </div>
       )}
 
-    </CaseStudyLayout>
-    </section>
+    </CaseStudySection>
   );
 }
 
@@ -1296,8 +1265,7 @@ export default function RulesWeMadeUp() {
       </section>
 
       {/* ── Video + Intro ── */}
-      <section style={{ paddingTop: '150px', backgroundColor: '#F5F0EC' }}>
-      <CaseStudyLayout>
+      <CaseStudyFullBleed background="#F5F0EC" style={{ paddingTop: '150px', paddingBottom: 0 }}>
 
         {/* Vimeo — padded, no rounded corners, with title overlay */}
         <div
@@ -1411,9 +1379,7 @@ export default function RulesWeMadeUp() {
             </Reveal>
           </div>
         </div>
-      </CaseStudyLayout>
-      </section>
-
+      </CaseStudyFullBleed>
 
       {/* ── How it started ── */}
       <HowItStarted />

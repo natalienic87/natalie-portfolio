@@ -416,8 +416,6 @@ function MoreFriends() {
               textTransform: 'uppercase',
               color:         '#101010',
               textAlign:     'center',
-              opacity:       hovered === file ? 1 : 0,
-              transform:     hovered === file ? 'translateY(0px)' : 'translateY(4px)',
               transition:    'opacity 0.25s ease, transform 0.25s ease',
               height:        '16px',
             }}>{label}</span>

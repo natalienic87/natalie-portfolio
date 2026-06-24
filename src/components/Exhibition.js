@@ -91,7 +91,7 @@ export default function Exhibition() {
           </p>
           <h2
             className="font-heading font-bold text-off-white"
-            style={{ fontSize: '40px', lineHeight: '50px', marginTop: '12px' }}
+            style={{ fontSize: '80px', lineHeight: 1, marginTop: '12px' }}
           >
             Selected works
           </h2>

@@ -119,7 +119,7 @@ export default function Hero() {
 
       {/* Text content */}
       <div className="text-center px-6 pt-[20px] pb-20">
-        <h1 className="font-heading font-bold leading-none tracking-normal" style={{ fontSize: '96px' }}>
+        <h1 className="font-heading font-bold leading-none tracking-normal" style={{ fontSize: '80px' }}>
           {HEADING.split('').map((char, i) => (
             <span
               key={i}

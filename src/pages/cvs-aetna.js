@@ -62,7 +62,7 @@ function CaseStudyNav() {
 // ── Metadata label/value pair ─────────────────────────────────────────────────
 function MetaItem({ label, value }) {
   const meta = {
-    fontFamily:    'Poppins, sans-serif',
+    fontFamily:    'Fira Mono, monospace',
     fontWeight:    400,
     fontSize:      '14px',
     letterSpacing: '0.08em',
@@ -173,9 +173,9 @@ export default function CvsAetna() {
           boxSizing:     'border-box',
         }}>
           <h1 className="font-heading" style={{
-            fontWeight: 500,
-            fontSize:   '64px',
-            lineHeight: 'normal',
+            fontWeight: 700,
+            fontSize:   '80px',
+            lineHeight: '88px',
             color:      '#ffffff',
             margin:     0,
           }}>
@@ -232,10 +232,10 @@ export default function CvsAetna() {
 
         <div style={{ gridColumn: '3 / 9' }}>
           <p style={{
-            fontFamily: 'Poppins, sans-serif',
+            fontFamily: 'Fraunces, serif',
             fontWeight: 400,
             fontSize:   '20px',
-            lineHeight: 1.6,
+            lineHeight: 1.5,
             color:      '#ffffff',
             margin:     0,
           }}>

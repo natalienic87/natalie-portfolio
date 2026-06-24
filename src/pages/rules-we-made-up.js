@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, createContext, useContext } from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
 import Cursor from '../components/Cursor';
@@ -69,7 +69,7 @@ function CaseStudyNav() {
 // ── Metadata label/value pair ─────────────────────────────────────────────────
 function MetaItem({ label, value }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', gap: '24px' }}>
       <span style={{
         fontFamily:    'Fira Mono, monospace',
         fontWeight:    400,
@@ -78,6 +78,8 @@ function MetaItem({ label, value }) {
         textTransform: 'uppercase',
         lineHeight:    1.5,
         color:         '#888888',
+        minWidth:      '72px',
+        flexShrink:    0,
       }}>{label}</span>
       <span style={{
         fontFamily: 'Fira Mono, monospace',
@@ -85,61 +87,531 @@ function MetaItem({ label, value }) {
         fontSize:   '14px',
         lineHeight: 1.5,
         color:      '#101010',
+        width:      '264px',
+        flexShrink: 0,
       }}>{value}</span>
     </div>
+  );
+}
+
+// ── Doodle shapes ────────────────────────────────────────────────────────────
+function DoodleCircle({ size = 80 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="46" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 6" />
+    </svg>
+  );
+}
+
+function DoodleStar({ size = 70 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
+      <path
+        d="M50,5 L60.6,35.4 L92.8,36.1 L67.1,55.6 L76.4,86.4 L50,68 L23.6,86.4 L32.9,55.6 L7.2,36.1 L39.4,35.4 Z"
+        stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 6" strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function DoodleStar8({ size = 70 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
+      <path
+        d="M50,6 L57,33 L81,19 L67,43 L94,50 L67,57 L81,81 L57,67 L50,94 L43,67 L19,81 L33,57 L6,50 L33,43 L19,19 L43,33 Z"
+        stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 6" strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function DoodleSquiggle({ width = 110, height = 28 }) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 110 28" fill="none">
+      <path
+        d="M0,14 C14,3 24,25 38,14 C52,3 62,25 76,14 C90,3 100,25 110,14"
+        stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 6" strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function DoodleSpiral({ size = 80 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
+      <path
+        d="M50,90 A40,40 0 1 0 50,10 A30,30 0 1 1 50,70 A20,20 0 1 0 50,30 A10,10 0 1 1 50,50"
+        stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 6" strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function DoodleDoubleCircle({ size = 80 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="44" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 6" />
+      <circle cx="50" cy="50" r="29" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 6" />
+    </svg>
+  );
+}
+
+const DOODLE_REGISTRY = [
+  { id: 'hero-circle',           type: 'circle',   size: 76 },
+  { id: 'howitstarted-squiggle', type: 'squiggle', size: 72 },
+  { id: 'morefriends-circle',    type: 'circle',   size: 68 },
+  { id: 'bloopers-circle',       type: 'circle',   size: 72 },
+  { id: 'ltx-spiral',           type: 'spiral',   size: 82 },
+  { id: 'principles-star',       type: 'star',     size: 60 },
+  { id: 'rollcall-star',         type: 'star',     size: 64 },
+  { id: 'rollcall-squiggle',     type: 'squiggle', size: 72 },
+  { id: 'video-star',            type: 'star',     size: 68 },
+];
+
+const SHAPE_TYPES = [
+  { type: 'circle',   label: 'circle',        size: 72 },
+  { type: 'double',   label: 'double circle', size: 80 },
+  { type: 'squiggle', label: 'squiggle',      size: 72 },
+  { type: 'star',     label: 'star',          size: 68 },
+  { type: 'star8',    label: '8pt star',      size: 68 },
+  { type: 'spiral',   label: 'spiral',        size: 80 },
+];
+
+function renderDoodleShape(type, size = 72) {
+  switch (type) {
+    case 'circle':   return <DoodleCircle size={size} />;
+    case 'double':   return <DoodleDoubleCircle size={size} />;
+    case 'star':     return <DoodleStar size={size} />;
+    case 'star8':    return <DoodleStar8 size={size} />;
+    case 'squiggle': return <DoodleSquiggle width={size} height={Math.round(size * 0.28)} />;
+    case 'spiral':   return <DoodleSpiral size={size} />;
+    default:         return <DoodleCircle size={size} />;
+  }
+}
+
+const DoodleEditContext = createContext({ enabled: false, positions: {}, updatePosition: () => {}, deletedDoodles: new Set(), deleteDoodle: () => {} });
+
+function Doodle({ children, className = '', style, id }) {
+  const { enabled, positions, updatePosition, deletedDoodles, deleteDoodle } = useContext(DoodleEditContext);
+  const ref = useRef(null);
+  const [dragging, setDragging] = useState(false);
+
+  if (deletedDoodles.has(id)) return null;
+
+  if (!enabled) {
+    return (
+      <div aria-hidden="true" className={className}
+        style={{ position: 'absolute', zIndex: 0, pointerEvents: 'none', color: '#101010', ...style }}>
+        {children}
+      </div>
+    );
+  }
+
+  const override = positions[id] || {};
+  const scale    = override.scale ?? 1;
+  const color    = override.color ?? style.color ?? '#101010';
+
+  const effectiveStyle = { ...style };
+  if (override.top  !== undefined) { effectiveStyle.top = override.top;   delete effectiveStyle.bottom; }
+  if (override.left !== undefined) { effectiveStyle.left = override.left; delete effectiveStyle.right;  }
+  const baseTransform = (style.transform || '').replace(/\s*scale\([^)]*\)/g, '');
+  effectiveStyle.transform = scale !== 1 ? `${baseTransform} scale(${scale})`.trim() : (baseTransform || undefined);
+  effectiveStyle.color = color;
+
+  const handleMouseDown = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const el = ref.current;
+    if (!el) return;
+    const startTop  = el.offsetTop;
+    const startLeft = el.offsetLeft;
+    const startMX   = e.clientX;
+    const startMY   = e.clientY;
+    setDragging(true);
+
+    const onMove = (me) => {
+      updatePosition(id, {
+        ...positions[id],
+        top:  `${Math.round(startTop  + me.clientY - startMY)}px`,
+        left: `${Math.round(startLeft + me.clientX - startMX)}px`,
+      });
+    };
+    const onUp = () => {
+      setDragging(false);
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  };
+
+  const handleResizeDown = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const el = ref.current;
+    if (!el) return;
+    const startMX    = e.clientX;
+    const startMY    = e.clientY;
+    const startScale = scale;
+    const elSize     = el.offsetWidth;
+
+    const onMove = (me) => {
+      const delta    = (me.clientX - startMX + me.clientY - startMY) / 2;
+      const next     = Math.max(0.3, Math.min(6, startScale + delta / elSize));
+      updatePosition(id, { ...positions[id], scale: Math.round(next * 100) / 100 });
+    };
+    const onUp = () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  };
+
+  return (
+    <div
+      ref={ref}
+      aria-hidden="true"
+      className={className}
+      onMouseDown={handleMouseDown}
+      style={{
+        position:      'absolute',
+        zIndex:        50,
+        pointerEvents: 'all',
+        cursor:        dragging ? 'grabbing' : 'grab',
+        outline:       '1.5px dashed #818cf8',
+        outlineOffset: '5px',
+        userSelect:    'none',
+        transformOrigin: 'top left',
+        ...effectiveStyle,
+      }}
+    >
+      {children}
+      <div style={{
+        position: 'absolute', top: '-20px', left: 0,
+        display: 'flex', alignItems: 'center', gap: '4px',
+        pointerEvents: 'all',
+      }}>
+        <span style={{
+          fontSize: '9px', fontFamily: 'Fira Mono, monospace', color: '#818cf8',
+          background: 'rgba(255,255,255,0.9)', padding: '1px 4px',
+          borderRadius: '3px', whiteSpace: 'nowrap', lineHeight: 1.4,
+        }}>{id}</span>
+        {[['#101010', 'dark'], ['#C0C0C0', 'light']].map(([c, label]) => (
+          <button key={c} title={label}
+            onMouseDown={e => e.stopPropagation()}
+            onClick={() => updatePosition(id, { ...positions[id], color: c })}
+            style={{
+              width: '11px', height: '11px', borderRadius: '50%', background: c,
+              border: color === c ? '2px solid #818cf8' : '1.5px solid #ccc',
+              cursor: 'pointer', padding: 0, flexShrink: 0,
+            }}
+          />
+        ))}
+        <button title="delete"
+          onMouseDown={e => e.stopPropagation()}
+          onClick={() => deleteDoodle(id)}
+          style={{
+            background: '#ef4444', border: 'none', color: 'white', borderRadius: '3px',
+            cursor: 'pointer', fontSize: '9px', padding: '1px 5px', lineHeight: 1.4,
+            fontFamily: 'Fira Mono, monospace',
+          }}>✕</button>
+      </div>
+      {/* Resize handle — bottom-right corner */}
+      <div
+        onMouseDown={handleResizeDown}
+        style={{
+          position:  'absolute',
+          bottom:    '-7px',
+          right:     '-7px',
+          width:     '13px',
+          height:    '13px',
+          background: 'white',
+          border:    '2px solid #818cf8',
+          borderRadius: '3px',
+          cursor:    'nwse-resize',
+          zIndex:    1,
+        }}
+      />
+    </div>
+  );
+}
+
+function ExtraDoodleItem({ id, type, size, top, left, scale, color = '#101010', onUpdate, onDelete }) {
+  const ref = useRef(null);
+  const [dragging, setDragging] = useState(false);
+  const s = scale ?? 1;
+
+  const handleMouseDown = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const el = ref.current;
+    if (!el) return;
+    const startTop = el.offsetTop, startLeft = el.offsetLeft;
+    const startMX = e.clientX, startMY = e.clientY;
+    setDragging(true);
+    const onMove = (me) => onUpdate({ top: Math.round(startTop + me.clientY - startMY), left: Math.round(startLeft + me.clientX - startMX) });
+    const onUp = () => { setDragging(false); window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  };
+
+  const handleResizeDown = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const el = ref.current;
+    if (!el) return;
+    const startMX    = e.clientX;
+    const startMY    = e.clientY;
+    const startScale = s;
+    const elSize     = el.offsetWidth;
+    const onMove = (me) => {
+      const delta = (me.clientX - startMX + me.clientY - startMY) / 2;
+      const next  = Math.max(0.3, Math.min(6, startScale + delta / elSize));
+      onUpdate({ scale: Math.round(next * 100) / 100 });
+    };
+    const onUp = () => { window.removeEventListener('mousemove', onMove); window.removeEventListener('mouseup', onUp); };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  };
+
+  return (
+    <div ref={ref} onMouseDown={handleMouseDown} style={{
+      position: 'absolute', top: `${top}px`, left: `${left}px`,
+      zIndex: 50, opacity: 0.25, userSelect: 'none', pointerEvents: 'all',
+      cursor: dragging ? 'grabbing' : 'grab',
+      transform: s !== 1 ? `scale(${s})` : undefined,
+      transformOrigin: 'top left',
+      outline: '1.5px dashed #f59e0b', outlineOffset: '5px',
+      color,
+    }}>
+      {renderDoodleShape(type, size)}
+      <div style={{ position: 'absolute', top: '-20px', left: 0, display: 'flex', alignItems: 'center', gap: '4px', pointerEvents: 'all' }}>
+        <span style={{
+          fontSize: '9px', fontFamily: 'Fira Mono, monospace', color: '#f59e0b',
+          background: 'rgba(255,255,255,0.9)', padding: '1px 4px',
+          borderRadius: '3px', whiteSpace: 'nowrap', lineHeight: 1.4,
+        }}>{id}</span>
+        {[['#101010', 'dark'], ['#C0C0C0', 'light']].map(([c, label]) => (
+          <button key={c} title={label}
+            onMouseDown={e => e.stopPropagation()}
+            onClick={() => onUpdate({ color: c })}
+            style={{
+              width: '11px', height: '11px', borderRadius: '50%', background: c,
+              border: color === c ? '2px solid #f59e0b' : '1.5px solid #ccc',
+              cursor: 'pointer', padding: 0, flexShrink: 0,
+            }}
+          />
+        ))}
+        <button onMouseDown={e => e.stopPropagation()} onClick={onDelete} style={{
+          background: '#f59e0b', border: 'none', color: 'white', borderRadius: '3px',
+          cursor: 'pointer', fontSize: '9px', padding: '1px 5px', lineHeight: 1.4,
+          fontFamily: 'Fira Mono, monospace',
+        }}>✕</button>
+      </div>
+      {/* Resize handle — bottom-right corner */}
+      <div onMouseDown={handleResizeDown} style={{
+        position: 'absolute', bottom: '-7px', right: '-7px',
+        width: '13px', height: '13px',
+        background: 'white', border: '2px solid #f59e0b',
+        borderRadius: '3px', cursor: 'nwse-resize', zIndex: 1,
+      }} />
+    </div>
+  );
+}
+
+const chipBtn = (onClick, label, accent = '#6366f1') => (
+  <button onClick={onClick} style={{
+    padding: '3px 7px', background: accent + '18', color: accent, border: `1px solid ${accent}44`,
+    borderRadius: '4px', cursor: 'pointer', fontFamily: 'Fira Mono, monospace',
+    fontSize: '10px', lineHeight: 1.4, whiteSpace: 'nowrap',
+  }}>{label}</button>
+);
+
+function DoodleEditorPanel({ positions, extras, onReset, onDuplicate, onDeleteExtra }) {
+  const moved = Object.entries(positions);
+
+  const copyAll = () => {
+    const sLines = moved.map(([id, pos]) => {
+      const parts = [];
+      if (pos.top  !== undefined) parts.push(`top: '${pos.top}'`);
+      if (pos.left !== undefined) parts.push(`left: '${pos.left}'`);
+      if (pos.scale !== undefined && pos.scale !== 1) parts.push(`scale: ${pos.scale}×`);
+      return `${id}: { ${parts.join(', ')} }`;
+    });
+    const eLines = extras.map(d =>
+      `${d.id} [page-level]: { top: '${d.top}px', left: '${d.left}px'${d.scale && d.scale !== 1 ? `, scale: ${d.scale}×` : ''} }`
+    );
+    navigator.clipboard.writeText([...sLines, ...eLines].join('\n'));
+  };
+
+  const panelStyle = {
+    position: 'fixed', bottom: '72px', right: '16px', width: '268px',
+    maxHeight: '480px', overflowY: 'auto',
+    background: 'white', border: '1px solid #e5e7eb', borderRadius: '12px',
+    padding: '14px', boxShadow: '0 4px 24px rgba(0,0,0,0.14)',
+    zIndex: 9999, fontFamily: 'Fira Mono, monospace', fontSize: '11px', lineHeight: 1.5,
+  };
+
+  return (
+    <div style={panelStyle}>
+      <div style={{ fontWeight: 700, fontSize: '12px', color: '#101010', marginBottom: '10px' }}>✦ Doodle Editor</div>
+
+      {/* Moved doodles */}
+      {moved.length > 0 && (
+        <>
+          <div style={{ color: '#aaa', fontSize: '10px', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>moved</div>
+          {moved.map(([id, pos]) => (
+            <div key={id} style={{ marginBottom: '6px', padding: '7px 8px', background: '#f5f3ff', borderRadius: '6px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ color: '#6366f1', fontWeight: 700 }}>{id}</span>
+                {chipBtn(() => onDuplicate(id), '⧉ dup')}
+              </div>
+              <div style={{ color: '#666', marginTop: '2px' }}>
+                {pos.top && `↕ ${pos.top}`}{pos.top && pos.left ? '  ' : ''}
+                {pos.left && `↔ ${pos.left}`}
+                {pos.scale && pos.scale !== 1 ? `  ⊞ ${pos.scale}×` : ''}
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
+      {/* Extra / duplicated doodles */}
+      {extras.length > 0 && (
+        <>
+          <div style={{ color: '#aaa', fontSize: '10px', margin: '10px 0 6px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>copies</div>
+          {extras.map(d => (
+            <div key={d.id} style={{ marginBottom: '6px', padding: '7px 8px', background: '#fffbeb', borderRadius: '6px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ color: '#d97706', fontWeight: 700 }}>{d.id}</span>
+                {chipBtn(() => onDeleteExtra(d.id), '✕', '#d97706')}
+              </div>
+              <div style={{ color: '#666', marginTop: '2px' }}>
+                ↕ {d.top}px  ↔ {d.left}px{d.scale && d.scale !== 1 ? `  ⊞ ${d.scale}×` : ''}
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
+      {/* Duplicate any shape */}
+      <div style={{ color: '#aaa', fontSize: '10px', margin: '10px 0 6px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>⧉ duplicate any</div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px', marginBottom: '12px' }}>
+        {SHAPE_TYPES.map(s => chipBtn(() => onDuplicate(s.type, s.size), s.label))}
+      </div>
+
+      {(moved.length > 0 || extras.length > 0) && (
+        <div style={{ display: 'flex', gap: '6px' }}>
+          <button onClick={copyAll} style={{
+            flex: 1, padding: '6px', background: '#6366f1', color: 'white',
+            border: 'none', borderRadius: '6px', cursor: 'pointer',
+            fontFamily: 'Fira Mono, monospace', fontSize: '11px',
+          }}>Copy positions</button>
+          <button onClick={onReset} style={{
+            padding: '6px 10px', background: '#f3f4f6', color: '#404040',
+            border: 'none', borderRadius: '6px', cursor: 'pointer',
+            fontFamily: 'Fira Mono, monospace', fontSize: '11px',
+          }}>Reset</button>
+        </div>
+      )}
+      {moved.length === 0 && extras.length === 0 && (
+        <div style={{ color: '#888' }}>Drag a doodle to move it.<br />Drag the corner handle to resize.</div>
+      )}
+    </div>
+  );
+}
+
+function DoodleEditorToggle({ enabled, onToggle }) {
+  return (
+    <button onClick={onToggle} style={{
+      position:     'fixed',
+      bottom:       '20px',
+      right:        '16px',
+      padding:      '9px 16px',
+      background:   enabled ? '#6366f1' : '#101010',
+      color:        'white',
+      border:       'none',
+      borderRadius: '999px',
+      cursor:       'pointer',
+      fontFamily:   'Fira Mono, monospace',
+      fontSize:     '12px',
+      zIndex:       10000,
+      boxShadow:    '0 4px 16px rgba(0,0,0,0.25)',
+      transition:   'background 0.2s',
+    }}>
+      {enabled ? '✕ exit doodle edit' : '✦ edit doodles'}
+    </button>
   );
 }
 
 // ── But first, a storyboard ───────────────────────────────────────────────────
 function HowItStarted() {
   return (
-    <CaseStudySection id="how-it-started" style={{ display: 'flex', gap: '60px', alignItems: 'center', paddingBottom: '50px' }}>
+    <CaseStudySection id="how-it-started" style={{ paddingBottom: '50px' }}
+      sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
+      doodle={undefined}
+    >
 
-      {/* Left: photo + caption */}
-      <Reveal style={{ flexShrink: 0, width: 'auto' }}>
-        <div style={{ marginBottom: '12px', width: '455px', height: '455px' }}>
-          <img
-            src="/rules-we-made-up/3-how-it-started/Storyboard 1.jpg"
-            alt="Storyboard planning documents"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          />
+      {/* Flex row: image vs text — caption excluded so centering is against image only */}
+      <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
+
+        {/* Left: photo */}
+        <Reveal style={{ flexShrink: 0, width: 'auto' }}>
+          <div
+            style={{ width: '455px', height: '455px', overflow: 'hidden' }}
+            onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
+            onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
+          >
+            <img
+              src="/rules-we-made-up/3-how-it-started/Storyboard 1.jpg"
+              alt="Storyboard planning documents"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
+            />
+          </div>
+        </Reveal>
+
+        {/* Right: heading + body */}
+        <div style={{ flex: 1 }}>
+          <Reveal delay={0}>
+            <h2 className="font-body" style={{
+              fontWeight: 700,
+              fontSize:   '33px',
+              lineHeight: 1.2,
+              color:      '#101010',
+              margin:     '0 0 12px',
+            }}>But first, a storyboard</h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              What did I do to start this thing. Before touching any tool, I needed a map. I adapted
+              the poem into lyrics, built the song in Suno to set my runtime, then storyboarded scene
+              by scene before generating a single frame.
+            </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              The Title "Rules We Made Up" comes from a line in my poem, which I fought to keep in
+              the lyrics. As the rules we make up about work, creativity and value are all shifting,
+              it felt like appropriate timing.
+            </p>
+          </Reveal>
         </div>
+
+      </div>
+
+      {/* Caption — outside the flex row, sits below the image */}
+      <Reveal delay={100}>
         <p style={{
           fontFamily: 'Fira Mono, monospace',
           fontWeight: 400,
           fontSize:   '13px',
           lineHeight: 1.6,
           color:      '#666666',
-          margin:     0,
+          margin:     '12px 0 0',
+          width:      '455px',
         }}>I printed it out, because I'm old school like that.</p>
       </Reveal>
-
-      {/* Right: heading + body — staggered after image */}
-      <div style={{ flex: 1 }}>
-        <Reveal delay={0}>
-          <h2 className="font-body" style={{
-            fontWeight: 700,
-            fontSize:   '33px',
-            lineHeight: 1.2,
-            color:      '#101010',
-            margin:     '0 0 12px',
-          }}>But first, a storyboard</h2>
-        </Reveal>
-        <Reveal delay={100}>
-          <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
-            What did I do to start this thing. Before touching any tool, I needed a map. I adapted
-            the poem into lyrics, built the song in Suno to set my runtime, then storyboarded scene
-            by scene before generating a single frame.
-          </p>
-        </Reveal>
-        <Reveal delay={200}>
-          <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-            The Title "Rules We Made Up" comes from a line in my poem, which I fought to keep in
-            the lyrics. As the rules we make up about work, creativity and value are all shifting,
-            it felt like appropriate timing.
-          </p>
-        </Reveal>
-      </div>
 
     </CaseStudySection>
   );
@@ -176,6 +648,24 @@ function CharacterCreation() {
   const [isAnimating,  setIsAnimating]  = useState(false);
   const [flyingOut,    setFlyingOut]    = useState(false);
   const [enteringPrev, setEnteringPrev] = useState(false);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.transform = 'scale(1)';
+          el.style.opacity   = '1';
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: '-100px' }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   const n = slides.length;
 
@@ -281,16 +771,34 @@ function CharacterCreation() {
   );
 
   return (
-    <CaseStudySection id="characters" style={{ display: 'flex', gap: '60px', alignItems: 'center', paddingTop: '50px', paddingBottom: '50px' }}>
+    <CaseStudySection id="characters" style={{ paddingTop: '50px', paddingBottom: '50px' }}
+      doodle={undefined}
+    >
+      <div
+        ref={contentRef}
+        style={{
+          display:         'flex',
+          gap:             '60px',
+          alignItems:      'center',
+          transform:       'scale(0.96)',
+          opacity:         0,
+          transition:      'transform 700ms cubic-bezier(0.16, 1, 0.3, 1), opacity 700ms cubic-bezier(0.16, 1, 0.3, 1)',
+          transformOrigin: 'center center',
+        }}
+      >
 
       {/* ── Left: collage (264px) above heading + text (360px) ── */}
       <div style={{ flex: '0 0 360px', width: '360px' }}>
         <Reveal delay={0}>
-          <div style={{ width: '264px', height: '264px', overflow: 'hidden', boxShadow: '0px 4px 20px rgba(0,0,0,0.12)', marginBottom: '28px' }}>
+          <div
+            style={{ width: '264px', height: '264px', overflow: 'hidden', boxShadow: '0px 4px 20px rgba(0,0,0,0.12)', marginBottom: '28px' }}
+            onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
+            onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
+          >
             <img
               src="/rules-we-made-up/4-character-creation/collage-nat-photos.jpg"
               alt="Childhood reference photos"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
             />
           </div>
         </Reveal>
@@ -352,6 +860,7 @@ function CharacterCreation() {
         </div>
       </Reveal>
 
+      </div>
     </CaseStudySection>
   );
 }
@@ -368,7 +877,9 @@ const friends = [
 function MoreFriends() {
   const [hovered, setHovered] = useState(null);
   return (
-    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '50px' }}>
+    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '50px' }}
+      doodle={undefined}
+    >
       <Reveal delay={0}>
         <p style={{
           fontFamily:    'Fira Mono, monospace',
@@ -394,6 +905,7 @@ function MoreFriends() {
                 transition:   'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
                 cursor:       'pointer',
                 flexShrink:   0,
+                boxShadow:    '0 4px 24px rgba(0,0,0,0.10)',
               }}
               onMouseEnter={() => setHovered(file)}
               onMouseLeave={() => setHovered(null)}
@@ -462,7 +974,7 @@ function MushroomFriend() {
 
   useEffect(() => {
     if (!started || typed.length >= MUSHROOM_TEXT.length) return;
-    const t = setTimeout(() => setTyped(MUSHROOM_TEXT.slice(0, typed.length + 1)), 30);
+    const t = setTimeout(() => setTyped(MUSHROOM_TEXT.slice(0, typed.length + 1)), 55);
     return () => clearTimeout(t);
   }, [started, typed]);
 
@@ -484,7 +996,7 @@ function MushroomFriend() {
   };
 
   return (
-    <section id="mushroom-friend" ref={sectionRef} style={{ display: 'flex', width: '100%', height: '800px' }}>
+    <section id="mushroom-friend" ref={sectionRef} style={{ display: 'flex', width: '100%', height: '800px', position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8' }}>
 
       {/* Left — red panel with typewriter text */}
       <div style={{
@@ -495,16 +1007,27 @@ function MushroomFriend() {
         justifyContent:  'center',
         padding:         '80px',
         boxSizing:       'border-box',
+        overflow:        'hidden',
       }}>
-        <div>
-          {paragraphs.map((p, i) => (
-            <p key={i} style={{ ...textStyle, marginBottom: i < paragraphs.length - 1 ? '32px' : 0 }}>
-              {p}
-              {i === paragraphs.length - 1 && !done && (
-                <span style={{ opacity: cursorOn ? 1 : 0, transition: 'opacity 0.1s', borderRight: '2px solid #fff', marginLeft: '2px' }}>&nbsp;</span>
-              )}
-            </p>
-          ))}
+        {/* Relative wrapper: invisible full text holds height; typed text overlays it */}
+        <div style={{ position: 'relative', width: '100%' }}>
+          {/* Invisible placeholder — establishes full height so centering never shifts */}
+          <div aria-hidden="true" style={{ opacity: 0, pointerEvents: 'none' }}>
+            {MUSHROOM_TEXT.split('\n\n').map((p, i, arr) => (
+              <p key={i} style={{ ...textStyle, marginBottom: i < arr.length - 1 ? '32px' : 0 }}>{p}</p>
+            ))}
+          </div>
+          {/* Visible typed text */}
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
+            {paragraphs.map((p, i) => (
+              <p key={i} style={{ ...textStyle, marginBottom: i < paragraphs.length - 1 ? '32px' : 0 }}>
+                {p}
+                {i === paragraphs.length - 1 && !done && (
+                  <span style={{ opacity: cursorOn ? 1 : 0, transition: 'opacity 0.1s', borderRight: '2px solid #fff', marginLeft: '2px' }}>&nbsp;</span>
+                )}
+              </p>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -534,6 +1057,7 @@ const principles = [
     img:   '/rules-we-made-up/8-filmmaking-principles/insert-yourself.jpg',
     title: 'Insert Yourself into the Film',
     body:  'Ask: what makes this film mine? My character wore the outfits I loved in my twenties. There\'s maple syrup on the kitchen table because we always had it growing up. Nobody else would make those connections. That\'s exactly why they\'re there.',
+    crop:  'left',
   },
   {
     img:   '/rules-we-made-up/8-filmmaking-principles/direct-for-consistency.jpg',
@@ -554,7 +1078,7 @@ const principles = [
 
 function BlooperReel() {
   return (
-    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingBottom: '50px' }}>
+    <CaseStudySection>
 
       <Reveal delay={0}>
         <h2 className="font-body" style={{
@@ -571,8 +1095,8 @@ function BlooperReel() {
 
       <Reveal delay={100}>
         <p style={{
-          fontFamily: 'Poppins, sans-serif',
-          fontWeight: 400,
+          fontFamily: 'Fraunces, serif',
+          fontWeight: 300,
           fontSize:   '18px',
           lineHeight: 1.6,
           color:      '#404040',
@@ -584,17 +1108,15 @@ function BlooperReel() {
       </Reveal>
 
       <Reveal delay={200}>
-      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <div style={{ borderRadius: '12px', overflow: 'hidden' }}>
-          <div style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
-            <iframe
-              src="https://player.vimeo.com/video/1193427742?badge=0&autopause=0&player_id=0&app_id=58479"
-              frameBorder="0"
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-              title="Outtakes - Rules We Made Up"
-            />
-          </div>
+      <div style={{ position: 'relative', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)' }}>
+        <div style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
+          <iframe
+            src="https://player.vimeo.com/video/1193427742?badge=0&autopause=0&player_id=0&app_id=58479"
+            frameBorder="0"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+            title="Outtakes - Rules We Made Up"
+          />
         </div>
       </div>
       </Reveal>
@@ -604,8 +1126,30 @@ function BlooperReel() {
 }
 
 function TheTool() {
+  const ltxRef  = useRef(null);
+  const MAX_TILT = 12;
+
+  const handleTiltMove = (e) => {
+    const el = ltxRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left  - rect.width  / 2) / (rect.width  / 2);
+    const y = (e.clientY - rect.top   - rect.height / 2) / (rect.height / 2);
+    el.style.transition = 'transform 0.1s ease';
+    el.style.transform  = `perspective(1000px) rotateX(${-y * MAX_TILT}deg) rotateY(${x * MAX_TILT}deg)`;
+  };
+
+  const handleTiltLeave = () => {
+    const el = ltxRef.current;
+    if (!el) return;
+    el.style.transition = 'transform 0.6s ease';
+    el.style.transform  = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+  };
+
   return (
-    <CaseStudySection id="ltx-studio" style={{ paddingTop: '50px' }}>
+    <CaseStudySection id="ltx-studio"
+      doodle={undefined}
+    >
       <div style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
 
         {/* Left — text */}
@@ -635,13 +1179,32 @@ function TheTool() {
           </Reveal>
         </div>
 
-        {/* Right — screenshot, simultaneous with h2 */}
+        {/* Right — screenshot + caption with 3D tilt */}
         <Reveal delay={0} style={{ flex: 1, width: 'auto', minWidth: 0 }}>
-          <img
-            src="/rules-we-made-up/9-the-tool/LTX.jpg"
-            alt="LTX Studio interface"
-            style={{ width: '100%', height: '359px', objectFit: 'cover', display: 'block', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)' }}
-          />
+          <div
+            ref={ltxRef}
+            onMouseMove={handleTiltMove}
+            onMouseLeave={handleTiltLeave}
+            style={{ display: 'block', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)' }}
+          >
+            <img
+              src="/rules-we-made-up/9-the-tool/LTX.jpg"
+              alt="LTX Studio interface"
+              style={{ width: '100%', display: 'block' }}
+            />
+          </div>
+          <div style={{ display: 'flex', gap: '32px', marginTop: '16px' }}>
+            {['Elements', 'Editor', 'Character consistency'].map(label => (
+              <span key={label} style={{
+                fontFamily:    'Fira Mono, monospace',
+                fontWeight:    400,
+                fontSize:      '11px',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color:         '#888888',
+              }}>{label}</span>
+            ))}
+          </div>
         </Reveal>
 
       </div>
@@ -650,35 +1213,116 @@ function TheTool() {
 }
 
 function FilmmakingPrinciples() {
-  const trackRef = useRef(null);
-  const N        = principles.length;
-  const looped   = [...principles, ...principles, ...principles];
-  const CARD_W   = 380;
-  const GAP      = 20;
+  const [page, setPage]       = useState(0);
+  const viewportRef           = useRef(null);
+  const trackRef              = useRef(null);
+  const offsetRef             = useRef(0);
+  const animRef               = useRef(null);
+  const dragRef               = useRef({ active: false, startX: 0, startOffset: 0 });
+  const vpWidthRef            = useRef(1120);
+  const [vpWidth, setVpWidth] = useState(1120);
+  const [dragging, setDragging] = useState(false);
+  const GAP   = 24;
+  const PAGES = [principles.slice(0, 3), principles.slice(3)];
 
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.scrollLeft = N * (CARD_W + GAP);
-  }, []);
+  const getStep    = () => vpWidthRef.current + GAP;
+  const getMaxOff  = () => (PAGES.length - 1) * getStep();
 
-  const onScroll = () => {
-    const track = trackRef.current;
-    if (!track) return;
-    const setW = N * (CARD_W + GAP);
-    if (track.scrollLeft >= setW * 2) track.scrollLeft -= setW;
-    else if (track.scrollLeft <= 0)   track.scrollLeft += setW;
+  const applyTransform = () => {
+    if (trackRef.current) trackRef.current.style.transform = `translateX(-${offsetRef.current}px)`;
   };
 
-  return (
-    <section id="principles" style={{
-      backgroundColor:    '#F5F0EC',
-      paddingTop:         '150px',
-      paddingBottom:      '150px',
-    }}>
+  const animateTo = (target) => {
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    const clamped  = Math.max(0, Math.min(getMaxOff(), target));
+    const start    = offsetRef.current;
+    const diff     = clamped - start;
+    const duration = 500;
+    const t0       = performance.now();
+    const tick = (now) => {
+      const p    = Math.min((now - t0) / duration, 1);
+      const ease = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      offsetRef.current = start + diff * ease;
+      applyTransform();
+      if (p < 1) animRef.current = requestAnimationFrame(tick);
+      else { offsetRef.current = clamped; applyTransform(); }
+    };
+    animRef.current = requestAnimationFrame(tick);
+  };
 
-      {/* Centered heading + subtitle */}
-      <div style={{ maxWidth: '1280px', margin: '0 auto', width: '100%', paddingLeft: '80px', paddingRight: '80px', textAlign: 'center', marginBottom: '48px', boxSizing: 'border-box' }}>
+  const snapNearest = () => {
+    const step        = getStep();
+    const nearest     = Math.max(0, Math.min(PAGES.length - 1, Math.round(offsetRef.current / step)));
+    setPage(nearest);
+    animateTo(nearest * step);
+  };
+
+  useEffect(() => {
+    const el = viewportRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([e]) => {
+      vpWidthRef.current = e.contentRect.width;
+      setVpWidth(e.contentRect.width);
+    });
+    ro.observe(el);
+
+    const handleWheel = (e) => {
+      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
+      e.preventDefault();
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+      offsetRef.current = Math.max(0, Math.min(getMaxOff(), offsetRef.current + e.deltaX));
+      applyTransform();
+    };
+    el.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => { ro.disconnect(); el.removeEventListener('wheel', handleWheel); };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Keep offset in sync when page is set via arrows/dots
+  useEffect(() => { animateTo(page * getStep()); }, [page, vpWidth]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const onMouseDown = (e) => {
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    dragRef.current = { active: true, startX: e.clientX, startOffset: offsetRef.current };
+    setDragging(true);
+  };
+  const onMouseMove = (e) => {
+    if (!dragRef.current.active) return;
+    offsetRef.current = Math.max(0, Math.min(getMaxOff(), dragRef.current.startOffset + (dragRef.current.startX - e.clientX)));
+    applyTransform();
+  };
+  const onDragEnd = () => {
+    if (!dragRef.current.active) return;
+    dragRef.current.active = false;
+    setDragging(false);
+    snapNearest();
+  };
+
+  const arrowStyle = (disabled) => ({
+    position:        'absolute',
+    top:             '50%',
+    transform:       'translateY(-50%)',
+    zIndex:          2,
+    width:           '44px',
+    height:          '44px',
+    borderRadius:    '50%',
+    border:          '1.5px solid rgba(16,16,16,0.18)',
+    backgroundColor: '#ffffff',
+    cursor:          disabled ? 'default' : 'pointer',
+    opacity:         disabled ? 0.3 : 1,
+    display:         'flex',
+    alignItems:      'center',
+    justifyContent:  'center',
+    fontSize:        '18px',
+    color:           '#101010',
+    transition:      'opacity 0.25s ease',
+    boxShadow:       '0 2px 12px rgba(0,0,0,0.08)',
+    flexShrink:      0,
+  });
+
+  return (
+    <>
+      <CaseStudyFullBleed id="principles" background="#F5F0EC" style={{ paddingBottom: '48px', textAlign: 'center' }}>
         <Reveal>
           <h2 className="font-body" style={{
             fontWeight: 700,
@@ -686,7 +1330,7 @@ function FilmmakingPrinciples() {
             lineHeight: 1.2,
             color:      '#101010',
             margin:     '0 0 16px',
-          }}>Nat's 6 AI Filmmaking Principles</h2>
+          }}>Nat's AI Filmmaking Principles</h2>
         </Reveal>
         <Reveal delay={100}>
           <p style={{
@@ -701,66 +1345,109 @@ function FilmmakingPrinciples() {
             Six things I learned making an animated short with AI — things I'd tell anyone starting out.
           </p>
         </Reveal>
-      </div>
+      </CaseStudyFullBleed>
 
-      {/* Scrollable card track */}
-      <div
-        ref={trackRef}
-        onScroll={onScroll}
-        style={{
-          display:         'flex',
-          gap:             `${GAP}px`,
-          overflowX:       'auto',
-          scrollbarWidth:  'none',
-          msOverflowStyle: 'none',
-          paddingLeft:     '80px',
-          paddingRight:    '80px',
-          paddingBottom:   '8px',
-          alignItems:      'flex-start',
-        }}
-      >
-        {looped.map((p, i) => (
-          <div key={i} style={{
-            flexShrink:      0,
-            width:           '665px',
-            height:          '584px',
-            backgroundColor: '#ffffff',
-            borderRadius:    '20px',
-            overflow:        'hidden',
-            border:          '2px dashed #101010',
-            padding:         '20px',
-            display:         'flex',
-            flexDirection:   'column',
-          }}>
-            {/* Image */}
-            <div style={{ borderRadius: '12px', overflow: 'hidden', marginBottom: '20px', flexShrink: 0 }}>
-              <img
-                src={p.img}
-                alt={p.title}
-                style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', display: 'block' }}
-              />
+      {/* Draggable paginated card carousel */}
+      <div style={{ backgroundColor: '#F5F0EC', paddingBottom: '80px', position: 'relative', zIndex: 2 }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', position: 'relative' }}>
+
+          {/* Left arrow */}
+          <button
+            onClick={() => setPage(p => Math.max(0, p - 1))}
+            aria-label="Previous"
+            style={{ ...arrowStyle(page === 0), left: '-22px' }}
+          >←</button>
+
+          {/* Right arrow */}
+          <button
+            onClick={() => setPage(p => Math.min(PAGES.length - 1, p + 1))}
+            aria-label="Next"
+            style={{ ...arrowStyle(page === PAGES.length - 1), right: '-22px' }}
+          >→</button>
+
+          {/* Viewport — clips horizontally, lets hover scale breathe vertically */}
+          <div
+            ref={viewportRef}
+            style={{ overflowX: 'clip', padding: '32px 0', cursor: dragging ? 'grabbing' : 'grab', userSelect: 'none', maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)' }}
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseUp={onDragEnd}
+            onMouseLeave={onDragEnd}
+          >
+            <div ref={trackRef} style={{ display: 'flex', gap: `${GAP}px`, willChange: 'transform' }}>
+              {PAGES.map((cards, pageIdx) => (
+                <div key={pageIdx} style={{
+                  display:             'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gap:                 `${GAP}px`,
+                  width:               `${vpWidth}px`,
+                  flexShrink:          0,
+                }}>
+                  {cards.map(p => (
+                    <div key={p.title} className="principles-card" style={{
+                      backgroundColor: '#ffffff',
+                      borderRadius:    '20px',
+                      overflow:        'hidden',
+                      border:          '2px dashed #101010',
+                      padding:         '20px',
+                      display:         'flex',
+                      flexDirection:   'column',
+                      boxShadow:       '0 16px 48px rgba(0,0,0,0.14)',
+                    }}>
+                      <div style={{ borderRadius: '12px', overflow: 'hidden', marginBottom: '20px', flexShrink: 0 }}>
+                        <img
+                          src={p.img}
+                          alt={p.title}
+                          draggable={false}
+                          style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: p.crop === 'left' ? 'left center' : 'center', display: 'block' }}
+                        />
+                      </div>
+                      <h3 className="font-body" style={{
+                        fontWeight: 700,
+                        fontSize:   '22px',
+                        lineHeight: 1.2,
+                        color:      '#101010',
+                        margin:     '0 0 10px',
+                      }}>{p.title}</h3>
+                      <p style={{
+                        fontFamily: 'Fraunces, serif',
+                        fontWeight: 300,
+                        fontSize:   '15px',
+                        lineHeight: 1.6,
+                        color:      '#404040',
+                        margin:     0,
+                      }}>{p.body}</p>
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
-            {/* Text */}
-            <h3 className="font-body" style={{
-              fontWeight: 700,
-              fontSize:   '24px',
-              lineHeight: 1.2,
-              color:      '#101010',
-              margin:     '0 0 10px',
-            }}>{p.title}</h3>
-            <p style={{
-              fontFamily: 'Fraunces, serif',
-              fontWeight: 300,
-              fontSize:   '16px',
-              lineHeight: 1.6,
-              color:      '#404040',
-              margin:     0,
-            }}>{p.body}</p>
           </div>
-        ))}
-      </div>
 
-    </section>
+          {/* Page dots */}
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '32px' }}>
+            {PAGES.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setPage(idx)}
+                aria-label={`Page ${idx + 1}`}
+                style={{
+                  width:           idx === page ? '24px' : '8px',
+                  height:          '8px',
+                  borderRadius:    '4px',
+                  backgroundColor: idx === page ? '#101010' : 'rgba(16,16,16,0.25)',
+                  border:          'none',
+                  cursor:          'pointer',
+                  padding:         0,
+                  transition:      'width 0.3s ease, background-color 0.3s ease',
+                }}
+              />
+            ))}
+          </div>
+
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -777,6 +1464,25 @@ function RollCall() {
   const [lightboxIdx, setLightboxIdx] = useState(null);
   const [familyOpen, setFamilyOpen] = useState(false);
   const n = festivalImages.length;
+  const phoneRef = useRef(null);
+  const MAX_TILT = 12;
+
+  const handleTiltMove = (e) => {
+    const el = phoneRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left  - rect.width  / 2) / (rect.width  / 2);
+    const y = (e.clientY - rect.top   - rect.height / 2) / (rect.height / 2);
+    el.style.transition = 'transform 0.1s ease';
+    el.style.transform  = `perspective(1000px) rotateX(${-y * MAX_TILT}deg) rotateY(${x * MAX_TILT}deg)`;
+  };
+
+  const handleTiltLeave = () => {
+    const el = phoneRef.current;
+    if (!el) return;
+    el.style.transition = 'transform 0.6s ease';
+    el.style.transform  = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+  };
 
   const body = {
     fontFamily: 'Fraunces, serif',
@@ -788,191 +1494,196 @@ function RollCall() {
   };
 
   return (
-    <CaseStudySection id="roll-call">
-      <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
+    <>
+      <CaseStudySection id="roll-call">
+        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
-      {/* Left — phone mockup */}
-      <Reveal delay={0} style={{ flexShrink: 0, width: 'auto' }}>
-        <img
-          src="/rules-we-made-up/7-roll-call/Roll-call-mockup.png"
-          alt="Substack roll call post on phone"
-          style={{ height: '775px', width: 'auto', display: 'block', boxShadow: '4px 4px 90px 0px rgba(0,0,0,0.10)', borderRadius: '30px' }}
-        />
-      </Reveal>
-
-      {/* Right — heading + body + groups image */}
-      <div style={{ flex: 1 }}>
-        <Reveal delay={0}>
-          <h2 className="font-body" style={{
-            fontWeight: 700,
-            fontSize:   '33px',
-            lineHeight: 1.2,
-            color:      '#101010',
-            margin:     '0 0 12px',
-          }}>
-            Inviting the Substack community into the film
-          </h2>
-        </Reveal>
-        <Reveal delay={100}>
-          <p style={body}>
-            My film had a festival scene near the end — about 30 seconds of runtime — and I needed
-            a crowd. That's when I invited my Substack community to make themselves a claymation
-            character and I'd put them in the film. I provided the prompt, and eighteen people showed up.
-          </p>
-        </Reveal>
-        <Reveal delay={200}>
-          <p style={body}>
-            I divided all the characters into groups by scene so I could animate each cluster
-            separately and control the lighting as the night progressed.
-          </p>
-        </Reveal>
-        <Reveal delay={200}>
-          <img
-            src="/rules-we-made-up/7-roll-call/SupportingCast-groups.png"
-            alt="Supporting cast character groups"
-            style={{ width: '100%', display: 'block', marginBottom: '32px' }}
-          />
-        </Reveal>
-      </div>
-
-      </div>{/* end flex row */}
-
-      {/* Fira Mono label above family photo */}
-      <Reveal delay={0}>
-        <p style={{
-          fontFamily:    'Fira Mono, monospace',
-          fontWeight:    400,
-          fontSize:      '11px',
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          color:         '#404040',
-          margin:        '80px 0 12px',
-          lineHeight:    1.6,
-        }}>Generated "Family Photo" / in Nano Banana</p>
-      </Reveal>
-
-      {/* Family photo — full width within section padding */}
-      <Reveal delay={100}>
-      <div
-        onClick={() => setFamilyOpen(true)}
-        style={{ cursor: 'pointer', overflow: 'hidden' }}
-        onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.03)'}
-        onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
-      >
-        <img
-          src="/rules-we-made-up/7-roll-call/GENERATED FAMILY PHOTO 1.jpg"
-          alt="The full cast of claymation characters"
-          style={{ width: '100%', display: 'block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)', transformOrigin: 'center center' }}
-        />
-      </div>
-      </Reveal>
-
-      {/* Family photo lightbox */}
-      {familyOpen && (
-        <div
-          onClick={() => setFamilyOpen(false)}
-          style={{
-            position:        'fixed',
-            inset:           0,
-            backgroundColor: 'rgba(0,0,0,0.88)',
-            zIndex:          1000,
-            display:         'flex',
-            alignItems:      'center',
-            justifyContent:  'center',
-          }}
-        >
-          <img
-            src="/rules-we-made-up/7-roll-call/GENERATED FAMILY PHOTO 1.jpg"
-            alt="The full cast of claymation characters"
-            onClick={e => e.stopPropagation()}
-            style={{ maxHeight: '90vh', maxWidth: '90vw', objectFit: 'contain', display: 'block' }}
-          />
-          <button
-            onClick={() => setFamilyOpen(false)}
-            style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: '#fff', fontSize: '28px', cursor: 'pointer', lineHeight: 1 }}
-          >×</button>
-        </div>
-      )}
-
-      {/* Five festival stills */}
-      <Reveal delay={100}>
-        <div style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
-          {festivalImages.map(({ src, alt }, i) => (
+          {/* Left — phone mockup with 3D tilt */}
+          <Reveal delay={0} style={{ flexShrink: 0, width: 'auto' }}>
             <div
-              key={src}
-              style={{ flex: 1, overflow: 'hidden', cursor: 'pointer', transition: 'transform 0.3s ease' }}
-              onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-8px)'}
-              onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0px)'}
-              onClick={() => setLightboxIdx(i)}
+              ref={phoneRef}
+              onMouseMove={handleTiltMove}
+              onMouseLeave={handleTiltLeave}
+              style={{ display: 'inline-block', borderRadius: '30px', boxShadow: '4px 4px 90px 0px rgba(0,0,0,0.10)' }}
             >
               <img
-                src={`/rules-we-made-up/7-roll-call/${src}`}
-                alt={alt}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                src="/rules-we-made-up/7-roll-call/Roll-call-mockup.png"
+                alt="Substack roll call post on phone"
+                style={{ height: '775px', width: 'auto', display: 'block', borderRadius: '30px' }}
               />
             </div>
-          ))}
+          </Reveal>
+
+          {/* Right — heading + body + groups image */}
+          <div style={{ flex: 1 }}>
+            <Reveal delay={0}>
+              <h2 className="font-body" style={{
+                fontWeight: 700,
+                fontSize:   '33px',
+                lineHeight: 1.2,
+                color:      '#101010',
+                margin:     '0 0 12px',
+              }}>
+                Inviting the Substack community into the film
+              </h2>
+            </Reveal>
+            <Reveal delay={100}>
+              <p style={body}>
+                My film had a festival scene near the end — about 30 seconds of runtime — and I needed
+                a crowd. That's when I invited my Substack community to make themselves a claymation
+                character and I'd put them in the film. I provided the prompt, and eighteen people showed up.
+              </p>
+            </Reveal>
+            <Reveal delay={200}>
+              <p style={body}>
+                I divided all the characters into groups by scene so I could animate each cluster
+                separately and control the lighting as the night progressed.
+              </p>
+            </Reveal>
+            <Reveal delay={200}>
+              <img
+                src="/rules-we-made-up/7-roll-call/SupportingCast-groups.png"
+                alt="Supporting cast character groups"
+                style={{ width: '100%', display: 'block', marginBottom: '32px' }}
+              />
+            </Reveal>
+          </div>
+
         </div>
-      </Reveal>
+      </CaseStudySection>
 
-      <Reveal delay={200}>
-        <p style={{
-          fontFamily: 'Fraunces, serif',
-          fontWeight: 300,
-          fontSize:   '18px',
-          lineHeight: 1.6,
-          color:      '#404040',
-          margin:     '32px auto 0',
-          maxWidth:   '620px',
-          textAlign:  'center',
-        }}>
-          From there, it was up to me to put all my characters in scene. They brought specific details: a key necklace, a leather bag, a flamingo. Details I wasn't willing to loose. It was the most challenging part of the project and by far, the most rewarding.
-        </p>
-      </Reveal>
+      <CaseStudyFullBleed background="#F5F0EC">
 
-      {/* Lightbox */}
-      {lightboxIdx !== null && (
-        <div
-          onClick={() => setLightboxIdx(null)}
-          style={{
-            position:        'fixed',
-            inset:           0,
-            backgroundColor: 'rgba(0,0,0,0.88)',
-            zIndex:          1000,
-            display:         'flex',
-            alignItems:      'center',
-            justifyContent:  'center',
-          }}
-        >
-          {/* Prev */}
-          <button
-            onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx - 1 + n) % n); }}
-            style={{ position: 'absolute', left: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >←</button>
+        {/* Fira Mono label above family photo */}
+        <Reveal delay={0}>
+          <p style={{
+            fontFamily:    'Fira Mono, monospace',
+            fontWeight:    400,
+            fontSize:      '11px',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color:         '#404040',
+            margin:        '0 0 12px',
+            lineHeight:    1.6,
+          }}>Generated "Family Photo" / in Nano Banana</p>
+        </Reveal>
 
-          {/* Image */}
-          <img
-            src={`/rules-we-made-up/7-roll-call/${festivalImages[lightboxIdx].src}`}
-            alt={festivalImages[lightboxIdx].alt}
-            onClick={e => e.stopPropagation()}
-            style={{ maxHeight: '90vh', maxWidth: '90vw', objectFit: 'contain', display: 'block' }}
-          />
+        {/* Family photo — full width within section padding */}
+        <Reveal delay={100}>
+          <div
+            onClick={() => setFamilyOpen(true)}
+            style={{ cursor: 'pointer', overflow: 'hidden' }}
+            onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.03)'}
+            onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
+          >
+            <img
+              src="/rules-we-made-up/7-roll-call/GENERATED FAMILY PHOTO 1.jpg"
+              alt="The full cast of claymation characters"
+              style={{ width: '100%', display: 'block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)', transformOrigin: 'center center' }}
+            />
+          </div>
+        </Reveal>
 
-          {/* Next */}
-          <button
-            onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx + 1) % n); }}
-            style={{ position: 'absolute', right: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >→</button>
+        {/* Family photo lightbox */}
+        {familyOpen && (
+          <div
+            onClick={() => setFamilyOpen(false)}
+            style={{
+              position:        'fixed',
+              inset:           0,
+              backgroundColor: 'rgba(0,0,0,0.88)',
+              zIndex:          1000,
+              display:         'flex',
+              alignItems:      'center',
+              justifyContent:  'center',
+            }}
+          >
+            <img
+              src="/rules-we-made-up/7-roll-call/GENERATED FAMILY PHOTO 1.jpg"
+              alt="The full cast of claymation characters"
+              onClick={e => e.stopPropagation()}
+              style={{ maxHeight: '90vh', maxWidth: '90vw', objectFit: 'contain', display: 'block' }}
+            />
+            <button
+              onClick={() => setFamilyOpen(false)}
+              style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: '#fff', fontSize: '28px', cursor: 'pointer', lineHeight: 1 }}
+            >×</button>
+          </div>
+        )}
 
-          {/* Close */}
-          <button
+        {/* Five festival stills */}
+        <Reveal delay={100}>
+          <div style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
+            {festivalImages.map(({ src, alt }, i) => (
+              <div
+                key={src}
+                style={{ flex: 1, overflow: 'hidden', cursor: 'pointer', transition: 'transform 0.3s ease' }}
+                onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-8px)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0px)'}
+                onClick={() => setLightboxIdx(i)}
+              >
+                <img
+                  src={`/rules-we-made-up/7-roll-call/${src}`}
+                  alt={alt}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={200}>
+          <p style={{
+            fontFamily: 'Fraunces, serif',
+            fontWeight: 300,
+            fontSize:   '18px',
+            lineHeight: 1.6,
+            color:      '#404040',
+            margin:     '32px auto 0',
+            maxWidth:   '620px',
+            textAlign:  'center',
+          }}>
+            From there, it was up to me to put all my characters in scene. They brought specific details: a key necklace, a leather bag, a flamingo. Details I wasn't willing to loose. It was the most challenging part of the project and by far, the most rewarding.
+          </p>
+        </Reveal>
+
+        {/* Festival stills lightbox */}
+        {lightboxIdx !== null && (
+          <div
             onClick={() => setLightboxIdx(null)}
-            style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: '#fff', fontSize: '28px', cursor: 'pointer', lineHeight: 1 }}
-          >×</button>
-        </div>
-      )}
+            style={{
+              position:        'fixed',
+              inset:           0,
+              backgroundColor: 'rgba(0,0,0,0.88)',
+              zIndex:          1000,
+              display:         'flex',
+              alignItems:      'center',
+              justifyContent:  'center',
+            }}
+          >
+            <button
+              onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx - 1 + n) % n); }}
+              style={{ position: 'absolute', left: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >←</button>
+            <img
+              src={`/rules-we-made-up/7-roll-call/${festivalImages[lightboxIdx].src}`}
+              alt={festivalImages[lightboxIdx].alt}
+              onClick={e => e.stopPropagation()}
+              style={{ maxHeight: '90vh', maxWidth: '90vw', objectFit: 'contain', display: 'block' }}
+            />
+            <button
+              onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx + 1) % n); }}
+              style={{ position: 'absolute', right: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >→</button>
+            <button
+              onClick={() => setLightboxIdx(null)}
+              style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: '#fff', fontSize: '28px', cursor: 'pointer', lineHeight: 1 }}
+            >×</button>
+          </div>
+        )}
 
-    </CaseStudySection>
+      </CaseStudyFullBleed>
+    </>
   );
 }
 
@@ -1122,51 +1833,84 @@ function SectionNav() {
   );
 }
 
+// Sizes pre-multiplied by scale so CSS transform conflicts with animations are avoided
+const BAKED_EXTRAS = [];
+
 export default function RulesWeMadeUp() {
-  const [videoHovered, setVideoHovered] = useState(false);
+  const videoContainerRef = useRef(null);
+  const videoOverlayRef   = useRef(null);
+  const videoPillRef      = useRef(null);
+  const [doodleEditEnabled, setDoodleEditEnabled] = useState(false);
+  const [doodlePositions, setDoodlePositions] = useState({});
+  const [extraDoodles, setExtraDoodles] = useState([]);
+  const [deletedDoodles, setDeletedDoodles] = useState(new Set());
+
+  const deleteDoodle = (id) => setDeletedDoodles(prev => new Set([...prev, id]));
+
+  const updateDoodlePosition = (id, pos) => setDoodlePositions(prev => ({ ...prev, [id]: pos }));
+
+  const duplicateDoodle = (typeOrId, sizeOverride) => {
+    const isType = SHAPE_TYPES.some(s => s.type === typeOrId);
+    const reg    = isType
+      ? SHAPE_TYPES.find(s => s.type === typeOrId)
+      : (DOODLE_REGISTRY.find(r => r.id === typeOrId) || { type: 'circle', size: 72 });
+    const type   = isType ? typeOrId : reg.type;
+    const size   = sizeOverride ?? reg.size;
+    setExtraDoodles(prev => {
+      const n = prev.length + 1;
+      return [...prev, {
+        id:    `${type}-copy-${n}`,
+        sourceId: typeOrId,
+        type,
+        size,
+        top:   Math.round(window.scrollY + 220 + n * 30),
+        left:  360 + n * 30,
+        scale: 1,
+        color: '#101010',
+      }];
+    });
+  };
+
+  const updateExtraDoodle = (id, updates) =>
+    setExtraDoodles(prev => prev.map(d => d.id === id ? { ...d, ...updates } : d));
+
+  const deleteExtraDoodle = (id) =>
+    setExtraDoodles(prev => prev.filter(d => d.id !== id));
 
   return (
+    <DoodleEditContext.Provider value={{ enabled: doodleEditEnabled, positions: doodlePositions, updatePosition: updateDoodlePosition, deletedDoodles, deleteDoodle }}>
     <main style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
       <Cursor />
       <CaseStudyNav />
       <SectionNav />
 
-      {/* ── Floating doodle decoratives ── */}
-      {/* Dotted circle — top right, near hero */}
-      <img src="/homepage/1-hero/Ellipse 33.svg" alt="" className="animate-spin-ellipse"
-        style={{ position: 'absolute', top: '140px', right: '56px', width: '100px', opacity: 0.5, zIndex: 1, pointerEvents: 'none' }} />
+      {/* Baked page-level doodles */}
+      {BAKED_EXTRAS.map(d => (
+        <div key={d.id} aria-hidden="true" className={d.className} style={{
+          position:      'absolute',
+          top:           `${d.top}px`,
+          left:          `${d.left}px`,
+          opacity:       0.2,
+          color:         '#101010',
+          zIndex:        1,
+          pointerEvents: 'none',
+        }}>
+          {renderDoodleShape(d.type, d.size)}
+        </div>
+      ))}
 
-      {/* Dotted heart — left side, how-it-started */}
-      <img src="/doodle-heart.svg" alt="" className="animate-float-lazy"
-        style={{ position: 'absolute', top: '900px', left: '36px', width: '72px', opacity: 0.45, zIndex: 1, pointerEvents: 'none' }} />
-
-      {/* Small dotted circle — right side, character creation */}
-      <img src="/homepage/4-about/small-ellipse.svg" alt="" className="animate-spin-ellipse"
-        style={{ position: 'absolute', top: '2100px', right: '52px', width: '60px', opacity: 0.45, zIndex: 1, pointerEvents: 'none' }} />
-
-      {/* Dotted heart — right side, more friends */}
-      <img src="/doodle-heart.svg" alt="" className="animate-float-lazy"
-        style={{ position: 'absolute', top: '3000px', right: '44px', width: '58px', opacity: 0.4, zIndex: 1, pointerEvents: 'none' }} />
-
-      {/* Dotted circle — left side, roll call */}
-      <img src="/homepage/6-careerpath/Ellipse 33 2.svg" alt="" className="animate-spin-ellipse"
-        style={{ position: 'absolute', top: '4400px', left: '-32px', width: '120px', opacity: 0.35, zIndex: 1, pointerEvents: 'none' }} />
-
-      {/* Dotted heart — left side, ltx studio */}
-      <img src="/doodle-heart.svg" alt="" className="animate-float-lazy"
-        style={{ position: 'absolute', top: '5400px', left: '40px', width: '66px', opacity: 0.4, zIndex: 1, pointerEvents: 'none' }} />
-
-      {/* Dotted circle — right side, principles */}
-      <img src="/homepage/1-hero/Ellipse 33.svg" alt="" className="animate-spin-ellipse"
-        style={{ position: 'absolute', top: '6400px', right: '44px', width: '90px', opacity: 0.35, zIndex: 1, pointerEvents: 'none' }} />
 
       {/* ── Hero: 50/50 split ── */}
       <section style={{
         display:             'flex',
-        position:            'relative',
+        position:            'sticky',
+        top:                 0,
+        zIndex:              1,
         minHeight:           '760px',
         width:               '100%',
       }}>
+
+
 
         {/* Left — 50%, stacked content */}
         <div style={{
@@ -1179,54 +1923,50 @@ export default function RulesWeMadeUp() {
           paddingTop:     '80px',
           paddingBottom:  '80px',
           boxSizing:      'border-box',
+          position:       'relative',
+          zIndex:         1,
         }}>
 
-          {/* CASE STUDY pill */}
+          {/* Eyebrow */}
           <div style={{
-            display:       'inline-flex',
+            display:       'inline-block',
             alignSelf:     'flex-start',
-            alignItems:    'center',
-            border:        '1.5px dashed #101010',
+            fontFamily:    'Fira Mono, monospace',
+            fontSize:      '11px',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            color:         '#101010',
+            border:        '1.5px dashed rgba(16,16,16,0.45)',
             borderRadius:  '100px',
-            padding:       '6px 18px',
-            marginBottom:  '32px',
-          }}>
-            <span style={{
-              fontFamily:    'Fira Mono, monospace',
-              fontWeight:    400,
-              fontSize:      '11px',
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              lineHeight:    1.5,
-              color:         '#101010',
-            }}>Case Study</span>
-          </div>
+            padding:       '6px 14px',
+            marginBottom:  '24px',
+          }}>Case Study</div>
 
           <h1 className="font-heading" style={{
             fontWeight:  700,
-            fontSize:    '62px',
-            lineHeight:  '70px',
+            fontSize:    '80px',
+            lineHeight:  '88px',
             color:       '#101010',
             margin:      '0 0 28px',
           }}>
             The Making of an Animated Short with AI
           </h1>
 
-          <p style={{
-            fontFamily: 'Fraunces, serif',
-            fontWeight: 300,
-            fontSize:   '18px',
-            lineHeight: 1.6,
-            color:      '#404040',
-            margin:     0,
-          }}>
-            This short film, "Rules We Made Up" is adapted from a poem I wrote years ago.
-            Music creation, storyboarding, character creation, and a community scene.
-          </p>
+          {/* Dashed divider — 2px stroke, 4px dashes */}
+          <svg width="100%" height="2" style={{ display: 'block', margin: '32px 0' }} preserveAspectRatio="none">
+            <line x1="0" y1="1" x2="100%" y2="1" stroke="rgba(16,16,16,0.25)" strokeWidth="2" strokeDasharray="4 4" />
+          </svg>
+
+          {/* Meta */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
+            <MetaItem label="Year"   value="2020 – 2024" />
+            <MetaItem label="Role"   value="Sr. Designer & Art Director" />
+            <MetaItem label="Medium" value="Omnichannel Campaigns" />
+          </div>
         </div>
 
         {/* Right — 50%, full-height image */}
-        <div style={{ flex: '0 0 50%', overflow: 'hidden' }}>
+        <div style={{ flex: '0 0 50%', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
           <video
             autoPlay muted loop playsInline
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', cursor: 'default' }}
@@ -1235,43 +1975,40 @@ export default function RulesWeMadeUp() {
           </video>
         </div>
 
-        {/* Bouncing scroll cue — bottom left, aligned with text */}
-        <div className="animate-scroll-bounce" style={{
-          position:       'absolute',
-          bottom:         '32px',
-          left:           '80px',
-          display:        'flex',
-          flexDirection:  'column',
-          alignItems:     'flex-start',
-          gap:            '6px',
-          pointerEvents:  'none',
-        }}>
-          <span style={{
-            fontFamily:    'Fira Mono, monospace',
-            fontSize:      '10px',
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            color:         '#101010',
-            opacity:       0.7,
-          }}>scroll</span>
-          <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 1 L8 18 M2 12 L8 18 L14 12" stroke="#101010" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.7"/>
-          </svg>
-        </div>
       </section>
 
       {/* ── Video + Intro ── */}
-      <CaseStudyFullBleed background="#F5F0EC" style={{ paddingTop: '150px', paddingBottom: 0 }}>
+      <section style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '80px' }}>
 
-        {/* Vimeo — padded, no rounded corners, with title overlay */}
+        {/* Video — 100px padding, section #F5F0EC IS the frame */}
+        <div style={{ padding: '100px 100px 60px', maxWidth: '1320px', margin: '0 auto', boxSizing: 'border-box' }}>
         <div
-          style={{ position: 'relative', margin: '0 80px', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)', transform: videoHovered ? 'translateY(-8px)' : 'translateY(0px)', transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
-          onMouseEnter={() => setVideoHovered(true)}
-          onMouseLeave={() => setVideoHovered(false)}
+          ref={videoContainerRef}
+          style={{ position: 'relative', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)', transform: 'translateY(0px)', transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
+          onMouseEnter={() => {
+            if (videoContainerRef.current) videoContainerRef.current.style.transform = 'translateY(-8px)';
+            if (videoPillRef.current)      videoPillRef.current.style.opacity = '1';
+          }}
+          onMouseLeave={() => {
+            if (videoContainerRef.current) videoContainerRef.current.style.transform = 'translateY(0px)';
+            if (videoPillRef.current)      videoPillRef.current.style.opacity = '0';
+          }}
+          onMouseDown={() => {
+            if (videoPillRef.current) {
+              videoPillRef.current.style.transition = 'transform 0.1s ease';
+              videoPillRef.current.style.transform  = 'scale(0.93)';
+            }
+          }}
+          onMouseUp={() => {
+            if (videoPillRef.current) {
+              videoPillRef.current.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+              videoPillRef.current.style.transform  = 'scale(1)';
+            }
+          }}
         >
-          <div style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
+          <div style={{ padding: '56.25% 0 0 0', position: 'relative', overflow: 'hidden' }}>
             <iframe
-              src="https://player.vimeo.com/video/1193369686?badge=0&autopause=0&player_id=0&app_id=58479"
+              src="https://player.vimeo.com/video/1193369686?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0"
               frameBorder="0"
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
               style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
@@ -1280,17 +2017,15 @@ export default function RulesWeMadeUp() {
           </div>
 
           {/* Play overlay — pointer-events none so clicks reach iframe */}
-          <div style={{
+          <div ref={videoOverlayRef} style={{
             position:       'absolute',
             inset:          0,
             display:        'flex',
             alignItems:     'center',
             justifyContent: 'center',
-            opacity:        videoHovered ? 1 : 0,
-            transition:     'opacity 0.3s ease',
             pointerEvents:  'none',
           }}>
-            <div style={{
+            <div ref={videoPillRef} style={{
               display:           'flex',
               alignItems:        'center',
               gap:               '12px',
@@ -1300,8 +2035,9 @@ export default function RulesWeMadeUp() {
               borderRadius:      '100px',
               padding:           '16px 28px 16px 22px',
               border:            '1px solid rgba(255,255,255,0.3)',
+              opacity:           0,
+              transition:        'opacity 0.6s ease-in-out',
             }}>
-              {/* Triangle play icon */}
               <svg width="18" height="20" viewBox="0 0 18 20" fill="none">
                 <path d="M2 1.5L16 10L2 18.5V1.5Z" fill="white" stroke="white" strokeWidth="1" strokeLinejoin="round"/>
               </svg>
@@ -1315,67 +2051,76 @@ export default function RulesWeMadeUp() {
             </div>
           </div>
         </div>
-        <Script src="https://player.vimeo.com/api/player.js" />
-
-        {/* Metadata (left) + How it started (right) */}
-        <div style={{
-          display:             'grid',
-          gridTemplateColumns: '220px 1fr',
-          gap:                 '60px',
-          paddingLeft:         '95px',
-          paddingRight:        '95px',
-          paddingTop:          '80px',
-          paddingBottom:       '150px',
-          alignItems:          'start',
-        }}>
-          <Reveal delay={0}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
-              <MetaItem label="Year"   value="2020 – 2024" />
-              <MetaItem label="Role"   value="Sr. Designer & Art Director" />
-              <MetaItem label="Medium" value="Omnichannel Campaigns" />
-            </div>
-          </Reveal>
-
-          <div>
-            <Reveal delay={0}>
-              <h2 className="font-body" style={{
-                fontWeight: 700,
-                fontSize:   '33px',
-                color:      '#101010',
-                margin:     '0 0 12px',
-              }}>How it started</h2>
-            </Reveal>
-            <Reveal delay={100}>
-              <p style={{
-                fontFamily: 'Fraunces, serif',
-                fontWeight: 300,
-                fontSize:   '18px',
-                lineHeight: 1.6,
-                color:      '#404040',
-                margin:     '0 0 20px',
-              }}>
-                This film is adapted from a poem I wrote years ago, late one night. It's about a specific
-                kind of person: someone who thinks deeply, resists neat categories, and feels perpetually
-                out of step with a world that wants everything linear and labeled.
-              </p>
-            </Reveal>
-            <Reveal delay={200}>
-              <p style={{
-                fontFamily: 'Fraunces, serif',
-                fontWeight: 300,
-                fontSize:   '18px',
-                lineHeight: 1.6,
-                color:      '#404040',
-                margin:     0,
-              }}>
-                When AI tools emerged, I finally had the means to bring it to life. The title comes from
-                a line I fought to keep in the lyrics. Some rules deserve protecting. Some were never
-                worth following. Right now, it feels like it's all up for renegotiation.
-              </p>
-            </Reveal>
-          </div>
         </div>
-      </CaseStudyFullBleed>
+
+        {/* Film caption — on #F5F0EC, centered below video, before torn edge */}
+        <div style={{ textAlign: 'center', paddingBottom: '50px' }}>
+          <span style={{
+            fontFamily:    'Fira Mono, monospace',
+            fontSize:      '11px',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            color:         '#888888',
+          }}>Rules We Made Up / Directed by Natalie Nicholson</span>
+        </div>
+
+        {/* Torn paper edge — #FFFBF8 (next section) tears up into this section */}
+        <svg
+          viewBox="0 0 1440 50"
+          preserveAspectRatio="none"
+          style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}
+        >
+          <path d="M0,50 L0,30 L60,8 L120,40 L175,12 L230,42 L285,5 L340,35 L395,18 L450,44 L505,8 L560,36 L620,20 L680,45 L740,5 L800,32 L855,12 L910,42 L965,18 L1020,44 L1080,8 L1135,38 L1190,15 L1250,42 L1310,10 L1370,36 L1440,22 L1440,50 Z" fill="#FFFBF8" />
+        </svg>
+
+        <Script src="https://player.vimeo.com/api/player.js" />
+      </section>
+
+      {/* ── Project Overview ── */}
+      <CaseStudySection
+        id="project-overview"
+        sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
+        style={{ paddingTop: '80px', paddingBottom: '80px' }}
+      >
+        <div>
+          <Reveal delay={0}>
+            <h2 className="font-body" style={{
+              fontWeight: 700,
+              fontSize:   '33px',
+              color:      '#101010',
+              margin:     '0 0 12px',
+            }}>The Project</h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <p style={{
+              fontFamily: 'Fraunces, serif',
+              fontWeight: 300,
+              fontSize:   '18px',
+              lineHeight: 1.6,
+              color:      '#404040',
+              margin:     '0 0 20px',
+            }}>
+              This film is adapted from a poem I wrote years ago, late one night. It's about a specific
+              kind of person: someone who thinks deeply, resists neat categories, and feels perpetually
+              out of step with a world that wants everything linear and labeled.
+            </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <p style={{
+              fontFamily: 'Fraunces, serif',
+              fontWeight: 300,
+              fontSize:   '18px',
+              lineHeight: 1.6,
+              color:      '#404040',
+              margin:     0,
+            }}>
+              When AI tools emerged, I finally had the means to bring it to life. The title comes from
+              a line I fought to keep in the lyrics. Some rules deserve protecting. Some were never
+              worth following. Right now, it feels like it's all up for renegotiation.
+            </p>
+          </Reveal>
+        </div>
+      </CaseStudySection>
 
       {/* ── How it started ── */}
       <HowItStarted />
@@ -1402,6 +2147,28 @@ export default function RulesWeMadeUp() {
       <BlooperReel />
 
       <Footer />
+
+      {/* Page-level extra doodles overlay */}
+      {doodleEditEnabled && extraDoodles.map(d => (
+        <ExtraDoodleItem
+          key={d.id}
+          {...d}
+          onUpdate={(updates) => updateExtraDoodle(d.id, updates)}
+          onDelete={() => deleteExtraDoodle(d.id)}
+        />
+      ))}
+
+      <DoodleEditorToggle enabled={doodleEditEnabled} onToggle={() => setDoodleEditEnabled(v => !v)} />
+      {doodleEditEnabled && (
+        <DoodleEditorPanel
+          positions={doodlePositions}
+          extras={extraDoodles}
+          onReset={() => { setDoodlePositions({}); setExtraDoodles([]); setDeletedDoodles(new Set()); }}
+          onDuplicate={duplicateDoodle}
+          onDeleteExtra={deleteExtraDoodle}
+        />
+      )}
     </main>
+    </DoodleEditContext.Provider>
   );
 }

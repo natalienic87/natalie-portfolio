@@ -2,7 +2,7 @@ import Button from './Button';
 
 export default function Footer() {
   return (
-    <footer style={{ position: 'relative', backgroundColor: '#101010', overflow: 'hidden' }}>
+    <footer style={{ position: 'relative', zIndex: 2, backgroundColor: '#101010', overflow: 'hidden' }}>
 
       {/* ── Content ── */}
       <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '80px 40px 60px' }}>
@@ -22,7 +22,7 @@ export default function Footer() {
 
         {/* Heading */}
         <h2 className="font-heading"
-          style={{ fontWeight: 500, fontSize: '72px', color: '#ffffff', margin: '0 0 20px', lineHeight: 1.05 }}>
+          style={{ fontWeight: 500, fontSize: '80px', color: '#ffffff', margin: '0 0 20px', lineHeight: 1.05 }}>
           Open a new dimension
         </h2>
 

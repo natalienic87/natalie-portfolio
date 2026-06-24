@@ -336,7 +336,7 @@ export default function About() {
           <div style={{ maxWidth: '430px' }}>
             <h2
               className="font-heading font-bold"
-              style={{ fontSize: '48px', lineHeight: 1.1, color: '#101010' }}
+              style={{ fontSize: '80px', lineHeight: 1.1, color: '#101010' }}
             >
               Brand. Film. AI.
             </h2>

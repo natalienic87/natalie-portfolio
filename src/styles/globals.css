@@ -74,6 +74,7 @@ body {
   animation: float-lazy 8s linear infinite;
 }
 
+
 @keyframes spin-planet {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
@@ -253,6 +254,14 @@ body {
 .testimonial-card:hover {
   transform: scale(1.04) translateY(-6px);
   filter: drop-shadow(0 12px 28px rgba(0,0,0,0.28));
+}
+
+.principles-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.principles-card:hover {
+  transform: scale(1.03) translateY(-6px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.18) !important;
 }
 
 @keyframes slide-in-left {

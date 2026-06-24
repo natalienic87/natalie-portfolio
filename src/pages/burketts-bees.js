@@ -634,7 +634,92 @@ export default function BurkettsBees() {
         </div>
       ))}
 
-      {/* ── Sections go here ── */}
+      {/* ── Hero: 50/50 split ── */}
+      <section style={{
+        display:   'flex',
+        position:  'sticky',
+        top:       0,
+        zIndex:    1,
+        minHeight: '760px',
+        width:     '100%',
+      }}>
+
+        {/* Left — 50%, stacked content */}
+        <div style={{
+          flex:           '0 0 50%',
+          display:        'flex',
+          flexDirection:  'column',
+          justifyContent: 'center',
+          paddingLeft:    '80px',
+          paddingRight:   '80px',
+          paddingTop:     '80px',
+          paddingBottom:  '80px',
+          boxSizing:      'border-box',
+          backgroundColor: '#FFFBF8',
+          position:       'relative',
+          zIndex:         1,
+        }}>
+
+          {/* Eyebrow */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', alignSelf: 'flex-start', marginBottom: '50px' }}>
+            <style>{`@keyframes slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+            <svg width="22" height="22" viewBox="0 0 16 16" fill="#101010" style={{ flexShrink: 0, animation: 'slow-spin 12s linear infinite', transformOrigin: 'center' }}>
+              <path d="M8,1 L9.2,5.3 L13.5,3.7 L10.9,7.3 L14.8,9.6 L10.4,9.9 L10.9,14.4 L8,11 L5.1,14.4 L5.6,9.9 L1.2,9.6 L5.1,7.3 L2.5,3.7 L6.8,5.3 Z"/>
+            </svg>
+            <span style={{
+              fontFamily:    'Fira Mono, monospace',
+              fontWeight:    400,
+              fontSize:      '18px',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              color:         '#101010',
+            }}>Case Study</span>
+          </div>
+
+          <h1 className="font-heading" style={{
+            fontWeight: 700,
+            fontSize:   '90px',
+            lineHeight: '90px',
+            color:      '#101010',
+            margin:     '0 0 28px',
+          }}>
+            From Branding Experiment to AI Integration
+          </h1>
+
+          <p style={{
+            fontFamily: 'Fraunces, serif',
+            fontWeight: 300,
+            fontSize:   '20px',
+            lineHeight: 1.5,
+            color:      '#101010',
+            margin:     0,
+          }}>
+            How a self-initiated AI branding experiment turned into a new creative role, internal education, and AI integration.
+          </p>
+
+          {/* Dashed divider */}
+          <svg width="100%" height="2" style={{ display: 'block', margin: '32px 0' }} preserveAspectRatio="none">
+            <line x1="0" y1="1" x2="100%" y2="1" stroke="rgba(16,16,16,0.25)" strokeWidth="2" strokeDasharray="4 4" />
+          </svg>
+
+          {/* Meta */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
+            <MetaItem label="Year"   value="2024" />
+            <MetaItem label="Role"   value="Creative Director & AI Strategist" />
+            <MetaItem label="Medium" value="Branding, AI Integration, Education" />
+          </div>
+        </div>
+
+        {/* Right — 50%, full-height hero image */}
+        <div style={{ flex: '0 0 50%', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
+          <img
+            src="/burketts-bees/1_RawHoneyHero.jpg"
+            alt="Burkett's Bees raw honey hero"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+          />
+        </div>
+
+      </section>
 
       <Footer />
 

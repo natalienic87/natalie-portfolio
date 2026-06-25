@@ -3,13 +3,13 @@ export default function CaseStudySection({ children, id, style, sectionStyle, do
     <section id={id} style={{ backgroundColor: '#FFFBF8', position: 'relative', zIndex: 2, ...sectionStyle }}>
       {doodle}
       <div style={{
-        maxWidth:      '1280px',
+        maxWidth:      '1120px',
         margin:        '0 auto',
         width:         '100%',
-        paddingLeft:   '175px',
-        paddingRight:  '175px',
-        paddingTop:    '150px',
-        paddingBottom: '150px',
+        paddingLeft:   '80px',
+        paddingRight:  '80px',
+        paddingTop:    '120px',
+        paddingBottom: '120px',
         boxSizing:     'border-box',
         ...style,
         position:      'relative',

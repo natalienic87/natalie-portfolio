@@ -26,7 +26,7 @@ Sticky hero wrapper for all case study pages. Renders a `<section>` with `positi
 ### `CaseStudySection` — `src/components/CaseStudySection.js`
 Standard section wrapper. Already provides `position: 'relative'`, `zIndex: 2`, `backgroundColor: '#FFFBF8'`.
 
-- Inner div: `maxWidth: 1280px`, `margin: 0 auto`, `paddingLeft/Right: 175px`, `paddingTop/Bottom: 150px`
+- Inner div: `maxWidth: 1120px`, `margin: 0 auto`, `paddingLeft/Right: 80px`, `paddingTop/Bottom: 120px`, `boxSizing: 'border-box'`
 - Props: `id`, `style` (overrides inner div), `sectionStyle` (overrides outer section), `doodle`
 - **Never wrap in a bare `<section>` tag** — it IS the section.
 - Override padding: `<CaseStudySection style={{ paddingTop: '80px' }}>`
@@ -36,7 +36,7 @@ Standard section wrapper. Already provides `position: 'relative'`, `zIndex: 2`, 
 ### `CaseStudyFullBleed` — `src/components/CaseStudyFullBleed.js`
 Full-bleed section wrapper. Same guarantees as `CaseStudySection` but with tighter padding.
 
-- Inner div: `maxWidth: 1280px`, `margin: 0 auto`, `paddingLeft/Right: 80px`, `paddingTop/Bottom: 80px`
+- Inner div: `maxWidth: 1120px`, `margin: 0 auto`, `paddingLeft/Right: 80px`, `paddingTop/Bottom: 120px`, `boxSizing: 'border-box'`
 - Props: `id`, `background`, `style`, `sectionStyle`, `doodle`
 - For custom internal layouts (splits, grids): `<CaseStudyFullBleed style={{ padding: 0 }}>`
 - **Never wrap in a bare `<section>` tag.**
@@ -233,19 +233,37 @@ Never set `overflow` or `overflowX: 'hidden'` on the page `<main>` wrapper — i
 All case study hero sections use `minHeight` and `maxHeight` of `max(800px, 90vh)` — on both `StickyHero` defaults and on the right panel explicitly. This ensures the hero fills tall monitors and scales gracefully on shorter ones.
 
 ### Typography scale
-| Use | Class / Font | Weight | Size |
-|---|---|---|---|
-| Page H1 | `font-heading` (Fraunces) | 700 | 90px |
-| H2 — Section heading | `font-heading` (Fraunces) | 700 | **64px** |
-| H3 — Section sub-heading | `font-body` (Poppins) | 700 | **33px** |
-| Body / editorial | Fraunces 300 | — | **20px** (use exactly, not a range) |
-| FourBy card title + body | Fraunces | 700 / 300 | **17px** |
-| Captions / labels | Fira Mono 400 | — | 11px, uppercase, `letterSpacing: 0.1em` |
-| Meta values | Fira Mono 400 | — | 14px |
+| Use | Class / Font | Weight | Size | Other |
+|---|---|---|---|---|
+| Hero H1 | `font-heading` (Fraunces) | 700 | 90px | lineHeight 1.0 |
+| H2 — Section heading | `font-heading` (Fraunces) | 700 | **64px** | lineHeight 1.05 |
+| H3 — Card / sub-heading | `font-body` (Poppins) | 700 | **33px** | — |
+| Body / editorial | Fraunces 300 | — | **20px** | lineHeight 1.6, color **#404040** |
+| Pull quote | Fraunces 400 | — | **28px** | — |
+| FourBy card title + body | Fraunces | 700 / 300 | **17px** | — |
+| Captions / labels | Fira Mono **500** | — | 11px | uppercase, `letterSpacing: 0.1em` |
+| Meta values | Fira Mono 500 | — | 14px | — |
+
+### Color palette
+| Token | Value | Use |
+|---|---|---|
+| Page background | `#FFFBF8` | All section backgrounds |
+| Body copy | `#404040` | All Fraunces 300 body text |
+| Headers | `#101010` | H1, H2, H3, and bold labels |
+| Accent | `#FDB154` | Per-page accent (override per project) |
+| Caption / meta | `#888888` | Fira Mono labels |
+| Border / divider | `rgba(16,16,16,0.20)` or `#C4B8A8` | Dashed lines, card borders |
+
+### Layout system
+- **Full bleed:** 100vw — hero images, colored sections, videos. No `maxWidth` constraint.
+- **Content sections:** `maxWidth: '1120px'`, `padding: '0 80px'`, `margin: '0 auto'`, `boxSizing: 'border-box'`
+- **Text blocks:** `maxWidth: '640px'` within content sections for body/intro copy
+- **Section vertical padding:** 120px top and bottom
+- **No 175px horizontal padding anywhere** — that value is retired
 
 ### Spacing defaults
-- Standard section side margins: **80px** (CaseStudyFullBleed, most bare sections)
-- Wide section side margins: **175px** (CaseStudySection)
+- Section horizontal padding: **80px** on all sections
+- Section vertical padding: **120px** top and bottom
 - Carousel outer margins: **80px** unless specified otherwise
 
 ### Borrowing patterns
@@ -288,4 +306,4 @@ When starting work on any case study page:
 | `src/pages/rules-we-made-up.js` | Complete |
 | `src/pages/burketts-bees.js` | Complete |
 | `src/pages/add-refresh.js` | Complete (website section placeholder remains) |
-| `src/pages/cvs-aetna.js` | In progress — hero + MediaFrame only |
+| `src/pages/cvs-aetna.js` | In progress — sections built, design system sweep pending |

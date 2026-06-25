@@ -549,7 +549,7 @@ function DoodleEditorToggle({ enabled, onToggle }) {
 // ── But first, a storyboard ───────────────────────────────────────────────────
 function HowItStarted() {
   return (
-    <CaseStudySection id="how-it-started" style={{ paddingTop: '50px', paddingBottom: '50px' }}
+    <CaseStudySection id="how-it-started" style={{ paddingTop: '80px', paddingBottom: '80px' }}
       sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
       doodle={undefined}
     >
@@ -772,7 +772,7 @@ function CharacterCreation() {
   );
 
   return (
-    <CaseStudySection id="characters" style={{ paddingTop: '50px', paddingBottom: '50px' }}
+    <CaseStudySection id="characters" style={{ paddingTop: '80px', paddingBottom: '80px' }}
       doodle={undefined}
     >
       <div
@@ -886,7 +886,7 @@ const friends = [
 function MoreFriends() {
   const [hovered, setHovered] = useState(null);
   return (
-    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '50px' }}
+    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '80px' }}
       doodle={undefined}
     >
       <Reveal delay={0}>
@@ -1087,7 +1087,7 @@ const principles = [
 
 function BlooperReel() {
   return (
-    <CaseStudySection style={{ paddingTop: '50px' }}
+    <CaseStudySection style={{ paddingTop: '80px' }}
       doodle={
         <>
           <div data-dev-id="burst-blooper-left" data-dev-type="doodle"
@@ -1169,7 +1169,7 @@ function TheTool() {
   };
 
   return (
-    <CaseStudySection id="ltx-studio" style={{ paddingTop: '50px' }}
+    <CaseStudySection id="ltx-studio" style={{ paddingTop: '80px' }}
       doodle={undefined}
     >
       <div style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
@@ -1344,7 +1344,7 @@ function FilmmakingPrinciples() {
 
   return (
     <>
-      <CaseStudyFullBleed id="principles" background="#FFFBF8" sectionStyle={{ overflowX: 'clip' }} style={{ paddingTop: '175px', paddingBottom: '48px', textAlign: 'center' }}
+      <CaseStudyFullBleed id="principles" background="#FFFBF8" sectionStyle={{ overflowX: 'clip' }} style={{ paddingTop: '120px', paddingBottom: '48px', textAlign: 'center' }}
         doodle={
           <div data-dev-id="burst-principles-left" data-dev-type="doodle"
             style={{ position: 'absolute', top: '80px', left: '20px', width: '160px', zIndex: 0, transform: 'translate(-72px, -39px) scale(1.273)', transformOrigin: 'top left' }}>
@@ -1382,9 +1382,9 @@ function FilmmakingPrinciples() {
           style={{ position: 'absolute', top: '0px', right: '0px', width: '160px', zIndex: 0, transform: 'translate(6px, 232px) scale(1.18)', transformOrigin: 'top left' }}>
           <img src="/ELEMENTS/White Burst.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 24s linear infinite', transformOrigin: 'center' }} />
         </div>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', position: 'relative' }}>
+        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', position: 'relative' }}>
 
-          {/* Left arrow — lives inside the 175px margin zone */}
+          {/* Left arrow — lives inside the 80px margin zone */}
           <button
             onClick={() => setPage(p => Math.max(0, p - 1))}
             aria-label="Previous"
@@ -1685,7 +1685,7 @@ function RollCall() {
     <>
       <CaseStudySection
         id="roll-call"
-        style={{ paddingTop: '50px' }}
+        style={{ paddingTop: '80px' }}
         doodle={
           <div
             data-dev-id="substack-flower"
@@ -2091,7 +2091,7 @@ export default function RulesWeMadeUp() {
       <section style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '80px' }}>
 
         {/* Video — 100px padding, section #F5F0EC IS the frame */}
-        <div style={{ padding: '100px 100px 60px', maxWidth: '1320px', margin: '0 auto', boxSizing: 'border-box' }}>
+        <div style={{ padding: '120px 80px 80px', maxWidth: '1120px', margin: '0 auto', boxSizing: 'border-box' }}>
         <div
           ref={videoContainerRef}
           style={{ position: 'relative', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)', transform: 'translateY(0px)', transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
@@ -2164,7 +2164,7 @@ export default function RulesWeMadeUp() {
         </div>
 
         {/* Film caption — on #F5F0EC, centered below video, before torn edge */}
-        <div style={{ textAlign: 'center', paddingBottom: '50px' }}>
+        <div style={{ textAlign: 'center', paddingBottom: '80px' }}>
           <span style={{
             fontFamily:    'Fira Mono, monospace',
             fontSize:      '11px',

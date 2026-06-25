@@ -401,7 +401,7 @@ function ConceptSystem() {
   );
 
   return (
-    <CaseStudySection style={{ paddingTop: '50px', paddingBottom: '50px' }}>
+    <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '80px' }}>
       <div ref={contentRef} style={{
         display: 'flex', gap: '60px', alignItems: 'center',
         transform: 'scale(0.96)', opacity: 0,
@@ -568,7 +568,7 @@ export default function AddRefresh() {
         boxShadow:          '0 -8px 40px rgba(0,0,0,0.10)',
         paddingBottom:      '80px',
       }}>
-        <div style={{ padding: '100px 100px 60px', maxWidth: '1320px', margin: '0 auto', boxSizing: 'border-box' }}>
+        <div style={{ padding: '120px 80px 80px', maxWidth: '1120px', margin: '0 auto', boxSizing: 'border-box' }}>
           <Reveal>
             <div
               style={{ position: 'relative', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)', transform: 'translateY(0px)', transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
@@ -708,7 +708,7 @@ export default function AddRefresh() {
         </Reveal>
 
         {/* 3-box image row */}
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
+        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
             {[
               { src: '/add-refresh/4_carousel_concepts/4_Concept1.jpg', label: 'Back to the Future' },

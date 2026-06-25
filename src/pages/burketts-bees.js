@@ -670,7 +670,7 @@ function ProjectPurpose() {
   );
 
   return (
-    <CaseStudySection id="project-purpose" style={{ paddingTop: '50px', paddingBottom: '50px' }} doodle={undefined}>
+    <CaseStudySection id="project-purpose" style={{ paddingTop: '80px', paddingBottom: '80px' }} doodle={undefined}>
       <div ref={contentRef} style={{
         display: 'flex', gap: '60px', alignItems: 'center',
         transform: 'scale(0.96)', opacity: 0,
@@ -946,7 +946,7 @@ function WorkshopCarousel() {
 
   return (
     <>
-      <CaseStudyFullBleed id="workshops" background="#FFFBF8" style={{ paddingTop: '175px', paddingBottom: '48px', textAlign: 'center' }}>
+      <CaseStudyFullBleed id="workshops" background="#FFFBF8" style={{ paddingTop: '120px', paddingBottom: '48px', textAlign: 'center' }}>
         <Reveal>
           <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '75px', lineHeight: 1.05, color: '#101010', margin: '0 0 16px' }}>
             Monthly workshops &amp; discussions
@@ -961,7 +961,7 @@ function WorkshopCarousel() {
 
       {/* Draggable paginated card carousel */}
       <div style={{ backgroundColor: '#FFFBF8', paddingBottom: '80px', position: 'relative', zIndex: 2 }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', position: 'relative' }}>
+        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', position: 'relative' }}>
 
           <button onClick={() => setPage(p => Math.max(0, p - 1))} aria-label="Previous"
             style={{ ...arrowStyle(page === 0), left: '28px' }}>←</button>
@@ -1250,7 +1250,7 @@ export default function BurkettsBees() {
       {/* ── MediaFrame: Product Shot ── */}
       <section style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '80px' }}>
 
-        <div style={{ padding: '100px 100px 60px', maxWidth: '1320px', margin: '0 auto', boxSizing: 'border-box' }}>
+        <div style={{ padding: '120px 80px 80px', maxWidth: '1120px', margin: '0 auto', boxSizing: 'border-box' }}>
           <Reveal>
             <MediaFrameCarousel />
           </Reveal>
@@ -1322,7 +1322,7 @@ export default function BurkettsBees() {
       <CaseStudySection
         id="why-burketts-bees"
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
-        style={{ paddingTop: '50px', paddingBottom: '50px' }}
+        style={{ paddingTop: '80px', paddingBottom: '80px' }}
         doodle={undefined}
       >
 
@@ -1436,7 +1436,7 @@ export default function BurkettsBees() {
         </Reveal>
 
         {/* 4-box image row */}
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
+        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
           {[
             { src: '/burketts-bees/5_carousel_toolit/5_BB_Color.jpg',       label: 'Color' },
@@ -1491,7 +1491,7 @@ export default function BurkettsBees() {
 
       {/* ── Putting the Toolkit to Work ── */}
       <section style={{ backgroundColor: '#FFFBF8', position: 'relative', zIndex: 2, paddingTop: '80px', paddingBottom: '120px' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', paddingLeft: '80px', paddingRight: '80px', boxSizing: 'border-box', backgroundColor: '#FFFBF8' }}>
+        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
 
           {/* Heading + body + sun */}
           <Reveal>

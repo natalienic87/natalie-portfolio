@@ -370,7 +370,7 @@ export default function CvsAetna() {
         boxShadow:          '0 -8px 40px rgba(0,0,0,0.10)',
         paddingBottom:      '80px',
       }}>
-        <div style={{ padding: '100px 100px 60px', maxWidth: '1320px', margin: '0 auto', boxSizing: 'border-box' }}>
+        <div style={{ padding: '120px 80px 80px', maxWidth: '1120px', margin: '0 auto', boxSizing: 'border-box' }}>
           <Reveal>
             <div
               style={{ position: 'relative', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)', transform: 'translateY(0px)', transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
@@ -396,7 +396,7 @@ export default function CvsAetna() {
 
       {/* ── How it started ── */}
       <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '100px 80px', boxSizing: 'border-box' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '2fr 3fr', alignItems: 'center', gap: '0' }}>
+        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '2fr 3fr', alignItems: 'center', gap: '0' }}>
 
           {/* Left: mascara image */}
           <Reveal>
@@ -447,7 +447,7 @@ export default function CvsAetna() {
 
       {/* ── The brief: reimagine CVS shop ── */}
       <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '100px 80px', boxSizing: 'border-box' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
+        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
 
           {/* Left: text */}
           <Reveal>

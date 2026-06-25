@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Button from './Button';
 
 const HEADING = "Hi I'm Natalie.";
 const COLORS  = ['#E35038', '#FDB154', '#8286F7', '#FBC1C2', '#6374E4', '#FB5755'];
@@ -72,7 +71,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="min-h-screen flex flex-col">
+    <section className="min-h-[900px] flex flex-col" style={{ paddingTop: '40px' }}>
       {/* Collage — flex-1 fills remaining viewport height so doorway is never cropped */}
       <div className="relative w-full flex-1 overflow-hidden">
 
@@ -139,18 +138,8 @@ export default function Hero() {
           ))}
         </h1>
         <p className="font-body font-normal text-body-grey text-[20px] mt-6 max-w-[828px] mx-auto leading-normal">
-          Merging high-concept{' '}
-          <strong className="text-off-white font-semibold">branding</strong>,
-          {' '}cinematic{' '}
-          <strong className="text-off-white font-semibold">video</strong>,
-          {' '}and{' '}
-          <strong className="text-off-white font-semibold">Generative AI</strong>
-          {' '}into singular immersive experiences.
+          Art director and designer building cinematic visual worlds, brand systems, and AI-assisted creative work.
         </p>
-        <div className="flex items-center justify-center gap-4 mt-10">
-          <Button variant="primary" href="#">View Exhibition</Button>
-          <Button variant="dashed-outline" href="#">Contact Me</Button>
-        </div>
       </div>
     </section>
   );

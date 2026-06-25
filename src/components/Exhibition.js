@@ -84,14 +84,13 @@ export default function Exhibition() {
       <div className="flex justify-between items-start">
         <div>
           <p
-            className="font-body text-off-white/60 uppercase tracking-[0.25em]"
-            style={{ fontSize: '12px' }}
+            style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 500, fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', margin: 0 }}
           >
             The Exhibition
           </p>
           <h2
             className="font-heading font-bold text-off-white"
-            style={{ fontSize: '80px', lineHeight: 1, marginTop: '12px' }}
+            style={{ fontSize: '64px', lineHeight: 1.05, marginTop: '12px' }}
           >
             Selected works
           </h2>
@@ -99,7 +98,7 @@ export default function Exhibition() {
 
         {/* Dotted circle — circle rotates, text stays centered */}
         <a
-          href="#"
+          href="mailto:natalienic87@gmail.com"
           className="relative flex items-center justify-center flex-shrink-0"
           style={{ width: '110px', height: '110px' }}
         >
@@ -112,7 +111,7 @@ export default function Exhibition() {
             className="relative font-body text-off-white text-center uppercase"
             style={{ fontSize: '8px', letterSpacing: '0.14em', lineHeight: '1.5' }}
           >
-            View all<br />projects
+            Let&rsquo;s work<br />together
           </span>
         </a>
       </div>

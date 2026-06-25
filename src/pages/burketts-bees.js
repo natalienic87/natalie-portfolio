@@ -1276,7 +1276,7 @@ export default function BurkettsBees() {
         <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-start' }}>
 
           {/* Left: heading + body copy */}
-          <div style={{ width: '644px', flexShrink: 0 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
             <Reveal delay={0}>
               <h2 className="font-heading" style={{
                 fontWeight: 700,

@@ -2195,7 +2195,7 @@ export default function RulesWeMadeUp() {
         <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-start' }}>
 
           {/* Left: heading + body copy */}
-          <div data-dev-id="proj-text" data-dev-type="text" style={{ width: '644px', flexShrink: 0, transform: 'translateY(38px)' }}>
+          <div data-dev-id="proj-text" data-dev-type="text" style={{ flex: 1, minWidth: 0, transform: 'translateY(38px)' }}>
             <Reveal delay={0}>
               <h2 className="font-heading" style={{
                 fontWeight:  700,

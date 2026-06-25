@@ -5,6 +5,7 @@ import Cursor from '../components/Cursor';
 import Footer from '../components/Footer';
 import CaseStudySection  from '../components/CaseStudySection';
 import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
+import StickyHero        from '../components/StickyHero';
 
 // ── Minimal case-study nav ────────────────────────────────────────────────────
 function CaseStudyNav() {
@@ -548,7 +549,7 @@ function DoodleEditorToggle({ enabled, onToggle }) {
 // ── But first, a storyboard ───────────────────────────────────────────────────
 function HowItStarted() {
   return (
-    <CaseStudySection id="how-it-started" style={{ paddingBottom: '50px' }}
+    <CaseStudySection id="how-it-started" style={{ paddingTop: '50px', paddingBottom: '50px' }}
       sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
       doodle={undefined}
     >
@@ -583,14 +584,14 @@ function HowItStarted() {
             }}>But first, a storyboard</h2>
           </Reveal>
           <Reveal delay={100}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
               What did I do to start this thing. Before touching any tool, I needed a map. I adapted
               the poem into lyrics, built the song in Suno to set my runtime, then storyboarded scene
               by scene before generating a single frame.
             </p>
           </Reveal>
           <Reveal delay={200}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               The Title "Rules We Made Up" comes from a line in my poem, which I fought to keep in
               the lyrics. As the rules we make up about work, creativity and value are all shifting,
               it felt like appropriate timing.
@@ -789,6 +790,14 @@ function CharacterCreation() {
 
       {/* ── Left: collage (264px) above heading + text (360px) ── */}
       <div style={{ flex: '0 0 360px', width: '360px' }}>
+        {/* Yellow star doodle above photo grid */}
+        <div
+          data-dev-id="star-doodle"
+          data-dev-type="doodle"
+          style={{ width: '72px', marginBottom: '16px', transform: 'translate(92px, -74px) scale(1.227)', transformOrigin: 'top left' }}
+        >
+          <img src="/ELEMENTS/Yellow Star_.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 10s linear infinite', transformOrigin: 'center' }} />
+        </div>
         <Reveal delay={0}>
           <div
             style={{ width: '264px', height: '264px', overflow: 'hidden', boxShadow: '0px 4px 20px rgba(0,0,0,0.12)', marginBottom: '28px' }}
@@ -809,13 +818,13 @@ function CharacterCreation() {
             lineHeight: 1.2,
             color:      '#101010',
             margin:     '0 0 12px',
-          }}>Creating my characters</h2>
+          }}>Character creation</h2>
         </Reveal>
         <Reveal delay={100}>
           <p style={{
             fontFamily: 'Fraunces, serif',
             fontWeight: 300,
-            fontSize:   '18px',
+            fontSize:   '20px',
             lineHeight: 1.6,
             color:      '#404040',
             margin:     0,
@@ -1078,7 +1087,20 @@ const principles = [
 
 function BlooperReel() {
   return (
-    <CaseStudySection>
+    <CaseStudySection style={{ paddingTop: '50px' }}
+      doodle={
+        <>
+          <div data-dev-id="burst-blooper-left" data-dev-type="doodle"
+            style={{ position: 'absolute', top: '40px', left: '20px', width: '160px', zIndex: 0, transform: 'translate(69px, -285px) scale(1.247)', transformOrigin: 'top left' }}>
+            <img src="/ELEMENTS/White Burst.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 14s linear infinite', transformOrigin: 'center' }} />
+          </div>
+          <div data-dev-id="burst-blooper-right" data-dev-type="doodle"
+            style={{ position: 'absolute', bottom: '40px', right: '20px', width: '160px', zIndex: 0, transform: 'translate(-32px, -294px) scale(1)', transformOrigin: 'top left' }}>
+            <img src="/ELEMENTS/White Burst.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 20s linear infinite', transformOrigin: 'center' }} />
+          </div>
+        </>
+      }
+    >
 
       <Reveal delay={0}>
         <h2 className="font-body" style={{
@@ -1097,7 +1119,7 @@ function BlooperReel() {
         <p style={{
           fontFamily: 'Fraunces, serif',
           fontWeight: 300,
-          fontSize:   '18px',
+          fontSize:   '20px',
           lineHeight: 1.6,
           color:      '#404040',
           textAlign:  'center',
@@ -1147,7 +1169,7 @@ function TheTool() {
   };
 
   return (
-    <CaseStudySection id="ltx-studio"
+    <CaseStudySection id="ltx-studio" style={{ paddingTop: '50px' }}
       doodle={undefined}
     >
       <div style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
@@ -1169,7 +1191,7 @@ function TheTool() {
             <p style={{
               fontFamily: 'Fraunces, serif',
               fontWeight: 300,
-              fontSize:   '18px',
+              fontSize:   '20px',
               lineHeight: 1.6,
               color:      '#404040',
               margin:     '0 0 20px',
@@ -1222,7 +1244,7 @@ function FilmmakingPrinciples() {
   const vpWidthRef            = useRef(1120);
   const [vpWidth, setVpWidth] = useState(1120);
   const [dragging, setDragging] = useState(false);
-  const GAP   = 24;
+  const GAP   = 20;
   const PAGES = [principles.slice(0, 3), principles.slice(3)];
 
   const getStep    = () => vpWidthRef.current + GAP;
@@ -1322,21 +1344,28 @@ function FilmmakingPrinciples() {
 
   return (
     <>
-      <CaseStudyFullBleed id="principles" background="#F5F0EC" style={{ paddingBottom: '48px', textAlign: 'center' }}>
+      <CaseStudyFullBleed id="principles" background="#FFFBF8" sectionStyle={{ overflowX: 'clip' }} style={{ paddingTop: '175px', paddingBottom: '48px', textAlign: 'center' }}
+        doodle={
+          <div data-dev-id="burst-principles-left" data-dev-type="doodle"
+            style={{ position: 'absolute', top: '80px', left: '20px', width: '160px', zIndex: 0, transform: 'translate(-72px, -39px) scale(1.273)', transformOrigin: 'top left' }}>
+            <img src="/ELEMENTS/White Burst.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 18s linear infinite', transformOrigin: 'center' }} />
+          </div>
+        }
+      >
         <Reveal>
-          <h2 className="font-body" style={{
+          <h2 className="font-heading" style={{
             fontWeight: 700,
-            fontSize:   '40px',
-            lineHeight: 1.2,
+            fontSize:   '75px',
+            lineHeight: 1.05,
             color:      '#101010',
             margin:     '0 0 16px',
-          }}>Nat's AI Filmmaking Principles</h2>
+          }}>What I learned</h2>
         </Reveal>
         <Reveal delay={100}>
           <p style={{
             fontFamily: 'Fraunces, serif',
             fontWeight: 300,
-            fontSize:   '18px',
+            fontSize:   '20px',
             lineHeight: 1.6,
             color:      '#404040',
             margin:     '0 auto',
@@ -1348,27 +1377,33 @@ function FilmmakingPrinciples() {
       </CaseStudyFullBleed>
 
       {/* Draggable paginated card carousel */}
-      <div style={{ backgroundColor: '#F5F0EC', paddingBottom: '80px', position: 'relative', zIndex: 2 }}>
+      <div style={{ backgroundColor: '#FFFBF8', paddingBottom: '80px', position: 'relative', zIndex: 2, overflowX: 'clip' }}>
+        <div data-dev-id="burst-principles-right" data-dev-type="doodle"
+          style={{ position: 'absolute', top: '0px', right: '0px', width: '160px', zIndex: 0, transform: 'translate(6px, 232px) scale(1.18)', transformOrigin: 'top left' }}>
+          <img src="/ELEMENTS/White Burst.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 24s linear infinite', transformOrigin: 'center' }} />
+        </div>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', position: 'relative' }}>
 
-          {/* Left arrow */}
+          {/* Left arrow — lives inside the 175px margin zone */}
           <button
             onClick={() => setPage(p => Math.max(0, p - 1))}
             aria-label="Previous"
-            style={{ ...arrowStyle(page === 0), left: '-22px' }}
+            style={{ ...arrowStyle(page === 0), left: '28px' }}
           >←</button>
 
           {/* Right arrow */}
           <button
             onClick={() => setPage(p => Math.min(PAGES.length - 1, p + 1))}
             aria-label="Next"
-            style={{ ...arrowStyle(page === PAGES.length - 1), right: '-22px' }}
+            style={{ ...arrowStyle(page === PAGES.length - 1), right: '28px' }}
           >→</button>
 
-          {/* Viewport — clips horizontally, lets hover scale breathe vertically */}
+          {/* Left breathing room for shadow; right stays at exact 1120px so card 4 can't bleed */}
+          <div style={{ overflowX: 'clip', marginLeft: '-60px', paddingLeft: '60px' }}>
+          {/* Viewport — bottom padding gives shadow room; overflow visible so shadow diffuses */}
           <div
             ref={viewportRef}
-            style={{ overflowX: 'clip', padding: '32px 0', cursor: dragging ? 'grabbing' : 'grab', userSelect: 'none', maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)' }}
+            style={{ overflow: 'visible', padding: '40px 0 80px', cursor: dragging ? 'grabbing' : 'grab', userSelect: 'none' }}
             onMouseDown={onMouseDown}
             onMouseMove={onMouseMove}
             onMouseUp={onDragEnd}
@@ -1377,19 +1412,20 @@ function FilmmakingPrinciples() {
             <div ref={trackRef} style={{ display: 'flex', gap: `${GAP}px`, willChange: 'transform' }}>
               {PAGES.map((cards, pageIdx) => (
                 <div key={pageIdx} style={{
-                  display:             'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
-                  gap:                 `${GAP}px`,
-                  width:               `${vpWidth}px`,
-                  flexShrink:          0,
+                  display:    'flex',
+                  gap:        `${GAP}px`,
+                  width:      `${vpWidth}px`,
+                  flexShrink: 0,
                 }}>
                   {cards.map(p => (
                     <div key={p.title} className="principles-card" style={{
+                      width:           '360px',
+                      flexShrink:      0,
                       backgroundColor: '#ffffff',
                       borderRadius:    '20px',
                       overflow:        'hidden',
                       border:          '2px dashed #101010',
-                      padding:         '20px',
+                      padding:         '24px',
                       display:         'flex',
                       flexDirection:   'column',
                       boxShadow:       '0 16px 48px rgba(0,0,0,0.14)',
@@ -1423,6 +1459,7 @@ function FilmmakingPrinciples() {
               ))}
             </div>
           </div>
+          </div>{/* end horizontal clip wrapper */}
 
           {/* Page dots */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '32px' }}>
@@ -1460,6 +1497,157 @@ const festivalImages = [
   { src: '5-CREDITS_TOM.jpg',     alt: 'Tom'     },
 ];
 
+// ── Scene Creation ───────────────────────────────────────────────────────────
+const sceneSlides = [
+  '/rules-we-made-up/7a-scenes/Snapshot_5.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_6.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_7.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_9.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_22.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_10.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_11.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_12.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_13.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_14.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_15.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_16.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_17.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_18.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_19.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_20.jpg',
+  '/rules-we-made-up/7a-scenes/Snapshot_21.jpg',
+];
+
+function SceneCreation() {
+  const [current, setCurrent] = useState(0);
+  const n = sceneSlides.length;
+  const prev = () => setCurrent(i => (i - 1 + n) % n);
+  const next = () => setCurrent(i => (i + 1) % n);
+
+  const ArrowBtn = ({ onClick, children }) => (
+    <button
+      onClick={onClick}
+      style={{
+        width: '44px', height: '44px', borderRadius: '50%',
+        border: '1.5px solid rgba(0,0,0,0.3)', background: 'none',
+        color: '#101010', fontSize: '18px', cursor: 'pointer',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        transition: 'border-color 0.2s ease', flexShrink: 0,
+      }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.6)'; }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.3)'; }}
+    >
+      {children}
+    </button>
+  );
+
+  return (
+    <CaseStudySection
+      id="scene-creation"
+      style={{ paddingTop: '100px', paddingBottom: '100px', textAlign: 'center' }}
+      doodle={
+        <>
+          {/* Saturn — upper right, outside content margins */}
+          <div
+            data-dev-id="saturn"
+            data-dev-type="doodle"
+            style={{ position: 'absolute', top: '60px', right: '40px', width: '110px', zIndex: 3, transform: 'translate(-224px, 22px) scale(1.227)', transformOrigin: 'top left' }}
+          >
+            <img src="/ELEMENTS/Yellow Satrun.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'float 4s ease-in-out infinite' }} />
+          </div>
+        </>
+      }
+    >
+      {/* Heading */}
+      <Reveal delay={0}>
+        <h2 className="font-body" style={{
+          fontWeight:   700,
+          fontSize:     '33px',
+          lineHeight:   1.2,
+          color:        '#101010',
+          margin:       '0 0 20px',
+        }}>Scene creation</h2>
+      </Reveal>
+
+      {/* Body copy */}
+      <Reveal delay={100}>
+        <p style={{
+          fontFamily: 'Fraunces, serif',
+          fontWeight: 300,
+          fontSize:   '20px',
+          lineHeight: 1.6,
+          color:      '#404040',
+          maxWidth:   '540px',
+          margin:     '0 auto 40px',
+        }}>
+          I started developing my scenes according to my storyboard. Each scene had to feel
+          like a world — built from color, light, and the kind of detail only I would notice.
+          It was an act of patience.
+        </p>
+      </Reveal>
+
+      {/* Carousel */}
+      <div style={{ position: 'relative' }}>
+        {/* Left arrow */}
+        <div style={{ position: 'absolute', left: '-60px', top: '50%', transform: 'translateY(-50%)', zIndex: 2 }}>
+          <ArrowBtn onClick={prev}>←</ArrowBtn>
+        </div>
+
+        {/* Slide viewport */}
+        <div style={{ overflow: 'hidden', borderRadius: '16px', width: '100%' }}>
+          <div style={{ display: 'flex', transform: `translateX(-${current * 100}%)`, transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+            {sceneSlides.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={`Scene ${i + 1}`}
+                style={{ width: '100%', flexShrink: 0, display: 'block', objectFit: 'cover', height: '480px' }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Right arrow */}
+        <div style={{ position: 'absolute', right: '-60px', top: '50%', transform: 'translateY(-50%)', zIndex: 2 }}>
+          <ArrowBtn onClick={next}>→</ArrowBtn>
+        </div>
+      </div>
+
+      {/* Fira Mono caption */}
+      <p style={{
+        fontFamily:    'Fira Mono, monospace',
+        fontSize:      '11px',
+        letterSpacing: '0.15em',
+        textTransform: 'uppercase',
+        color:         '#888',
+        margin:        '24px 0 12px',
+      }}>
+        Scene {current + 1} of {n}
+      </p>
+
+      {/* Pagination pills */}
+      <div style={{ display: 'flex', gap: '6px', justifyContent: 'center' }}>
+        {sceneSlides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            style={{
+              width:        i === current ? '28px' : '8px',
+              height:       '8px',
+              borderRadius: '4px',
+              background:   i === current ? '#101010' : 'rgba(0,0,0,0.2)',
+              border:       'none',
+              cursor:       'pointer',
+              padding:      0,
+              transition:   'width 0.3s ease, background 0.3s ease',
+            }}
+          />
+        ))}
+      </div>
+    </CaseStudySection>
+  );
+}
+
 function RollCall() {
   const [lightboxIdx, setLightboxIdx] = useState(null);
   const [familyOpen, setFamilyOpen] = useState(false);
@@ -1487,7 +1675,7 @@ function RollCall() {
   const body = {
     fontFamily: 'Fraunces, serif',
     fontWeight: 300,
-    fontSize:   '18px',
+    fontSize:   '20px',
     lineHeight: 1.6,
     color:      '#404040',
     margin:     '0 0 20px',
@@ -1495,7 +1683,19 @@ function RollCall() {
 
   return (
     <>
-      <CaseStudySection id="roll-call">
+      <CaseStudySection
+        id="roll-call"
+        style={{ paddingTop: '50px' }}
+        doodle={
+          <div
+            data-dev-id="substack-flower"
+            data-dev-type="doodle"
+            style={{ position: 'absolute', top: '60px', left: '30px', width: '130px', zIndex: 0, transform: 'translate(252px, -47px) scale(0.727)', transformOrigin: 'top left' }}
+          >
+            <img src="/ELEMENTS/L Purple Flower.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 16s linear infinite', transformOrigin: 'center' }} />
+          </div>
+        }
+      >
         <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
           {/* Left — phone mockup with 3D tilt */}
@@ -1552,7 +1752,28 @@ function RollCall() {
         </div>
       </CaseStudySection>
 
-      <CaseStudyFullBleed background="#F5F0EC">
+      <CaseStudyFullBleed
+        background="#F5F0EC"
+        sectionStyle={{
+          backgroundImage:    'url(/Medium-beige-darker-bg2.jpg)',
+          backgroundSize:     'cover',
+          backgroundPosition: 'center',
+        }}
+        doodle={
+          <>
+            {/* Top torn edge — #FFFBF8 tears down into the beige section */}
+            <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}>
+              <path d="M0,0 L0,28 L48,6 L95,35 L148,8 L200,38 L260,4 L315,32 L370,15 L425,40 L480,10 L535,34 L595,18 L650,42 L710,6 L765,28 L820,10 L875,38 L930,14 L985,40 L1040,5 L1095,30 L1150,12 L1210,38 L1270,8 L1330,32 L1390,15 L1440,25 L1440,0 Z" fill="#FFFBF8" />
+            </svg>
+            {/* Bottom torn edge — #FFFBF8 tears up into the beige section */}
+            <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
+              style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}>
+              <path d="M0,50 L0,22 L55,45 L110,18 L168,44 L225,10 L280,38 L335,20 L390,46 L445,12 L500,40 L558,8 L615,36 L675,22 L735,48 L792,10 L845,38 L900,18 L958,44 L1015,6 L1070,34 L1128,16 L1185,42 L1245,8 L1300,36 L1360,20 L1440,38 L1440,50 Z" fill="#FFFBF8" />
+            </svg>
+          </>
+        }
+      >
 
         {/* Fira Mono label above family photo */}
         <Reveal delay={0}>
@@ -1636,7 +1857,7 @@ function RollCall() {
           <p style={{
             fontFamily: 'Fraunces, serif',
             fontWeight: 300,
-            fontSize:   '18px',
+            fontSize:   '20px',
             lineHeight: 1.6,
             color:      '#404040',
             margin:     '32px auto 0',
@@ -1728,110 +1949,6 @@ function Reveal({ children, delay = 0, distance = 48, style = {} }) {
 }
 
 // ── Section Nav ───────────────────────────────────────────────────────────────
-const navItems = [
-  { id: 'how-it-started', label: 'How It Started',   dot: '#6366F1' },
-  { id: 'characters',     label: 'Characters',        dot: '#F97316' },
-  { id: 'mushroom-friend',label: 'Mushroom Friend',   dot: '#EC4899' },
-  { id: 'roll-call',      label: 'Roll Call',         dot: '#FDB154' },
-  { id: 'ltx-studio',     label: 'LTX Studio',        dot: '#6366F1' },
-  { id: 'principles',     label: 'Principles',        dot: '#E35038' },
-];
-
-function SectionNav() {
-  const [activeId, setActiveId] = useState(null);
-
-  useEffect(() => {
-    const observers = navItems.map(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return null;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveId(id); },
-        { threshold: 0.3 }
-      );
-      obs.observe(el);
-      return obs;
-    });
-    return () => observers.forEach(o => o?.disconnect());
-  }, []);
-
-  const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  return (
-    <div style={{
-      position:        'fixed',
-      right:           '28px',
-      top:             '50%',
-      transform:       'translateY(-50%)',
-      zIndex:          200,
-      display:         'flex',
-      flexDirection:   'column',
-      alignItems:      'flex-end',
-      gap:             0,
-      backgroundColor: 'rgba(255,251,248,0.6)',
-      backdropFilter:  'blur(12px)',
-      WebkitBackdropFilter: 'blur(12px)',
-      borderRadius:    '20px',
-      padding:         '24px 14px',
-      overflow:        'hidden',
-    }}>
-      {/* Vertical dashed line — same DNA as career timeline */}
-      <div style={{
-        position:    'absolute',
-        right:       '5px',
-        top:         0,
-        bottom:      0,
-        borderRight: '2px dashed rgba(16,16,16,0.15)',
-        zIndex:      0,
-        pointerEvents: 'none',
-      }} />
-
-      {navItems.map(({ id, label, dot }) => {
-        const isActive = activeId === id;
-        return (
-          <div
-            key={id}
-            onClick={() => scrollTo(id)}
-            style={{
-              display:     'flex',
-              alignItems:  'center',
-              gap:         '10px',
-              padding:     '7px 0',
-              cursor:      'pointer',
-              position:    'relative',
-              zIndex:      1,
-            }}
-          >
-            {/* Label */}
-            <span style={{
-              fontFamily:    'Fira Mono, monospace',
-              fontSize:      '10px',
-              letterSpacing: isActive ? '0.12em' : '0.08em',
-              textTransform: 'uppercase',
-              color:         '#101010',
-              fontWeight:    400,
-              opacity:       isActive ? 1 : 0.25,
-              transition:    'opacity 0.5s ease, letter-spacing 0.5s ease',
-              whiteSpace:    'nowrap',
-            }}>{label}</span>
-
-            {/* Dot — same size & shadow as career timeline */}
-            <div style={{
-              width:           isActive ? '11px' : '8px',
-              height:          isActive ? '11px' : '8px',
-              borderRadius:    '50%',
-              backgroundColor: isActive ? dot : 'rgba(16,16,16,0.15)',
-              boxShadow:       isActive ? `0 2px 8px ${dot}99` : 'none',
-              transition:      'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-              flexShrink:      0,
-            }} />
-          </div>
-        );
-      })}
-    </div>
-  );
-}
 
 // Sizes pre-multiplied by scale so CSS transform conflicts with animations are avoided
 const BAKED_EXTRAS = [];
@@ -1882,7 +1999,6 @@ export default function RulesWeMadeUp() {
     <main style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
       <Cursor />
       <CaseStudyNav />
-      <SectionNav />
 
       {/* Baked page-level doodles */}
       {BAKED_EXTRAS.map(d => (
@@ -1901,14 +2017,7 @@ export default function RulesWeMadeUp() {
 
 
       {/* ── Hero: 50/50 split ── */}
-      <section style={{
-        display:             'flex',
-        position:            'sticky',
-        top:                 0,
-        zIndex:              1,
-        minHeight:           '760px',
-        width:               '100%',
-      }}>
+      <StickyHero>
 
 
 
@@ -1928,24 +2037,25 @@ export default function RulesWeMadeUp() {
         }}>
 
           {/* Eyebrow */}
-          <div style={{
-            display:       'inline-block',
-            alignSelf:     'flex-start',
-            fontFamily:    'Fira Mono, monospace',
-            fontSize:      '11px',
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
-            color:         '#101010',
-            border:        '1.5px dashed rgba(16,16,16,0.45)',
-            borderRadius:  '100px',
-            padding:       '6px 14px',
-            marginBottom:  '24px',
-          }}>Case Study</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', alignSelf: 'flex-start', marginBottom: '50px' }}>
+            <style>{`@keyframes slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+            <svg width="22" height="22" viewBox="0 0 16 16" fill="#101010" style={{ flexShrink: 0, animation: 'slow-spin 12s linear infinite', transformOrigin: 'center' }}>
+              <path d="M8,1 L9.2,5.3 L13.5,3.7 L10.9,7.3 L14.8,9.6 L10.4,9.9 L10.9,14.4 L8,11 L5.1,14.4 L5.6,9.9 L1.2,9.6 L5.1,7.3 L2.5,3.7 L6.8,5.3 Z"/>
+            </svg>
+            <span style={{
+              fontFamily:    'Fira Mono, monospace',
+              fontWeight:    400,
+              fontSize:      '18px',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              color:         '#101010',
+            }}>Case Study</span>
+          </div>
 
           <h1 className="font-heading" style={{
             fontWeight:  700,
-            fontSize:    '80px',
-            lineHeight:  '88px',
+            fontSize:    '90px',
+            lineHeight:  '90px',
             color:       '#101010',
             margin:      '0 0 28px',
           }}>
@@ -1975,7 +2085,7 @@ export default function RulesWeMadeUp() {
           </video>
         </div>
 
-      </section>
+      </StickyHero>
 
       {/* ── Video + Intro ── */}
       <section style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '80px' }}>
@@ -2082,43 +2192,73 @@ export default function RulesWeMadeUp() {
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
         style={{ paddingTop: '80px', paddingBottom: '80px' }}
       >
-        <div>
-          <Reveal delay={0}>
-            <h2 className="font-body" style={{
-              fontWeight: 700,
-              fontSize:   '33px',
-              color:      '#101010',
-              margin:     '0 0 12px',
-            }}>The Project</h2>
-          </Reveal>
-          <Reveal delay={100}>
-            <p style={{
-              fontFamily: 'Fraunces, serif',
-              fontWeight: 300,
-              fontSize:   '18px',
-              lineHeight: 1.6,
-              color:      '#404040',
-              margin:     '0 0 20px',
-            }}>
-              This film is adapted from a poem I wrote years ago, late one night. It's about a specific
-              kind of person: someone who thinks deeply, resists neat categories, and feels perpetually
-              out of step with a world that wants everything linear and labeled.
-            </p>
-          </Reveal>
-          <Reveal delay={200}>
-            <p style={{
-              fontFamily: 'Fraunces, serif',
-              fontWeight: 300,
-              fontSize:   '18px',
-              lineHeight: 1.6,
-              color:      '#404040',
-              margin:     0,
-            }}>
-              When AI tools emerged, I finally had the means to bring it to life. The title comes from
-              a line I fought to keep in the lyrics. Some rules deserve protecting. Some were never
-              worth following. Right now, it feels like it's all up for renegotiation.
-            </p>
-          </Reveal>
+        <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-start' }}>
+
+          {/* Left: heading + body copy */}
+          <div data-dev-id="proj-text" data-dev-type="text" style={{ width: '644px', flexShrink: 0, transform: 'translateY(38px)' }}>
+            <Reveal delay={0}>
+              <h2 className="font-heading" style={{
+                fontWeight:  700,
+                fontSize:    '75px',
+                lineHeight:  1.05,
+                color:       '#101010',
+                margin:      '0 0 28px',
+              }}>The Project</h2>
+            </Reveal>
+            <Reveal delay={100}>
+              <p style={{
+                fontFamily: 'Fraunces, serif',
+                fontWeight: 300,
+                fontSize:   '20px',
+                lineHeight: 1.6,
+                color:      '#404040',
+                margin:     '0 0 20px',
+              }}>
+                This film is adapted from a poem I wrote years ago, late one night. It's about a specific
+                kind of person: someone who thinks deeply, resists neat categories, and feels perpetually
+                out of step with a world that wants everything linear and labeled.
+              </p>
+            </Reveal>
+            <Reveal delay={200}>
+              <p style={{
+                fontFamily: 'Fraunces, serif',
+                fontWeight: 300,
+                fontSize:   '20px',
+                lineHeight: 1.6,
+                color:      '#404040',
+                margin:     0,
+              }}>
+                When AI tools emerged, I finally had the means to bring it to life. The title comes from
+                a line I fought to keep in the lyrics. Some rules deserve protecting. Some were never
+                worth following. Right now, it feels like it's all up for renegotiation.
+              </p>
+            </Reveal>
+          </div>
+
+          {/* Right: Red Planet doodle with cloud overlays */}
+          <div data-dev-id="proj-planet" data-dev-type="doodle" style={{ flexShrink: 0, width: '260px', paddingTop: '8px', position: 'relative', overflowX: 'clip', transform: 'translate(54px, 37px) scale(0.88)', transformOrigin: 'top left' }}>
+            {/* Planet floats and rotates */}
+            <div style={{ animation: 'float 5s ease-in-out infinite' }}>
+              <img
+                src="/ELEMENTS/Red Planet.png"
+                alt=""
+                style={{ width: '100%', display: 'block', animation: 'spin-planet 36s linear infinite', transformOrigin: 'center' }}
+              />
+            </div>
+            {/* Wrapper holds baked DevDrag position; img drifts independently */}
+            <div
+              data-dev-id="clouds"
+              data-dev-type="doodle"
+              style={{ position: 'absolute', width: '200px', left: '80px', top: '118px', pointerEvents: 'none', transform: 'translate(86px, 0px) scale(0.713)', transformOrigin: 'top left' }}
+            >
+              <img
+                src="/ELEMENTS/TOP LEFT CLOUD.png"
+                alt=""
+                style={{ width: '100%', display: 'block', animation: 'cloud-drift-1 7s ease-in-out infinite' }}
+              />
+            </div>
+          </div>
+
         </div>
       </CaseStudySection>
 
@@ -2134,14 +2274,17 @@ export default function RulesWeMadeUp() {
       {/* ── Mushroom Friend ── */}
       <MushroomFriend />
 
+      {/* ── Scene Creation ── */}
+      <SceneCreation />
+
       {/* ── Roll Call ── */}
       <RollCall />
 
-      {/* ── The Tool ── */}
-      <TheTool />
-
       {/* ── Filmmaking Principles ── */}
       <FilmmakingPrinciples />
+
+      {/* ── The Tool ── */}
+      <TheTool />
 
       {/* ── Blooper Reel ── */}
       <BlooperReel />

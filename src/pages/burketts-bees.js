@@ -948,7 +948,7 @@ function WorkshopCarousel() {
     <>
       <CaseStudyFullBleed id="workshops" background="#FFFBF8" style={{ paddingTop: '120px', paddingBottom: '48px', textAlign: 'center' }}>
         <Reveal>
-          <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '75px', lineHeight: 1.05, color: '#101010', margin: '0 0 16px' }}>
+          <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 16px' }}>
             Monthly workshops &amp; discussions
           </h2>
         </Reveal>
@@ -997,10 +997,10 @@ function WorkshopCarousel() {
                           <img src={w.img} alt={w.title} draggable={false}
                             style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: w.crop === 'left' ? 'left center' : 'center', display: 'block' }} />
                         </div>
-                        <h3 className="font-body" style={{ fontWeight: 700, fontSize: '22px', lineHeight: 1.2, color: '#101010', margin: '0 0 10px' }}>
+                        <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 10px' }}>
                           {w.title}
                         </h3>
-                        <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '15px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+                        <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                           {w.body}
                         </p>
                       </div>
@@ -1280,7 +1280,7 @@ export default function BurkettsBees() {
             <Reveal delay={0}>
               <h2 className="font-heading" style={{
                 fontWeight: 700,
-                fontSize:   '75px',
+                fontSize:   '64px',
                 lineHeight: 1.05,
                 color:      '#101010',
                 margin:     '0 0 28px',
@@ -1385,7 +1385,7 @@ export default function BurkettsBees() {
                   </div>
                   <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '18px', lineHeight: 1.3, color: '#101010' }}>{title}</span>
                 </div>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '15px', lineHeight: 1.7, color: '#404040', margin: 0 }}>{desc}</p>
+                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>{desc}</p>
               </div>
             ))}
           </div>
@@ -1414,8 +1414,8 @@ export default function BurkettsBees() {
           <div style={{ maxWidth: '738px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', textAlign: 'center', marginBottom: '56px' }}>
             <h2 className="font-body" style={{
               fontWeight: 700,
-              fontSize:   '44px',
-              lineHeight: 1.2,
+              fontSize:   '64px',
+              lineHeight: 1.05,
               color:      '#101010',
               margin:     '0 0 16px',
             }}>Built with AI. Art Directed by Me</h2>
@@ -1707,7 +1707,7 @@ export default function BurkettsBees() {
                     </div>
                     <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '18px', lineHeight: 1.3, color: '#101010' }}>{title}</span>
                   </div>
-                  <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '15px', lineHeight: 1.7, color: '#404040', margin: 0 }}>{desc}</p>
+                  <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>{desc}</p>
                 </div>
               ))}
             </div>
@@ -1783,10 +1783,10 @@ export default function BurkettsBees() {
         rightColor="#EEEAE4"
         leftContent={
           <>
-            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '52px', lineHeight: 1.1, color: '#101010', margin: '0 0 28px' }}>
+            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 28px' }}>
               From curiosity to AI education and integration
             </h2>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.7, color: '#101010', margin: 0 }}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               Burkett&rsquo;s Bees gave the team something concrete to react to. The project helped shift the conversation from abstract AI hype to practical creative workflows and became part of the foundation for my eventual role as <strong style={{ fontWeight: 700 }}>Art Director, AI Integration.</strong>
             </p>
           </>
@@ -1865,7 +1865,7 @@ export default function BurkettsBees() {
             <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
               Testing AI against the &ldquo;Three C&rsquo;s&rdquo;
             </h2>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               I developed a simple framework to evaluate AI tools against real agency needs — from presentation makers and image generators to plug-ins, internal GPTs and DAM capabilities.
             </p>
           </div>
@@ -1886,7 +1886,7 @@ export default function BurkettsBees() {
                   </div>
                   <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '20px', color: '#101010' }}>{title}</span>
                 </div>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '15px', lineHeight: 1.7, color: '#404040', margin: 0 }}>{body}</p>
+                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>{body}</p>
               </div>
             </Reveal>
           ))}
@@ -1902,13 +1902,13 @@ export default function BurkettsBees() {
               <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
                 What carried forward
               </h2>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.7, color: '#404040', margin: '0 0 20px' }}>
+              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 The use cases I identified through Burkett&rsquo;s Bees ended up being the same places AI proved useful inside the agency: RFPs, notionals, pitch materials, social content, mockups and early creative exploration.
               </p>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.7, color: '#404040', margin: '0 0 20px' }}>
+              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 When (add)ventures later explored a new internal brand direction, AI-assisted collage became part of the visual identity.
               </p>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.7, color: '#404040', margin: 0 }}>
+              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                 AI may have replaced a few pricey stock photos, but it did not replace the people behind the craft. Designers still had to direct, edit, combine, refine and turn those pieces into usable brand assets.
               </p>
             </Reveal>

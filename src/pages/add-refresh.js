@@ -598,7 +598,7 @@ export default function AddRefresh() {
         {/* Centered heading + body */}
         <Reveal>
           <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 60px' }}>
-            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '75px', lineHeight: 1.05, color: '#101010', margin: '0 0 28px' }}>
+            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 28px' }}>
               How it started
             </h2>
             <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
@@ -698,7 +698,7 @@ export default function AddRefresh() {
         {/* Centered heading + body */}
         <Reveal>
           <div style={{ maxWidth: '738px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', textAlign: 'center', marginBottom: '56px' }}>
-            <h2 className="font-body" style={{ fontWeight: 700, fontSize: '44px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 16px' }}>
               The Concept Sprint
             </h2>
             <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
@@ -822,10 +822,10 @@ export default function AddRefresh() {
         {/* Centered heading + subhead */}
         <Reveal>
           <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 60px' }}>
-            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '52px', lineHeight: 1.1, color: '#101010', margin: '0 0 20px' }}>
+            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 20px' }}>
               Turning a concept into a working system
             </h2>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               Members from the (add)ventures Creative Team and I tested the direction across various touchpoints: presentation decks, social media, logo expression, brand marks, shapes, gradients, text treatments, doodles, illustrations, swag, wayfinding, headlines, internal initiatives, podcast graphics, and the virtual production studio.
             </p>
           </div>
@@ -1020,10 +1020,10 @@ export default function AddRefresh() {
 
         <Reveal>
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
-            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '56px', lineHeight: 1.1, color: '#101010', margin: '0 0 24px' }}>
+            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 24px' }}>
               Carrying the system to create a brand new website
             </h2>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '18px', lineHeight: 1.7, color: '#404040', margin: 0 }}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               As the refresh gained momentum, the system moved directly into a website sprint. In a short timeline, the team began translating the new direction into digital structure, page design, content hierarchy, and interactive brand moments.
             </p>
           </div>

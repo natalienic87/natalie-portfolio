@@ -1355,7 +1355,7 @@ function FilmmakingPrinciples() {
         <Reveal>
           <h2 className="font-heading" style={{
             fontWeight: 700,
-            fontSize:   '75px',
+            fontSize:   '64px',
             lineHeight: 1.05,
             color:      '#101010',
             margin:     '0 0 16px',
@@ -1440,7 +1440,7 @@ function FilmmakingPrinciples() {
                       </div>
                       <h3 className="font-body" style={{
                         fontWeight: 700,
-                        fontSize:   '22px',
+                        fontSize:   '33px',
                         lineHeight: 1.2,
                         color:      '#101010',
                         margin:     '0 0 10px',
@@ -1448,7 +1448,7 @@ function FilmmakingPrinciples() {
                       <p style={{
                         fontFamily: 'Fraunces, serif',
                         fontWeight: 300,
-                        fontSize:   '15px',
+                        fontSize:   '20px',
                         lineHeight: 1.6,
                         color:      '#404040',
                         margin:     0,
@@ -2199,7 +2199,7 @@ export default function RulesWeMadeUp() {
             <Reveal delay={0}>
               <h2 className="font-heading" style={{
                 fontWeight:  700,
-                fontSize:    '75px',
+                fontSize:    '64px',
                 lineHeight:  1.05,
                 color:       '#101010',
                 margin:      '0 0 28px',

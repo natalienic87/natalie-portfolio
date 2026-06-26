@@ -1,6 +1,11 @@
-import Button from './Button';
-
 export default function Footer() {
+  const footerLinks = [
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/natalienicholson' },
+    { label: 'Substack', href: 'https://crankthatnat.substack.com/' },
+    { label: 'Resume',   href: '#' },
+    { label: 'Email',    href: 'mailto:natalienic87@gmail.com' },
+  ];
+
   return (
     <footer style={{ position: 'relative', zIndex: 2, backgroundColor: '#101010', overflow: 'hidden' }}>
 
@@ -26,30 +31,28 @@ export default function Footer() {
           Open a new dimension
         </h2>
 
-        {/* Subtext */}
-        <p className="font-body"
-          style={{ fontSize: '16px', color: 'rgba(255,255,255,0.65)', margin: '0 0 36px', lineHeight: 1.6 }}>
-          Currently accepting <strong style={{ color: '#ffffff', fontStyle: 'italic' }}>Generative AI</strong>,
-          {' '}concept <strong style={{ color: '#ffffff' }}>Branding</strong>, and cinematic{' '}
-          <strong style={{ color: '#ffffff' }}>Video</strong> into singular immersive experiences.
+        {/* Body copy */}
+        <p style={{
+          fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px',
+          lineHeight: 1.6, color: 'rgba(255,255,255,0.75)',
+          maxWidth: '640px', margin: '0 auto 48px',
+        }}>
+          Bring me in for art direction, brand systems, AI-assisted concepting, and visual work that needs to move quickly without feeling generic.
         </p>
 
-        {/* CTA buttons */}
-        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginBottom: '48px' }}>
-          <Button variant="primary" href="https://crankthatnat.substack.com/" target="_blank" rel="noopener noreferrer">Subscribe to my Substack</Button>
-          <Button variant="dashed-outline" href="mailto:natalienic87@gmail.com">Contact Me</Button>
-        </div>
-
-        {/* Social links */}
+        {/* Footer links */}
         <div style={{ display: 'flex', gap: '48px', justifyContent: 'center' }}>
-          {['LinkedIn', 'Substack', 'Instagram', 'Facebook'].map((name) => (
-            <a key={name} href="#" className="font-body"
+          {footerLinks.map(({ label, href }) => (
+            <a key={label} href={href}
+              target={href.startsWith('http') ? '_blank' : undefined}
+              rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
               style={{
-                fontSize: '11px', fontWeight: 600, letterSpacing: '0.18em',
+                fontFamily: 'Fira Mono, monospace', fontWeight: 500,
+                fontSize: '11px', letterSpacing: '0.18em',
                 textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)',
                 textDecoration: 'none',
               }}>
-              {name}
+              {label}
             </a>
           ))}
         </div>

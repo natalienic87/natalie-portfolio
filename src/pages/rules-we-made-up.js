@@ -2,71 +2,12 @@ import { useState, useRef, useEffect, createContext, useContext } from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
 import Cursor from '../components/Cursor';
+import CaseStudyNav from '../components/CaseStudyNav';
 import Footer from '../components/Footer';
 import CaseStudySection  from '../components/CaseStudySection';
 import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
 import StickyHero           from '../components/StickyHero';
 import DashedCardCarousel   from '../components/DashedCardCarousel';
-
-// ── Minimal case-study nav ────────────────────────────────────────────────────
-function CaseStudyNav() {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <nav style={{
-      position:       'absolute',
-      top:            0,
-      left:           0,
-      right:          0,
-      zIndex:         50,
-      display:        'flex',
-      alignItems:     'center',
-      justifyContent: 'space-between',
-      padding:        '20px 120px',
-    }}>
-      {/* ← HOME */}
-      <Link
-        href="/"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{
-          display:        'inline-flex',
-          alignItems:     'center',
-          gap:            '8px',
-          fontFamily:     'Poppins, sans-serif',
-          fontWeight:     700,
-          fontSize:       '11px',
-          letterSpacing:  '0.18em',
-          textTransform:  'uppercase',
-          textDecoration: 'none',
-          color:          '#FDB154',
-          paddingBottom:  '4px',
-          position:       'relative',
-          transition:     'opacity 0.2s ease',
-          opacity:        hovered ? 0.75 : 1,
-        }}
-      >
-        <span style={{ fontSize: '14px', lineHeight: 1 }}>←</span>
-        Home
-      </Link>
-
-      {/* Hamburger */}
-      <button aria-label="Open menu" style={{
-        display:        'flex',
-        flexDirection:  'column',
-        gap:            '5px',
-        background:     'none',
-        border:         'none',
-        cursor:         'pointer',
-        padding:        0,
-      }}>
-        <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#101010' }} />
-        <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#101010' }} />
-        <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#101010' }} />
-      </button>
-    </nav>
-  );
-}
 
 // ── Metadata label/value pair ─────────────────────────────────────────────────
 function MetaItem({ label, value }) {

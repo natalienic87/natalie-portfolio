@@ -1891,16 +1891,6 @@ export default function BurkettsBees() {
         />
       ))}
 
-      <DoodleEditorToggle enabled={doodleEditEnabled} onToggle={() => setDoodleEditEnabled(v => !v)} />
-      {doodleEditEnabled && (
-        <DoodleEditorPanel
-          positions={doodlePositions}
-          extras={extraDoodles}
-          onReset={() => { setDoodlePositions({}); setExtraDoodles([]); setDeletedDoodles(new Set()); }}
-          onDuplicate={duplicateDoodle}
-          onDeleteExtra={deleteExtraDoodle}
-        />
-      )}
     </main>
     </DoodleEditContext.Provider>
   );

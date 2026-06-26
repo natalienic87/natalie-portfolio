@@ -1209,6 +1209,33 @@ function TheTool() {
               I chose LTX Studio for its built-in storyboarding feature — for a 3-minute film, I needed something that could hold the full sequence together. I learned quickly that uploading everything at once was an expensive mistake. Going scene by scene, slower, was faster in the end.
             </p>
           </Reveal>
+          <Reveal delay={150}>
+            <p style={{
+              fontFamily: 'Fira Mono, monospace',
+              fontWeight: 400,
+              fontSize:   '16px',
+              lineHeight: 1.2,
+              color:      '#101010',
+              margin:     '0 0 10px',
+            }}>Want to learn more about LTX Studio?</p>
+            <a
+              href="https://crankthatnat.substack.com/p/i-built-a-short-film-in-ltx-studio"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily:          'Fraunces, serif',
+                fontWeight:          400,
+                fontSize:            '18px',
+                lineHeight:          1.4,
+                color:               '#101010',
+                textDecoration:      'underline',
+                textUnderlineOffset: '3px',
+                cursor:              'pointer',
+              }}
+            >
+              Get my thoughts on it here
+            </a>
+          </Reveal>
         </div>
 
         {/* Right — screenshot + caption with 3D tilt */}
@@ -1249,7 +1276,7 @@ function FilmmakingPrinciples() {
       <CaseStudyFullBleed id="principles" background="#FFFBF8" sectionStyle={{ overflowX: 'clip' }} style={{ paddingTop: '80px', paddingBottom: '10px', textAlign: 'center' }}
         doodle={
           <div data-dev-id="burst-principles-left" data-dev-type="doodle"
-            style={{ position: 'absolute', top: '80px', left: '20px', width: '160px', zIndex: 0, transform: 'translate(-72px, -39px) scale(1.273)', transformOrigin: 'top left' }}>
+            style={{ position: 'absolute', top: '80px', left: '20px', width: '160px', zIndex: 0, transform: 'translate(-72px, -39px) scale(0.891)', transformOrigin: 'top left' }}>
             <img src="/ELEMENTS/White Burst.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 18s linear infinite', transformOrigin: 'center' }} />
           </div>
         }
@@ -1484,19 +1511,10 @@ function RollCall() {
       <CaseStudySection
         id="roll-call"
         style={{ paddingTop: '80px', paddingBottom: '120px' }}
-        doodle={
-          <div
-            data-dev-id="substack-flower"
-            data-dev-type="doodle"
-            style={{ position: 'absolute', top: '60px', left: '30px', width: '130px', zIndex: 0, transform: 'translate(252px, -47px) scale(0.727)', transformOrigin: 'top left' }}
-          >
-            <img src="/ELEMENTS/L Purple Flower.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 16s linear infinite', transformOrigin: 'center' }} />
-          </div>
-        }
       >
-        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '222px', alignItems: 'center' }}>
 
-          {/* Left — phone mockup with 3D tilt */}
+          {/* Left — phone mockup 488px wide */}
           <Reveal delay={0} style={{ flexShrink: 0, width: 'auto' }}>
             <div
               ref={phoneRef}
@@ -1507,33 +1525,34 @@ function RollCall() {
               <img
                 src="/rules-we-made-up/7-roll-call/Roll-call-mockup.png"
                 alt="Substack roll call post on phone"
-                style={{ height: '775px', width: 'auto', display: 'block', borderRadius: '30px' }}
+                style={{ width: '488px', height: 'auto', display: 'block', borderRadius: '30px' }}
               />
             </div>
           </Reveal>
 
-          {/* Right — heading + body + groups image */}
-          <div style={{ flex: 1 }}>
+          {/* Right — heading + body + image, starts at x=710 */}
+          <div style={{ width: '488px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <Reveal delay={0}>
               <h2 className="font-body" style={{
                 fontWeight: 700,
                 fontSize:   '33px',
                 lineHeight: 1.2,
                 color:      '#101010',
-                margin:     '0 0 12px',
+                margin:     0,
+                maxWidth:   '488px',
               }}>
                 Inviting the Substack community into the film
               </h2>
             </Reveal>
             <Reveal delay={100}>
-              <p style={body}>
+              <p style={{ ...body, maxWidth: '488px', margin: 0 }}>
                 My film had a festival scene near the end — about 30 seconds of runtime — and I needed
                 a crowd. That's when I invited my Substack community to make themselves a claymation
                 character and I'd put them in the film. I provided the prompt, and eighteen people showed up.
               </p>
             </Reveal>
-            <Reveal delay={200}>
-              <p style={body}>
+            <Reveal delay={150}>
+              <p style={{ ...body, maxWidth: '488px', margin: 0 }}>
                 I divided all the characters into groups by scene so I could animate each cluster
                 separately and control the lighting as the night progressed.
               </p>
@@ -1542,7 +1561,7 @@ function RollCall() {
               <img
                 src="/rules-we-made-up/7-roll-call/SupportingCast-groups.png"
                 alt="Supporting cast character groups"
-                style={{ width: '100%', display: 'block', marginBottom: '32px' }}
+                style={{ width: '488px', display: 'block' }}
               />
             </Reveal>
           </div>
@@ -2151,16 +2170,6 @@ export default function RulesWeMadeUp() {
         />
       ))}
 
-      <DoodleEditorToggle enabled={doodleEditEnabled} onToggle={() => setDoodleEditEnabled(v => !v)} />
-      {doodleEditEnabled && (
-        <DoodleEditorPanel
-          positions={doodlePositions}
-          extras={extraDoodles}
-          onReset={() => { setDoodlePositions({}); setExtraDoodles([]); setDeletedDoodles(new Set()); }}
-          onDuplicate={duplicateDoodle}
-          onDeleteExtra={deleteExtraDoodle}
-        />
-      )}
     </main>
     </DoodleEditContext.Provider>
   );

@@ -1453,7 +1453,7 @@ function RollCall() {
         id="roll-call"
         style={{ paddingTop: '80px', paddingBottom: '120px' }}
       >
-        <div style={{ display: 'flex', gap: '222px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '100px', alignItems: 'center' }}>
 
           {/* Left — phone mockup 488px wide */}
           <Reveal delay={0} style={{ flexShrink: 0, width: 'auto' }}>

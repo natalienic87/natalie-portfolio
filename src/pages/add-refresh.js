@@ -1064,6 +1064,17 @@ export default function AddRefresh() {
           </div>
         </Reveal>
 
+        <Reveal>
+          <div style={{ maxWidth: '1440px', margin: '60px auto 0', padding: '0 120px', boxSizing: 'border-box' }}>
+            <video
+              autoPlay muted loop playsInline
+              style={{ width: '100%', display: 'block' }}
+            >
+              <source src="/add-refresh/9_new-website/add website-1.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </Reveal>
+
       </section>
 
       <Footer />

@@ -13,7 +13,7 @@ import DashedCardCarousel   from '../components/DashedCardCarousel';
 function MetaItem({ label, value }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', gap: '24px' }}>
-      <span style={{
+      <span className="hero-meta-label" style={{
         fontFamily: 'Fira Mono, monospace',
         fontWeight: 400,
         fontSize:   '16px',
@@ -22,7 +22,7 @@ function MetaItem({ label, value }) {
         minWidth:   '72px',
         flexShrink: 0,
       }}>{label}</span>
-      <span style={{
+      <span className="hero-meta-value" style={{
         fontFamily: 'Fira Mono, monospace',
         fontWeight: 400,
         fontSize:   '16px',
@@ -1793,12 +1793,12 @@ export default function RulesWeMadeUp() {
         }}>
 
           {/* Eyebrow */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', alignSelf: 'flex-start', marginBottom: '50px' }}>
+          <div className="hero-eyebrow" style={{ display: 'flex', alignItems: 'center', gap: '5px', alignSelf: 'flex-start', marginBottom: '50px' }}>
             <style>{`@keyframes slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
             <svg width="22" height="22" viewBox="0 0 16 16" fill="#101010" style={{ flexShrink: 0, animation: 'slow-spin 12s linear infinite', transformOrigin: 'center' }}>
               <path d="M8,1 L9.2,5.3 L13.5,3.7 L10.9,7.3 L14.8,9.6 L10.4,9.9 L10.9,14.4 L8,11 L5.1,14.4 L5.6,9.9 L1.2,9.6 L5.1,7.3 L2.5,3.7 L6.8,5.3 Z"/>
             </svg>
-            <span style={{
+            <span className="hero-eyebrow-text" style={{
               fontFamily: 'Fira Mono, monospace',
               fontWeight: 400,
               fontSize:   '16px',
@@ -1818,12 +1818,12 @@ export default function RulesWeMadeUp() {
           </h1>
 
           {/* Dashed divider — 2px stroke, 4px dashes */}
-          <svg width="100%" height="2" style={{ display: 'block', margin: '32px 0' }} preserveAspectRatio="none">
+          <svg className="hero-divider" width="100%" height="2" style={{ display: 'block', margin: '32px 0' }} preserveAspectRatio="none">
             <line x1="0" y1="1" x2="100%" y2="1" stroke="rgba(16,16,16,0.25)" strokeWidth="2" strokeDasharray="4 4" />
           </svg>
 
           {/* Meta */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
+          <div className="hero-meta-container" style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
             <MetaItem label="Year"   value="2025" />
             <MetaItem label="Role"   value="Director, Writer, Art Director" />
             <MetaItem label="Medium" value="AI-assisted animation, music, character design, visual storytelling" />
@@ -1843,12 +1843,13 @@ export default function RulesWeMadeUp() {
       </StickyHero>
 
       {/* ── Video + Intro ── */}
-      <section style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '80px' }}>
+      <section className="video-intro-section" style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '80px' }}>
 
         {/* Video — 100px padding, section #F5F0EC IS the frame */}
-        <div style={{ paddingTop: '120px', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
+        <div className="video-intro-inner" style={{ paddingTop: '120px', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
         <div
           ref={videoContainerRef}
+          className="video-intro-frame"
           style={{ position: 'relative', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)', transform: 'translateY(0px)', transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
           onMouseEnter={() => {
             if (videoContainerRef.current) videoContainerRef.current.style.transform = 'translateY(-8px)';
@@ -1919,7 +1920,7 @@ export default function RulesWeMadeUp() {
         </div>
 
         {/* Film caption — on #F5F0EC, centered below video, before torn edge */}
-        <div style={{ textAlign: 'center', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto' }}>
+        <div className="video-intro-caption" style={{ textAlign: 'center', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto' }}>
           <span style={{
             fontFamily: 'Fira Mono, monospace',
             fontWeight: 400,
@@ -1929,13 +1930,24 @@ export default function RulesWeMadeUp() {
           }}>Rules We Made Up / Directed by Natalie Nicholson</span>
         </div>
 
-        {/* Torn paper edge — #FFFBF8 (next section) tears up into this section */}
+        {/* Torn paper edge — desktop (full drama) */}
         <svg
+          className="torn-edge-desktop"
           viewBox="0 0 1440 50"
           preserveAspectRatio="none"
           style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}
         >
           <path d="M0,50 L0,30 L60,8 L120,40 L175,12 L230,42 L285,5 L340,35 L395,18 L450,44 L505,8 L560,36 L620,20 L680,45 L740,5 L800,32 L855,12 L910,42 L965,18 L1020,44 L1080,8 L1135,38 L1190,15 L1250,42 L1310,10 L1370,36 L1440,22 L1440,50 Z" fill="#FFFBF8" />
+        </svg>
+
+        {/* Torn paper edge — mobile (subtle, shallow peaks) */}
+        <svg
+          className="torn-edge-mobile"
+          viewBox="0 0 1440 50"
+          preserveAspectRatio="none"
+          style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'none', zIndex: 3, pointerEvents: 'none' }}
+        >
+          <path d="M0,50 L0,42 L60,40 L120,45 L175,40 L230,46 L285,39 L340,44 L395,41 L450,47 L505,39 L560,44 L620,41 L680,47 L740,38 L800,43 L855,40 L910,45 L965,41 L1020,46 L1080,39 L1135,44 L1190,40 L1250,45 L1310,39 L1370,43 L1440,41 L1440,50 Z" fill="#FFFBF8" />
         </svg>
 
         <Script src="https://player.vimeo.com/api/player.js" />
@@ -1946,13 +1958,20 @@ export default function RulesWeMadeUp() {
         id="project-overview"
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
         style={{ paddingTop: '80px', paddingBottom: '0px' }}
+        doodle={
+          <img
+            src="/ELEMENTS/headphones.png"
+            alt=""
+            className="headphones-mobile"
+          />
+        }
       >
-        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
+        <div className="project-overview-row" style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
           {/* Left: heading + body copy — 8 of 12 columns */}
           <div data-dev-id="proj-text" data-dev-type="text" style={{ flex: '0 0 66.66%', minWidth: 0 }}>
             <Reveal delay={0}>
-              <h2 className="font-heading" style={{
+              <h2 className="font-heading cs-h2" style={{
                 fontWeight:  700,
                 fontSize:    '64px',
                 lineHeight:  1.05,
@@ -1961,7 +1980,7 @@ export default function RulesWeMadeUp() {
               }}>The project</h2>
             </Reveal>
             <Reveal delay={100}>
-              <p style={{
+              <p className="cs-body" style={{
                 fontFamily: 'Fraunces, serif',
                 fontWeight: 300,
                 fontSize:   '20px',
@@ -1978,7 +1997,7 @@ export default function RulesWeMadeUp() {
           </div>
 
           {/* Right: headphones doodle */}
-          <div data-dev-id="proj-headphones" data-dev-type="doodle" style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div className="project-headphones-doodle" data-dev-id="proj-headphones" data-dev-type="doodle" style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <img
               src="/ELEMENTS/headphones.png"
               alt=""
@@ -2036,7 +2055,7 @@ export default function RulesWeMadeUp() {
               }}>
                 {/* Badge + title row */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-                  <div style={{
+                  <div className="wib-badge" style={{
                     flexShrink:      0,
                     width:           '60px',
                     height:          '60px',
@@ -2046,9 +2065,9 @@ export default function RulesWeMadeUp() {
                     alignItems:      'center',
                     justifyContent:  'center',
                   }}>
-                    <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{num}</span>
+                    <span className="wib-badge-num" style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{num}</span>
                   </div>
-                  <h4 style={{
+                  <h4 className="wib-title" style={{
                     fontFamily: 'Fraunces, serif',
                     fontWeight: 700,
                     fontSize:   '24px',
@@ -2058,7 +2077,7 @@ export default function RulesWeMadeUp() {
                   }}>{title}</h4>
                 </div>
                 {/* Body */}
-                <p style={{
+                <p className="wib-body" style={{
                   fontFamily: 'Fraunces, serif',
                   fontWeight: 300,
                   fontSize:   '16px',

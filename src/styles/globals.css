@@ -313,6 +313,12 @@ body {
   100%    { opacity: 0; }
 }
 
+/* Headphones hidden on desktop, shown on mobile via media query */
+.headphones-mobile { display: none; }
+
+/* Torn edge — swap between desktop (dramatic) and mobile (subtle) versions */
+.torn-edge-mobile { display: none; }
+
 /* ── Case study section horizontal padding (responsive) ── */
 .cs-inner {
   padding-left: 120px;
@@ -321,9 +327,17 @@ body {
 
 /* ── Mobile: ≤768px ── */
 @media (max-width: 768px) {
+  .torn-edge-desktop { display: none !important; }
+  .torn-edge-mobile  { display: block !important; }
+
   .cs-inner {
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+  }
+
+  .case-study-nav {
+    padding-left: 60px !important;
+    padding-right: 60px !important;
   }
 
   /* Clip off-screen doodles without breaking layout */
@@ -343,28 +357,271 @@ body {
     order: -1;
     width: 100%;
     flex: 0 0 auto;
-    height: 56vw;
-    max-height: 280px;
+    height: 70vw;
+    min-height: 0 !important;
+    max-height: 500px;
+  }
+
+  .hero-panel-right video {
+    object-position: center 35% !important;
   }
 
   /* Text panel sits below, full width */
   .hero-panel-left {
     width: 100%;
-    flex: 0 0 auto;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
-    padding-top: 80px !important;
+    flex: 0 0 auto !important;
+    justify-content: flex-start !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+    padding-top: 24px !important;
     padding-bottom: 40px !important;
   }
 
-  /* Hero H1 scale-down */
-  .hero-title {
-    font-size: 36px !important;
-    line-height: 1.1 !important;
+  /* Hero eyebrow gap + font size */
+  .hero-eyebrow {
+    margin-bottom: 16px !important;
+    width: auto !important;
+  }
+  .hero-eyebrow-text {
+    font-size: 14px !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
   }
 
-  /* "What it became" 3-col grid → single column */
-  .what-it-became-grid {
-    grid-template-columns: 1fr !important;
+  /* Hero H1 */
+  .hero-title {
+    font-size: 36px !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 24px !important;
   }
+
+  /* Hide dashed divider between H1 and meta */
+  .hero-divider {
+    display: none !important;
+  }
+
+  /* Meta — 52px label aligns values at x=100 (24px padding + 52px + 24px gap) */
+  .hero-meta-label {
+    font-size: 12px !important;
+    min-width: 52px !important;
+    width: 52px !important;
+    flex-shrink: 0 !important;
+  }
+  .hero-meta-value {
+    font-size: 12px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    flex-shrink: 1 !important;
+    white-space: normal !important;
+    word-break: break-word;
+  }
+
+  /* Video intro section — no rounded corners, 40px bottom padding on mobile */
+  .video-intro-section {
+    border-radius: 0 !important;
+    padding-bottom: 40px !important;
+  }
+
+  /* Video inner wrapper — full bleed, no padding */
+  .video-intro-inner {
+    padding: 0 !important;
+  }
+
+  /* Video frame — no shadow on mobile */
+  .video-intro-frame {
+    box-shadow: none !important;
+  }
+
+  /* Film caption — tighten on mobile */
+  .video-intro-caption {
+    padding-top: 8px !important;
+    padding-bottom: 0 !important;
+  }
+  .video-intro-caption span {
+    font-size: 12px !important;
+  }
+
+  /* Headphones — mobile only, floats in the 60px gap above "The Project" */
+  .headphones-mobile {
+    display: block;
+    position: absolute;
+    top: 8px;
+    right: 24px;
+    width: 96px;
+    z-index: 10;
+    pointer-events: none;
+    animation: float 3.5s ease-in-out infinite;
+  }
+
+  /* "What it became" → horizontal snap carousel */
+  .what-it-became-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 12px !important;
+    /* Break out of cs-inner to full viewport width */
+    margin-left: -60px !important;
+    margin-right: -60px !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+    scrollbar-width: none !important;
+    padding-bottom: 4px;
+  }
+  .what-it-became-grid::-webkit-scrollbar { display: none; }
+  /* Each card (Reveal wrapper) = fixed 270px snap target */
+  .what-it-became-grid > * {
+    width: 270px !important;
+    min-width: 270px !important;
+    flex-shrink: 0 !important;
+    scroll-snap-align: start;
+  }
+
+  /* Card badge — shrink on mobile */
+  .wib-badge {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 8px !important;
+  }
+  .wib-badge-num { font-size: 16px !important; }
+
+  /* Card H4 */
+  .wib-title {
+    font-size: 16px !important;
+    line-height: 18px !important;
+  }
+
+  /* Card body */
+  .wib-body {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 160% !important;
+  }
+
+  /* Project overview section — 60px top, collapse row, hide doodle */
+  #project-overview .cs-inner { padding-top: 60px !important; }
+  .project-overview-row { flex-direction: column !important; gap: 0 !important; }
+  .project-headphones-doodle { display: none !important; }
+
+  /* "What it became" — 24px below body copy */
+  #what-it-became .cs-inner { padding-top: 24px !important; }
+
+  /* Mobile type system */
+  .cs-h2 {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 16px !important;
+  }
+  .cs-body {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* ── Phone: ≤414px ── */
+@media (max-width: 414px) {
+  .cs-inner {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .case-study-nav {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .hero-panel-right {
+    height: 60vw;
+  }
+
+  .hero-panel-left {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* Carousel breakout matches 24px content margin at phone width */
+  .what-it-became-grid {
+    margin-left: -24px !important;
+    margin-right: -24px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   Homepage mobile
+   ══════════════════════════════════════════ */
+
+/* Hidden on desktop, revealed on mobile */
+.nav-hamburger  { display: none; }
+.footer-deco    { display: none !important; }
+.career-deco    { display: none !important; }
+
+@media (max-width: 768px) {
+  /* ── Nav ── */
+  .nav-right      { display: none !important; }
+  .nav-hamburger  { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0; }
+
+  /* ── Hero collage ── */
+  .hero-section      { padding-top: 60px !important; }
+  .hero-collage      { transform: translateY(-20px); }
+  .hero-white-star   { top: 22% !important; left: 18% !important; width: 6% !important; }
+  .hero-purple-plant { width: 100px !important; }
+  .hero-cloud        { left: 0 !important; }
+  .hero-planet       { width: 20% !important; }
+
+  /* ── Hero text → LogoScroll spacing ── */
+  .hero-text-content   { padding-bottom: 20px !important; }
+  .logo-scroll-section { margin-top: 8px !important; }
+
+  /* ── Marquee — faster on mobile only ── */
+  .animate-marquee { animation-duration: 20s !important; }
+
+  /* ── Hero ── */
+  .home-hero-h1   { font-size: 36px !important; line-height: 1.2 !important; }
+  .home-hero-body { font-size: 16px !important; }
+
+  /* ── Shared homepage H2 ── */
+  .home-h2 { font-size: 24px !important; line-height: 1.2 !important; margin-bottom: 16px !important; }
+
+  /* ── Exhibition ── */
+  .ex-inner           { padding-left: 60px !important; padding-right: 60px !important; }
+  .ex-contact-circle  { display: none !important; }
+  .ex-grid            { flex-direction: column !important; gap: 40px !important; }
+  .ex-grid-col-right  { padding-top: 0 !important; }
+  .ex-card-title      { font-size: 20px !important; font-weight: 700 !important; line-height: 1.2 !important; margin-top: 16px !important; }
+  .ex-card-body       { font-size: 16px !important; }
+
+  /* ── About: bio section ── */
+  .about-inner    { padding-left: 60px !important; padding-right: 60px !important; }
+  .about-grid     { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .about-grid > * { grid-column: 1 / -1 !important; }
+  .about-photo-img { width: 100% !important; height: 300px !important; object-fit: cover; object-position: center top; }
+
+  /* ── Testimonials ── */
+  .testimonials-section   { padding-top: 40px !important; }
+  .testimonials-heading   { margin-bottom: 32px !important; }
+  .testimonial-track-wrap { padding: 20px 0 !important; }
+  .testimonial-controls   { margin-top: 20px !important; padding-bottom: 40px !important; }
+  .testimonial-card       { flex: 0 0 60% !important; }
+
+  /* ── Career ── */
+  .career-content   { padding-left: 60px !important; padding-right: 60px !important; }
+  .career-timeline  { width: 100% !important; }
+
+  /* ── Footer ── */
+  .footer-inner-body { font-size: 16px !important; }
+  .footer-links      { gap: 20px !important; flex-wrap: wrap !important; justify-content: center !important; }
+  .footer-deco       { display: none !important; }
+  .career-deco       { display: none !important; }
+}
+
+@media (max-width: 414px) {
+  .ex-inner        { padding-left: 24px !important; padding-right: 24px !important; }
+  .about-inner     { padding-left: 24px !important; padding-right: 24px !important; }
+  .career-content  { padding-left: 24px !important; padding-right: 24px !important; }
 }

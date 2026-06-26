@@ -130,46 +130,101 @@ function Divider() {
 }
 
 export default function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-8" style={{ paddingTop: '24px', paddingBottom: '24px' }}>
+    <>
+      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-8" style={{ paddingTop: '24px', paddingBottom: '24px' }}>
 
-      {/* LEFT — wordmark */}
-      <Link href="/" style={{
-        fontFamily:     'Fraunces, serif',
-        fontWeight:     600,
-        fontSize:       '15px',
-        letterSpacing:  '0.06em',
-        textTransform:  'uppercase',
-        textDecoration: 'none',
-        color:          '#ffffff',
-      }}>
-        Natalie Nicholson
-      </Link>
+        {/* LEFT — wordmark */}
+        <Link href="/" style={{
+          fontFamily:     'Fraunces, serif',
+          fontWeight:     600,
+          fontSize:       '15px',
+          letterSpacing:  '0.06em',
+          textTransform:  'uppercase',
+          textDecoration: 'none',
+          color:          '#ffffff',
+        }}>
+          Natalie Nicholson
+        </Link>
 
-      {/* RIGHT — case studies + contact + substack */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-        <CaseStudiesDropdown />
-        <Divider />
-        <NavLink href="mailto:natalienic87@gmail.com">Contact</NavLink>
-        <Divider />
-        <a
-          href="https://crankthatnat.substack.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            fontFamily:     'Fira Mono, monospace',
-            fontWeight:     500,
-            fontSize:       '13px',
-            letterSpacing:  '0.12em',
-            textTransform:  'uppercase',
-            textDecoration: 'none',
-            color:          '#D9D9D9',
-          }}
+        {/* RIGHT — desktop: case studies + contact + substack */}
+        <div className="nav-right" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          <CaseStudiesDropdown />
+          <Divider />
+          <NavLink href="mailto:natalienic87@gmail.com">Contact</NavLink>
+          <Divider />
+          <a
+            href="https://crankthatnat.substack.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily:     'Fira Mono, monospace',
+              fontWeight:     500,
+              fontSize:       '13px',
+              letterSpacing:  '0.12em',
+              textTransform:  'uppercase',
+              textDecoration: 'none',
+              color:          '#D9D9D9',
+            }}
+          >
+            The Off Hours Substack↗
+          </a>
+        </div>
+
+        {/* Mobile — hamburger */}
+        <button
+          className="nav-hamburger"
+          aria-label="Open menu"
+          onClick={() => setMenuOpen(true)}
         >
-          The Off Hours Substack↗
-        </a>
-      </div>
+          <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#ffffff' }} />
+          <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#ffffff' }} />
+          <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#ffffff' }} />
+        </button>
 
-    </nav>
+      </nav>
+
+      {/* Overlay */}
+      {menuOpen && (
+        <div onClick={() => setMenuOpen(false)} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.4)', zIndex: 998 }} />
+      )}
+
+      {/* Slide-in panel */}
+      <div style={{
+        position: 'fixed', top: 0, right: 0, bottom: 0, width: '320px',
+        backgroundColor: '#101010', zIndex: 999,
+        padding: '40px', display: 'flex', flexDirection: 'column',
+        transform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
+        transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+        boxShadow: '-8px 0 40px rgba(0,0,0,0.25)',
+      }}>
+        <button onClick={() => setMenuOpen(false)} aria-label="Close menu" style={{ alignSelf: 'flex-end', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', fontSize: '24px', lineHeight: 1, padding: 0, marginBottom: '48px' }}>✕</button>
+
+        <Link href="/" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'Fraunces, serif', fontWeight: 600, fontSize: '15px', letterSpacing: '0.06em', textTransform: 'uppercase', textDecoration: 'none', color: '#ffffff', marginBottom: '32px', display: 'block' }}>
+          Natalie Nicholson
+        </Link>
+
+        <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', margin: '0 0 20px' }}>
+          Case Studies
+        </p>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '40px' }}>
+          {caseStudies.map(({ label, href }) => (
+            <Link key={href} href={href} onClick={() => setMenuOpen(false)}
+              style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '22px', lineHeight: 1.3, color: '#ffffff', textDecoration: 'none', transition: 'color 0.15s ease' }}
+              onMouseEnter={e => e.currentTarget.style.color = '#FDB154'}
+              onMouseLeave={e => e.currentTarget.style.color = '#ffffff'}
+            >{label}</Link>
+          ))}
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <a href="mailto:natalienic87@gmail.com" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 500, fontSize: '13px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#FDB154', textDecoration: 'none' }}>Contact</a>
+          <a href="https://crankthatnat.substack.com/" target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 500, fontSize: '13px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>The Off Hours Substack↗</a>
+        </div>
+      </div>
+    </>
   );
 }

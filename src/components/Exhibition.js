@@ -66,12 +66,13 @@ function Card({ src, alt, title, body, cta, video, href }) {
       </div>
 
       <h3
-        className="font-body font-normal text-off-white"
+        className="font-body font-normal text-off-white ex-card-title"
         style={{ fontSize: '33px', lineHeight: '40px', marginTop: '24px' }}
       >
         {title}
       </h3>
       <p
+        className="ex-card-body"
         style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, marginTop: '12px', color: 'rgba(255,255,255,0.65)' }}
       >
         {body}
@@ -99,7 +100,7 @@ export default function Exhibition() {
 
   return (
     <section style={{ marginTop: '60px', paddingBottom: '120px' }}>
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <div className="ex-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
         {/* Header row */}
         <div className="flex justify-between items-start">
@@ -108,7 +109,7 @@ export default function Exhibition() {
               The Exhibition
             </p>
             <h2
-              className="font-heading font-bold text-off-white"
+              className="font-heading font-bold text-off-white home-h2"
               style={{ fontSize: '64px', lineHeight: 1.05, marginTop: '12px' }}
             >
               Selected works
@@ -118,7 +119,7 @@ export default function Exhibition() {
           {/* Dotted circle */}
           <a
             href="mailto:natalienic87@gmail.com"
-            className="relative flex items-center justify-center flex-shrink-0"
+            className="ex-contact-circle relative flex items-center justify-center flex-shrink-0"
             style={{ width: '110px', height: '110px' }}
           >
             <img
@@ -136,13 +137,13 @@ export default function Exhibition() {
         </div>
 
         {/* Staggered 2-column grid */}
-        <div className="flex mt-[40px]" style={{ gap: '40px' }}>
+        <div className="ex-grid flex mt-[40px]" style={{ gap: '40px' }}>
           <div className="flex-1 flex flex-col gap-[60px]">
             {left.map((card) => (
               <Card key={card.title} {...card} />
             ))}
           </div>
-          <div className="flex-1 flex flex-col gap-10" style={{ paddingTop: '200px' }}>
+          <div className="ex-grid-col-right flex-1 flex flex-col gap-10" style={{ paddingTop: '200px' }}>
             {right.map((card) => (
               <Card key={card.title} {...card} />
             ))}

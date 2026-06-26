@@ -26,13 +26,13 @@ export default function Footer() {
         </div>
 
         {/* Heading */}
-        <h2 className="font-heading"
+        <h2 className="font-heading home-h2"
           style={{ fontWeight: 700, fontSize: '80px', color: '#ffffff', margin: '0 0 20px', lineHeight: 1.05 }}>
           Open a new dimension
         </h2>
 
         {/* Body copy */}
-        <p style={{
+        <p className="footer-inner-body" style={{
           fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px',
           lineHeight: 1.6, color: 'rgba(255,255,255,0.75)',
           maxWidth: '640px', margin: '0 auto 48px',
@@ -41,7 +41,7 @@ export default function Footer() {
         </p>
 
         {/* Footer links */}
-        <div style={{ display: 'flex', gap: '48px', justifyContent: 'center' }}>
+        <div className="footer-links" style={{ display: 'flex', gap: '48px', justifyContent: 'center' }}>
           {footerLinks.map(({ label, href }) => (
             <a key={label} href={href}
               target={href.startsWith('http') ? '_blank' : undefined}
@@ -60,32 +60,32 @@ export default function Footer() {
 
       {/* Planet — ~100px left and below Substack link */}
       <img src="/homepage/7-footer/Planet 1.png" alt=""
-        className="animate-float-lazy"
+        className="footer-deco animate-float-lazy"
         style={{ position: 'absolute', top: '580px', left: 'calc(50% - 200px)', width: '115px', zIndex: 3, pointerEvents: 'none' }} />
 
       {/* Light purple flower — far right, above orange/red leaves */}
       <img src="/homepage/7-footer/L Purple Flower 1.png" alt=""
-        className="animate-spin-planet-reverse"
+        className="footer-deco animate-spin-planet-reverse"
         style={{ position: 'absolute', top: '580px', left: 'calc(82% + 105px)', width: '120px', zIndex: 3, pointerEvents: 'none' }} />
 
       {/* Moon — same y as planet, above right plant section */}
       <img src="/homepage/7-footer/Moon_ 1.png" alt=""
-        className="animate-float"
+        className="footer-deco animate-float"
         style={{ position: 'absolute', top: '540px', left: 'calc(68% + 50px)', width: '64px', zIndex: 3, pointerEvents: 'none' }} />
 
       {/* Diamond star — upper, right of center */}
       <img src="/homepage/7-footer/Yellow Diamond Star 2.png" alt=""
-        className="animate-pulse-star-fast"
+        className="footer-deco animate-pulse-star-fast"
         style={{ position: 'absolute', top: '540px', left: 'calc(58% + 60px)', width: '24px', zIndex: 3, pointerEvents: 'none' }} />
 
       {/* Diamond star — lower, left of center */}
       <img src="/homepage/7-footer/Yellow Diamond Star 2.png" alt=""
-        className="animate-pulse-star-slow"
+        className="footer-deco animate-pulse-star-slow"
         style={{ position: 'absolute', top: '670px', left: 'calc(72% - 230px)', width: '20px', zIndex: 3, pointerEvents: 'none' }} />
 
       {/* White star — 28px below social links, left-aligned with flower */}
       <img src="/homepage/7-footer/White Star 1.png" alt=""
-        className="animate-pulse-star"
+        className="footer-deco animate-pulse-star"
         style={{ position: 'absolute', top: '460px', left: 'calc(3% + 280px)', width: '36px', zIndex: 3, pointerEvents: 'none' }} />
 
       {/* ── Bottom zone: floating elements + botanical strip ── */}

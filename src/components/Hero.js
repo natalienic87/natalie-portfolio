@@ -23,6 +23,7 @@ const collageElements = [
     style: { bottom: 0, left: 'calc(-3% + 30px)', width: '16.2%' },
     z: 0,
     animClass: 'animate-cloud-1',
+    extraClass: 'hero-cloud',
   },
 
   // ── Mid layer ──────────────────────────────────────────────────────────────
@@ -55,6 +56,7 @@ const collageElements = [
     style: { top: '62%', left: '37%', width: '3.5%' },
     z: 16,
     animClass: 'animate-pulse-star-delay-2',
+    extraClass: 'hero-white-star',
   },
 ];
 
@@ -71,20 +73,20 @@ export default function Hero() {
   };
 
   return (
-    <section className="min-h-[620px] md:min-h-[750px] lg:min-h-[900px] flex flex-col" style={{ paddingTop: '40px' }}>
+    <section className="hero-section min-h-[620px] md:min-h-[750px] lg:min-h-[900px] flex flex-col" style={{ paddingTop: '40px' }}>
       {/* Collage — flex-1 fills remaining viewport height so doorway is never cropped */}
-      <div className="relative w-full flex-1 overflow-hidden">
+      <div className="hero-collage relative w-full flex-1 overflow-hidden">
 
         {/* Purple plant — far right, full illustration height, bleeds off right edge */}
         <img
           src="/homepage/1-hero/PURPLE PLANT 1.png"
           alt=""
-          className="absolute bottom-0 animate-plant-sway"
+          className="absolute bottom-0 animate-plant-sway hero-purple-plant"
           style={{ right: '-2%', width: 'clamp(140px, 16vw, 240px)', height: 'auto', zIndex: 20 }}
         />
 
         {/* Planet — outer div positions, inner div spins */}
-        <div className="absolute" style={{ top: '50%', left: '15%', width: '16%', transform: 'translateY(-50%)', zIndex: 5 }}>
+        <div className="absolute hero-planet" style={{ top: '50%', left: '15%', width: '16%', transform: 'translateY(-50%)', zIndex: 5 }}>
           <div className="animate-spin-planet">
             <img src="/homepage/1-hero/PLANET 1.png" alt="" className="w-full h-auto" />
           </div>
@@ -105,20 +107,20 @@ export default function Hero() {
         </div>
 
         {/* All other decorative elements */}
-        {collageElements.map(({ src, style, z, animClass }) => (
+        {collageElements.map(({ src, style, z, animClass, extraClass }) => (
           <img
             key={src}
             src={src}
             alt=""
-            className={`absolute object-contain${animClass ? ` ${animClass}` : ''}`}
+            className={`absolute object-contain${animClass ? ` ${animClass}` : ''}${extraClass ? ` ${extraClass}` : ''}`}
             style={{ ...style, zIndex: z }}
           />
         ))}
       </div>
 
       {/* Text content */}
-      <div className="text-center px-6 pt-[20px] pb-20">
-        <h1 className="font-heading font-bold leading-none tracking-normal" style={{ fontSize: '80px' }}>
+      <div className="hero-text-content text-center px-6 pt-[20px] pb-20">
+        <h1 className="font-heading font-bold leading-none tracking-normal home-hero-h1" style={{ fontSize: '80px' }}>
           {HEADING.split('').map((char, i) => (
             <span
               key={i}
@@ -137,7 +139,7 @@ export default function Hero() {
             </span>
           ))}
         </h1>
-        <p className="font-body font-normal text-body-grey text-[20px] mt-6 max-w-[828px] mx-auto leading-normal">
+        <p className="font-body font-normal text-body-grey text-[20px] mt-6 max-w-[828px] mx-auto leading-normal home-hero-body">
           Art director and designer building cinematic visual worlds, brand systems, and AI-assisted creative work.
         </p>
       </div>

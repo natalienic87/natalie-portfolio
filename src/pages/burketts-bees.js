@@ -15,7 +15,7 @@ import DashedCardCarousel  from '../components/DashedCardCarousel';
 function MetaItem({ label, value }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', gap: '24px', width: '500px' }}>
-      <span style={{
+      <span className="hero-meta-label" style={{
         fontFamily:    'Fira Mono, monospace',
         fontWeight:    400,
         fontSize:      '11px',
@@ -26,7 +26,7 @@ function MetaItem({ label, value }) {
         minWidth:      '72px',
         flexShrink:    0,
       }}>{label}</span>
-      <span style={{
+      <span className="hero-meta-value" style={{
         fontFamily:  'Fira Mono, monospace',
         fontWeight:  400,
         fontSize:    '14px',
@@ -959,7 +959,7 @@ export default function BurkettsBees() {
 
   return (
     <DoodleEditContext.Provider value={{ enabled: doodleEditEnabled, positions: doodlePositions, updatePosition: updateDoodlePosition, deletedDoodles, deleteDoodle }}>
-    <main style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
+    <main className="main-clip-mobile" style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
       <Cursor />
       <CaseStudyNav />
 
@@ -982,12 +982,12 @@ export default function BurkettsBees() {
       <StickyHero backgroundColor="#FFFBF8">
 
         {/* Left — 50%, stacked content */}
-        <div style={{
+        <div className="hero-panel-left" style={{
           flex:           '0 0 50%',
           display:        'flex',
           flexDirection:  'column',
           justifyContent: 'center',
-          paddingLeft:    'max(120px, calc((100vw - 1440px) / 2 + 120px))',
+          paddingLeft:    '120px',
           paddingRight:   '120px',
           paddingTop:     '80px',
           paddingBottom:  '80px',
@@ -998,12 +998,12 @@ export default function BurkettsBees() {
         }}>
 
           {/* Eyebrow */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', width: '500px', marginBottom: '50px' }}>
+          <div className="hero-eyebrow" style={{ display: 'flex', alignItems: 'center', gap: '5px', width: '500px', marginBottom: '50px' }}>
             <style>{`@keyframes slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
             <svg width="22" height="22" viewBox="0 0 16 16" fill="#101010" style={{ flexShrink: 0, animation: 'slow-spin 12s linear infinite', transformOrigin: 'center' }}>
               <path d="M8,1 L9.2,5.3 L13.5,3.7 L10.9,7.3 L14.8,9.6 L10.4,9.9 L10.9,14.4 L8,11 L5.1,14.4 L5.6,9.9 L1.2,9.6 L5.1,7.3 L2.5,3.7 L6.8,5.3 Z"/>
             </svg>
-            <span style={{
+            <span className="hero-eyebrow-text" style={{
               fontFamily:    'Fira Mono, monospace',
               fontWeight:    400,
               fontSize:      '18px',
@@ -1013,7 +1013,7 @@ export default function BurkettsBees() {
             }}>Case Study</span>
           </div>
 
-          <h1 className="font-heading" style={{
+          <h1 className="font-heading hero-title" style={{
             fontWeight: 700,
             fontSize:   '80px',
             lineHeight: '80px',
@@ -1024,12 +1024,12 @@ export default function BurkettsBees() {
           </h1>
 
           {/* Dashed divider */}
-          <svg width="500" height="2" style={{ display: 'block', margin: '32px 0' }} preserveAspectRatio="none">
+          <svg className="hero-divider" width="500" height="2" style={{ display: 'block', margin: '32px 0' }} preserveAspectRatio="none">
             <line x1="0" y1="1" x2="100%" y2="1" stroke="rgba(16,16,16,0.25)" strokeWidth="2" strokeDasharray="4 4" />
           </svg>
 
           {/* Meta */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
+          <div className="hero-meta-container" style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
             <MetaItem label="Year"   value="2024" />
             <MetaItem label="Role"   value="Creative Director & AI Strategist" />
             <MetaItem label="Medium" value="Branding, AI Integration, Education" />
@@ -1037,7 +1037,7 @@ export default function BurkettsBees() {
         </div>
 
         {/* Right — 50%, full-height looping video */}
-        <div style={{ flex: '0 0 50%', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
+        <div className="hero-panel-right" style={{ flex: '0 0 50%', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
           <video
             autoPlay muted loop playsInline
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
@@ -1049,21 +1049,32 @@ export default function BurkettsBees() {
       </StickyHero>
 
       {/* ── MediaFrame: Product Shot ── */}
-      <section style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '80px' }}>
+      <section className="video-intro-section" style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '80px' }}>
 
-        <div style={{ paddingTop: '120px', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
+        <div className="video-intro-inner" style={{ paddingTop: '120px', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
           <Reveal>
             <MediaFrameCarousel />
           </Reveal>
         </div>
 
-        {/* Torn paper edge — #FFFBF8 (next section) tears up into this section */}
+        {/* Torn paper edge — desktop (full drama) */}
         <svg
+          className="torn-edge-desktop"
           viewBox="0 0 1440 50"
           preserveAspectRatio="none"
           style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}
         >
           <path d="M0,50 L0,30 L60,8 L120,40 L175,12 L230,42 L285,5 L340,35 L395,18 L450,44 L505,8 L560,36 L620,20 L680,45 L740,5 L800,32 L855,12 L910,42 L965,18 L1020,44 L1080,8 L1135,38 L1190,15 L1250,42 L1310,10 L1370,36 L1440,22 L1440,50 Z" fill="#FFFBF8" />
+        </svg>
+
+        {/* Torn paper edge — mobile (subtle, shallow peaks) */}
+        <svg
+          className="torn-edge-mobile"
+          viewBox="0 0 1440 50"
+          preserveAspectRatio="none"
+          style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'none', zIndex: 3, pointerEvents: 'none' }}
+        >
+          <path d="M0,50 L0,42 L60,40 L120,45 L175,40 L230,46 L285,39 L340,44 L395,41 L450,47 L505,39 L560,44 L620,41 L680,47 L740,38 L800,43 L855,40 L910,45 L965,41 L1020,46 L1080,39 L1135,44 L1190,40 L1250,45 L1310,39 L1370,43 L1440,41 L1440,50 Z" fill="#FFFBF8" />
         </svg>
 
       </section>
@@ -1074,12 +1085,12 @@ export default function BurkettsBees() {
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
         style={{ paddingTop: '80px', paddingBottom: '0px' }}
       >
-        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
+        <div className="project-overview-row" style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
           {/* Left: heading + body copy — 8 of 12 columns */}
           <div style={{ flex: '0 0 66.66%', minWidth: 0 }}>
             <Reveal delay={0}>
-              <h2 className="font-heading" style={{
+              <h2 className="font-heading cs-h2" style={{
                 fontWeight:  700,
                 fontSize:    '64px',
                 lineHeight:  1.05,
@@ -1088,7 +1099,7 @@ export default function BurkettsBees() {
               }}>The project</h2>
             </Reveal>
             <Reveal delay={100}>
-              <p style={{
+              <p className="cs-body" style={{
                 fontFamily: 'Fraunces, serif',
                 fontWeight: 300,
                 fontSize:   '20px',
@@ -1105,7 +1116,7 @@ export default function BurkettsBees() {
           </div>
 
           {/* Right: bee doodle */}
-          <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <div className="project-headphones-doodle" style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <img
               src="/ELEMENTS/bumble-bee@2x.png"
               alt=""
@@ -1133,7 +1144,7 @@ export default function BurkettsBees() {
           }}>What it became</h3>
         </Reveal>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+        <div className="what-it-became-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
           {[
             {
               num:   1,
@@ -1162,7 +1173,7 @@ export default function BurkettsBees() {
                 height:          '100%',
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-                  <div style={{
+                  <div className="wib-badge" style={{
                     flexShrink:      0,
                     width:           '60px',
                     height:          '60px',
@@ -1172,9 +1183,9 @@ export default function BurkettsBees() {
                     alignItems:      'center',
                     justifyContent:  'center',
                   }}>
-                    <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{num}</span>
+                    <span className="wib-badge-num" style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{num}</span>
                   </div>
-                  <h4 style={{
+                  <h4 className="wib-title" style={{
                     fontFamily: 'Fraunces, serif',
                     fontWeight: 700,
                     fontSize:   '24px',
@@ -1183,7 +1194,7 @@ export default function BurkettsBees() {
                     margin:     0,
                   }}>{title}</h4>
                 </div>
-                <p style={{
+                <p className="wib-body" style={{
                   fontFamily: 'Fraunces, serif',
                   fontWeight: 300,
                   fontSize:   '16px',

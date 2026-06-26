@@ -14,7 +14,7 @@ export default function CaseStudyNav() {
 
   return (
     <>
-      <nav style={{
+      <nav className="case-study-nav" style={{
         position:       'absolute',
         top:            0,
         left:           0,

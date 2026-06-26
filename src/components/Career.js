@@ -175,7 +175,7 @@ export default function Career() {
         style={{ position: 'absolute', bottom: '80px', left: '-30px', width: '150px', opacity: 0.45, zIndex: 1 }} />
 
       {/* ── Content ── */}
-      <div style={{ position: 'relative', zIndex: 2 }}>
+      <div className="career-content" style={{ position: 'relative', zIndex: 2 }}>
 
         {/* Header — full width, centered */}
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
@@ -183,7 +183,7 @@ export default function Career() {
             style={{ fontWeight: 700, fontSize: '18px', letterSpacing: '0.3em', color: '#E35038', textTransform: 'uppercase', marginBottom: '12px' }}>
             Career Path
           </p>
-          <h2 className="font-heading"
+          <h2 className="font-heading home-h2"
             style={{ fontWeight: 700, fontSize: '80px', color: '#ffffff', lineHeight: 1, margin: 0 }}>
             The journey so far
           </h2>
@@ -193,14 +193,16 @@ export default function Career() {
         </div>
 
         {/* Timeline + cards — 820px centered, line overlays all cards */}
-        <div style={{ width: '820px', margin: '0 auto', position: 'relative' }}>
+        <div className="career-timeline" style={{ width: '820px', margin: '0 auto', position: 'relative' }}>
 
           {/* Saturn — nestled top-left of first card, peeking behind it */}
           <img src="/homepage/6-careerpath/d-Yellow Satrun 1.png" alt=""
+            className="career-deco"
             style={{ position: 'absolute', left: '-130px', top: '-94px', width: '200px', zIndex: 0, pointerEvents: 'none' }} />
 
           {/* Spiral — nestled bottom-right of last card, peeking behind it */}
           <img src="/homepage/6-careerpath/d-Spiral.png" alt=""
+            className="career-deco"
             style={{ position: 'absolute', right: '-80px', bottom: '-50px', width: '108px', zIndex: 0, pointerEvents: 'none' }} />
 
           {/* Single vertical dotted line — runs over all cards, pointer-events none so clicks pass through */}

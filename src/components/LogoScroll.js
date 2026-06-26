@@ -18,7 +18,7 @@ const GAP = 80;
 export default function LogoScroll() {
   return (
     <section
-      className="mt-[60px] overflow-hidden"
+      className="logo-scroll-section mt-[60px] overflow-hidden"
       style={{
         backgroundImage: "url('/homepage/2-logos/1-background-paper.png')",
         backgroundSize: 'cover',

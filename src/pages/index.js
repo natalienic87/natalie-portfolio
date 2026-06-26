@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-background text-off-white">
+    <main className="main-clip-mobile relative min-h-screen bg-background text-off-white" style={{ overflowX: 'clip' }}>
       <Cursor />
       <Nav />
       <Hero />

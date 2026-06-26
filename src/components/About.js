@@ -124,7 +124,7 @@ function Carousel({ cards }) {
       onMouseUp={onDragEnd} onMouseLeave={onDragEnd}
       style={{ cursor: dragging ? 'grabbing' : 'grab', userSelect: 'none' }}
     >
-      <div style={{ overflowX: 'clip', padding: '40px 0' }}>
+      <div className="testimonial-track-wrap" style={{ overflowX: 'clip', padding: '40px 0' }}>
         <div ref={trackRef} style={{ display: 'flex', gap: `${GAP}px`, willChange: 'transform' }}>
           {deck.map((src, i) => (
             <div key={i} className="testimonial-card" style={{ flex: `0 0 ${CARD_W_PCT}%`, minWidth: 0 }}>
@@ -134,7 +134,7 @@ function Carousel({ cards }) {
           ))}
         </div>
       </div>
-      <div className="flex items-center justify-center"
+      <div className="testimonial-controls flex items-center justify-center"
         style={{ gap: '16px', marginTop: '40px', paddingBottom: '80px' }}
         onMouseDown={e => e.stopPropagation()}
       >
@@ -159,22 +159,28 @@ export default function About() {
       {/* ── Section 1: Fun ideas, made functional ── */}
       <section style={{ position: 'relative', backgroundImage: "url('/Medium-beige-darker-bg2.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', paddingTop: '100px', paddingBottom: '100px', zIndex: 2 }}>
 
-        {/* Top torn edge — dark bleeds into beige */}
-        <svg width="100%" height="50" viewBox="0 0 1440 50" preserveAspectRatio="none"
+        {/* Top torn edge — desktop (full drama) */}
+        <svg className="torn-edge-desktop" width="100%" height="50" viewBox="0 0 1440 50" preserveAspectRatio="none"
           style={{ position: 'absolute', top: 0, left: 0, display: 'block' }}>
           <path d="M0,0 L1440,0 L1440,22 L1370,36 L1310,10 L1250,42 L1190,15 L1135,38 L1080,8 L1020,44 L965,18 L910,42 L855,12 L800,32 L740,5 L680,45 L620,20 L560,36 L505,8 L450,44 L395,18 L340,35 L285,5 L230,42 L175,12 L120,40 L60,8 L0,30 Z" fill="#101010" />
         </svg>
+        {/* Top torn edge — mobile (subtle) */}
+        <svg className="torn-edge-mobile" width="100%" height="50" viewBox="0 0 1440 50" preserveAspectRatio="none"
+          style={{ position: 'absolute', top: 0, left: 0, display: 'none' }}>
+          <path d="M0,0 L1440,0 L1440,37 L1370,41 L1310,34 L1250,43 L1190,35 L1135,42 L1080,33 L1020,44 L965,36 L910,43 L855,34 L800,40 L740,32 L680,44 L620,37 L560,41 L505,33 L450,44 L395,36 L340,41 L285,32 L230,43 L175,34 L120,43 L60,33 L0,40 Z" fill="#101010" />
+        </svg>
 
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+        <div className="about-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
           {/* 12-col grid: image left, text right */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'center' }}>
+          <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'center' }}>
 
             {/* Left: headshot */}
             <div style={{ gridColumn: '1 / 7' }}>
               <img
                 src="/homepage/4-about/2-headshot.jpg"
                 alt="Natalie Nicholson"
+                className="about-photo-img"
                 style={{ width: '520px', height: '650px', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
               />
             </div>
@@ -192,18 +198,18 @@ export default function About() {
                 The &ldquo;Human in the Loop&rdquo;
               </p>
 
-              <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 28px' }}>
+              <h2 className="font-heading home-h2" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 28px' }}>
                 Fun ideas, made functional
               </h2>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+                <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                   I&apos;m a Senior Art Director and designer with a background in brand systems, campaign work, visual storytelling, and AI-assisted creative production.
                 </p>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+                <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                   I like the part of a project where the idea is still weird, and someone needs to turn the fog into a direction people can actually build from.
                 </p>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+                <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                   My work blends creative direction, design systems, writing, image-making, and generative tools. The tools change fast but the job stays pretty consistent: make smart decisions, protect the idea, and keep the work from looking like everyone else&apos;s.
                 </p>
               </div>
@@ -218,26 +224,31 @@ export default function About() {
 
         </div>
 
-        {/* Bottom torn edge — beige into dark below */}
-        <svg width="100%" height="50" viewBox="0 0 1440 50" preserveAspectRatio="none"
+        {/* Bottom torn edge — desktop (full drama) */}
+        <svg className="torn-edge-desktop" width="100%" height="50" viewBox="0 0 1440 50" preserveAspectRatio="none"
           style={{ position: 'absolute', bottom: 0, left: 0, display: 'block' }}>
           <path d="M0,50 L0,30 L60,8 L120,40 L175,12 L230,42 L285,5 L340,35 L395,18 L450,44 L505,8 L560,36 L620,20 L680,45 L740,5 L800,32 L855,12 L910,42 L965,18 L1020,44 L1080,8 L1135,38 L1190,15 L1250,42 L1310,10 L1370,36 L1440,22 L1440,50 Z" fill="#68512F" />
+        </svg>
+        {/* Bottom torn edge — mobile (subtle) */}
+        <svg className="torn-edge-mobile" width="100%" height="50" viewBox="0 0 1440 50" preserveAspectRatio="none"
+          style={{ position: 'absolute', bottom: 0, left: 0, display: 'none' }}>
+          <path d="M0,50 L0,42 L60,40 L120,45 L175,40 L230,46 L285,39 L340,44 L395,41 L450,47 L505,39 L560,44 L620,41 L680,47 L740,38 L800,43 L855,40 L910,45 L965,41 L1020,46 L1080,39 L1135,44 L1190,40 L1250,45 L1310,39 L1370,43 L1440,41 L1440,50 Z" fill="#68512F" />
         </svg>
 
       </section>
 
       {/* ── Section 2: Testimonials ── */}
-      <section style={{ backgroundColor: '#68512F', paddingTop: '80px' }}>
+      <section className="testimonials-section" style={{ backgroundColor: '#68512F', paddingTop: '80px' }}>
 
         {/* Eyebrow + heading */}
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+        <div className="testimonials-heading" style={{ textAlign: 'center', marginBottom: '60px' }}>
           <p style={{
             fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px',
             lineHeight: 1.2, color: '#FDB154', margin: '0 0 16px',
           }}>
             Kind words on LinkedIn &amp; Substack
           </p>
-          <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#ffffff', margin: 0 }}>
+          <h2 className="font-heading home-h2" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#ffffff', margin: 0 }}>
             Trusted by creative leads and<br />fast-moving teams
           </h2>
         </div>

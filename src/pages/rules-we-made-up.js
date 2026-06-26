@@ -1752,7 +1752,7 @@ export default function RulesWeMadeUp() {
 
   return (
     <DoodleEditContext.Provider value={{ enabled: doodleEditEnabled, positions: doodlePositions, updatePosition: updateDoodlePosition, deletedDoodles, deleteDoodle }}>
-    <main style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
+    <main className="main-clip-mobile" style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
       <Cursor />
       <CaseStudyNav />
 
@@ -1778,12 +1778,12 @@ export default function RulesWeMadeUp() {
 
 
         {/* Left — 50%, stacked content */}
-        <div style={{
+        <div className="hero-panel-left" style={{
           flex:           '0 0 50%',
           display:        'flex',
           flexDirection:  'column',
           justifyContent: 'center',
-          paddingLeft:    'max(120px, calc((100vw - 1440px) / 2 + 120px))',
+          paddingLeft:    '120px',
           paddingRight:   '120px',
           paddingTop:     '80px',
           paddingBottom:  '80px',
@@ -1807,7 +1807,7 @@ export default function RulesWeMadeUp() {
             }}>Case Study</span>
           </div>
 
-          <h1 className="font-heading" style={{
+          <h1 className="font-heading hero-title" style={{
             fontWeight:  700,
             fontSize:    '80px',
             lineHeight:  '80px',
@@ -1831,7 +1831,7 @@ export default function RulesWeMadeUp() {
         </div>
 
         {/* Right — 50%, full-height image */}
-        <div style={{ flex: '0 0 50%', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
+        <div className="hero-panel-right" style={{ flex: '0 0 50%', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
           <video
             autoPlay muted loop playsInline
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', cursor: 'default' }}
@@ -2006,7 +2006,7 @@ export default function RulesWeMadeUp() {
           }}>What it became</h3>
         </Reveal>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+        <div className="what-it-became-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
           {[
             {
               num:   1,

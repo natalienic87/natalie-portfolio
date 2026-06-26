@@ -10,7 +10,7 @@
  */
 export default function StickyHero({ children, backgroundColor = '#FFFBF8', minHeight = 'max(700px, 75vh)', maxHeight = 'max(700px, 75vh)' }) {
   return (
-    <section style={{
+    <section className="sticky-hero" style={{
       display:         'flex',
       position:        'sticky',
       top:             0,

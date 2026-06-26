@@ -312,3 +312,59 @@ body {
   16.68%  { opacity: 0; }
   100%    { opacity: 0; }
 }
+
+/* ── Case study section horizontal padding (responsive) ── */
+.cs-inner {
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+/* ── Mobile: ≤768px ── */
+@media (max-width: 768px) {
+  .cs-inner {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* Clip off-screen doodles without breaking layout */
+  .main-clip-mobile {
+    overflow-x: clip;
+  }
+
+  .sticky-hero {
+    flex-direction: column;
+    position: relative !important;
+    min-height: auto !important;
+    max-height: none !important;
+  }
+
+  /* Video panel floats to top */
+  .hero-panel-right {
+    order: -1;
+    width: 100%;
+    flex: 0 0 auto;
+    height: 56vw;
+    max-height: 280px;
+  }
+
+  /* Text panel sits below, full width */
+  .hero-panel-left {
+    width: 100%;
+    flex: 0 0 auto;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    padding-top: 80px !important;
+    padding-bottom: 40px !important;
+  }
+
+  /* Hero H1 scale-down */
+  .hero-title {
+    font-size: 36px !important;
+    line-height: 1.1 !important;
+  }
+
+  /* "What it became" 3-col grid → single column */
+  .what-it-became-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -226,6 +226,17 @@ body {
   animation: marquee 35s linear infinite;
 }
 
+@keyframes pencil-write {
+  0%, 100% { transform: rotate(75deg); }
+  35%       { transform: rotate(65deg); }
+  70%       { transform: rotate(80deg); }
+}
+.animate-pencil-write {
+  animation: pencil-write 2.8s ease-in-out infinite;
+  transform-origin: top center;
+  display: block;
+}
+
 @keyframes wiggle {
   0%,100% { transform: rotate(0deg); }
   20%      { transform: rotate(-4deg); }

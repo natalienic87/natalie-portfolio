@@ -22,7 +22,7 @@ export default function Footer() {
 
         {/* Heading */}
         <h2 className="font-heading"
-          style={{ fontWeight: 500, fontSize: '80px', color: '#ffffff', margin: '0 0 20px', lineHeight: 1.05 }}>
+          style={{ fontWeight: 700, fontSize: '80px', color: '#ffffff', margin: '0 0 20px', lineHeight: 1.05 }}>
           Open a new dimension
         </h2>
 
@@ -36,8 +36,8 @@ export default function Footer() {
 
         {/* CTA buttons */}
         <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginBottom: '48px' }}>
-          <Button variant="primary" href="#">View Exhibition</Button>
-          <Button variant="dashed-outline" href="#">Contact Me</Button>
+          <Button variant="primary" href="https://crankthatnat.substack.com/" target="_blank" rel="noopener noreferrer">Subscribe to my Substack</Button>
+          <Button variant="dashed-outline" href="mailto:natalienic87@gmail.com">Contact Me</Button>
         </div>
 
         {/* Social links */}

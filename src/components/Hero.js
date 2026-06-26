@@ -71,7 +71,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="min-h-[900px] flex flex-col" style={{ paddingTop: '40px' }}>
+    <section className="min-h-[620px] md:min-h-[750px] lg:min-h-[900px] flex flex-col" style={{ paddingTop: '40px' }}>
       {/* Collage — flex-1 fills remaining viewport height so doorway is never cropped */}
       <div className="relative w-full flex-1 overflow-hidden">
 
@@ -80,7 +80,7 @@ export default function Hero() {
           src="/homepage/1-hero/PURPLE PLANT 1.png"
           alt=""
           className="absolute bottom-0 animate-plant-sway"
-          style={{ right: '-2%', height: '54.4%', width: 'auto', zIndex: 20 }}
+          style={{ right: '-2%', width: 'clamp(140px, 16vw, 240px)', height: 'auto', zIndex: 20 }}
         />
 
         {/* Planet — outer div positions, inner div spins */}
@@ -93,7 +93,7 @@ export default function Hero() {
         {/* Doorway + figure — outer div positions, inner div floats */}
         <div
           className="absolute bottom-0 left-1/2 -translate-x-1/2"
-          style={{ zIndex: 15, width: '25%' }}
+          style={{ zIndex: 15, width: 'clamp(220px, 25vw, 380px)' }}
         >
           <div className="animate-float">
             <img

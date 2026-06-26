@@ -1375,7 +1375,7 @@ function SceneCreation() {
           fontSize:   '20px',
           lineHeight: 1.6,
           color:      '#404040',
-          maxWidth:   '540px',
+          maxWidth:   '590px',
           margin:     '0 auto 40px',
         }}>
           I started developing my scenes according to my storyboard. Each scene had to feel
@@ -1399,7 +1399,7 @@ function SceneCreation() {
                 key={i}
                 src={src}
                 alt={`Scene ${i + 1}`}
-                style={{ width: '100%', flexShrink: 0, display: 'block', objectFit: 'cover', height: '480px' }}
+                style={{ width: '100%', flexShrink: 0, display: 'block', objectFit: 'cover', aspectRatio: '16 / 9' }}
               />
             ))}
           </div>
@@ -1864,9 +1864,9 @@ export default function RulesWeMadeUp() {
 
           {/* Meta */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
-            <MetaItem label="Year"   value="2020 – 2024" />
-            <MetaItem label="Role"   value="Sr. Designer & Art Director" />
-            <MetaItem label="Medium" value="Omnichannel Campaigns" />
+            <MetaItem label="Year"   value="2025" />
+            <MetaItem label="Role"   value="Director, Writer, Art Director" />
+            <MetaItem label="Medium" value="AI-assisted animation, music, character design, visual storytelling" />
           </div>
         </div>
 

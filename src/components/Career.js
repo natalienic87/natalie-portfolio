@@ -184,7 +184,7 @@ export default function Career() {
             Career Path
           </p>
           <h2 className="font-heading"
-            style={{ fontWeight: 500, fontSize: '80px', color: '#ffffff', lineHeight: 1, margin: 0 }}>
+            style={{ fontWeight: 700, fontSize: '80px', color: '#ffffff', lineHeight: 1, margin: 0 }}>
             The journey so far
           </h2>
           <div style={{ marginTop: '16px' }}>

@@ -403,9 +403,9 @@ export default function AddRefresh() {
 
           {/* Meta */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
-            <MetaItem label="Year"   value="2020 – 2024" />
+            <MetaItem label="Year"   value="2025" />
             <MetaItem label="Role"   value="Sr. Designer & Art Director" />
-            <MetaItem label="Medium" value="Omnichannel Campaigns" />
+            <MetaItem label="Medium" value="Brand Identity, Visual Systems, Web" />
           </div>
         </div>
 
@@ -609,7 +609,8 @@ export default function AddRefresh() {
                 <img
                   src="/ELEMENTS/Pencil@2x.png"
                   alt=""
-                  style={{ width: '60px', display: 'block', transform: 'rotate(75deg)', transformOrigin: 'top center' }}
+                  className="animate-pencil-write"
+                  style={{ width: '60px' }}
                 />
               </Reveal>
             </div>
@@ -934,24 +935,23 @@ export default function AddRefresh() {
           </p>
         </Reveal>
 
-        <Reveal style={{ width: '1120px', marginLeft: 'auto', marginRight: 'auto' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {/* Top row: full-width collage, 1120×580 */}
-            <div style={{ height: '580px', overflow: 'hidden', borderRadius: '20px' }}>
+        <Reveal>
+          <div style={{ display: 'flex', gap: '16px', height: '620px' }}>
+            {/* Left: tall collage 787px */}
+            <div style={{ flex: '0 0 787px', overflow: 'hidden' }}>
               <img src="/add-refresh/8-working-sytem/8_ws-grid-collage1.jpg" alt=""
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
-            {/* Bottom row: 360 | 455 | 266 */}
-            <div style={{ display: 'flex', gap: '16px' }}>
-              <div style={{ flex: '0 0 360px', height: '324px', overflow: 'hidden', borderRadius: '20px' }}>
+            {/* Right: two stacked images 384px */}
+            <div style={{ flex: '0 0 384px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ flex: 1, overflow: 'hidden' }}>
                 <img src="/add-refresh/8-working-sytem/8_ws-grid-collage2-steve.png" alt=""
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
-              <div style={{ flex: '0 0 455px', height: '324px', overflow: 'hidden', borderRadius: '20px' }}>
+              <div style={{ flex: 1, overflow: 'hidden' }}>
                 <img src="/add-refresh/8-working-sytem/8_ws-grid-shapes.png" alt=""
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               </div>
-              <div style={{ flex: '0 0 266px', height: '324px', overflow: 'hidden', borderRadius: '20px', backgroundColor: '#EDE8E2' }} />
             </div>
           </div>
         </Reveal>
@@ -1009,16 +1009,16 @@ export default function AddRefresh() {
           <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 24px' }}>
             Totes, apparel, and swag
           </p>
-          <div style={{ border: '1.5px solid #c8c8c8', overflow: 'hidden' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <img src="/add-refresh/8-working-sytem/8_ws-totes.jpg" alt=""
-              style={{ width: '100%', display: 'block', borderBottom: '1.5px solid #c8c8c8' }} />
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+              style={{ width: '100%', display: 'block' }} />
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <img src="/add-refresh/8-working-sytem/8_ws-waterbottle.png" alt=""
-                style={{ width: '100%', display: 'block', borderRight: '1.5px solid #c8c8c8' }} />
+                style={{ width: '386px', display: 'block' }} />
               <img src="/add-refresh/8-working-sytem/8_ws-sweatshirt.jpg" alt=""
-                style={{ width: '100%', display: 'block', borderRight: '1.5px solid #c8c8c8' }} />
+                style={{ width: '453px', display: 'block' }} />
               <img src="/add-refresh/8-working-sytem/8_ws-bs-mug.png" alt=""
-                style={{ width: '100%', display: 'block' }} />
+                style={{ width: '283px', display: 'block' }} />
             </div>
           </div>
         </Reveal>
@@ -1054,7 +1054,7 @@ export default function AddRefresh() {
         </svg>
 
         <Reveal>
-          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+          <div style={{ textAlign: 'center', maxWidth: '842px', margin: '0 auto' }}>
             <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 24px' }}>
               Carrying the system to create a brand new website
             </h2>

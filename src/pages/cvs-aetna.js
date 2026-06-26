@@ -251,10 +251,105 @@ function BeyondCarousel({ slides }) {
 }
 
 // ── Page ─────────────────────────────────────────────────────────────────────
+function RequestAccessWall() {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  return (
+    <div style={{
+      position:        'fixed',
+      inset:           0,
+      zIndex:          9999,
+      backgroundColor: 'rgba(16,16,16,0.72)',
+      backdropFilter:  'blur(4px)',
+      display:         'flex',
+      alignItems:      'center',
+      justifyContent:  'center',
+      padding:         '20px',
+    }}>
+      <div style={{
+        backgroundColor: '#FFFBF8',
+        borderRadius:    '20px',
+        padding:         '56px 48px',
+        maxWidth:        '480px',
+        width:           '100%',
+        textAlign:       'center',
+        boxShadow:       '0 32px 80px rgba(0,0,0,0.35)',
+      }}>
+        <h2 style={{
+          fontFamily: 'Fraunces, serif',
+          fontWeight: 700,
+          fontSize:   '33px',
+          lineHeight: 1.2,
+          color:      '#101010',
+          margin:     '0 0 20px',
+        }}>
+          This work is protected per agency policy.
+        </h2>
+        <p style={{
+          fontFamily: 'Poppins, sans-serif',
+          fontWeight: 400,
+          fontSize:   '16px',
+          lineHeight: 1.7,
+          color:      '#404040',
+          margin:     '0 0 36px',
+        }}>
+          Five years of omnichannel campaigns, brand systems, and platform work I&apos;m happy to walk you through directly.
+        </p>
+        <a
+          href="mailto:natalienic87@gmail.com"
+          style={{
+            display:         'inline-block',
+            backgroundColor: '#E35038',
+            color:           '#ffffff',
+            fontFamily:      'Poppins, sans-serif',
+            fontWeight:      600,
+            fontSize:        '15px',
+            letterSpacing:   '0.03em',
+            padding:         '14px 32px',
+            borderRadius:    '8px',
+            textDecoration:  'none',
+            marginBottom:    '20px',
+          }}
+        >
+          Request Access →
+        </a>
+        <p style={{
+          fontFamily: 'Fira Mono, monospace',
+          fontWeight: 400,
+          fontSize:   '13px',
+          lineHeight: 1.5,
+          color:      '#888888',
+          margin:     '0 0 28px',
+          userSelect: 'all',
+        }}>
+          natalienic87@gmail.com
+        </p>
+        <Link href="/" style={{
+          fontFamily:     'Fira Mono, monospace',
+          fontWeight:     400,
+          fontSize:       '13px',
+          color:          '#101010',
+          textDecoration: 'none',
+          opacity:        0.5,
+          display:        'inline-block',
+        }}>
+          ← Back to home
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 export default function CvsAetna() {
   return (
-    // NO overflow on <main> — required for StickyHero position:sticky to work
-    <main style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
+    <>
+      <RequestAccessWall />
+      {/* Page content — blurred and non-interactive behind the wall */}
+      <div style={{ filter: 'blur(8px)', pointerEvents: 'none', userSelect: 'none', overflow: 'hidden' }}>
+      <main style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
       <style>{`
         @keyframes cvs-cycle {
           0%     { opacity: 1; }
@@ -1029,5 +1124,7 @@ export default function CvsAetna() {
 
       <Footer />
     </main>
+      </div>
+    </>
   );
 }

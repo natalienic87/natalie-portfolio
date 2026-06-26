@@ -21,7 +21,7 @@ function CaseStudyNav() {
       display:        'flex',
       alignItems:     'center',
       justifyContent: 'space-between',
-      padding:        '20px 32px',
+      padding:        '20px 120px',
     }}>
       {/* ← HOME */}
       <Link
@@ -51,13 +51,13 @@ function CaseStudyNav() {
 
       {/* Hamburger */}
       <button aria-label="Open menu" style={{
-        display:       'flex',
-        flexDirection: 'column',
-        gap:           '5px',
-        background:    'none',
-        border:        'none',
-        cursor:        'pointer',
-        padding:       0,
+        display:        'flex',
+        flexDirection:  'column',
+        gap:            '5px',
+        background:     'none',
+        border:         'none',
+        cursor:         'pointer',
+        padding:        0,
       }}>
         <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#101010' }} />
         <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#101010' }} />
@@ -670,7 +670,7 @@ function ProjectPurpose() {
   );
 
   return (
-    <CaseStudySection id="project-purpose" style={{ paddingTop: '80px', paddingBottom: '80px' }} doodle={undefined}>
+    <CaseStudySection id="project-purpose" style={{ paddingTop: '80px', paddingBottom: '120px' }} doodle={undefined}>
       <div ref={contentRef} style={{
         display: 'flex', gap: '60px', alignItems: 'center',
         transform: 'scale(0.96)', opacity: 0,
@@ -946,7 +946,7 @@ function WorkshopCarousel() {
 
   return (
     <>
-      <CaseStudyFullBleed id="workshops" background="#FFFBF8" style={{ paddingTop: '120px', paddingBottom: '48px', textAlign: 'center' }}>
+      <CaseStudyFullBleed id="workshops" background="#FFFBF8" style={{ paddingTop: '80px', paddingBottom: '120px', textAlign: 'center' }}>
         <Reveal>
           <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 16px' }}>
             Monthly workshops &amp; discussions
@@ -961,7 +961,7 @@ function WorkshopCarousel() {
 
       {/* Draggable paginated card carousel */}
       <div style={{ backgroundColor: '#FFFBF8', paddingBottom: '80px', position: 'relative', zIndex: 2 }}>
-        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', position: 'relative' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', position: 'relative' }}>
 
           <button onClick={() => setPage(p => Math.max(0, p - 1))} aria-label="Previous"
             style={{ ...arrowStyle(page === 0), left: '28px' }}>←</button>
@@ -1186,8 +1186,8 @@ export default function BurkettsBees() {
           display:        'flex',
           flexDirection:  'column',
           justifyContent: 'center',
-          paddingLeft:    '80px',
-          paddingRight:   '80px',
+          paddingLeft:    'max(120px, calc((100vw - 1440px) / 2 + 120px))',
+          paddingRight:   '120px',
           paddingTop:     '80px',
           paddingBottom:  '80px',
           boxSizing:      'border-box',
@@ -1214,8 +1214,8 @@ export default function BurkettsBees() {
 
           <h1 className="font-heading" style={{
             fontWeight: 700,
-            fontSize:   '90px',
-            lineHeight: '90px',
+            fontSize:   '80px',
+            lineHeight: '80px',
             color:      '#101010',
             margin:     '0 0 28px',
           }}>
@@ -1250,7 +1250,7 @@ export default function BurkettsBees() {
       {/* ── MediaFrame: Product Shot ── */}
       <section style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '80px' }}>
 
-        <div style={{ padding: '120px 80px 80px', maxWidth: '1120px', margin: '0 auto', boxSizing: 'border-box' }}>
+        <div style={{ paddingTop: '120px', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
           <Reveal>
             <MediaFrameCarousel />
           </Reveal>
@@ -1267,24 +1267,24 @@ export default function BurkettsBees() {
 
       </section>
 
-      {/* ── How it started ── */}
+      {/* ── Project Overview ── */}
       <CaseStudySection
-        id="how-it-started"
+        id="project-overview"
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
-        style={{ paddingTop: '80px', paddingBottom: '80px' }}
+        style={{ paddingTop: '80px', paddingBottom: '0px' }}
       >
-        <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
-          {/* Left: heading + body copy */}
-          <div style={{ flex: 1, minWidth: 0 }}>
+          {/* Left: heading + body copy — 8 of 12 columns */}
+          <div style={{ flex: '0 0 66.66%', minWidth: 0 }}>
             <Reveal delay={0}>
               <h2 className="font-heading" style={{
-                fontWeight: 700,
-                fontSize:   '64px',
-                lineHeight: 1.05,
-                color:      '#101010',
-                margin:     '0 0 28px',
-              }}>How it started</h2>
+                fontWeight:  700,
+                fontSize:    '64px',
+                lineHeight:  1.05,
+                color:       '#101010',
+                margin:      '0 0 28px',
+              }}>The project</h2>
             </Reveal>
             <Reveal delay={100}>
               <p style={{
@@ -1295,55 +1295,130 @@ export default function BurkettsBees() {
                 color:      '#404040',
                 margin:     0,
               }}>
-                In 2023, I joined a six-week AI learning course that fundamentally shifted how I
-                thought about AI. I wanted to know where AI could actually support the creative
-                process — not cheapen the work, or replace what we do best at (add)ventures, the
-                creative agency I worked at. What started as a branding exercise eventually
-                became the foundation for a larger conversation about AI integration. My interest
-                earned me the unofficial title of "AI Girl" and later, the official title of{' '}
-                <strong>Art Director, AI Integration</strong>.
+                Burkett's Bees started as a self-initiated AI branding experiment I worked on in 2023,
+                when AI first became mainstream. I used a fictional honey brand to test how generative
+                AI could support an actual creative workflow, from identity and packaging to mockups,
+                social concepts, and internal discussion.
               </p>
             </Reveal>
           </div>
 
-          {/* Right: bumble bee */}
-          <div style={{ flexShrink: 0, width: '260px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {/* Right: bee doodle */}
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <img
               src="/ELEMENTS/bumble-bee@2x.png"
               alt=""
-              style={{ width: '180px', display: 'block', pointerEvents: 'none' }}
+              style={{ width: '220px', display: 'block', animation: 'float-strong 4s ease-in-out infinite' }}
             />
           </div>
 
         </div>
       </CaseStudySection>
 
-      {/* ── Why Burkett's Bees? ── */}
+      {/* ── What it became ── */}
       <CaseStudySection
-        id="why-burketts-bees"
+        id="what-it-became"
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
-        style={{ paddingTop: '80px', paddingBottom: '80px' }}
+        style={{ paddingTop: '50px', paddingBottom: '120px' }}
+      >
+        <Reveal>
+          <h3 style={{
+            fontFamily: 'Fira Mono, monospace',
+            fontWeight: 400,
+            fontSize:   '16px',
+            lineHeight: 1.2,
+            color:      '#101010',
+            margin:     '0 0 20px',
+          }}>What it became</h3>
+        </Reveal>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+          {[
+            {
+              num:   1,
+              title: 'A concrete AI conversation',
+              body:  'A fictional honey brand gave the team something real to critique, question, and learn from.',
+            },
+            {
+              num:   2,
+              title: 'A workflow testing ground',
+              body:  'The project tested where AI could help across identity, packaging, mockups, copy, social, and presentation design.',
+            },
+            {
+              num:   3,
+              title: 'A new creative role',
+              body:  'The experiment helped shape my eventual role as Art Director, AI Integration, focused on tools, education, and integration.',
+            },
+          ].map(({ num, title, body }) => (
+            <Reveal key={num} delay={(num - 1) * 120}>
+              <div style={{
+                backgroundColor: '#ffffff',
+                border:          '1px solid #E8E0D8',
+                borderRadius:    '16px',
+                padding:         '28px',
+                boxSizing:       'border-box',
+                boxShadow:       '0px 4px 20px rgba(0,0,0,0.06)',
+                height:          '100%',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+                  <div style={{
+                    flexShrink:      0,
+                    width:           '60px',
+                    height:          '60px',
+                    backgroundColor: '#D2D7F5',
+                    borderRadius:    '10px',
+                    display:         'flex',
+                    alignItems:      'center',
+                    justifyContent:  'center',
+                  }}>
+                    <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{num}</span>
+                  </div>
+                  <h4 style={{
+                    fontFamily: 'Fraunces, serif',
+                    fontWeight: 700,
+                    fontSize:   '24px',
+                    lineHeight: '24px',
+                    color:      '#101010',
+                    margin:     0,
+                  }}>{title}</h4>
+                </div>
+                <p style={{
+                  fontFamily: 'Fraunces, serif',
+                  fontWeight: 300,
+                  fontSize:   '16px',
+                  lineHeight: '160%',
+                  color:      '#404040',
+                  margin:     0,
+                }}>{body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </CaseStudySection>
+
+      {/* ── It started with a muse ── */}
+      <CaseStudySection id="how-it-started" style={{ paddingTop: '80px', paddingBottom: '120px' }}
+        sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
         doodle={undefined}
       >
+        <div style={{ display: 'flex', gap: '50px', alignItems: 'center' }}>
 
-        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
-
-          {/* Left: photo */}
-          <Reveal style={{ flexShrink: 0, width: 'auto' }}>
+          {/* Left: square image — 6 of 12 columns */}
+          <Reveal style={{ flex: '0 0 590px' }}>
             <div
-              style={{ width: '455px', height: '455px', overflow: 'hidden' }}
+              style={{ width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' }}
               onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
               onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
             >
               <img
-                src="/burketts-bees/4_Burkett_Outside.png"
-                alt="Real bee hive outside (add)ventures office"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
+                src="/burketts-bees/4-Burketts-outsideA.jpg"
+                alt="Beehives outside the (add)ventures office"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
               />
             </div>
           </Reveal>
 
-          {/* Right: heading + body */}
+          {/* Right: text group, vertically centered */}
           <div style={{ flex: 1 }}>
             <Reveal delay={0}>
               <h2 className="font-body" style={{
@@ -1351,30 +1426,33 @@ export default function BurkettsBees() {
                 fontSize:   '33px',
                 lineHeight: 1.2,
                 color:      '#101010',
-                margin:     '0 0 12px',
-              }}>Why Burkett's Bees?</h2>
+                margin:     '0 0 20px',
+              }}>It started with a muse</h2>
             </Reveal>
             <Reveal delay={100}>
+              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+                The brand may have been fictional, but the inspiration was not. I was inspired by
+                the beehives outside the (add)ventures office and more importantly, Keith Burkett —
+                a beloved, retired team member, who used to be the unofficial caretaker of the hives.
+              </p>
+            </Reveal>
+            <Reveal delay={150}>
               <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-                <strong>The brand may have been fictional, but the inspiration was not.</strong>{' '}
-                The idea started with the actual beehives outside the (add)ventures office.
-                K. Burkett, a retired team member and unofficial caretaker of the hives, became
-                the muse for the brand. He brought the kind of warmth and craftsmanship I wanted
-                the identity to carry, so the spec project became less random and more rooted in
-                the world of the agency itself.
+                He brought the warmth and craftsmanship I wanted the identity to carry, which made
+                the spec project feel less random and more rooted in the agency itself. He would be
+                the muse for the brand.
               </p>
             </Reveal>
           </div>
 
         </div>
-
       </CaseStudySection>
 
       {/* ── Project Purpose ── */}
       <ProjectPurpose />
 
       {/* ── Project Goals: 4-card row ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingBottom: '80px', paddingLeft: '80px', paddingRight: '80px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingBottom: '80px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
         <Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
             {goals.map(({ num, title, desc }, i) => (
@@ -1399,8 +1477,8 @@ export default function BurkettsBees() {
         backgroundPosition: 'center',
         position:           'relative',
         zIndex:             2,
-        paddingTop:         '120px',
-        paddingBottom:      '100px',
+        paddingTop:         '80px',
+        paddingBottom:      '120px',
       }}>
 
         {/* Top torn edge — #FFFBF8 tears down into the beige section */}
@@ -1411,7 +1489,7 @@ export default function BurkettsBees() {
 
         {/* Centered heading + body */}
         <Reveal>
-          <div style={{ maxWidth: '738px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', textAlign: 'center', marginBottom: '56px' }}>
+          <div style={{ maxWidth: '738px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', textAlign: 'center', marginBottom: '56px' }}>
             <h2 className="font-body" style={{
               fontWeight: 700,
               fontSize:   '64px',
@@ -1436,7 +1514,7 @@ export default function BurkettsBees() {
         </Reveal>
 
         {/* 4-box image row */}
-        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
           {[
             { src: '/burketts-bees/5_carousel_toolit/5_BB_Color.jpg',       label: 'Color' },
@@ -1491,7 +1569,7 @@ export default function BurkettsBees() {
 
       {/* ── Putting the Toolkit to Work ── */}
       <section style={{ backgroundColor: '#FFFBF8', position: 'relative', zIndex: 2, paddingTop: '80px', paddingBottom: '120px' }}>
-        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
           {/* Heading + body + sun */}
           <Reveal>
@@ -1624,7 +1702,7 @@ export default function BurkettsBees() {
       <AIAssessment />
 
       {/* ── Bee-hind the Scenes + Realistic Use Cases ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '80px', paddingRight: '80px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
         <div>
 
           {/* Row 1: heading + body left | presentation slides right */}
@@ -1717,7 +1795,7 @@ export default function BurkettsBees() {
       </section>
 
       {/* ── Tools ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingLeft: '80px', paddingRight: '80px', paddingBottom: '120px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingLeft: '120px', paddingRight: '120px', paddingBottom: '120px', boxSizing: 'border-box' }}>
         {/* Dashed separator — no paddingTop so the line sits flush at the section boundary */}
         <div style={{ borderTop: '1px dashed #C4B8A8', marginBottom: '80px' }} />
 
@@ -1800,7 +1878,7 @@ export default function BurkettsBees() {
       </CaseSplitPanel>
 
       {/* ── The Role in Practice ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '80px', paddingRight: '80px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
 
           {/* Left: heading + body */}
@@ -1857,7 +1935,7 @@ export default function BurkettsBees() {
       <WorkshopCarousel />
 
       {/* ── Three C's + What Carried Forward ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '80px', paddingRight: '80px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
 
         {/* Testing AI against the Three C's — centered heading */}
         <Reveal>

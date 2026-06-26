@@ -1,11 +1,11 @@
 export default function CaseStudyLayout({ children, style }) {
   return (
     <div style={{
-      maxWidth:     '1120px',
+      maxWidth:     '1440px',
       margin:       '0 auto',
       width:        '100%',
-      paddingLeft:  '80px',
-      paddingRight: '80px',
+      paddingLeft:  '120px',
+      paddingRight: '120px',
       boxSizing:    'border-box',
       ...style,
     }}>

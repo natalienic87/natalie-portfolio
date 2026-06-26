@@ -62,6 +62,11 @@ body {
   50%       { transform: translateY(-6px); }
 }
 
+@keyframes float-strong {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-18px) rotate(4deg); }
+}
+
 @keyframes float-lazy {
   0%   { transform: translate(0px, 0px); }
   25%  { transform: translate(-22px, -14px); }

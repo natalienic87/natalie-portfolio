@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const MAX_WIDTH = 1120;
+const MAX_WIDTH = 1440;
 const GUTTER    = 20;
 const COLS      = 12;
 
@@ -26,9 +26,9 @@ export default function DevGrid() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  // The 1120px container is centered; 80px padding applied inside.
+  // The 1440px container is centered; 120px padding applied inside.
   const containerLeft = Math.max(0, (vw - MAX_WIDTH) / 2);
-  const edge80        = containerLeft + 80;
+  const edge120       = containerLeft + 120;
 
   return (
     <>
@@ -36,16 +36,16 @@ export default function DevGrid() {
         <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 9990 }}>
 
           {/* 80px margin zones */}
-          <div style={{ position: 'absolute', inset: 0, left: 0,       width: edge80,  background: 'rgba(255,110,0,0.07)', borderRight: '1px solid rgba(255,110,0,0.6)' }} />
-          <div style={{ position: 'absolute', inset: 0, left: 'auto',  width: edge80,  background: 'rgba(255,110,0,0.07)', borderLeft:  '1px solid rgba(255,110,0,0.6)' }} />
+          <div style={{ position: 'absolute', inset: 0, left: 0,       width: edge120,  background: 'rgba(255,110,0,0.07)', borderRight: '1px solid rgba(255,110,0,0.6)' }} />
+          <div style={{ position: 'absolute', inset: 0, left: 'auto',  width: edge120,  background: 'rgba(255,110,0,0.07)', borderLeft:  '1px solid rgba(255,110,0,0.6)' }} />
 
           {/* 12 columns between the 80px margins */}
           <div style={{
             position:            'absolute',
             top:    0,
             bottom: 0,
-            left:   edge80,
-            right:  edge80,
+            left:   edge120,
+            right:  edge120,
             display:             'grid',
             gridTemplateColumns: `repeat(${COLS}, 1fr)`,
             gap:                 GUTTER,
@@ -60,8 +60,8 @@ export default function DevGrid() {
           </div>
 
           {/* Labels */}
-          <div style={label({ left: edge80 + 4,  top: 6,  color: 'rgba(255,110,0,0.95)' })}>80px</div>
-          <div style={label({ left: edge80 + 4,  top: 18, color: 'rgba(0,100,255,0.85)' })}>12 col · 20px gutter</div>
+          <div style={label({ left: edge120 + 4,  top: 6,  color: 'rgba(255,110,0,0.95)' })}>120px</div>
+          <div style={label({ left: edge120 + 4,  top: 18, color: 'rgba(0,100,255,0.85)' })}>12 col · 20px gutter</div>
         </div>
       )}
 

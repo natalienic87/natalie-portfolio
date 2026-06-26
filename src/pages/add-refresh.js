@@ -20,8 +20,9 @@ function CaseStudyNav() {
       display:        'flex',
       alignItems:     'center',
       justifyContent: 'space-between',
-      padding:        '20px 32px',
+      padding:        '20px 120px',
     }}>
+      {/* ← HOME */}
       <Link
         href="/"
         onMouseEnter={() => setHovered(true)}
@@ -38,6 +39,7 @@ function CaseStudyNav() {
           textDecoration: 'none',
           color:          '#FDB154',
           paddingBottom:  '4px',
+          position:       'relative',
           transition:     'opacity 0.2s ease',
           opacity:        hovered ? 0.75 : 1,
         }}
@@ -46,14 +48,15 @@ function CaseStudyNav() {
         Home
       </Link>
 
+      {/* Hamburger */}
       <button aria-label="Open menu" style={{
-        display:       'flex',
-        flexDirection: 'column',
-        gap:           '5px',
-        background:    'none',
-        border:        'none',
-        cursor:        'pointer',
-        padding:       0,
+        display:        'flex',
+        flexDirection:  'column',
+        gap:            '5px',
+        background:     'none',
+        border:         'none',
+        cursor:         'pointer',
+        padding:        0,
       }}>
         <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#101010' }} />
         <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#101010' }} />
@@ -232,7 +235,7 @@ function CollageCarousel() {
 
   return (
     <>
-      <CaseStudyFullBleed background="#FFFBF8" style={{ paddingTop: '120px', paddingBottom: '48px', textAlign: 'center' }}>
+      <CaseStudyFullBleed background="#FFFBF8" style={{ paddingTop: '80px', paddingBottom: '120px', textAlign: 'center' }}>
         <Reveal>
           <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
             Collage as an Expression
@@ -246,7 +249,7 @@ function CollageCarousel() {
       </CaseStudyFullBleed>
 
       <div style={{ backgroundColor: '#FFFBF8', paddingBottom: '80px', position: 'relative', zIndex: 2 }}>
-        <div style={{ padding: '0 80px', boxSizing: 'border-box', position: 'relative' }}>
+        <div style={{ padding: '0 120px', boxSizing: 'border-box', position: 'relative' }}>
 
           <button onClick={() => setPage(p => Math.max(0, p - 1))} aria-label="Previous"
             style={{ ...arrowStyle(page === 0), left: '28px' }}>←</button>
@@ -401,7 +404,7 @@ function ConceptSystem() {
   );
 
   return (
-    <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '80px' }}>
+    <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '120px' }}>
       <div ref={contentRef} style={{
         display: 'flex', gap: '60px', alignItems: 'center',
         transform: 'scale(0.96)', opacity: 0,
@@ -495,8 +498,8 @@ export default function AddRefresh() {
           display:         'flex',
           flexDirection:   'column',
           justifyContent:  'center',
-          paddingLeft:     '80px',
-          paddingRight:    '80px',
+          paddingLeft:     'max(120px, calc((100vw - 1440px) / 2 + 120px))',
+          paddingRight:    '120px',
           paddingTop:      '80px',
           paddingBottom:   '80px',
           boxSizing:       'border-box',
@@ -523,8 +526,8 @@ export default function AddRefresh() {
 
           <h1 className="font-heading" style={{
             fontWeight: 700,
-            fontSize:   '90px',
-            lineHeight: '90px',
+            fontSize:   '80px',
+            lineHeight: '80px',
             color:      '#101010',
             margin:     '0 0 28px',
           }}>
@@ -545,7 +548,7 @@ export default function AddRefresh() {
         </div>
 
         {/* Right — full-height looping video */}
-        <div style={{ flex: '0 0 50%', overflow: 'hidden', position: 'relative', zIndex: 1, minHeight: 'max(800px, 90vh)', maxHeight: 'max(800px, 90vh)' }}>
+        <div style={{ flex: '0 0 50%', overflow: 'hidden', position: 'relative', zIndex: 1, minHeight: 'max(700px, 75vh)', maxHeight: 'max(700px, 75vh)' }}>
           <video
             autoPlay muted loop playsInline
             style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
@@ -568,7 +571,7 @@ export default function AddRefresh() {
         boxShadow:          '0 -8px 40px rgba(0,0,0,0.10)',
         paddingBottom:      '80px',
       }}>
-        <div style={{ padding: '120px 80px 80px', maxWidth: '1120px', margin: '0 auto', boxSizing: 'border-box' }}>
+        <div style={{ paddingTop: '120px', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
           <Reveal>
             <div
               style={{ position: 'relative', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)', transform: 'translateY(0px)', transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
@@ -592,8 +595,134 @@ export default function AddRefresh() {
         </svg>
       </section>
 
+      {/* ── Project Overview ── */}
+      <CaseStudySection
+        id="project-overview"
+        sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
+        style={{ paddingTop: '80px', paddingBottom: '0px' }}
+      >
+        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
+
+          <div style={{ flex: '0 0 66.66%', minWidth: 0 }}>
+            <Reveal delay={0}>
+              <h2 className="font-heading" style={{
+                fontWeight: 700,
+                fontSize:   '64px',
+                lineHeight: 1.05,
+                color:      '#101010',
+                margin:     '0 0 28px',
+              }}>The project</h2>
+            </Reveal>
+            <Reveal delay={100}>
+              <p style={{
+                fontFamily: 'Fraunces, serif',
+                fontWeight: 300,
+                fontSize:   '20px',
+                lineHeight: 1.6,
+                color:      '#404040',
+                margin:     0,
+              }}>
+                The (add)ventures brand had history, recognition, and personality, but the system
+                needed more range. What began as an illustration exploration became a broader
+                refresh built from office artifacts, collage, typography, color, doodles, and strategy.
+              </p>
+            </Reveal>
+          </div>
+
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img
+              src="/ELEMENTS/Sun@2x.png"
+              alt=""
+              style={{ width: '220px', display: 'block', animation: 'spin-planet 20s linear infinite' }}
+            />
+          </div>
+
+        </div>
+      </CaseStudySection>
+
+      {/* ── What it became ── */}
+      <CaseStudySection
+        id="what-it-became"
+        sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
+        style={{ paddingTop: '50px', paddingBottom: '120px' }}
+      >
+        <Reveal>
+          <h3 style={{
+            fontFamily: 'Fira Mono, monospace',
+            fontWeight: 400,
+            fontSize:   '16px',
+            lineHeight: 1.2,
+            color:      '#101010',
+            margin:     '0 0 20px',
+          }}>What it became</h3>
+        </Reveal>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+          {[
+            {
+              num:   1,
+              title: 'A more flexible visual language',
+              body:  'A refreshed system that gave the agency more range without losing its existing personality.',
+            },
+            {
+              num:   2,
+              title: 'A brand system built to stretch',
+              body:  'A direction that could flex across decks, social, swag, wayfinding, podcast graphics, internal initiatives, and web.',
+            },
+            {
+              num:   3,
+              title: 'A refresh from the inside out',
+              body:  'A brand evolution built from agency culture, office artifacts, collage, type, color, and creative strategy.',
+            },
+          ].map(({ num, title, body }) => (
+            <Reveal key={num} delay={(num - 1) * 120}>
+              <div style={{
+                backgroundColor: '#ffffff',
+                border:          '1px solid #E8E0D8',
+                borderRadius:    '16px',
+                padding:         '28px',
+                boxSizing:       'border-box',
+                boxShadow:       '0px 4px 20px rgba(0,0,0,0.06)',
+                height:          '100%',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+                  <div style={{
+                    flexShrink:      0,
+                    width:           '60px',
+                    height:          '60px',
+                    backgroundColor: '#FDB154',
+                    borderRadius:    '10px',
+                    display:         'flex',
+                    alignItems:      'center',
+                    justifyContent:  'center',
+                  }}>
+                    <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{num}</span>
+                  </div>
+                  <h4 style={{
+                    fontFamily: 'Fraunces, serif',
+                    fontWeight: 700,
+                    fontSize:   '24px',
+                    lineHeight: '24px',
+                    color:      '#101010',
+                    margin:     0,
+                  }}>{title}</h4>
+                </div>
+                <p style={{
+                  fontFamily: 'Fraunces, serif',
+                  fontWeight: 300,
+                  fontSize:   '16px',
+                  lineHeight: '160%',
+                  color:      '#404040',
+                  margin:     0,
+                }}>{body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </CaseStudySection>
+
       {/* ── How it started ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingLeft: '80px', paddingRight: '80px', paddingTop: '120px', paddingBottom: '120px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingLeft: '120px', paddingRight: '120px', paddingTop: '120px', paddingBottom: '120px', boxSizing: 'border-box' }}>
 
         {/* Centered heading + body */}
         <Reveal>
@@ -626,7 +755,7 @@ export default function AddRefresh() {
       </section>
 
       {/* ── When a seemingly small ask ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '80px', paddingRight: '80px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
 
           {/* Left: heading + body */}
@@ -685,8 +814,8 @@ export default function AddRefresh() {
         backgroundPosition: 'center',
         position:           'relative',
         zIndex:             2,
-        paddingTop:         '120px',
-        paddingBottom:      '100px',
+        paddingTop:         '80px',
+        paddingBottom:      '120px',
       }}>
 
         {/* Top torn edge */}
@@ -697,7 +826,7 @@ export default function AddRefresh() {
 
         {/* Centered heading + body */}
         <Reveal>
-          <div style={{ maxWidth: '738px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', textAlign: 'center', marginBottom: '56px' }}>
+          <div style={{ maxWidth: '738px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', textAlign: 'center', marginBottom: '56px' }}>
             <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 16px' }}>
               The Concept Sprint
             </h2>
@@ -708,7 +837,7 @@ export default function AddRefresh() {
         </Reveal>
 
         {/* 3-box image row */}
-        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
             {[
               { src: '/add-refresh/4_carousel_concepts/4_Concept1.jpg', label: 'Back to the Future' },
@@ -759,7 +888,7 @@ export default function AddRefresh() {
       <ConceptSystem />
 
       {/* ── The answer was in the building ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '80px', paddingRight: '80px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
 
           {/* Left: image mosaic */}
@@ -817,7 +946,7 @@ export default function AddRefresh() {
       <CollageCarousel />
 
       {/* ── Turning a concept into a working system ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '80px', paddingRight: '80px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
 
         {/* Centered heading + subhead */}
         <Reveal>
@@ -898,7 +1027,7 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Integrating collage, shape language, doodles, and patterns ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '80px 80px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
 
         <Reveal>
           <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '14px', letterSpacing: '0.04em', color: '#404040', margin: '0 0 28px' }}>
@@ -931,7 +1060,7 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Deck fan ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '100px 80px 160px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Reveal style={{ width: 'auto' }}>
             <div style={{ position: 'relative', width: '800px', height: '450px' }}>
@@ -958,7 +1087,7 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Two posters, centered ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '80px 80px 100px', boxSizing: 'border-box', display: 'flex', justifyContent: 'center' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '80px 120px 100px', boxSizing: 'border-box', display: 'flex', justifyContent: 'center' }}>
         <Reveal style={{ width: 'auto' }}>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
             <img src="/add-refresh/8-working-sytem/8_ws-poster1.jpg" alt=""
@@ -970,7 +1099,7 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Totes, apparel, and swag ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '80px 80px 100px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
         <Reveal>
           <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '14px', letterSpacing: '0.04em', color: '#404040', margin: '0 0 24px' }}>
             Totes, apparel, and swag
@@ -1011,7 +1140,7 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Carrying the system to a brand new website ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingBottom: '100px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', boxSizing: 'border-box' }}>
 
         {/* Dotted divider */}
         <svg width="100%" height="2" style={{ display: 'block', marginBottom: '64px' }} preserveAspectRatio="none">
@@ -1019,7 +1148,7 @@ export default function AddRefresh() {
         </svg>
 
         <Reveal>
-          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
+          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
             <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 24px' }}>
               Carrying the system to create a brand new website
             </h2>

@@ -22,8 +22,9 @@ function CaseStudyNav() {
       display:        'flex',
       alignItems:     'center',
       justifyContent: 'space-between',
-      padding:        '20px 32px',
+      padding:        '20px 120px',
     }}>
+      {/* ← HOME */}
       <Link
         href="/"
         onMouseEnter={() => setHovered(true)}
@@ -39,6 +40,8 @@ function CaseStudyNav() {
           textTransform:  'uppercase',
           textDecoration: 'none',
           color:          '#FDB154',
+          paddingBottom:  '4px',
+          position:       'relative',
           transition:     'opacity 0.2s ease',
           opacity:        hovered ? 0.75 : 1,
         }}
@@ -47,14 +50,15 @@ function CaseStudyNav() {
         Home
       </Link>
 
+      {/* Hamburger */}
       <button aria-label="Open menu" style={{
-        display:       'flex',
-        flexDirection: 'column',
-        gap:           '5px',
-        background:    'none',
-        border:        'none',
-        cursor:        'pointer',
-        padding:       0,
+        display:        'flex',
+        flexDirection:  'column',
+        gap:            '5px',
+        background:     'none',
+        border:         'none',
+        cursor:         'pointer',
+        padding:        0,
       }}>
         <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#101010' }} />
         <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#101010' }} />
@@ -276,8 +280,8 @@ export default function CvsAetna() {
           display:         'flex',
           flexDirection:   'column',
           justifyContent:  'center',
-          paddingLeft:     '80px',
-          paddingRight:    '80px',
+          paddingLeft:     'max(120px, calc((100vw - 1440px) / 2 + 120px))',
+          paddingRight:    '120px',
           paddingTop:      '80px',
           paddingBottom:   '80px',
           boxSizing:       'border-box',
@@ -305,7 +309,7 @@ export default function CvsAetna() {
           <h1 className="font-heading" style={{
             fontWeight: 700,
             fontSize:   '90px',
-            lineHeight: '90px',
+            lineHeight: '80px',
             color:      '#101010',
             margin:     '0 0 28px',
           }}>
@@ -332,8 +336,8 @@ export default function CvsAetna() {
           overflow:        'hidden',
           backgroundColor: '#CC0000',
           zIndex:          1,
-          minHeight:       'max(800px, 90vh)',
-          maxHeight:       'max(800px, 90vh)',
+          minHeight:       'max(700px, 75vh)',
+          maxHeight:       'max(700px, 75vh)',
         }}>
           {heroImages.map((src, i) => (
             <img
@@ -370,7 +374,7 @@ export default function CvsAetna() {
         boxShadow:          '0 -8px 40px rgba(0,0,0,0.10)',
         paddingBottom:      '80px',
       }}>
-        <div style={{ padding: '120px 80px 80px', maxWidth: '1120px', margin: '0 auto', boxSizing: 'border-box' }}>
+        <div style={{ paddingTop: '120px', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
           <Reveal>
             <div
               style={{ position: 'relative', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)', transform: 'translateY(0px)', transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
@@ -394,9 +398,135 @@ export default function CvsAetna() {
         </svg>
       </section>
 
+      {/* ── The Work Overview ── */}
+      <CaseStudySection
+        id="project-overview"
+        sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
+        style={{ paddingTop: '80px', paddingBottom: '0px' }}
+      >
+        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
+
+          <div style={{ flex: '0 0 66.66%', minWidth: 0 }}>
+            <Reveal delay={0}>
+              <h2 className="font-heading" style={{
+                fontWeight: 700,
+                fontSize:   '64px',
+                lineHeight: 1.05,
+                color:      '#101010',
+                margin:     '0 0 28px',
+              }}>The work</h2>
+            </Reveal>
+            <Reveal delay={100}>
+              <p style={{
+                fontFamily: 'Fraunces, serif',
+                fontWeight: 300,
+                fontSize:   '20px',
+                lineHeight: 1.6,
+                color:      '#404040',
+                margin:     0,
+              }}>
+                This case study brings together several years of agency work for CVS Health,
+                spanning CVS.com shopping experiences, scalable department-page systems, campaign
+                design, CMS migration support, store brand work, and platform playbooks.
+              </p>
+            </Reveal>
+          </div>
+
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img
+              src="/ELEMENTS/Red Planet.png"
+              alt=""
+              style={{ width: '220px', display: 'block', animation: 'float-strong 4s ease-in-out infinite' }}
+            />
+          </div>
+
+        </div>
+      </CaseStudySection>
+
+      {/* ── The Through Line ── */}
+      <CaseStudySection
+        id="the-through-line"
+        sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
+        style={{ paddingTop: '50px', paddingBottom: '120px' }}
+      >
+        <Reveal>
+          <h3 style={{
+            fontFamily: 'Fira Mono, monospace',
+            fontWeight: 400,
+            fontSize:   '16px',
+            lineHeight: 1.2,
+            color:      '#101010',
+            margin:     '0 0 20px',
+          }}>The through line</h3>
+        </Reveal>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+          {[
+            {
+              num:   1,
+              title: 'Digital systems',
+              body:  'Designed and improved reusable page systems, templates, components, and production rules for CVS.com.',
+            },
+            {
+              num:   2,
+              title: 'High-volume campaigns',
+              body:  'Created work that had to move quickly across weekly cycles, seasonal content, store brands, and national campaigns.',
+            },
+            {
+              num:   3,
+              title: 'Brand at scale',
+              body:  'Helped translate strategy into practical systems that could work across teams, platforms, and real production constraints.',
+            },
+          ].map(({ num, title, body }) => (
+            <Reveal key={num} delay={(num - 1) * 120}>
+              <div style={{
+                backgroundColor: '#ffffff',
+                border:          '1px solid #E8E0D8',
+                borderRadius:    '16px',
+                padding:         '28px',
+                boxSizing:       'border-box',
+                boxShadow:       '0px 4px 20px rgba(0,0,0,0.06)',
+                height:          '100%',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+                  <div style={{
+                    flexShrink:      0,
+                    width:           '60px',
+                    height:          '60px',
+                    backgroundColor: '#E35038',
+                    borderRadius:    '10px',
+                    display:         'flex',
+                    alignItems:      'center',
+                    justifyContent:  'center',
+                  }}>
+                    <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#ffffff', lineHeight: 1 }}>{num}</span>
+                  </div>
+                  <h4 style={{
+                    fontFamily: 'Fraunces, serif',
+                    fontWeight: 700,
+                    fontSize:   '24px',
+                    lineHeight: '24px',
+                    color:      '#101010',
+                    margin:     0,
+                  }}>{title}</h4>
+                </div>
+                <p style={{
+                  fontFamily: 'Fraunces, serif',
+                  fontWeight: 300,
+                  fontSize:   '16px',
+                  lineHeight: '160%',
+                  color:      '#404040',
+                  margin:     0,
+                }}>{body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </CaseStudySection>
+
       {/* ── How it started ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '100px 80px', boxSizing: 'border-box' }}>
-        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '2fr 3fr', alignItems: 'center', gap: '0' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '2fr 3fr', alignItems: 'center', gap: '0' }}>
 
           {/* Left: mascara image */}
           <Reveal>
@@ -423,7 +553,7 @@ export default function CvsAetna() {
       </section>
 
       {/* ── Proposed User Journey ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingBottom: '100px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', boxSizing: 'border-box' }}>
 
         {/* Dotted divider */}
         <svg width="100%" height="2" style={{ display: 'block', marginBottom: '56px' }} preserveAspectRatio="none">
@@ -446,8 +576,8 @@ export default function CvsAetna() {
       </section>
 
       {/* ── The brief: reimagine CVS shop ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '100px 80px', boxSizing: 'border-box' }}>
-        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
 
           {/* Left: text */}
           <Reveal>
@@ -488,7 +618,7 @@ export default function CvsAetna() {
       </section>
 
       {/* ── Core pillars ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '80px 80px 120px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '80px 120px 120px', boxSizing: 'border-box' }}>
         <Reveal>
           <FourBy accentColor="#CC0000" items={[
             { title: 'Strategic Badging',      body: 'Tags that actually communicate value – clean ingredients, dermatologist-tested, FSA eligible and more.' },
@@ -550,12 +680,12 @@ export default function CvsAetna() {
       </CaseStudyFullBleed>
 
       {/* ── Twelve Department Pages ── */}
-      <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '120px', paddingBottom: '120px' }}>
+      <CaseStudySection style={{ paddingLeft: '120px', paddingRight: '120px', paddingTop: '80px', paddingBottom: '120px' }}>
 
         {/* ZONE 1: Centered header */}
         <Reveal>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-            <h1 className="font-heading" style={{ fontWeight: 700, fontSize: '90px', lineHeight: 1.0, color: '#101010', margin: '0 0 28px' }}>
+            <h1 className="font-heading" style={{ fontWeight: 700, fontSize: '80px', lineHeight: '80px', color: '#101010', margin: '0 0 28px' }}>
               Twelve Department Pages
             </h1>
             <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', maxWidth: '680px', margin: '0 auto' }}>
@@ -650,7 +780,7 @@ export default function CvsAetna() {
       </CaseStudySection>
 
       {/* ── Built to lift, shift and scale ── */}
-      <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '80px', paddingBottom: '120px' }}>
+      <CaseStudySection style={{ paddingLeft: '120px', paddingRight: '120px', paddingTop: '80px', paddingBottom: '120px' }}>
 
         {/* Dotted top divider */}
         <svg width="100%" height="2" style={{ display: 'block', marginBottom: '64px' }} preserveAspectRatio="none">
@@ -697,7 +827,7 @@ export default function CvsAetna() {
       </CaseStudySection>
 
       {/* ── And then one morning ── */}
-      <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '80px', paddingBottom: '120px' }}>
+      <CaseStudySection style={{ paddingLeft: '120px', paddingRight: '120px', paddingTop: '80px', paddingBottom: '120px' }}>
 
         {/* Dotted top divider */}
         <svg width="100%" height="2" style={{ display: 'block', marginBottom: '64px' }} preserveAspectRatio="none">
@@ -825,7 +955,7 @@ export default function CvsAetna() {
       </CaseStudyFullBleed>
 
       {/* ── Platform Playbook ── */}
-      <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '100px', paddingBottom: '120px' }}>
+      <CaseStudySection style={{ paddingLeft: '120px', paddingRight: '120px', paddingTop: '80px', paddingBottom: '120px' }}>
 
         {/* Dotted top divider */}
         <svg width="100%" height="2" style={{ display: 'block', marginBottom: '64px' }} preserveAspectRatio="none">

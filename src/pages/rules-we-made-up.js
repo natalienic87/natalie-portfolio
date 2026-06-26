@@ -21,7 +21,7 @@ function CaseStudyNav() {
       display:        'flex',
       alignItems:     'center',
       justifyContent: 'space-between',
-      padding:        '20px 32px',
+      padding:        '20px 120px',
     }}>
       {/* ← HOME */}
       <Link
@@ -549,18 +549,16 @@ function DoodleEditorToggle({ enabled, onToggle }) {
 // ── But first, a storyboard ───────────────────────────────────────────────────
 function HowItStarted() {
   return (
-    <CaseStudySection id="how-it-started" style={{ paddingTop: '80px', paddingBottom: '80px' }}
+    <CaseStudySection id="how-it-started" style={{ paddingTop: '80px', paddingBottom: '120px' }}
       sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
       doodle={undefined}
     >
+      <div style={{ display: 'flex', gap: '50px', alignItems: 'center' }}>
 
-      {/* Flex row: image vs text — caption excluded so centering is against image only */}
-      <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
-
-        {/* Left: photo */}
-        <Reveal style={{ flexShrink: 0, width: 'auto' }}>
+        {/* Left: square image — 6 of 12 columns */}
+        <Reveal style={{ flex: '0 0 590px' }}>
           <div
-            style={{ width: '455px', height: '455px', overflow: 'hidden' }}
+            style={{ width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' }}
             onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
             onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
           >
@@ -572,7 +570,7 @@ function HowItStarted() {
           </div>
         </Reveal>
 
-        {/* Right: heading + body */}
+        {/* Right: text group, vertically centered */}
         <div style={{ flex: 1 }}>
           <Reveal delay={0}>
             <h2 className="font-body" style={{
@@ -580,40 +578,52 @@ function HowItStarted() {
               fontSize:   '33px',
               lineHeight: 1.2,
               color:      '#101010',
-              margin:     '0 0 12px',
-            }}>But first, a storyboard</h2>
+              margin:     '0 0 20px',
+            }}>It started with a storyboard</h2>
           </Reveal>
           <Reveal delay={100}>
             <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
-              What did I do to start this thing. Before touching any tool, I needed a map. I adapted
-              the poem into lyrics, built the song in Suno to set my runtime, then storyboarded scene
-              by scene before generating a single frame.
+              Before touching animation, I needed a map. I adapted the poem into lyrics, built the
+              song in Suno, and used the final track as my runtime. Once I had the song (80
+              generations later), I storyboarded the film scene by scene.
+            </p>
+          </Reveal>
+          <Reveal delay={150}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 32px' }}>
+              That storyboard gave the project a spine. It was the thing I came back to whenever
+              the tools got too shiny, too chaotic, or too far from the point.
             </p>
           </Reveal>
           <Reveal delay={200}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-              The Title "Rules We Made Up" comes from a line in my poem, which I fought to keep in
-              the lyrics. As the rules we make up about work, creativity and value are all shifting,
-              it felt like appropriate timing.
-            </p>
+            <p style={{
+              fontFamily: 'Fira Mono, monospace',
+              fontWeight: 400,
+              fontSize:   '16px',
+              lineHeight: 1.2,
+              color:      '#101010',
+              margin:     '0 0 10px',
+            }}>Wanna make a song yourself?</p>
+            <a
+              href="https://open.substack.com/pub/crankthatnat/p/how-we-turned-our-substack-brands?r=5v51sb&utm_campaign=post-expanded-share&utm_medium=web"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily:     'Fraunces, serif',
+                fontWeight:     400,
+                fontSize:       '18px',
+                lineHeight:     1.4,
+                color:          '#101010',
+                textDecoration: 'underline',
+                textUnderlineOffset: '3px',
+                cursor:         'pointer',
+              }}
+            >
+              Read more about my Suno Songwriting process here
+            </a>
           </Reveal>
         </div>
 
       </div>
-
-      {/* Caption — outside the flex row, sits below the image */}
-      <Reveal delay={100}>
-        <p style={{
-          fontFamily: 'Fira Mono, monospace',
-          fontWeight: 400,
-          fontSize:   '13px',
-          lineHeight: 1.6,
-          color:      '#666666',
-          margin:     '12px 0 0',
-          width:      '455px',
-        }}>I printed it out, because I'm old school like that.</p>
-      </Reveal>
-
     </CaseStudySection>
   );
 }
@@ -772,7 +782,7 @@ function CharacterCreation() {
   );
 
   return (
-    <CaseStudySection id="characters" style={{ paddingTop: '80px', paddingBottom: '80px' }}
+    <CaseStudySection id="characters" style={{ paddingTop: '80px', paddingBottom: '120px' }}
       doodle={undefined}
     >
       <div
@@ -886,7 +896,7 @@ const friends = [
 function MoreFriends() {
   const [hovered, setHovered] = useState(null);
   return (
-    <CaseStudySection style={{ paddingLeft: '80px', paddingRight: '80px', paddingTop: '80px' }}
+    <CaseStudySection style={{ paddingLeft: '120px', paddingRight: '120px', paddingTop: '80px', paddingBottom: '120px' }}
       doodle={undefined}
     >
       <Reveal delay={0}>
@@ -1014,7 +1024,7 @@ function MushroomFriend() {
         display:         'flex',
         alignItems:      'center',
         justifyContent:  'center',
-        padding:         '80px',
+        padding:         '80px 80px 120px',
         boxSizing:       'border-box',
         overflow:        'hidden',
       }}>
@@ -1087,7 +1097,7 @@ const principles = [
 
 function BlooperReel() {
   return (
-    <CaseStudySection style={{ paddingTop: '80px' }}
+    <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '120px' }}
       doodle={
         <>
           <div data-dev-id="burst-blooper-left" data-dev-type="doodle"
@@ -1169,7 +1179,7 @@ function TheTool() {
   };
 
   return (
-    <CaseStudySection id="ltx-studio" style={{ paddingTop: '80px' }}
+    <CaseStudySection id="ltx-studio" style={{ paddingTop: '80px', paddingBottom: '120px' }}
       doodle={undefined}
     >
       <div style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
@@ -1344,7 +1354,7 @@ function FilmmakingPrinciples() {
 
   return (
     <>
-      <CaseStudyFullBleed id="principles" background="#FFFBF8" sectionStyle={{ overflowX: 'clip' }} style={{ paddingTop: '120px', paddingBottom: '48px', textAlign: 'center' }}
+      <CaseStudyFullBleed id="principles" background="#FFFBF8" sectionStyle={{ overflowX: 'clip' }} style={{ paddingTop: '80px', paddingBottom: '120px', textAlign: 'center' }}
         doodle={
           <div data-dev-id="burst-principles-left" data-dev-type="doodle"
             style={{ position: 'absolute', top: '80px', left: '20px', width: '160px', zIndex: 0, transform: 'translate(-72px, -39px) scale(1.273)', transformOrigin: 'top left' }}>
@@ -1382,7 +1392,7 @@ function FilmmakingPrinciples() {
           style={{ position: 'absolute', top: '0px', right: '0px', width: '160px', zIndex: 0, transform: 'translate(6px, 232px) scale(1.18)', transformOrigin: 'top left' }}>
           <img src="/ELEMENTS/White Burst.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 24s linear infinite', transformOrigin: 'center' }} />
         </div>
-        <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', position: 'relative' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', position: 'relative' }}>
 
           {/* Left arrow — lives inside the 80px margin zone */}
           <button
@@ -1544,7 +1554,7 @@ function SceneCreation() {
   return (
     <CaseStudySection
       id="scene-creation"
-      style={{ paddingTop: '100px', paddingBottom: '100px', textAlign: 'center' }}
+      style={{ paddingTop: '80px', paddingBottom: '120px', textAlign: 'center' }}
       doodle={
         <>
           {/* Saturn — upper right, outside content margins */}
@@ -1685,7 +1695,7 @@ function RollCall() {
     <>
       <CaseStudySection
         id="roll-call"
-        style={{ paddingTop: '80px' }}
+        style={{ paddingTop: '80px', paddingBottom: '120px' }}
         doodle={
           <div
             data-dev-id="substack-flower"
@@ -2027,8 +2037,8 @@ export default function RulesWeMadeUp() {
           display:        'flex',
           flexDirection:  'column',
           justifyContent: 'center',
-          paddingLeft:    '80px',
-          paddingRight:   '80px',
+          paddingLeft:    'max(120px, calc((100vw - 1440px) / 2 + 120px))',
+          paddingRight:   '120px',
           paddingTop:     '80px',
           paddingBottom:  '80px',
           boxSizing:      'border-box',
@@ -2054,8 +2064,8 @@ export default function RulesWeMadeUp() {
 
           <h1 className="font-heading" style={{
             fontWeight:  700,
-            fontSize:    '90px',
-            lineHeight:  '90px',
+            fontSize:    '80px',
+            lineHeight:  '80px',
             color:       '#101010',
             margin:      '0 0 28px',
           }}>
@@ -2091,7 +2101,7 @@ export default function RulesWeMadeUp() {
       <section style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '80px' }}>
 
         {/* Video — 100px padding, section #F5F0EC IS the frame */}
-        <div style={{ padding: '120px 80px 80px', maxWidth: '1120px', margin: '0 auto', boxSizing: 'border-box' }}>
+        <div style={{ paddingTop: '120px', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
         <div
           ref={videoContainerRef}
           style={{ position: 'relative', overflow: 'hidden', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)', transform: 'translateY(0px)', transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
@@ -2164,7 +2174,7 @@ export default function RulesWeMadeUp() {
         </div>
 
         {/* Film caption — on #F5F0EC, centered below video, before torn edge */}
-        <div style={{ textAlign: 'center', paddingBottom: '80px' }}>
+        <div style={{ textAlign: 'center', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto' }}>
           <span style={{
             fontFamily:    'Fira Mono, monospace',
             fontSize:      '11px',
@@ -2190,12 +2200,12 @@ export default function RulesWeMadeUp() {
       <CaseStudySection
         id="project-overview"
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
-        style={{ paddingTop: '80px', paddingBottom: '80px' }}
+        style={{ paddingTop: '80px', paddingBottom: '0px' }}
       >
-        <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
-          {/* Left: heading + body copy */}
-          <div data-dev-id="proj-text" data-dev-type="text" style={{ flex: 1, minWidth: 0, transform: 'translateY(38px)' }}>
+          {/* Left: heading + body copy — 8 of 12 columns */}
+          <div data-dev-id="proj-text" data-dev-type="text" style={{ flex: '0 0 66.66%', minWidth: 0 }}>
             <Reveal delay={0}>
               <h2 className="font-heading" style={{
                 fontWeight:  700,
@@ -2203,7 +2213,7 @@ export default function RulesWeMadeUp() {
                 lineHeight:  1.05,
                 color:       '#101010',
                 margin:      '0 0 28px',
-              }}>The Project</h2>
+              }}>The project</h2>
             </Reveal>
             <Reveal delay={100}>
               <p style={{
@@ -2212,53 +2222,108 @@ export default function RulesWeMadeUp() {
                 fontSize:   '20px',
                 lineHeight: 1.6,
                 color:      '#404040',
-                margin:     '0 0 20px',
-              }}>
-                This film is adapted from a poem I wrote years ago, late one night. It's about a specific
-                kind of person: someone who thinks deeply, resists neat categories, and feels perpetually
-                out of step with a world that wants everything linear and labeled.
-              </p>
-            </Reveal>
-            <Reveal delay={200}>
-              <p style={{
-                fontFamily: 'Fraunces, serif',
-                fontWeight: 300,
-                fontSize:   '20px',
-                lineHeight: 1.6,
-                color:      '#404040',
                 margin:     0,
               }}>
-                When AI tools emerged, I finally had the means to bring it to life. The title comes from
-                a line I fought to keep in the lyrics. Some rules deserve protecting. Some were never
-                worth following. Right now, it feels like it's all up for renegotiation.
+                <em>Rules We Made Up</em> is a self-directed animated short built with AI-assisted tools,
+                original music, storyboarding, character design, and <em>a lot</em> of human editing. What
+                started as an old poem became a song, then a claymation-inspired world about creativity,
+                the rules we inherit, protect, break, or make up as we go.
               </p>
             </Reveal>
           </div>
 
-          {/* Right: Red Planet doodle with cloud overlays */}
-          <div data-dev-id="proj-planet" data-dev-type="doodle" style={{ flexShrink: 0, width: '260px', paddingTop: '8px', position: 'relative', overflowX: 'clip', transform: 'translate(54px, 37px) scale(0.88)', transformOrigin: 'top left' }}>
-            {/* Planet floats and rotates */}
-            <div style={{ animation: 'float 5s ease-in-out infinite' }}>
-              <img
-                src="/ELEMENTS/Red Planet.png"
-                alt=""
-                style={{ width: '100%', display: 'block', animation: 'spin-planet 36s linear infinite', transformOrigin: 'center' }}
-              />
-            </div>
-            {/* Wrapper holds baked DevDrag position; img drifts independently */}
-            <div
-              data-dev-id="clouds"
-              data-dev-type="doodle"
-              style={{ position: 'absolute', width: '200px', left: '80px', top: '118px', pointerEvents: 'none', transform: 'translate(86px, 0px) scale(0.713)', transformOrigin: 'top left' }}
-            >
-              <img
-                src="/ELEMENTS/TOP LEFT CLOUD.png"
-                alt=""
-                style={{ width: '100%', display: 'block', animation: 'cloud-drift-1 7s ease-in-out infinite' }}
-              />
-            </div>
+          {/* Right: headphones doodle */}
+          <div data-dev-id="proj-headphones" data-dev-type="doodle" style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img
+              src="/ELEMENTS/headphones.png"
+              alt=""
+              style={{ width: '220px', display: 'block', animation: 'float-strong 4s ease-in-out infinite' }}
+            />
           </div>
 
+        </div>
+      </CaseStudySection>
+
+      {/* ── What it became ── */}
+      <CaseStudySection
+        id="what-it-became"
+        sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
+        style={{ paddingTop: '50px', paddingBottom: '120px' }}
+      >
+        <Reveal>
+          <h3 style={{
+            fontFamily:    'Fira Mono, monospace',
+            fontWeight:    400,
+            fontSize:      '16px',
+            lineHeight:    1.2,
+            color:         '#101010',
+            margin:        '0 0 20px',
+          }}>What it became</h3>
+        </Reveal>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+          {[
+            {
+              num:   1,
+              title: 'A test of personal AI storytelling',
+              body:  'A way to find out whether AI could help me make something emotional, specific, and mine — not just "generated".',
+            },
+            {
+              num:   2,
+              title: 'A full creative workflow',
+              body:  'A crash course in writing lyrics, generating music, storyboarding, directing scenes, building characters, editing footage, and learning LTX Studio scene by scene.',
+            },
+            {
+              num:   3,
+              title: 'A process I could carry forward',
+              body:  'The project taught me how much direction AI still needs: references, structure, pacing, consistency, and restraint.',
+            },
+          ].map(({ num, title, body }) => (
+            <Reveal key={num} delay={(num - 1) * 120}>
+              <div style={{
+                backgroundColor: '#ffffff',
+                border:          '1px solid #E8E0D8',
+                borderRadius:    '16px',
+                padding:         '28px',
+                boxSizing:       'border-box',
+                boxShadow:       '0px 4px 20px rgba(0,0,0,0.06)',
+                height:          '100%',
+              }}>
+                {/* Badge + title row */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+                  <div style={{
+                    flexShrink:      0,
+                    width:           '60px',
+                    height:          '60px',
+                    backgroundColor: '#D2D7F5',
+                    borderRadius:    '10px',
+                    display:         'flex',
+                    alignItems:      'center',
+                    justifyContent:  'center',
+                  }}>
+                    <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{num}</span>
+                  </div>
+                  <h4 style={{
+                    fontFamily: 'Fraunces, serif',
+                    fontWeight: 700,
+                    fontSize:   '24px',
+                    lineHeight: '24px',
+                    color:      '#101010',
+                    margin:     0,
+                  }}>{title}</h4>
+                </div>
+                {/* Body */}
+                <p style={{
+                  fontFamily: 'Fraunces, serif',
+                  fontWeight: 300,
+                  fontSize:   '16px',
+                  lineHeight: '160%',
+                  color:      '#404040',
+                  margin:     0,
+                }}>{body}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </CaseStudySection>
 

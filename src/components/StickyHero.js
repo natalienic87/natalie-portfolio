@@ -8,7 +8,7 @@
  * overflowX: 'hidden' on any ancestor kills position: sticky.
  * Use overflowX: 'clip' on individual carousel wrappers instead.
  */
-export default function StickyHero({ children, backgroundColor = '#FFFBF8', minHeight = 'max(800px, 90vh)', maxHeight = 'max(800px, 90vh)' }) {
+export default function StickyHero({ children, backgroundColor = '#FFFBF8', minHeight = 'max(700px, 75vh)', maxHeight = 'max(700px, 75vh)' }) {
   return (
     <section style={{
       display:         'flex',
@@ -18,6 +18,7 @@ export default function StickyHero({ children, backgroundColor = '#FFFBF8', minH
       minHeight,
       maxHeight,
       width:           '100%',
+      overflow:        'hidden',
       backgroundColor,
     }}>
       {children}

@@ -6,6 +6,8 @@ import CaseStudySection  from '../components/CaseStudySection';
 import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
 import CaseSplitPanel    from '../components/CaseSplitPanel';
 import StickyHero        from '../components/StickyHero';
+import TickerStrip         from '../components/TickerStrip';
+import DashedCardCarousel  from '../components/DashedCardCarousel';
 
 // ── Minimal case-study nav ────────────────────────────────────────────────────
 function CaseStudyNav() {
@@ -574,12 +576,6 @@ const flavorSlides = [
 
 const flavorCardRotations = [-2, 3, -4, 1.5, -3, 2];
 
-const goals = [
-  { num: '01', title: 'Test the workflow',           desc: 'Explore where AI could support strategy, identity, packaging, mockups, copy and presentation design.' },
-  { num: '02', title: 'Build something concrete',    desc: 'Create a full spec brand the team could actually see, critique and discuss.' },
-  { num: '03', title: 'Separate hype from usefulness', desc: 'Document where the tools helped, where they fell short and where they might fit into agency work.' },
-  { num: '04', title: 'Start a bigger conversation', desc: 'Use the project as a practical entry point for AI integration at (add)ventures.' },
-];
 
 function ProjectPurpose() {
   const [index,        setIndex]        = useState(0);
@@ -672,35 +668,42 @@ function ProjectPurpose() {
   return (
     <CaseStudySection id="project-purpose" style={{ paddingTop: '80px', paddingBottom: '120px' }} doodle={undefined}>
       <div ref={contentRef} style={{
-        display: 'flex', gap: '60px', alignItems: 'center',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(12, 1fr)',
+        columnGap: '20px',
+        alignItems: 'center',
         transform: 'scale(0.96)', opacity: 0,
         transition: 'transform 700ms cubic-bezier(0.16, 1, 0.3, 1), opacity 700ms cubic-bezier(0.16, 1, 0.3, 1)',
         transformOrigin: 'center center',
       }}>
 
-        {/* Left: heading + body */}
-        <div style={{ flex: '0 0 360px', width: '360px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignSelf: 'stretch' }}>
+        {/* Left: heading + text (cols 1–5) */}
+        <div style={{ gridColumn: '1 / 6' }}>
           <Reveal delay={0}>
             <h2 className="font-body" style={{
               fontWeight: 700, fontSize: '33px', lineHeight: 1.2,
-              color: '#101010', margin: '0 0 12px',
-            }}>Project purpose</h2>
+              color: '#101010', margin: '0 0 20px',
+            }}>Building the flavor system</h2>
           </Reveal>
           <Reveal delay={100}>
-            <p style={{
-              fontFamily: 'Fraunces, serif', fontWeight: 300,
-              fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0,
-            }}>
-              The Burkett's Bees Raw Honey project wasn't just about testing creative AI tools.
-              It was about inspiring the creative team with practical examples of how AI could
-              fit inside a creative workflow.
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              I wanted to see whether AI could help extend a brand system, so I built a line of
+              flavors to test how well the tools could maintain consistency across related packaging.
+            </p>
+          </Reveal>
+          <Reveal delay={150}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              I decided to riff off the existing (add)ventures color palette, and develop bold
+              illustrations that could flex across flavor profiles. The real test was whether the
+              logo, label structure, illustration style, and handmade warmth could stay consistent
+              across flavor profiles.
             </p>
           </Reveal>
         </div>
 
-        {/* Right: card stack + arrows */}
-        <Reveal delay={0} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
-          <div style={{ position: 'relative', width: '518px', height: '636px' }}>
+        {/* Right: card stack + arrows (cols 7–12) */}
+        <Reveal delay={0} style={{ gridColumn: '7 / 13', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
+          <div style={{ position: 'relative', width: '622px', height: '763px' }}>
             {flavorSlides.map((src, si) => (
               <div key={si} style={getCardStyle(si)}>
                 <img
@@ -713,8 +716,8 @@ function ProjectPurpose() {
           </div>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
             <span style={{
-              fontFamily: 'Fira Mono, monospace', fontSize: '11px',
-              letterSpacing: '0.08em', textTransform: 'uppercase', color: '#888',
+              fontFamily: 'Fira Mono, monospace', fontWeight: 400,
+              fontSize: '16px', lineHeight: 1.2, color: '#101010',
             }}>flip through the deck</span>
             <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
             <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
@@ -840,196 +843,51 @@ const workshops = [
 ];
 
 function WorkshopCarousel() {
-  const [page, setPage]         = useState(0);
-  const viewportRef             = useRef(null);
-  const trackRef                = useRef(null);
-  const offsetRef               = useRef(0);
-  const animRef                 = useRef(null);
-  const dragRef                 = useRef({ active: false, startX: 0, startOffset: 0 });
-  const vpWidthRef              = useRef(1120);
-  const [vpWidth, setVpWidth]   = useState(1120);
-  const [dragging, setDragging] = useState(false);
-  const GAP   = 20;
-  const PAGES = [workshops.slice(0, 3), workshops.slice(3)];
-
-  const getStep   = () => vpWidthRef.current + GAP;
-  const getMaxOff = () => (PAGES.length - 1) * getStep();
-
-  const applyTransform = () => {
-    if (trackRef.current) trackRef.current.style.transform = `translateX(-${offsetRef.current}px)`;
-  };
-
-  const animateTo = (target) => {
-    if (animRef.current) cancelAnimationFrame(animRef.current);
-    const clamped  = Math.max(0, Math.min(getMaxOff(), target));
-    const start    = offsetRef.current;
-    const diff     = clamped - start;
-    const duration = 500;
-    const t0       = performance.now();
-    const tick = (now) => {
-      const p    = Math.min((now - t0) / duration, 1);
-      const ease = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
-      offsetRef.current = start + diff * ease;
-      applyTransform();
-      if (p < 1) animRef.current = requestAnimationFrame(tick);
-      else { offsetRef.current = clamped; applyTransform(); }
-    };
-    animRef.current = requestAnimationFrame(tick);
-  };
-
-  const snapNearest = () => {
-    const step    = getStep();
-    const nearest = Math.max(0, Math.min(PAGES.length - 1, Math.round(offsetRef.current / step)));
-    setPage(nearest);
-    animateTo(nearest * step);
-  };
-
-  useEffect(() => {
-    const el = viewportRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([e]) => {
-      vpWidthRef.current = e.contentRect.width;
-      setVpWidth(e.contentRect.width);
-    });
-    ro.observe(el);
-    const handleWheel = (e) => {
-      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
-      e.preventDefault();
-      if (animRef.current) cancelAnimationFrame(animRef.current);
-      offsetRef.current = Math.max(0, Math.min(getMaxOff(), offsetRef.current + e.deltaX));
-      applyTransform();
-    };
-    el.addEventListener('wheel', handleWheel, { passive: false });
-    return () => { ro.disconnect(); el.removeEventListener('wheel', handleWheel); };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => { animateTo(page * getStep()); }, [page, vpWidth]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const onMouseDown = (e) => {
-    if (animRef.current) cancelAnimationFrame(animRef.current);
-    dragRef.current = { active: true, startX: e.clientX, startOffset: offsetRef.current };
-    setDragging(true);
-  };
-  const onMouseMove = (e) => {
-    if (!dragRef.current.active) return;
-    offsetRef.current = Math.max(0, Math.min(getMaxOff(), dragRef.current.startOffset + (dragRef.current.startX - e.clientX)));
-    applyTransform();
-  };
-  const onDragEnd = () => {
-    if (!dragRef.current.active) return;
-    dragRef.current.active = false;
-    setDragging(false);
-    snapNearest();
-  };
-
-  const arrowStyle = (disabled) => ({
-    position:        'absolute',
-    top:             '50%',
-    transform:       'translateY(-50%)',
-    zIndex:          2,
-    width:           '44px',
-    height:          '44px',
-    borderRadius:    '50%',
-    border:          '1.5px solid rgba(16,16,16,0.18)',
-    backgroundColor: '#ffffff',
-    cursor:          disabled ? 'default' : 'pointer',
-    opacity:         disabled ? 0.3 : 1,
-    display:         'flex',
-    alignItems:      'center',
-    justifyContent:  'center',
-    fontSize:        '18px',
-    color:           '#101010',
-    transition:      'opacity 0.25s ease',
-    boxShadow:       '0 2px 12px rgba(0,0,0,0.08)',
-    flexShrink:      0,
-  });
-
   return (
     <>
-      <CaseStudyFullBleed id="workshops" background="#FFFBF8" style={{ paddingTop: '80px', paddingBottom: '120px', textAlign: 'center' }}>
-        <Reveal>
-          <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 16px' }}>
-            Monthly workshops &amp; discussions
-          </h2>
-        </Reveal>
-        <Reveal delay={100}>
-          <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto', maxWidth: '560px' }}>
-            We made space for honest questions, tool demos, creative exercises and open discussion.
-          </p>
-        </Reveal>
-      </CaseStudyFullBleed>
+      <section style={{
+        backgroundImage:    'url(/Medium-beige-darker-bg2.jpg)',
+        backgroundSize:     'cover',
+        backgroundPosition: 'center',
+        backgroundColor:    '#F5F0EC',
+        position:           'relative',
+        zIndex:             2,
+        paddingTop:         '80px',
+        paddingBottom:      '80px',
+      }}>
+        {/* Top torn edge */}
+        <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}>
+          <path d="M0,0 L0,28 L48,6 L95,35 L148,8 L200,38 L260,4 L315,32 L370,15 L425,40 L480,10 L535,34 L595,18 L650,42 L710,6 L765,28 L820,10 L875,38 L930,14 L985,40 L1040,5 L1095,30 L1150,12 L1210,38 L1270,8 L1330,32 L1390,15 L1440,25 L1440,0 Z" fill="#FFFBF8" />
+        </svg>
 
-      {/* Draggable paginated card carousel */}
-      <div style={{ backgroundColor: '#FFFBF8', paddingBottom: '80px', position: 'relative', zIndex: 2 }}>
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', position: 'relative' }}>
-
-          <button onClick={() => setPage(p => Math.max(0, p - 1))} aria-label="Previous"
-            style={{ ...arrowStyle(page === 0), left: '28px' }}>←</button>
-          <button onClick={() => setPage(p => Math.min(PAGES.length - 1, p + 1))} aria-label="Next"
-            style={{ ...arrowStyle(page === PAGES.length - 1), right: '28px' }}>→</button>
-
-          <div style={{ overflowX: 'clip', marginLeft: '-60px', paddingLeft: '60px' }}>
-            <div
-              ref={viewportRef}
-              style={{ overflow: 'visible', padding: '40px 0 80px', cursor: dragging ? 'grabbing' : 'grab', userSelect: 'none' }}
-              onMouseDown={onMouseDown}
-              onMouseMove={onMouseMove}
-              onMouseUp={onDragEnd}
-              onMouseLeave={onDragEnd}
-            >
-              <div ref={trackRef} style={{ display: 'flex', gap: `${GAP}px`, willChange: 'transform' }}>
-                {PAGES.map((cards, pageIdx) => (
-                  <div key={pageIdx} style={{ display: 'flex', gap: `${GAP}px`, width: `${vpWidth}px`, flexShrink: 0 }}>
-                    {cards.map(w => (
-                      <div key={w.title + w.img} style={{
-                        width:           '360px',
-                        flexShrink:      0,
-                        backgroundColor: '#ffffff',
-                        borderRadius:    '20px',
-                        overflow:        'hidden',
-                        border:          '2px dashed #101010',
-                        padding:         '24px',
-                        display:         'flex',
-                        flexDirection:   'column',
-                        boxShadow:       '0 16px 48px rgba(0,0,0,0.14)',
-                      }}>
-                        <div style={{ borderRadius: '12px', overflow: 'hidden', marginBottom: '20px', flexShrink: 0 }}>
-                          <img src={w.img} alt={w.title} draggable={false}
-                            style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: w.crop === 'left' ? 'left center' : 'center', display: 'block' }} />
-                        </div>
-                        <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 10px' }}>
-                          {w.title}
-                        </h3>
-                        <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-                          {w.body}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Page dots */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '32px' }}>
-            {PAGES.map((_, idx) => (
-              <button key={idx} onClick={() => setPage(idx)} aria-label={`Page ${idx + 1}`}
-                style={{
-                  width:           idx === page ? '24px' : '8px',
-                  height:          '8px',
-                  borderRadius:    '4px',
-                  backgroundColor: idx === page ? '#101010' : 'rgba(16,16,16,0.25)',
-                  border:          'none',
-                  cursor:          'pointer',
-                  padding:         0,
-                  transition:      'width 0.3s ease, background-color 0.3s ease',
-                }} />
-            ))}
-          </div>
-
+        {/* Heading */}
+        <div style={{ textAlign: 'center', maxWidth: '1440px', margin: '0 auto', padding: '0 120px 10px', boxSizing: 'border-box' }}>
+          <Reveal>
+            <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+              Running monthly workshops &amp; discussions
+            </h3>
+          </Reveal>
+          <Reveal delay={100}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto', maxWidth: '560px' }}>
+              Another colleague and I held monthly &ldquo;Lunch &amp; discusses&rdquo; &ndash; intentionally
+              making them hands-on, practical and pressure-free. We made space for honest questions,
+              tool demos, creative exercises and open discussion.
+            </p>
+          </Reveal>
         </div>
-      </div>
+
+        {/* Carousel */}
+        <div style={{ paddingBottom: '0', position: 'relative', zIndex: 2 }}>
+          <DashedCardCarousel items={workshops} />
+        </div>
+
+        {/* Bottom torn edge */}
+        <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
+          style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}>
+          <path d="M0,50 L0,22 L55,45 L110,18 L168,44 L225,10 L280,38 L335,20 L390,46 L445,12 L500,40 L558,8 L615,36 L675,22 L735,48 L792,10 L845,38 L900,18 L958,44 L1015,6 L1070,34 L1128,16 L1185,42 L1245,8 L1300,36 L1360,20 L1440,38 L1440,50 Z" fill="#FFFBF8" />
+        </svg>
+      </section>
     </>
   );
 }
@@ -1068,6 +926,7 @@ function AIAssessment() {
       leftColor="#3975A7"
       rightColor="#CADCEF"
       eyebrow="My Assessment of AI in 2023"
+      eyebrowStyle={{ fontSize: '16px', letterSpacing: 0, textTransform: 'none', color: '#CADCEF' }}
       text={ASSESSMENT_TEXT}
     >
       {/* Bar chart — right panel content */}
@@ -1075,7 +934,7 @@ function AIAssessment() {
         {AI_BARS.map(({ label, pct, color }, i) => (
           <div key={label} style={{ marginBottom: i < AI_BARS.length - 1 ? '28px' : 0 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
-              <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '16px', color: '#101010' }}>
+              <span style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 500, fontSize: '16px', lineHeight: '20px', color: '#101010' }}>
                 {label}
               </span>
               <span style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '13px', color: 'rgba(0,0,0,0.55)', marginLeft: '16px', flexShrink: 0 }}>
@@ -1451,24 +1310,6 @@ export default function BurkettsBees() {
       {/* ── Project Purpose ── */}
       <ProjectPurpose />
 
-      {/* ── Project Goals: 4-card row ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingBottom: '80px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
-        <Reveal>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
-            {goals.map(({ num, title, desc }, i) => (
-              <div key={num} style={{ border: '1px solid rgba(16,16,16,0.12)', borderRadius: '16px', padding: '28px', backgroundColor: '#ffffff' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-                  <div style={{ width: '44px', height: '44px', backgroundColor: '#F5AF5A', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '26px', color: '#101010' }}>{i + 1}</span>
-                  </div>
-                  <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '18px', lineHeight: 1.3, color: '#101010' }}>{title}</span>
-                </div>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>{desc}</p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </section>
 
       {/* ── Built With AI: SmallBoxRow ── */}
       <section style={{
@@ -1489,74 +1330,73 @@ export default function BurkettsBees() {
 
         {/* Centered heading + body */}
         <Reveal>
-          <div style={{ maxWidth: '738px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', textAlign: 'center', marginBottom: '56px' }}>
-            <h2 className="font-body" style={{
+          <div style={{ textAlign: 'center', marginBottom: '50px', maxWidth: '1440px', margin: '0 auto 50px', padding: '0 120px', boxSizing: 'border-box' }}>
+            <h3 className="font-body" style={{
               fontWeight: 700,
-              fontSize:   '64px',
-              lineHeight: 1.05,
+              fontSize:   '33px',
+              lineHeight: 1.2,
               color:      '#101010',
               margin:     '0 0 16px',
-            }}>Built with AI. Art Directed by Me</h2>
+            }}>Built with AI. Art Directed by Me</h3>
             <p style={{
               fontFamily: 'Fraunces, serif',
               fontWeight: 300,
               fontSize:   '20px',
               lineHeight: 1.6,
               color:      '#404040',
-              margin:     0,
+              maxWidth:   '794px',
+              margin:     '0 auto',
             }}>
-              AI helped me build a brand identity toolkit in a fraction of the time. Concept
-              exploration was faster, but the decisions were still mine. I decided to riff off the
-              existing (add)ventures color palette, develop bold illustrations that could flex easily
-              across flavor profiles, and incorporate blue sky as the brand's emotional register.
+              In 2023, AI design tools needed a lot of help. They were useful for getting to a
+              visual direction faster, but the outputs were rarely finished brand assets. The toolkit
+              still took a lot of manual work and cleaning up, but AI certainly helped me get to a
+              concept I could work with, faster.
             </p>
           </div>
         </Reveal>
 
         {/* 4-box image row */}
         <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-          {[
-            { src: '/burketts-bees/5_carousel_toolit/5_BB_Color.jpg',       label: 'Color' },
-            { src: '/burketts-bees/5_carousel_toolit/5_BB_Logo.jpg',        label: 'Lockup' },
-            { src: '/burketts-bees/5_carousel_toolit/5_BB_Illu.jpg',        label: 'Illustrations' },
-            { src: '/burketts-bees/5_carousel_toolit/5_BB_Photography.jpg', label: 'Product photography' },
-          ].map((item) => (
-            <Reveal key={item.label}>
-              <div
-                style={{ transform: 'translateY(0px)', transition: 'transform 0.3s ease', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-                onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-8px)'}
-                onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0px)'}
-              >
-                {/* White frame with drop shadow */}
-                <div style={{
-                  width:           '260px',
-                  height:          '280px',
-                  backgroundColor: '#ffffff',
-                  padding:         '20px',
-                  boxSizing:       'border-box',
-                  boxShadow:       '0px 4px 24px rgba(0,0,0,0.12)',
-                }}>
-                  <img
-                    src={item.src}
-                    alt={item.label}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
-                  />
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            {[
+              { src: '/burketts-bees/5_carousel_toolit/5_BB_Color.jpg',       label: 'Color' },
+              { src: '/burketts-bees/5_carousel_toolit/5_BB_Logo.jpg',        label: 'Lockup' },
+              { src: '/burketts-bees/5_carousel_toolit/5_BB_Illu.jpg',        label: 'Illustrations' },
+              { src: '/burketts-bees/5_carousel_toolit/5_BB_Photography.jpg', label: 'Product photography' },
+            ].map((item) => (
+              <Reveal key={item.label}>
+                <div
+                  style={{ transform: 'translateY(0px)', transition: 'transform 0.3s ease', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+                  onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-8px)'}
+                  onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0px)'}
+                >
+                  <div style={{
+                    width:           '283px',
+                    height:          '305px',
+                    backgroundColor: '#ffffff',
+                    padding:         '20px',
+                    boxSizing:       'border-box',
+                    boxShadow:       '0px 4px 24px rgba(0,0,0,0.12)',
+                  }}>
+                    <img
+                      src={item.src}
+                      alt={item.label}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+                    />
+                  </div>
+                  <p style={{
+                    fontFamily: 'Fira Mono, monospace',
+                    fontWeight: 400,
+                    fontSize:   '16px',
+                    lineHeight: 1.2,
+                    color:      '#101010',
+                    textAlign:  'center',
+                    margin:     '12px 0 0',
+                  }}>{item.label}</p>
                 </div>
-                <p style={{
-                  fontFamily:    'Fira Mono, monospace',
-                  fontWeight:    400,
-                  fontSize:      '11px',
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color:         '#888888',
-                  textAlign:     'center',
-                  margin:        '12px 0 0',
-                }}>{item.label}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
 
         {/* Bottom torn edge — #FFFBF8 tears up into the beige section */}
@@ -1574,15 +1414,15 @@ export default function BurkettsBees() {
           {/* Heading + body + sun */}
           <Reveal>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px' }}>
-              <div style={{ minWidth: '762px' }}>
+              <div style={{ maxWidth: '794px' }}>
                 <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
                   Putting the toolkit to work
                 </h2>
                 <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-                  After building the toolkit, I wanted to see how far the brand could flex. The
-                  mockups were visually impressive, but making ideas visible enough to have productive
-                  conversations about them was the real value. Traditionally, that kind of ideation
-                  costs real time and money before a single thing gets approved.
+                  Once I started applying the brand across different assets, AI's value became much
+                  clearer. It could make early concepts visible enough for a team to discuss, critique,
+                  and build on. Traditionally, that kind of ideation costs real time and money before a
+                  single thing gets approved.
                 </p>
               </div>
               <img src="/ELEMENTS/Sun@2x.png" alt="" style={{ width: '180px', flexShrink: 0, pointerEvents: 'none' }} />
@@ -1702,22 +1542,22 @@ export default function BurkettsBees() {
       <AIAssessment />
 
       {/* ── Bee-hind the Scenes + Realistic Use Cases ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
-        <div>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
           {/* Row 1: heading + body left | presentation slides right */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'start', marginBottom: '60px' }}>
-            <div style={{ gridColumn: '1 / 6' }}>
+          <div style={{ display: 'flex', gap: '50px', alignItems: 'flex-start', marginBottom: '60px' }}>
+            <div style={{ flex: '0 0 490px' }}>
               <Reveal>
-                <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+                <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 20px' }}>
                   Bee-hind the scenes of working with AI
                 </h2>
                 <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-                  It was important that my team saw the weird AI-isms and behind-the-scenes work that it took to create the brand. I presented my findings with honesty. It opened up a discussion about where it actually might be useful.
+                  It was important that my team saw the weird AI-isms and behind-the-scenes work that it took to create the brand. I presented my findings with honesty. While AI's capabilities were impressive, the tool could also be frustrating and full of surprises.
                 </p>
               </Reveal>
             </div>
-            <div style={{ gridColumn: '6 / 13' }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
               <Reveal>
                 <img
                   src="/burketts-bees/7_BeeHindScenes/7_BeeHindScenes1.png"
@@ -1728,8 +1568,8 @@ export default function BurkettsBees() {
             </div>
           </div>
 
-          {/* Row 2: mosaic image + caption left | text paragraphs right */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
+          {/* Row 2: mosaic image + caption left | text cols 8–11 */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'center' }}>
             <div style={{ gridColumn: '1 / 8' }}>
               <Reveal>
                 <img
@@ -1738,21 +1578,19 @@ export default function BurkettsBees() {
                   style={{ width: '100%', display: 'block' }}
                 />
                 <p style={{
-                  fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px',
-                  letterSpacing: '0.1em', textTransform: 'uppercase',
-                  color: '#888888', margin: '12px 0 0',
+                  fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px',
+                  lineHeight: 1.2, color: '#101010', margin: '12px 0 0',
                 }}>
                   Original concepts from when I first started prompting flowers
                 </p>
               </Reveal>
             </div>
-            <div style={{ gridColumn: '8 / 13' }}>
+            <div style={{ gridColumn: '8 / 12', paddingLeft: '97px' }}>
               <Reveal>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 24px' }}>
-                  Image generation has come a long way since 2025, and the score would look different today. But at the time, it felt it was important to show both the potential and the friction.
-                </p>
                 <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-                  But it felt incredibly important to give my team a look at the frustration. And all the editing work that needed to happen at the later stages.
+                  Even if the outputs were not production-ready, the early concepts still made it
+                  easier to discuss direction, spot potential, and decide what was worth making or
+                  editing ourselves.
                 </p>
               </Reveal>
             </div>
@@ -1762,67 +1600,85 @@ export default function BurkettsBees() {
           <div style={{ borderTop: '1px dashed #C4B8A8', margin: '80px 0' }} />
 
           {/* Realistic use cases */}
-          <Reveal>
-            <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-              <h1 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.1, color: '#101010', margin: '0 0 16px' }}>
-                Realistic use cases
-              </h1>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', maxWidth: '640px', margin: '0 auto' }}>
-                Working with Fortune 500 clients meant working inside strict brand systems. Can this tool be used safely, responsibly and consistently inside real agency work?
-              </p>
+          <div style={{ display: 'flex', gap: '50px', alignItems: 'flex-start' }}>
+
+            {/* Left: heading + body */}
+            <div style={{ flex: '0 0 387px' }}>
+              <Reveal>
+                <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+                  Realistic use cases
+                </h3>
+                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+                  Working with Fortune 500 clients meant working inside strict brand systems. In that
+                  reality, AI-generated creative was not always something we could use as a final asset.
+                  The output often did not fit tightly enough within existing guidelines.
+                </p>
+                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '20px 0 0' }}>
+                  The question became: Where could AI make the process easier without making the work
+                  feel cheaper?
+                </p>
+              </Reveal>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+
+            {/* Right: 2×2 card grid */}
+            <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
               {[
-                { n: 1, title: 'Creative exploration & brainstorming', desc: 'Explore where AI could support strategy, identity, packaging, mockups, copy and presentation design.' },
-                { n: 2, title: 'Pitching ideas / RFPs / Nationals',    desc: 'Create a full spec brand the team could actually see, critique and discuss.' },
-                { n: 3, title: 'Social media assets',                   desc: 'Document where the tools helped, where they fell short and where they might fit into agency work.' },
-                { n: 4, title: 'Mockups and Presentations',             desc: 'Use the project as a practical entry point for AI integration at (add)ventures.' },
-              ].map(({ n, title, desc }) => (
-                <div key={n} style={{ border: '1px solid rgba(16,16,16,0.12)', borderRadius: '16px', padding: '28px', backgroundColor: '#ffffff' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-                    <div style={{ width: '44px', height: '44px', backgroundColor: '#F5AF5A', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '26px', color: '#101010' }}>{n}</span>
+                { n: 1, title: 'Creative exploration',      body: 'Generate early visual directions, thought-starters, and styles so the team could compare options before committing to one.' },
+                { n: 2, title: 'RFPs & new business',       body: 'Build quick spec visuals that helped teams respond faster, shape a pitch, and make new business ideas easier to understand.' },
+                { n: 3, title: 'Campaign & social concepts', body: 'Explore campaign ideas, post formats, content themes, and fast-moving social trends without investing too much time.' },
+                { n: 4, title: 'Presentation buildout',     body: 'Use tools with built-in layouts and simple animations to make ideas easier to present, update, and hand off to non-designers.' },
+              ].map(({ n, title, body }) => (
+                <Reveal key={n} delay={(n - 1) * 100}>
+                  <div style={{
+                    backgroundColor: '#ffffff',
+                    border:          '1px solid #E8E0D8',
+                    borderRadius:    '16px',
+                    padding:         '28px',
+                    boxSizing:       'border-box',
+                    boxShadow:       '0px 4px 20px rgba(0,0,0,0.06)',
+                    height:          '100%',
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+                      <div style={{
+                        flexShrink: 0, width: '60px', height: '60px',
+                        backgroundColor: '#D2D7F5', borderRadius: '10px',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      }}>
+                        <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{n}</span>
+                      </div>
+                      <h4 style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', lineHeight: '24px', color: '#101010', margin: 0 }}>{title}</h4>
                     </div>
-                    <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '18px', lineHeight: 1.3, color: '#101010' }}>{title}</span>
+                    <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '16px', lineHeight: '160%', color: '#404040', margin: 0 }}>{body}</p>
                   </div>
-                  <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>{desc}</p>
-                </div>
+                </Reveal>
               ))}
             </div>
-          </Reveal>
+
+          </div>
 
         </div>
       </section>
 
       {/* ── Tools ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingLeft: '120px', paddingRight: '120px', paddingBottom: '120px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingBottom: '120px' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
         {/* Dashed separator — no paddingTop so the line sits flush at the section boundary */}
         <div style={{ borderTop: '1px dashed #C4B8A8', marginBottom: '80px' }} />
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'start' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'start' }}>
 
           {/* Left: heading + body + tag pills */}
-          <div style={{ gridColumn: '1 / 5' }}>
+          <div style={{ gridColumn: '1 / 5', paddingRight: '30px' }}>
             <Reveal>
               <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
-                Tools
+                Helping designers design, not design <em>for</em> them
               </h2>
               <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 32px' }}>
-                Working with Fortune 500 clients meant working inside strict brand systems. In that reality, AI-generated creative was not always something we could use as a final asset. The output often needed too much editing or didn't fit tightly enough within existing guidelines.
+                Creative tools aren't just about image generation. I explored tools that could reduce
+                tedious parts of the design process: organizing assets, naming layers, checking
+                accessibility, supporting onboarding, managing brand assets, and speeding up
+                production work.
               </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {['Custom GPTs', 'AI Plug-ins', 'Data Asset Management Systems'].map(tag => (
-                  <span key={tag} style={{
-                    fontFamily:   'Fira Mono, monospace',
-                    fontSize:     '12px',
-                    color:        '#101010',
-                    border:       '1px solid #101010',
-                    borderRadius: '100px',
-                    padding:      '6px 14px',
-                    display:      'inline-block',
-                  }}>{tag}</span>
-                ))}
-              </div>
             </Reveal>
           </div>
 
@@ -1837,20 +1693,25 @@ export default function BurkettsBees() {
             </Reveal>
             <Reveal>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                <img
-                  src="/burketts-bees/8_tools-grid/8_Tools_Grid2_BottomL.png"
-                  alt="Figma AI workflow tools"
-                  style={{ width: '100%', display: 'block' }}
-                />
-                <img
-                  src="/burketts-bees/8_tools-grid/8_Tools_Grid3_BottomRight.png"
-                  alt="AI image tagging and recognition UI"
-                  style={{ width: '100%', display: 'block' }}
-                />
+                <div style={{ height: '260px', overflow: 'hidden' }}>
+                  <img
+                    src="/burketts-bees/8_tools-grid/8_Tools_Grid2_BottomL.png"
+                    alt="Figma AI workflow tools"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
+                  />
+                </div>
+                <div style={{ height: '260px', overflow: 'hidden' }}>
+                  <img
+                    src="/burketts-bees/8_tools-grid/8_Tools_Grid3_BottomRight.png"
+                    alt="AI image tagging and recognition UI"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+                  />
+                </div>
               </div>
             </Reveal>
           </div>
 
+        </div>
         </div>
       </section>
 
@@ -1859,74 +1720,55 @@ export default function BurkettsBees() {
         id="ai-education"
         leftColor="#F5AF5A"
         rightColor="#EEEAE4"
-        leftContent={
-          <>
-            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 28px' }}>
-              From curiosity to AI education and integration
-            </h2>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-              Burkett&rsquo;s Bees gave the team something concrete to react to. The project helped shift the conversation from abstract AI hype to practical creative workflows and became part of the foundation for my eventual role as <strong style={{ fontWeight: 700 }}>Art Director, AI Integration.</strong>
-            </p>
-          </>
-        }
+        text="The project helped shift the conversation from abstract AI hype to practical creative workflows and became part of the foundation for my eventual role as Art Director, AI Integration."
+        textColor="#101010"
+        rightFullBleed
       >
-        <video
-          src="/burketts-bees/9_addventuresbubbleplus.mp4"
-          autoPlay muted loop playsInline
-          style={{ width: '100%', display: 'block' }}
-        />
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+          <video
+            src="/burketts-bees/9_addventuresbubbleplus.mp4"
+            autoPlay muted loop playsInline
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center 55%',
+              display: 'block',
+            }}
+          />
+        </div>
       </CaseSplitPanel>
 
       {/* ── The Role in Practice ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
-
-          {/* Left: heading + body */}
-          <div style={{ gridColumn: '1 / 6' }}>
-            <Reveal>
-              <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
-                The role in practice
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+          <Reveal>
+            <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+                A new role in the company
+              </p>
+              <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 28px' }}>
+                Art Director, AI Integration
               </h2>
               <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-                In the role, I maintained my Art Director responsibilities, while also integrating new tools and educating the team. While also leading AI research, testing and implementation across creative workflows. The work was not just about experimenting with new tools. It was also about internal education, and figuring out what was useful, safe, and compliant for an agency serving highly regulated clients.
+                What the role looked like in practice: I kept my art direction responsibilities while
+                researching tools, testing workflows, leading discussions, and helping the team figure
+                out what was useful, safe, and realistic for both internal and client work.
               </p>
-            </Reveal>
+            </div>
+          </Reveal>
+
+          {/* Scrolling ticker */}
+          <div style={{ marginTop: '60px' }}>
+            <TickerStrip duration={40} items={[
+              'Monthly Workshops', 'Demos', 'One-on-one mentoring', 'Art Direction',
+              'Ethics', 'Image Gen', 'Custom Models', 'Discussion',
+              'Tool Testing', 'Guidelines & Guardrails', 'Compliance', 'New Business Support',
+            ]} />
           </div>
 
-          {/* Right: tag cloud */}
-          <div style={{ gridColumn: '6 / 13' }}>
-            <Reveal>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
-                {[
-                  { label: 'AI Lunch & Discuss',     variant: 'orange'  },
-                  { label: 'Demos',                   variant: 'purple'  },
-                  { label: 'Mentoring',               variant: 'dashed'  },
-                  { label: 'Art Direction',           variant: 'dashed'  },
-                  { label: 'Ethics',                  variant: 'purple'  },
-                  { label: 'Image Gen',               variant: 'dashed'  },
-                  { label: 'Custom Models',           variant: 'purple'  },
-                  { label: 'Discussion',              variant: 'dashed'  },
-                  { label: 'Tool testing',            variant: 'orange'  },
-                  { label: 'Guidelines & Guardrails', variant: 'dashed'  },
-                  { label: 'Compliance',              variant: 'dashed'  },
-                  { label: 'New business support',    variant: 'orange'  },
-                ].map(({ label, variant }) => {
-                  const base = {
-                    fontFamily:   'Fira Mono, monospace',
-                    fontSize:     '13px',
-                    lineHeight:   1,
-                    borderRadius: '100px',
-                    padding:      '11px 20px',
-                    display:      'inline-block',
-                    color:        '#101010',
-                  };
-                  if (variant === 'orange') return <span key={label} style={{ ...base, backgroundColor: '#F5AF5A' }}>{label}</span>;
-                  if (variant === 'purple') return <span key={label} style={{ ...base, backgroundColor: '#C5BFEC' }}>{label}</span>;
-                  return <span key={label} style={{ ...base, backgroundColor: 'transparent', border: '1.5px dashed #101010' }}>{label}</span>;
-                })}
-              </div>
-            </Reveal>
-          </div>
 
         </div>
       </section>
@@ -1935,7 +1777,8 @@ export default function BurkettsBees() {
       <WorkshopCarousel />
 
       {/* ── Three C's + What Carried Forward ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
         {/* Testing AI against the Three C's — centered heading */}
         <Reveal>
@@ -1952,19 +1795,50 @@ export default function BurkettsBees() {
         {/* Three cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
           {[
-            { num: '1', title: 'Collaboration', body: 'Does it help teams work better together? Can it speed up ideation, review and shared decision-making?' },
-            { num: '2', title: 'Consistency',   body: 'Can it stay on brand and on brief across multiple outputs, formats and teams? Where do we lose cohesion?' },
-            { num: '3', title: 'Compliance',    body: 'Can it be used safely within client, privacy, security and internal approval requirements?' },
+            { num: 1, title: 'Collaboration', body: 'Does it help teams work better together? Can it speed up ideation, review and shared decision-making?' },
+            { num: 2, title: 'Consistency',   body: 'Can it stay on brand and on brief across multiple outputs, formats and teams? Where do we lose cohesion?' },
+            { num: 3, title: 'Compliance',    body: 'Can it be used safely within client, privacy, security and internal approval requirements?' },
           ].map(({ num, title, body }) => (
-            <Reveal key={title}>
-              <div style={{ border: '1px solid rgba(16,16,16,0.12)', borderRadius: '16px', padding: '28px', backgroundColor: '#ffffff' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-                  <div style={{ width: '44px', height: '44px', backgroundColor: '#F5AF5A', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '26px', lineHeight: 1, color: '#101010' }}>{num}</span>
+            <Reveal key={num} delay={(num - 1) * 120}>
+              <div style={{
+                backgroundColor: '#ffffff',
+                border:          '1px solid #E8E0D8',
+                borderRadius:    '16px',
+                padding:         '28px',
+                boxSizing:       'border-box',
+                boxShadow:       '0px 4px 20px rgba(0,0,0,0.06)',
+                height:          '100%',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+                  <div style={{
+                    flexShrink:      0,
+                    width:           '60px',
+                    height:          '60px',
+                    backgroundColor: '#D2D7F5',
+                    borderRadius:    '10px',
+                    display:         'flex',
+                    alignItems:      'center',
+                    justifyContent:  'center',
+                  }}>
+                    <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{num}</span>
                   </div>
-                  <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '20px', color: '#101010' }}>{title}</span>
+                  <h4 style={{
+                    fontFamily: 'Fraunces, serif',
+                    fontWeight: 700,
+                    fontSize:   '24px',
+                    lineHeight: '24px',
+                    color:      '#101010',
+                    margin:     0,
+                  }}>{title}</h4>
                 </div>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>{body}</p>
+                <p style={{
+                  fontFamily: 'Fraunces, serif',
+                  fontWeight: 300,
+                  fontSize:   '16px',
+                  lineHeight: '160%',
+                  color:      '#404040',
+                  margin:     0,
+                }}>{body}</p>
               </div>
             </Reveal>
           ))}
@@ -2002,6 +1876,7 @@ export default function BurkettsBees() {
           </div>
         </div>
 
+      </div>
       </section>
 
       <Footer />

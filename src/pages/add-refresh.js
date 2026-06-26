@@ -4,7 +4,9 @@ import Cursor from '../components/Cursor';
 import Footer from '../components/Footer';
 import CaseStudySection  from '../components/CaseStudySection';
 import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
-import StickyHero        from '../components/StickyHero';
+import StickyHero          from '../components/StickyHero';
+import DashedCardCarousel  from '../components/DashedCardCarousel';
+import TickerStrip         from '../components/TickerStrip';
 
 // ── Minimal case-study nav ────────────────────────────────────────────────────
 function CaseStudyNav() {
@@ -127,115 +129,19 @@ function Reveal({ children, delay = 0, distance = 48, style = {} }) {
 }
 
 // ── Collage carousel ─────────────────────────────────────────────────────────
-const collageSlides = [
-  '/add-refresh/7_collages/7_collage1.jpg',
-  '/add-refresh/7_collages/7_collage4.jpg',
-  '/add-refresh/7_collages/7_collage6.jpg',
-  '/add-refresh/7_collages/7_collage2.jpg',
-  '/add-refresh/7_collages/7_collage5.jpg',
-  '/add-refresh/7_collages/7_collage3.jpg',
+const collageItems = [
+  { img: '/add-refresh/7_collages/7_collage1.jpg' },
+  { img: '/add-refresh/7_collages/7_collage4.jpg' },
+  { img: '/add-refresh/7_collages/7_collage6.jpg' },
+  { img: '/add-refresh/7_collages/7_collage2.jpg' },
+  { img: '/add-refresh/7_collages/7_collage5.jpg' },
+  { img: '/add-refresh/7_collages/7_collage3.jpg' },
 ];
 
 function CollageCarousel() {
-  const CARD_W    = 500;
-  const GAP       = 50;
-  const SNAP_STEP = CARD_W + GAP; // 550px per snap
-
-  const [page,     setPage]     = useState(0);
-  const [dragging, setDragging] = useState(false);
-  const viewportRef = useRef(null);
-  const trackRef    = useRef(null);
-  const offsetRef   = useRef(0);
-  const animRef     = useRef(null);
-  const dragRef     = useRef({ active: false, startX: 0, startOffset: 0 });
-  const vpWidthRef  = useRef(1120);
-  const [vpWidth,   setVpWidth] = useState(1120);
-
-  const getMaxOff = () => Math.max(0, collageSlides.length * CARD_W + (collageSlides.length - 1) * GAP - vpWidthRef.current);
-
-  const applyTransform = () => {
-    if (trackRef.current) trackRef.current.style.transform = `translateX(-${offsetRef.current}px)`;
-  };
-
-  const animateTo = (target) => {
-    if (animRef.current) cancelAnimationFrame(animRef.current);
-    const clamped  = Math.max(0, Math.min(getMaxOff(), target));
-    const start    = offsetRef.current;
-    const diff     = clamped - start;
-    const duration = 500;
-    const t0       = performance.now();
-    const tick = (now) => {
-      const p    = Math.min((now - t0) / duration, 1);
-      const ease = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
-      offsetRef.current = start + diff * ease;
-      applyTransform();
-      if (p < 1) animRef.current = requestAnimationFrame(tick);
-      else { offsetRef.current = clamped; applyTransform(); }
-    };
-    animRef.current = requestAnimationFrame(tick);
-  };
-
-  const snapNearest = () => {
-    const maxPage = Math.floor(getMaxOff() / SNAP_STEP);
-    const nearest = Math.max(0, Math.min(maxPage, Math.round(offsetRef.current / SNAP_STEP)));
-    setPage(nearest);
-    animateTo(nearest * SNAP_STEP);
-  };
-
-  useEffect(() => {
-    const el = viewportRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([e]) => {
-      vpWidthRef.current = e.contentRect.width;
-      setVpWidth(e.contentRect.width);
-    });
-    ro.observe(el);
-    const handleWheel = (e) => {
-      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
-      e.preventDefault();
-      if (animRef.current) cancelAnimationFrame(animRef.current);
-      offsetRef.current = Math.max(0, Math.min(getMaxOff(), offsetRef.current + e.deltaX));
-      applyTransform();
-    };
-    el.addEventListener('wheel', handleWheel, { passive: false });
-    return () => { ro.disconnect(); el.removeEventListener('wheel', handleWheel); };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => { animateTo(page * SNAP_STEP); }, [page, vpWidth]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const onMouseDown = (e) => {
-    if (animRef.current) cancelAnimationFrame(animRef.current);
-    dragRef.current = { active: true, startX: e.clientX, startOffset: offsetRef.current };
-    setDragging(true);
-  };
-  const onMouseMove = (e) => {
-    if (!dragRef.current.active) return;
-    offsetRef.current = Math.max(0, Math.min(getMaxOff(), dragRef.current.startOffset + (dragRef.current.startX - e.clientX)));
-    applyTransform();
-  };
-  const onDragEnd = () => {
-    if (!dragRef.current.active) return;
-    dragRef.current.active = false;
-    setDragging(false);
-    snapNearest();
-  };
-
-  const maxOff  = Math.max(0, collageSlides.length * CARD_W + (collageSlides.length - 1) * GAP - vpWidth);
-  const numDots = Math.floor(maxOff / SNAP_STEP) + 1;
-
-  const arrowStyle = (disabled) => ({
-    position: 'absolute', top: '50%', transform: 'translateY(-50%)', zIndex: 2,
-    width: '44px', height: '44px', borderRadius: '50%',
-    border: '1.5px solid rgba(16,16,16,0.18)', backgroundColor: '#ffffff',
-    cursor: disabled ? 'default' : 'pointer', opacity: disabled ? 0.3 : 1,
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    fontSize: '18px', color: '#101010', transition: 'opacity 0.25s ease',
-    boxShadow: '0 2px 12px rgba(0,0,0,0.08)', flexShrink: 0,
-  });
-
   return (
     <>
-      <CaseStudyFullBleed background="#FFFBF8" style={{ paddingTop: '80px', paddingBottom: '120px', textAlign: 'center' }}>
+      <CaseStudyFullBleed background="#FFFBF8" style={{ paddingTop: '80px', paddingBottom: '10px', textAlign: 'center' }}>
         <Reveal>
           <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
             Collage as an Expression
@@ -249,56 +155,7 @@ function CollageCarousel() {
       </CaseStudyFullBleed>
 
       <div style={{ backgroundColor: '#FFFBF8', paddingBottom: '80px', position: 'relative', zIndex: 2 }}>
-        <div style={{ padding: '0 120px', boxSizing: 'border-box', position: 'relative' }}>
-
-          <button onClick={() => setPage(p => Math.max(0, p - 1))} aria-label="Previous"
-            style={{ ...arrowStyle(page === 0), left: '28px' }}>←</button>
-          <button onClick={() => setPage(p => Math.min(numDots - 1, p + 1))} aria-label="Next"
-            style={{ ...arrowStyle(page === numDots - 1), right: '28px' }}>→</button>
-
-          <div style={{ overflowX: 'clip', marginLeft: '-60px', paddingLeft: '60px' }}>
-            <div ref={viewportRef}
-              style={{ overflow: 'visible', padding: '40px 0 80px', cursor: dragging ? 'grabbing' : 'grab', userSelect: 'none' }}
-              onMouseDown={onMouseDown} onMouseMove={onMouseMove} onMouseUp={onDragEnd} onMouseLeave={onDragEnd}
-            >
-              <div ref={trackRef} style={{ display: 'flex', gap: `${GAP}px`, willChange: 'transform' }}>
-                {collageSlides.map((src, i) => (
-                  <div key={i}
-                    style={{
-                      width:           `${CARD_W}px`,
-                      flexShrink:      0,
-                      backgroundColor: '#ffffff',
-                      borderRadius:    '20px',
-                      overflow:        'hidden',
-                      border:          '2px dashed #101010',
-                      padding:         '16px',
-                      boxShadow:       '0 16px 48px rgba(0,0,0,0.14)',
-                      transform:       'translateY(0px)',
-                      transition:      'transform 0.3s ease',
-                    }}
-                    onMouseEnter={e => { if (!dragRef.current.active) e.currentTarget.style.transform = 'translateY(-8px)'; }}
-                    onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0px)'}
-                  >
-                    <img src={src} alt="" draggable={false}
-                      style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', objectPosition: 'center', display: 'block', borderRadius: '10px' }} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '32px' }}>
-            {Array.from({ length: numDots }).map((_, idx) => (
-              <button key={idx} onClick={() => setPage(idx)} aria-label={`Page ${idx + 1}`} style={{
-                width: idx === page ? '24px' : '8px', height: '8px', borderRadius: '4px',
-                backgroundColor: idx === page ? '#101010' : 'rgba(16,16,16,0.25)',
-                border: 'none', cursor: 'pointer', padding: 0,
-                transition: 'width 0.3s ease, background-color 0.3s ease',
-              }} />
-            ))}
-          </div>
-
-        </div>
+        <DashedCardCarousel items={collageItems} imageRatio="1 / 1" />
       </div>
     </>
   );
@@ -406,32 +263,37 @@ function ConceptSystem() {
   return (
     <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '120px' }}>
       <div ref={contentRef} style={{
-        display: 'flex', gap: '60px', alignItems: 'center',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(12, 1fr)',
+        columnGap: '20px',
+        alignItems: 'center',
         transform: 'scale(0.96)', opacity: 0,
         transition: 'transform 700ms cubic-bezier(0.16, 1, 0.3, 1), opacity 700ms cubic-bezier(0.16, 1, 0.3, 1)',
         transformOrigin: 'center center',
       }}>
 
-        {/* Left: heading + body */}
-        <div style={{ flex: '0 0 360px', width: '360px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignSelf: 'stretch' }}>
+        {/* Left: heading + text (cols 1–5) */}
+        <div style={{ gridColumn: '1 / 6' }}>
           <Reveal delay={0}>
-            <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 12px' }}>
+            <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
               Familiar enough to belong. Flexible enough to grow.
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 24px' }}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
               The direction I helped develop — &ldquo;Night at the muse-em&rdquo; — was selected as the foundation because it built upon the brand&apos;s existing equity. This gave the agency more room to express its personality without a full reset.
             </p>
+          </Reveal>
+          <Reveal delay={150}>
             <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               From there, the challenge was synthesis: taking the strongest conceptual elements from the broader team&apos;s explorations and weaving them into a single, cohesive visual system that still felt unified.
             </p>
           </Reveal>
         </div>
 
-        {/* Right: card stack + arrows */}
-        <Reveal delay={0} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
-          <div style={{ position: 'relative', width: '518px', height: '636px' }}>
+        {/* Right: card stack + arrows (cols 7–12) */}
+        <Reveal delay={0} style={{ gridColumn: '7 / 13', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
+          <div style={{ position: 'relative', width: '622px', height: '763px' }}>
             {toolkitSlides.map((src, si) => (
               <div key={si} style={getCardStyle(si)}>
                 <img src={src} alt={`Brand system ${si + 1}`}
@@ -441,8 +303,8 @@ function ConceptSystem() {
           </div>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
             <span style={{
-              fontFamily: 'Fira Mono, monospace', fontSize: '11px',
-              letterSpacing: '0.08em', textTransform: 'uppercase', color: '#888',
+              fontFamily: 'Fira Mono, monospace', fontWeight: 400,
+              fontSize: '16px', lineHeight: 1.2, color: '#101010',
             }}>flip through the deck</span>
             <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
             <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
@@ -722,22 +584,44 @@ export default function AddRefresh() {
       </CaseStudySection>
 
       {/* ── How it started ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingLeft: '120px', paddingRight: '120px', paddingTop: '120px', paddingBottom: '120px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
-        {/* Centered heading + body */}
-        <Reveal>
-          <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 60px' }}>
-            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 28px' }}>
-              How it started
-            </h2>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-              The (add)ventures brand had history, recognition, and a point of view. But as the agency evolved, the brand was being asked to do more. The existing brand system had strong ingredients, but it needed clearer guidance for how those pieces should behave. The brand needed a clearer creative language that could carry across touchpoints without losing recognition.
-            </p>
+        {/* Top row: heading + body (8 cols) | pencil (4 cols) */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'flex-start', marginBottom: '50px' }}>
+
+          <div style={{ gridColumn: '1 / 9' }}>
+            <Reveal>
+              <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+                It started with a seemingly small ask
+              </h3>
+            </Reveal>
+            <Reveal delay={100}>
+              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+                The project began with a focused request: explore a new illustration style for the (add)ventures agency. But as we sketched and tested, we hit the same roadblocks as other parallel internal workstreams.
+              </p>
+            </Reveal>
           </div>
-        </Reveal>
+
+          <div style={{ gridColumn: '9 / 13', position: 'relative' }}>
+            <div style={{ position: 'absolute', right: 0, top: 0 }}>
+              <Reveal delay={200} style={{ width: 'auto' }}>
+                <img
+                  src="/ELEMENTS/Pencil@2x.png"
+                  alt=""
+                  style={{ width: '60px', display: 'block', transform: 'rotate(75deg)', transformOrigin: 'top center' }}
+                />
+              </Reveal>
+            </div>
+          </div>
+
+        </div>
 
         {/* Video card */}
         <Reveal>
+          <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+            Initial Character Illustrations. Drawn on Procreate.
+          </p>
           <div
             style={{ backgroundColor: '#ffffff', padding: '24px', boxShadow: '0px 4px 40px rgba(0,0,0,0.08)', transform: 'translateY(0px)', transition: 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
             onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-8px)'}
@@ -747,63 +631,35 @@ export default function AddRefresh() {
               <source src="/add-refresh/3_PortfolioIllu_Vid.mp4" type="video/mp4" />
             </video>
           </div>
-          <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888888', textAlign: 'center', margin: '16px 0 0' }}>
-            Character Illustration I developed
-          </p>
         </Reveal>
 
+      </div>
       </section>
 
-      {/* ── When a seemingly small ask ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
-
-          {/* Left: heading + body */}
-          <div style={{ gridColumn: '1 / 6' }}>
-            <Reveal>
-              <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
-                When a seemingly small ask reveals a bigger question
-              </h2>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 24px' }}>
-                The project began with a focused request: explore a new illustration style for the agency. But as we sketched and tested, we hit the same roadblocks as other parallel internal workstreams. The agency was evolving fast, but the brand guidelines hadn't kept pace. We realized we didn't just need new illustrations; we needed a clearer, more resilient visual language.
+      {/* ── The natural next step for the brand ── */}
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '40px', paddingBottom: '120px' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+          <Reveal>
+            <div style={{ textAlign: 'center', maxWidth: '793px', margin: '0 auto' }}>
+              <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+                The natural next step for the brand
+              </h3>
+              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+                The agency was evolving, and the brand needed room to evolve with it. What started as an illustration exploration quickly raised bigger questions about type, color, motion, tone, and how the system should behave across channels.
               </p>
               <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-                We were bringing this level of strategic thinking to client work every day. This became the moment to bring it back to ourselves.
+                We were bringing that kind of strategic thinking to client work every day. This became a chance to bring it back to ourselves.
               </p>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
 
-          {/* Right: tag cloud */}
-          <div style={{ gridColumn: '6 / 13' }}>
-            <Reveal>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
-                {[
-                  { label: 'Which font, when?',                   variant: 'purple' },
-                  { label: 'How should it move?',                  variant: 'purple' },
-                  { label: 'How much yellow?',                     variant: 'orange' },
-                  { label: 'How should it sound?',                 variant: 'purple' },
-                  { label: 'The virtual room?',                    variant: 'dashed' },
-                  { label: 'How does the podcast show up?',        variant: 'orange' },
-                  { label: 'How does it show up across channels?', variant: 'dashed' },
-                  { label: 'Where should it be allowed to flex?',  variant: 'dashed' },
-                ].map(({ label, variant }) => {
-                  const base = {
-                    fontFamily:   'Fira Mono, monospace',
-                    fontSize:     '13px',
-                    lineHeight:   1,
-                    borderRadius: '100px',
-                    padding:      '11px 20px',
-                    display:      'inline-block',
-                    color:        '#101010',
-                  };
-                  if (variant === 'orange') return <span key={label} style={{ ...base, backgroundColor: '#F5AF5A' }}>{label}</span>;
-                  if (variant === 'purple') return <span key={label} style={{ ...base, backgroundColor: '#C5BFEC' }}>{label}</span>;
-                  return <span key={label} style={{ ...base, backgroundColor: 'transparent', border: '1.5px dashed #101010' }}>{label}</span>;
-                })}
-              </div>
-            </Reveal>
+          <div style={{ marginTop: '60px' }}>
+            <TickerStrip duration={40} items={[
+              'Which font, when?', 'How much yellow?', 'How does it show up across channels?',
+              'How does Brand Slam fit in?', 'How does DoorG fit in?', 'Where are we allowed to flex?',
+              'Internal initiative?', 'When did we last update our templates?',
+            ]} />
           </div>
-
         </div>
       </section>
 
@@ -826,10 +682,10 @@ export default function AddRefresh() {
 
         {/* Centered heading + body */}
         <Reveal>
-          <div style={{ maxWidth: '738px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', textAlign: 'center', marginBottom: '56px' }}>
-            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 16px' }}>
-              The Concept Sprint
-            </h2>
+          <div style={{ maxWidth: '740px', margin: '0 auto', textAlign: 'center', marginBottom: '56px' }}>
+            <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+              Let the Concept Sprint Begin!
+            </h3>
             <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               In a fast-paced sprint, a small group of art directors developed independent visions for the brand&apos;s evolution.
             </p>
@@ -851,8 +707,8 @@ export default function AddRefresh() {
                   onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0px)'}
                 >
                   <div style={{
-                    width:           '260px',
-                    height:          '280px',
+                    width:           '283px',
+                    height:          '305px',
                     backgroundColor: '#ffffff',
                     padding:         '20px',
                     boxSizing:       'border-box',
@@ -862,14 +718,13 @@ export default function AddRefresh() {
                       style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
                   </div>
                   <p style={{
-                    fontFamily:    'Fira Mono, monospace',
-                    fontWeight:    400,
-                    fontSize:      '11px',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    color:         '#888888',
-                    textAlign:     'center',
-                    margin:        '12px 0 0',
+                    fontFamily: 'Fira Mono, monospace',
+                    fontWeight: 400,
+                    fontSize:   '16px',
+                    lineHeight: 1.2,
+                    color:      '#101010',
+                    textAlign:  'center',
+                    margin:     '12px 0 0',
                   }}>{item.label}</p>
                 </div>
               </Reveal>
@@ -888,7 +743,8 @@ export default function AddRefresh() {
       <ConceptSystem />
 
       {/* ── The answer was in the building ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
 
           {/* Left: image mosaic */}
@@ -922,7 +778,7 @@ export default function AddRefresh() {
                   </div>
                 </div>
               </div>
-              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888888', margin: '12px 0 0' }}>
+              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '12px 0 0' }}>
                 Image in the Epic HQ
               </p>
             </Reveal>
@@ -941,24 +797,65 @@ export default function AddRefresh() {
           </div>
 
         </div>
+      </div>
       </section>
 
       <CollageCarousel />
 
       {/* ── Turning a concept into a working system ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
-        {/* Centered heading + subhead */}
-        <Reveal>
-          <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 60px' }}>
-            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 20px' }}>
-              Turning a concept into a working system
-            </h2>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-              Members from the (add)ventures Creative Team and I tested the direction across various touchpoints: presentation decks, social media, logo expression, brand marks, shapes, gradients, text treatments, doodles, illustrations, swag, wayfinding, headlines, internal initiatives, podcast graphics, and the virtual production studio.
-            </p>
+        {/* Dashed divider */}
+        <svg width="100%" height="2" style={{ display: 'block', marginBottom: '60px' }} preserveAspectRatio="none">
+          <line x1="0" y1="1" x2="100%" y2="1" stroke="rgba(16,16,16,0.20)" strokeWidth="2" strokeDasharray="4 6" />
+        </svg>
+
+        {/* Heading (left) + Credits (right) */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'start', marginBottom: '60px' }}>
+
+          <div style={{ gridColumn: '1 / 8' }}>
+            <Reveal>
+              <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 20px' }}>
+                Turning a concept into a working system
+              </h2>
+            </Reveal>
+            <Reveal delay={100}>
+              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+                Members from the (add)ventures Creative Team and I tested the direction across various touchpoints: presentation decks, social media, logo expression, brand marks, shapes, gradients, text treatments, doodles, illustrations, swag, wayfinding, headlines, internal initiatives, podcast graphics, and the virtual production studio.
+              </p>
+            </Reveal>
           </div>
-        </Reveal>
+
+          <div style={{ gridColumn: '9 / 13', display: 'flex', flexDirection: 'column', gap: '24px', paddingTop: '8px' }}>
+            {[
+              { label: 'Creative Direction',        value: 'Meagan Driscoll' },
+              { label: 'Art Direction + Design',    value: 'Natalie Nicholson' },
+              { label: 'Additional Design Support', value: 'The (add)ventures Creative Team' },
+            ].map(({ label, value }, i) => (
+              <Reveal key={label} delay={150 + i * 80}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <span style={{
+                    fontFamily:    'Fira Mono, monospace',
+                    fontWeight:    400,
+                    fontSize:      '16px',
+                    letterSpacing: '0.08em',
+                    lineHeight:    1.2,
+                    color:         '#888888',
+                  }}>{label}</span>
+                  <span style={{
+                    fontFamily: 'Poppins, sans-serif',
+                    fontWeight: 400,
+                    fontSize:   '20px',
+                    lineHeight: 1.4,
+                    color:      '#101010',
+                  }}>{value}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+        </div>
 
         {/* Full-width dark image */}
         <Reveal>
@@ -970,7 +867,7 @@ export default function AddRefresh() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'start', marginBottom: '60px' }}>
           <Reveal>
             <div>
-              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888888', margin: '0 0 16px' }}>
+              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
                 Creating rules around color and gradients
               </p>
               <img src="/add-refresh/8-working-sytem/8_ws-gradient-rules.png" alt="" style={{ width: '100%', display: 'block' }} />
@@ -988,7 +885,7 @@ export default function AddRefresh() {
           </Reveal>
           <Reveal>
             <div>
-              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888888', margin: '0 0 16px' }}>
+              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
                 Brand mark cleanup, parentheses behavior
               </p>
               <img src="/add-refresh/8-working-sytem/8_ws-addmark.png" alt="" style={{ width: '100%', display: 'block' }} />
@@ -1010,7 +907,7 @@ export default function AddRefresh() {
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '40px', alignItems: 'start', marginTop: '60px' }}>
           <Reveal>
             <div>
-              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#888888', margin: '0 0 16px' }}>
+              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
                 Defining roles for headlines, wayfinding, and expressive type
               </p>
               <img src="/add-refresh/8-working-sytem/8_ws-typography.png" alt="" style={{ width: '100%', display: 'block' }} />
@@ -1024,13 +921,15 @@ export default function AddRefresh() {
           </Reveal>
         </div>
 
+      </div>
       </section>
 
       {/* ── Integrating collage, shape language, doodles, and patterns ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
         <Reveal>
-          <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '14px', letterSpacing: '0.04em', color: '#404040', margin: '0 0 28px' }}>
+          <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 28px' }}>
             Integrating collage, shape language, doodles, and patterns
           </p>
         </Reveal>
@@ -1057,10 +956,12 @@ export default function AddRefresh() {
           </div>
         </Reveal>
 
+      </div>
       </section>
 
       {/* ── Deck fan ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Reveal style={{ width: 'auto' }}>
             <div style={{ position: 'relative', width: '800px', height: '450px' }}>
@@ -1084,10 +985,12 @@ export default function AddRefresh() {
             </div>
           </Reveal>
         </div>
+      </div>
       </section>
 
       {/* ── Two posters, centered ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '80px 120px 100px', boxSizing: 'border-box', display: 'flex', justifyContent: 'center' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '100px' }}>
+      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', display: 'flex', justifyContent: 'center' }}>
         <Reveal style={{ width: 'auto' }}>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
             <img src="/add-refresh/8-working-sytem/8_ws-poster1.jpg" alt=""
@@ -1096,12 +999,14 @@ export default function AddRefresh() {
               style={{ width: '290px', display: 'block', borderRadius: '8px' }} />
           </div>
         </Reveal>
+      </div>
       </section>
 
       {/* ── Totes, apparel, and swag ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
+      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
         <Reveal>
-          <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '14px', letterSpacing: '0.04em', color: '#404040', margin: '0 0 24px' }}>
+          <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 24px' }}>
             Totes, apparel, and swag
           </p>
           <div style={{ border: '1.5px solid #c8c8c8', overflow: 'hidden' }}>
@@ -1117,12 +1022,13 @@ export default function AddRefresh() {
             </div>
           </div>
         </Reveal>
+      </div>
       </section>
 
       {/* ── Social media and podcast graphics ── */}
       <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', boxSizing: 'border-box', width: '100%' }}>
         <Reveal>
-          <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '14px', letterSpacing: '0.04em', color: '#404040', margin: '0 0 48px' }}>
+          <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 48px' }}>
             Social media and podcast graphics
           </p>
         </Reveal>

@@ -23,6 +23,7 @@ export default function CaseSplitPanel({
   leftColor      = '#3975A7',
   rightColor     = '#CADCEF',
   eyebrow,
+  eyebrowStyle   = {},
   text           = '',
   textColor      = '#ffffff',
   leftContent,
@@ -103,6 +104,7 @@ export default function CaseSplitPanel({
                 textTransform: 'uppercase',
                 color:         `${textColor}88`,
                 margin:        '0 0 32px',
+                ...eyebrowStyle,
               }}>{eyebrow}</p>
             )}
 

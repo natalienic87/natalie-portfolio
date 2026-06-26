@@ -5,7 +5,8 @@ import Cursor from '../components/Cursor';
 import Footer from '../components/Footer';
 import CaseStudySection  from '../components/CaseStudySection';
 import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
-import StickyHero        from '../components/StickyHero';
+import StickyHero           from '../components/StickyHero';
+import DashedCardCarousel   from '../components/DashedCardCarousel';
 
 // ── Minimal case-study nav ────────────────────────────────────────────────────
 function CaseStudyNav() {
@@ -72,21 +73,19 @@ function MetaItem({ label, value }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', gap: '24px' }}>
       <span style={{
-        fontFamily:    'Fira Mono, monospace',
-        fontWeight:    400,
-        fontSize:      '11px',
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
-        lineHeight:    1.5,
-        color:         '#888888',
-        minWidth:      '72px',
-        flexShrink:    0,
+        fontFamily: 'Fira Mono, monospace',
+        fontWeight: 400,
+        fontSize:   '16px',
+        lineHeight: 1.2,
+        color:      '#101010',
+        minWidth:   '72px',
+        flexShrink: 0,
       }}>{label}</span>
       <span style={{
         fontFamily: 'Fira Mono, monospace',
         fontWeight: 400,
-        fontSize:   '14px',
-        lineHeight: 1.5,
+        fontSize:   '16px',
+        lineHeight: 1.2,
         color:      '#101010',
         width:      '264px',
         flexShrink: 0,
@@ -788,8 +787,9 @@ function CharacterCreation() {
       <div
         ref={contentRef}
         style={{
-          display:         'flex',
-          gap:             '60px',
+          display:         'grid',
+          gridTemplateColumns: 'repeat(12, 1fr)',
+          columnGap:       '20px',
           alignItems:      'center',
           transform:       'scale(0.96)',
           opacity:         0,
@@ -798,86 +798,87 @@ function CharacterCreation() {
         }}
       >
 
-      {/* ── Left: collage (264px) above heading + text (360px) ── */}
-      <div style={{ flex: '0 0 360px', width: '360px' }}>
-        {/* Yellow star doodle above photo grid */}
-        <div
-          data-dev-id="star-doodle"
-          data-dev-type="doodle"
-          style={{ width: '72px', marginBottom: '16px', transform: 'translate(92px, -74px) scale(1.227)', transformOrigin: 'top left' }}
-        >
-          <img src="/ELEMENTS/Yellow Star_.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 10s linear infinite', transformOrigin: 'center' }} />
+        {/* ── Left: collage image + heading + text (cols 1–5) ── */}
+        <div style={{ gridColumn: '1 / 6' }}>
+          <Reveal delay={0}>
+            <div
+              style={{ width: '284px', height: '284px', overflow: 'hidden', boxShadow: '0px 4px 20px rgba(0,0,0,0.12)', marginBottom: '50px' }}
+              onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
+              onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
+            >
+              <img
+                src="/rules-we-made-up/4-character-creation/collage-nat-photos.jpg"
+                alt="Childhood reference photos"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
+              />
+            </div>
+          </Reveal>
+          <Reveal delay={0}>
+            <h2 className="font-body" style={{
+              fontWeight: 700,
+              fontSize:   '33px',
+              lineHeight: 1.2,
+              color:      '#101010',
+              margin:     '0 0 20px',
+            }}>Building the cast</h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              I started with the main character (me!) because the whole film depended on her
+              feeling specific. I used old photos of myself as a kid as reference, and developed
+              her in Nano Banana, with all my favorite outfits throughout the years.
+            </p>
+          </Reveal>
+          <Reveal delay={150}>
+            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              The goal was not a perfect likeness to myself (I don't really have fox ears), but
+              recognition as the timeline progressed. Once I had her down, I began building out
+              the rest of the crew.
+            </p>
+          </Reveal>
         </div>
-        <Reveal delay={0}>
-          <div
-            style={{ width: '264px', height: '264px', overflow: 'hidden', boxShadow: '0px 4px 20px rgba(0,0,0,0.12)', marginBottom: '28px' }}
-            onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
-            onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
-          >
-            <img
-              src="/rules-we-made-up/4-character-creation/collage-nat-photos.jpg"
-              alt="Childhood reference photos"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
-            />
+
+        {/* ── Star doodle in the gap (col 6) ── */}
+        <div style={{ gridColumn: '6 / 7', alignSelf: 'flex-start', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '106px', transform: 'translateX(-100px)' }}>
+          <img
+            src="/ELEMENTS/Yellow Star_.png"
+            alt=""
+            style={{ width: '72px', display: 'block', pointerEvents: 'none', animation: 'spin-planet 10s linear infinite', transformOrigin: 'center' }}
+          />
+        </div>
+
+        {/* ── Right: card stack + arrows (cols 7–12) ── */}
+        <Reveal delay={0} style={{ gridColumn: '7 / 13', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
+
+          {/* Stack container */}
+          <div style={{ position: 'relative', width: '622px', height: '763px' }}>
+            {slides.map((s, si) => {
+              const base = getCardStyle(si);
+              return (
+                <div key={si} style={base}>
+                  <img
+                    src={s.img}
+                    alt={`Character slide ${si + 1}`}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Label + arrows */}
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <span style={{
+              fontFamily: 'Fira Mono, monospace',
+              fontWeight: 400,
+              fontSize:   '16px',
+              lineHeight: 1.2,
+              color:      '#101010',
+            }}>flip through the deck</span>
+            <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
+            <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
           </div>
         </Reveal>
-        <Reveal delay={0}>
-          <h2 className="font-body" style={{
-            fontWeight: 700,
-            fontSize:   '33px',
-            lineHeight: 1.2,
-            color:      '#101010',
-            margin:     '0 0 12px',
-          }}>Character creation</h2>
-        </Reveal>
-        <Reveal delay={100}>
-          <p style={{
-            fontFamily: 'Fraunces, serif',
-            fontWeight: 300,
-            fontSize:   '20px',
-            lineHeight: 1.6,
-            color:      '#404040',
-            margin:     0,
-          }}>
-            I needed references that would actually make me feel something, so I grabbed some
-            old photos of myself as a kid. I used them in Nano Banana Pro to start developing
-            my character.
-          </p>
-        </Reveal>
-      </div>
-
-      {/* ── Right: card stack + arrows below ── */}
-      <Reveal delay={0} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
-
-        {/* Stack container */}
-        <div style={{ position: 'relative', width: '518px', height: '636px' }}>
-          {slides.map((s, si) => {
-            const base = getCardStyle(si);
-            return (
-              <div key={si} style={base}>
-                <img
-                  src={s.img}
-                  alt={`Character slide ${si + 1}`}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
-                />
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Label + arrows */}
-        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-          <span style={{
-            fontFamily:    'Fira Mono, monospace',
-            fontSize:      '11px',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color:         '#888',
-          }}>flip through the deck</span>
-          <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
-          <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
-        </div>
-      </Reveal>
 
       </div>
     </CaseStudySection>
@@ -901,23 +902,22 @@ function MoreFriends() {
     >
       <Reveal delay={0}>
         <p style={{
-          fontFamily:    'Fira Mono, monospace',
-          fontWeight:    400,
-          fontSize:      '13px',
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          color:         '#404040',
-          textAlign:     'center',
-          marginBottom:  '40px',
+          fontFamily:   'Fira Mono, monospace',
+          fontWeight:   400,
+          fontSize:     '16px',
+          lineHeight:   1.2,
+          color:        '#101010',
+          textAlign:    'center',
+          marginBottom: '40px',
         }}>More friends and family</p>
       </Reveal>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', flexWrap: 'nowrap' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'nowrap' }}>
         {friends.map(({ file, label }, i) => (
-          <Reveal key={file} delay={100 + i * 90} distance={32} style={{ flexShrink: 0, width: '202px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+          <Reveal key={file} delay={100 + i * 90} distance={32} style={{ flexShrink: 0, width: '205px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
             <div
               style={{
-                width:        '202px',
-                height:       '202px',
+                width:        '205px',
+                height:       '205px',
                 borderRadius: '50%',
                 overflow:     'hidden',
                 transform:    hovered === file ? 'translateY(-8px)' : 'translateY(0px)',
@@ -1228,12 +1228,11 @@ function TheTool() {
           <div style={{ display: 'flex', gap: '32px', marginTop: '16px' }}>
             {['Elements', 'Editor', 'Character consistency'].map(label => (
               <span key={label} style={{
-                fontFamily:    'Fira Mono, monospace',
-                fontWeight:    400,
-                fontSize:      '11px',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color:         '#888888',
+                fontFamily: 'Fira Mono, monospace',
+                fontWeight: 400,
+                fontSize:   '16px',
+                lineHeight: 1.2,
+                color:      '#101010',
               }}>{label}</span>
             ))}
           </div>
@@ -1245,116 +1244,9 @@ function TheTool() {
 }
 
 function FilmmakingPrinciples() {
-  const [page, setPage]       = useState(0);
-  const viewportRef           = useRef(null);
-  const trackRef              = useRef(null);
-  const offsetRef             = useRef(0);
-  const animRef               = useRef(null);
-  const dragRef               = useRef({ active: false, startX: 0, startOffset: 0 });
-  const vpWidthRef            = useRef(1120);
-  const [vpWidth, setVpWidth] = useState(1120);
-  const [dragging, setDragging] = useState(false);
-  const GAP   = 20;
-  const PAGES = [principles.slice(0, 3), principles.slice(3)];
-
-  const getStep    = () => vpWidthRef.current + GAP;
-  const getMaxOff  = () => (PAGES.length - 1) * getStep();
-
-  const applyTransform = () => {
-    if (trackRef.current) trackRef.current.style.transform = `translateX(-${offsetRef.current}px)`;
-  };
-
-  const animateTo = (target) => {
-    if (animRef.current) cancelAnimationFrame(animRef.current);
-    const clamped  = Math.max(0, Math.min(getMaxOff(), target));
-    const start    = offsetRef.current;
-    const diff     = clamped - start;
-    const duration = 500;
-    const t0       = performance.now();
-    const tick = (now) => {
-      const p    = Math.min((now - t0) / duration, 1);
-      const ease = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
-      offsetRef.current = start + diff * ease;
-      applyTransform();
-      if (p < 1) animRef.current = requestAnimationFrame(tick);
-      else { offsetRef.current = clamped; applyTransform(); }
-    };
-    animRef.current = requestAnimationFrame(tick);
-  };
-
-  const snapNearest = () => {
-    const step        = getStep();
-    const nearest     = Math.max(0, Math.min(PAGES.length - 1, Math.round(offsetRef.current / step)));
-    setPage(nearest);
-    animateTo(nearest * step);
-  };
-
-  useEffect(() => {
-    const el = viewportRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(([e]) => {
-      vpWidthRef.current = e.contentRect.width;
-      setVpWidth(e.contentRect.width);
-    });
-    ro.observe(el);
-
-    const handleWheel = (e) => {
-      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
-      e.preventDefault();
-      if (animRef.current) cancelAnimationFrame(animRef.current);
-      offsetRef.current = Math.max(0, Math.min(getMaxOff(), offsetRef.current + e.deltaX));
-      applyTransform();
-    };
-    el.addEventListener('wheel', handleWheel, { passive: false });
-
-    return () => { ro.disconnect(); el.removeEventListener('wheel', handleWheel); };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Keep offset in sync when page is set via arrows/dots
-  useEffect(() => { animateTo(page * getStep()); }, [page, vpWidth]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const onMouseDown = (e) => {
-    if (animRef.current) cancelAnimationFrame(animRef.current);
-    dragRef.current = { active: true, startX: e.clientX, startOffset: offsetRef.current };
-    setDragging(true);
-  };
-  const onMouseMove = (e) => {
-    if (!dragRef.current.active) return;
-    offsetRef.current = Math.max(0, Math.min(getMaxOff(), dragRef.current.startOffset + (dragRef.current.startX - e.clientX)));
-    applyTransform();
-  };
-  const onDragEnd = () => {
-    if (!dragRef.current.active) return;
-    dragRef.current.active = false;
-    setDragging(false);
-    snapNearest();
-  };
-
-  const arrowStyle = (disabled) => ({
-    position:        'absolute',
-    top:             '50%',
-    transform:       'translateY(-50%)',
-    zIndex:          2,
-    width:           '44px',
-    height:          '44px',
-    borderRadius:    '50%',
-    border:          '1.5px solid rgba(16,16,16,0.18)',
-    backgroundColor: '#ffffff',
-    cursor:          disabled ? 'default' : 'pointer',
-    opacity:         disabled ? 0.3 : 1,
-    display:         'flex',
-    alignItems:      'center',
-    justifyContent:  'center',
-    fontSize:        '18px',
-    color:           '#101010',
-    transition:      'opacity 0.25s ease',
-    boxShadow:       '0 2px 12px rgba(0,0,0,0.08)',
-    flexShrink:      0,
-  });
-
   return (
     <>
-      <CaseStudyFullBleed id="principles" background="#FFFBF8" sectionStyle={{ overflowX: 'clip' }} style={{ paddingTop: '80px', paddingBottom: '120px', textAlign: 'center' }}
+      <CaseStudyFullBleed id="principles" background="#FFFBF8" sectionStyle={{ overflowX: 'clip' }} style={{ paddingTop: '80px', paddingBottom: '10px', textAlign: 'center' }}
         doodle={
           <div data-dev-id="burst-principles-left" data-dev-type="doodle"
             style={{ position: 'absolute', top: '80px', left: '20px', width: '160px', zIndex: 0, transform: 'translate(-72px, -39px) scale(1.273)', transformOrigin: 'top left' }}>
@@ -1386,113 +1278,9 @@ function FilmmakingPrinciples() {
         </Reveal>
       </CaseStudyFullBleed>
 
-      {/* Draggable paginated card carousel */}
-      <div style={{ backgroundColor: '#FFFBF8', paddingBottom: '80px', position: 'relative', zIndex: 2, overflowX: 'clip' }}>
-        <div data-dev-id="burst-principles-right" data-dev-type="doodle"
-          style={{ position: 'absolute', top: '0px', right: '0px', width: '160px', zIndex: 0, transform: 'translate(6px, 232px) scale(1.18)', transformOrigin: 'top left' }}>
-          <img src="/ELEMENTS/White Burst.png" alt="" style={{ width: '100%', display: 'block', pointerEvents: 'none', animation: 'spin-planet 24s linear infinite', transformOrigin: 'center' }} />
-        </div>
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', position: 'relative' }}>
-
-          {/* Left arrow — lives inside the 80px margin zone */}
-          <button
-            onClick={() => setPage(p => Math.max(0, p - 1))}
-            aria-label="Previous"
-            style={{ ...arrowStyle(page === 0), left: '28px' }}
-          >←</button>
-
-          {/* Right arrow */}
-          <button
-            onClick={() => setPage(p => Math.min(PAGES.length - 1, p + 1))}
-            aria-label="Next"
-            style={{ ...arrowStyle(page === PAGES.length - 1), right: '28px' }}
-          >→</button>
-
-          {/* Left breathing room for shadow; right stays at exact 1120px so card 4 can't bleed */}
-          <div style={{ overflowX: 'clip', marginLeft: '-60px', paddingLeft: '60px' }}>
-          {/* Viewport — bottom padding gives shadow room; overflow visible so shadow diffuses */}
-          <div
-            ref={viewportRef}
-            style={{ overflow: 'visible', padding: '40px 0 80px', cursor: dragging ? 'grabbing' : 'grab', userSelect: 'none' }}
-            onMouseDown={onMouseDown}
-            onMouseMove={onMouseMove}
-            onMouseUp={onDragEnd}
-            onMouseLeave={onDragEnd}
-          >
-            <div ref={trackRef} style={{ display: 'flex', gap: `${GAP}px`, willChange: 'transform' }}>
-              {PAGES.map((cards, pageIdx) => (
-                <div key={pageIdx} style={{
-                  display:    'flex',
-                  gap:        `${GAP}px`,
-                  width:      `${vpWidth}px`,
-                  flexShrink: 0,
-                }}>
-                  {cards.map(p => (
-                    <div key={p.title} className="principles-card" style={{
-                      width:           '360px',
-                      flexShrink:      0,
-                      backgroundColor: '#ffffff',
-                      borderRadius:    '20px',
-                      overflow:        'hidden',
-                      border:          '2px dashed #101010',
-                      padding:         '24px',
-                      display:         'flex',
-                      flexDirection:   'column',
-                      boxShadow:       '0 16px 48px rgba(0,0,0,0.14)',
-                    }}>
-                      <div style={{ borderRadius: '12px', overflow: 'hidden', marginBottom: '20px', flexShrink: 0 }}>
-                        <img
-                          src={p.img}
-                          alt={p.title}
-                          draggable={false}
-                          style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', objectPosition: p.crop === 'left' ? 'left center' : 'center', display: 'block' }}
-                        />
-                      </div>
-                      <h3 className="font-body" style={{
-                        fontWeight: 700,
-                        fontSize:   '33px',
-                        lineHeight: 1.2,
-                        color:      '#101010',
-                        margin:     '0 0 10px',
-                      }}>{p.title}</h3>
-                      <p style={{
-                        fontFamily: 'Fraunces, serif',
-                        fontWeight: 300,
-                        fontSize:   '20px',
-                        lineHeight: 1.6,
-                        color:      '#404040',
-                        margin:     0,
-                      }}>{p.body}</p>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-          </div>{/* end horizontal clip wrapper */}
-
-          {/* Page dots */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '32px' }}>
-            {PAGES.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setPage(idx)}
-                aria-label={`Page ${idx + 1}`}
-                style={{
-                  width:           idx === page ? '24px' : '8px',
-                  height:          '8px',
-                  borderRadius:    '4px',
-                  backgroundColor: idx === page ? '#101010' : 'rgba(16,16,16,0.25)',
-                  border:          'none',
-                  cursor:          'pointer',
-                  padding:         0,
-                  transition:      'width 0.3s ease, background-color 0.3s ease',
-                }}
-              />
-            ))}
-          </div>
-
-        </div>
+      {/* Carousel */}
+      <div style={{ backgroundColor: '#FFFBF8', paddingBottom: '80px', position: 'relative', zIndex: 2 }}>
+        <DashedCardCarousel items={principles} />
       </div>
     </>
   );
@@ -1625,12 +1413,12 @@ function SceneCreation() {
 
       {/* Fira Mono caption */}
       <p style={{
-        fontFamily:    'Fira Mono, monospace',
-        fontSize:      '11px',
-        letterSpacing: '0.15em',
-        textTransform: 'uppercase',
-        color:         '#888',
-        margin:        '24px 0 12px',
+        fontFamily: 'Fira Mono, monospace',
+        fontWeight: 400,
+        fontSize:   '16px',
+        lineHeight: 1.2,
+        color:      '#101010',
+        margin:     '24px 0 12px',
       }}>
         Scene {current + 1} of {n}
       </p>
@@ -1788,14 +1576,12 @@ function RollCall() {
         {/* Fira Mono label above family photo */}
         <Reveal delay={0}>
           <p style={{
-            fontFamily:    'Fira Mono, monospace',
-            fontWeight:    400,
-            fontSize:      '11px',
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color:         '#404040',
-            margin:        '0 0 12px',
-            lineHeight:    1.6,
+            fontFamily: 'Fira Mono, monospace',
+            fontWeight: 400,
+            fontSize:   '16px',
+            lineHeight: 1.2,
+            color:      '#101010',
+            margin:     '0 0 12px',
           }}>Generated "Family Photo" / in Nano Banana</p>
         </Reveal>
 
@@ -2053,12 +1839,11 @@ export default function RulesWeMadeUp() {
               <path d="M8,1 L9.2,5.3 L13.5,3.7 L10.9,7.3 L14.8,9.6 L10.4,9.9 L10.9,14.4 L8,11 L5.1,14.4 L5.6,9.9 L1.2,9.6 L5.1,7.3 L2.5,3.7 L6.8,5.3 Z"/>
             </svg>
             <span style={{
-              fontFamily:    'Fira Mono, monospace',
-              fontWeight:    400,
-              fontSize:      '18px',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color:         '#101010',
+              fontFamily: 'Fira Mono, monospace',
+              fontWeight: 400,
+              fontSize:   '16px',
+              lineHeight: 1.2,
+              color:      '#101010',
             }}>Case Study</span>
           </div>
 
@@ -2176,11 +1961,11 @@ export default function RulesWeMadeUp() {
         {/* Film caption — on #F5F0EC, centered below video, before torn edge */}
         <div style={{ textAlign: 'center', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto' }}>
           <span style={{
-            fontFamily:    'Fira Mono, monospace',
-            fontSize:      '11px',
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
-            color:         '#888888',
+            fontFamily: 'Fira Mono, monospace',
+            fontWeight: 400,
+            fontSize:   '16px',
+            lineHeight: 1.2,
+            color:      '#101010',
           }}>Rules We Made Up / Directed by Natalie Nicholson</span>
         </div>
 

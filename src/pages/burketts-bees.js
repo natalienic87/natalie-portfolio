@@ -609,7 +609,7 @@ function ProjectPurpose() {
 
   return (
     <CaseStudySection id="project-purpose" style={{ paddingTop: '80px', paddingBottom: '120px' }} doodle={undefined}>
-      <div ref={contentRef} style={{
+      <div ref={contentRef} className="char-grid" style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(12, 1fr)',
         columnGap: '20px',
@@ -620,21 +620,21 @@ function ProjectPurpose() {
       }}>
 
         {/* Left: heading + text (cols 1–5) */}
-        <div style={{ gridColumn: '1 / 6' }}>
+        <div className="char-text-col" style={{ gridColumn: '1 / 6' }}>
           <Reveal delay={0}>
-            <h2 className="font-body" style={{
+            <h2 className="font-body cs-h2" style={{
               fontWeight: 700, fontSize: '33px', lineHeight: 1.2,
               color: '#101010', margin: '0 0 20px',
             }}>Building the flavor system</h2>
           </Reveal>
           <Reveal delay={100}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
               I wanted to see whether AI could help extend a brand system, so I built a line of
               flavors to test how well the tools could maintain consistency across related packaging.
             </p>
           </Reveal>
           <Reveal delay={150}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               I decided to riff off the existing (add)ventures color palette, and develop bold
               illustrations that could flex across flavor profiles. The real test was whether the
               logo, label structure, illustration style, and handmade warmth could stay consistent
@@ -644,8 +644,9 @@ function ProjectPurpose() {
         </div>
 
         {/* Right: card stack + arrows (cols 7–12) */}
-        <Reveal delay={0} style={{ gridColumn: '7 / 13', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
-          <div style={{ position: 'relative', width: '622px', height: '763px' }}>
+        <div className="char-card-reveal" style={{ gridColumn: '7 / 13' }}>
+          <Reveal delay={0} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
+          <div className="char-card-stack" style={{ position: 'relative', width: '622px', height: '763px' }}>
             {flavorSlides.map((src, si) => (
               <div key={si} style={getCardStyle(si)}>
                 <img
@@ -656,15 +657,16 @@ function ProjectPurpose() {
               </div>
             ))}
           </div>
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <span style={{
+          <div className="cs-deck-nav" style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
+            <span className="cs-mono" style={{
               fontFamily: 'Fira Mono, monospace', fontWeight: 400,
               fontSize: '16px', lineHeight: 1.2, color: '#101010',
             }}>flip through the deck</span>
-            <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
             <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
           </div>
-        </Reveal>
+          </Reveal>
+        </div>
 
       </div>
     </CaseStudySection>
@@ -804,14 +806,14 @@ function WorkshopCarousel() {
         </svg>
 
         {/* Heading */}
-        <div style={{ textAlign: 'center', maxWidth: '1440px', margin: '0 auto', padding: '0 120px 10px', boxSizing: 'border-box' }}>
+        <div className="workshop-heading-wrap" style={{ textAlign: 'center', maxWidth: '1440px', margin: '0 auto', padding: '0 120px 10px', boxSizing: 'border-box' }}>
           <Reveal>
-            <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+            <h3 className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
               Running monthly workshops &amp; discussions
             </h3>
           </Reveal>
           <Reveal delay={100}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto', maxWidth: '560px' }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto', maxWidth: '560px' }}>
               Another colleague and I held monthly &ldquo;Lunch &amp; discusses&rdquo; &ndash; intentionally
               making them hands-on, practical and pressure-free. We made space for honest questions,
               tool demos, creative exercises and open discussion.
@@ -1213,27 +1215,30 @@ export default function BurkettsBees() {
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
         doodle={undefined}
       >
-        <div style={{ display: 'flex', gap: '50px', alignItems: 'center' }}>
+        <div className="how-it-started-row" style={{ display: 'flex', gap: '50px', alignItems: 'center' }}>
 
           {/* Left: square image — 6 of 12 columns */}
-          <Reveal style={{ flex: '0 0 590px' }}>
-            <div
-              style={{ width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' }}
-              onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
-              onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
-            >
-              <img
-                src="/burketts-bees/4-Burketts-outsideA.jpg"
-                alt="Beehives outside the (add)ventures office"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
-              />
-            </div>
-          </Reveal>
+          <div className="how-it-started-img-wrap" style={{ flex: '0 0 590px' }}>
+            <Reveal>
+              <div
+                className="how-it-started-img"
+                style={{ width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' }}
+                onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
+                onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
+              >
+                <img
+                  src="/burketts-bees/4-Burketts-outsideA.jpg"
+                  alt="Beehives outside the (add)ventures office"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
+                />
+              </div>
+            </Reveal>
+          </div>
 
           {/* Right: text group, vertically centered */}
-          <div style={{ flex: 1 }}>
+          <div className="how-it-started-text" style={{ flex: 1 }}>
             <Reveal delay={0}>
-              <h2 className="font-body" style={{
+              <h2 className="font-body cs-h2" style={{
                 fontWeight: 700,
                 fontSize:   '33px',
                 lineHeight: 1.2,
@@ -1242,14 +1247,14 @@ export default function BurkettsBees() {
               }}>It started with a muse</h2>
             </Reveal>
             <Reveal delay={100}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 The brand may have been fictional, but the inspiration was not. I was inspired by
                 the beehives outside the (add)ventures office and more importantly, Keith Burkett —
                 a beloved, retired team member, who used to be the unofficial caretaker of the hives.
               </p>
             </Reveal>
             <Reveal delay={150}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                 He brought the warmth and craftsmanship I wanted the identity to carry, which made
                 the spec project feel less random and more rooted in the agency itself. He would be
                 the muse for the brand.
@@ -1676,6 +1681,7 @@ export default function BurkettsBees() {
         text="The project helped shift the conversation from abstract AI hype to practical creative workflows and became part of the foundation for my eventual role as Art Director, AI Integration."
         textColor="#101010"
         rightFullBleed
+        rightHeightOffset={100}
       >
         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
           <video

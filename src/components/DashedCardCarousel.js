@@ -6,13 +6,24 @@ import { useState, useRef, useEffect } from 'react';
  * Props:
  *   items       — array of { img, title?, body?, crop?, alt? }
  *                 Omit title/body for image-only cards.
- *   cardWidth   — px width of each card (default 500)
- *   gap         — px gap between cards (default 50)
+ *   cardWidth   — px width of each card on desktop (default 500)
+ *   gap         — px gap between cards on desktop (default 50)
  *   imageRatio  — CSS aspect-ratio for the image (default '4 / 3', use '1 / 1' for square)
  */
 export default function DashedCardCarousel({ items = [], cardWidth = 500, gap = 50, imageRatio = '4 / 3' }) {
-  const CARD_W    = cardWidth;
-  const GAP       = gap;
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1200
+  );
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth <= 768;
+  const CARD_W    = isMobile ? Math.min(cardWidth, windowWidth - 48) : cardWidth;
+  const GAP       = isMobile ? 16 : gap;
   const SNAP_STEP = CARD_W + GAP;
 
   const [page,     setPage]     = useState(0);
@@ -22,8 +33,8 @@ export default function DashedCardCarousel({ items = [], cardWidth = 500, gap = 
   const offsetRef   = useRef(0);
   const animRef     = useRef(null);
   const dragRef     = useRef({ active: false, startX: 0, startOffset: 0 });
-  const vpWidthRef  = useRef(1120);
-  const [vpWidth,   setVpWidth] = useState(1120);
+  const vpWidthRef  = useRef(windowWidth);
+  const [vpWidth,   setVpWidth] = useState(windowWidth);
 
   const getMaxOff = () =>
     Math.max(0, items.length * CARD_W + (items.length - 1) * GAP - vpWidthRef.current);
@@ -56,6 +67,13 @@ export default function DashedCardCarousel({ items = [], cardWidth = 500, gap = 
     animateTo(nearest * SNAP_STEP);
   };
 
+  // Reset to page 0 when switching between mobile and desktop
+  useEffect(() => {
+    offsetRef.current = 0;
+    setPage(0);
+    animateTo(0);
+  }, [isMobile]); // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     const el = viewportRef.current;
     if (!el) return;
@@ -77,6 +95,7 @@ export default function DashedCardCarousel({ items = [], cardWidth = 500, gap = 
 
   useEffect(() => { animateTo(page * SNAP_STEP); }, [page, vpWidth]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Mouse handlers
   const onMouseDown = (e) => {
     if (animRef.current) cancelAnimationFrame(animRef.current);
     dragRef.current = { active: true, startX: e.clientX, startOffset: offsetRef.current };
@@ -94,11 +113,33 @@ export default function DashedCardCarousel({ items = [], cardWidth = 500, gap = 
     snapNearest();
   };
 
+  // Touch handlers
+  const onTouchStart = (e) => {
+    if (animRef.current) cancelAnimationFrame(animRef.current);
+    dragRef.current = { active: true, startX: e.touches[0].clientX, startOffset: offsetRef.current };
+  };
+  const onTouchMove = (e) => {
+    if (!dragRef.current.active) return;
+    offsetRef.current = Math.max(0, Math.min(getMaxOff(), dragRef.current.startOffset + (dragRef.current.startX - e.touches[0].clientX)));
+    applyTransform();
+  };
+  const onTouchEnd = () => {
+    if (!dragRef.current.active) return;
+    dragRef.current.active = false;
+    snapNearest();
+  };
+
   const maxOff  = Math.max(0, items.length * CARD_W + (items.length - 1) * GAP - vpWidth);
   const numDots = Math.floor(maxOff / SNAP_STEP) + 1;
 
-  const arrowStyle = (disabled) => ({
-    position: 'absolute', top: '50%', transform: 'translateY(-50%)', zIndex: 2,
+  const outerPad  = isMobile ? '0 24px' : '0 120px';
+  const overflowML = isMobile ? '0' : '-60px';
+  const overflowPL = isMobile ? '0' : '60px';
+
+  const arrowStyle = (disabled, side) => ({
+    position: 'absolute', top: isMobile ? 'calc(50% - 40px)' : '50%',
+    transform: 'translateY(-50%)', zIndex: 2,
+    [side]: isMobile ? '4px' : '28px',
     width: '44px', height: '44px', borderRadius: '50%',
     border: '1.5px solid rgba(16,16,16,0.18)', backgroundColor: '#ffffff',
     cursor: disabled ? 'default' : 'pointer', opacity: disabled ? 0.3 : 1,
@@ -109,17 +150,18 @@ export default function DashedCardCarousel({ items = [], cardWidth = 500, gap = 
 
   return (
     <div style={{ position: 'relative', zIndex: 2 }}>
-      <div style={{ padding: '0 120px', boxSizing: 'border-box', position: 'relative' }}>
+      <div style={{ padding: outerPad, boxSizing: 'border-box', position: 'relative' }}>
 
         <button onClick={() => setPage(p => Math.max(0, p - 1))} aria-label="Previous"
-          style={{ ...arrowStyle(page === 0), left: '28px' }}>←</button>
+          style={arrowStyle(page === 0, 'left')}>←</button>
         <button onClick={() => setPage(p => Math.min(numDots - 1, p + 1))} aria-label="Next"
-          style={{ ...arrowStyle(page === numDots - 1), right: '28px' }}>→</button>
+          style={arrowStyle(page === numDots - 1, 'right')}>→</button>
 
-        <div style={{ overflowX: 'clip', marginLeft: '-60px', paddingLeft: '60px' }}>
+        <div style={{ overflowX: 'clip', marginLeft: overflowML, paddingLeft: overflowPL }}>
           <div ref={viewportRef}
-            style={{ overflow: 'visible', padding: '40px 0 80px', cursor: dragging ? 'grabbing' : 'grab', userSelect: 'none' }}
+            style={{ overflow: 'visible', padding: isMobile ? '24px 0 40px' : '40px 0 80px', cursor: dragging ? 'grabbing' : 'grab', userSelect: 'none' }}
             onMouseDown={onMouseDown} onMouseMove={onMouseMove} onMouseUp={onDragEnd} onMouseLeave={onDragEnd}
+            onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}
           >
             <div ref={trackRef} style={{ display: 'flex', gap: `${GAP}px`, willChange: 'transform' }}>
               {items.map((item, i) => (
@@ -148,7 +190,7 @@ export default function DashedCardCarousel({ items = [], cardWidth = 500, gap = 
                   </div>
                   {item.title && (
                     <div style={{ padding: '8px' }}>
-                      <h4 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '24px', lineHeight: '26px', color: '#101010', margin: '0 0 10px' }}>
+                      <h4 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: isMobile ? '18px' : '24px', lineHeight: isMobile ? '1.2' : '26px', color: '#101010', margin: '0 0 10px' }}>
                         {item.title}
                       </h4>
                       {item.body && (
@@ -164,7 +206,7 @@ export default function DashedCardCarousel({ items = [], cardWidth = 500, gap = 
           </div>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '32px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: isMobile ? '16px' : '32px' }}>
           {Array.from({ length: numDots }).map((_, idx) => (
             <button key={idx} onClick={() => setPage(idx)} aria-label={`Page ${idx + 1}`}
               style={{

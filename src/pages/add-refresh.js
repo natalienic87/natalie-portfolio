@@ -84,12 +84,12 @@ function CollageCarousel() {
     <>
       <CaseStudyFullBleed background="#FFFBF8" style={{ paddingTop: '80px', paddingBottom: '10px', textAlign: 'center' }}>
         <Reveal>
-          <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+          <h2 className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
             Collage as an Expression
           </h2>
         </Reveal>
         <Reveal delay={100}>
-          <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto', maxWidth: '640px' }}>
+          <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto', maxWidth: '640px' }}>
             The goal was to turn (add)ventures physical artifacts and ownable addventures symbols into a dimensional, collage-based visual language. I created these concepts using a blend of AI and photoshop.
           </p>
         </Reveal>
@@ -203,7 +203,7 @@ function ConceptSystem() {
 
   return (
     <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '120px' }}>
-      <div ref={contentRef} style={{
+      <div ref={contentRef} className="char-grid" style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(12, 1fr)',
         columnGap: '20px',
@@ -214,43 +214,45 @@ function ConceptSystem() {
       }}>
 
         {/* Left: heading + text (cols 1–5) */}
-        <div style={{ gridColumn: '1 / 6' }}>
+        <div className="char-text-col" style={{ gridColumn: '1 / 6' }}>
           <Reveal delay={0}>
-            <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+            <h2 className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
               Familiar enough to belong. Flexible enough to grow.
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
               The direction I helped develop — &ldquo;Night at the muse-em&rdquo; — was selected as the foundation because it built upon the brand&apos;s existing equity. This gave the agency more room to express its personality without a full reset.
             </p>
           </Reveal>
           <Reveal delay={150}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               From there, the challenge was synthesis: taking the strongest conceptual elements from the broader team&apos;s explorations and weaving them into a single, cohesive visual system that still felt unified.
             </p>
           </Reveal>
         </div>
 
         {/* Right: card stack + arrows (cols 7–12) */}
-        <Reveal delay={0} style={{ gridColumn: '7 / 13', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
-          <div style={{ position: 'relative', width: '622px', height: '763px' }}>
-            {toolkitSlides.map((src, si) => (
-              <div key={si} style={getCardStyle(si)}>
-                <img src={src} alt={`Brand system ${si + 1}`}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
-              </div>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <span style={{
-              fontFamily: 'Fira Mono, monospace', fontWeight: 400,
-              fontSize: '16px', lineHeight: 1.2, color: '#101010',
-            }}>flip through the deck</span>
-            <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
-            <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
-          </div>
-        </Reveal>
+        <div className="char-card-reveal" style={{ gridColumn: '7 / 13' }}>
+          <Reveal delay={0} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
+            <div className="char-card-stack" style={{ position: 'relative', width: '622px', height: '763px' }}>
+              {toolkitSlides.map((src, si) => (
+                <div key={si} style={getCardStyle(si)}>
+                  <img src={src} alt={`Brand system ${si + 1}`}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
+                </div>
+              ))}
+            </div>
+            <div className="cs-deck-nav" style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+              <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
+              <span className="cs-mono" style={{
+                fontFamily: 'Fira Mono, monospace', fontWeight: 400,
+                fontSize: '16px', lineHeight: 1.2, color: '#101010',
+              }}>flip through the deck</span>
+              <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
+            </div>
+          </Reveal>
+        </div>
 
       </div>
     </CaseStudySection>

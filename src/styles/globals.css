@@ -318,6 +318,7 @@ body {
 
 /* Torn edge — swap between desktop (dramatic) and mobile (subtle) versions */
 .torn-edge-mobile { display: none; }
+.roll-call-mobile-h2 { display: none; }
 
 /* ── Case study section horizontal padding (responsive) ── */
 .cs-inner {
@@ -333,6 +334,8 @@ body {
   .cs-inner {
     padding-left: 60px !important;
     padding-right: 60px !important;
+    padding-top: 32px !important;
+    padding-bottom: 32px !important;
   }
 
   .case-study-nav {
@@ -390,7 +393,7 @@ body {
 
   /* Hero H1 */
   .hero-title {
-    font-size: 36px !important;
+    font-size: 40px !important;
     font-weight: 900 !important;
     line-height: 1.2 !important;
     margin-bottom: 24px !important;
@@ -500,6 +503,126 @@ body {
     line-height: 160% !important;
   }
 
+  /* ── CharacterCreation ── */
+  .char-mobile-photos-wrap {
+    display: block !important;
+    margin-left: -60px;
+    margin-right: -60px;
+    margin-bottom: 24px;
+  }
+  .char-mobile-photos {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-left: 60px;
+    padding-right: 60px;
+    scrollbar-width: none;
+  }
+  .char-mobile-photos::-webkit-scrollbar { display: none; }
+  .char-mobile-photos img {
+    height: 200px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: cover;
+    scroll-snap-align: start;
+  }
+  .char-photo-dots { display: flex; gap: 6px; justify-content: center; margin-top: 10px; }
+  .char-photo-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(16,16,16,0.2); display: inline-block; }
+
+  .char-grid { display: flex !important; flex-direction: column !important; gap: 0 !important; }
+  .char-collage-photo { display: none !important; }
+  .char-star-doodle { display: none !important; }
+  .char-text-col { grid-column: unset !important; }
+  .char-card-reveal { grid-column: unset !important; margin-top: 24px; width: 100%; padding: 0 16px; box-sizing: border-box; }
+  .char-card-stack { width: 100% !important; height: auto !important; aspect-ratio: 622 / 763; }
+
+  /* Card deck nav — ← label → spread across full width on mobile */
+  .cs-deck-nav { justify-content: space-between !important; width: 100% !important; }
+
+  /* ── FamilyPhoto (roll-call full-bleed section) ── */
+  #family-photo > svg { height: 20px !important; }
+  .family-photo-wrap { margin-left: -60px !important; margin-right: -60px !important; width: calc(100% + 120px) !important; }
+  .family-festival-strip {
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 10px !important;
+    margin-left: -60px !important;
+    margin-right: -60px !important;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+    margin-top: 24px !important;
+    scrollbar-width: none;
+  }
+  .family-festival-strip::-webkit-scrollbar { display: none; }
+  .family-festival-item { flex: 0 0 auto !important; width: 200px !important; height: 260px !important; }
+  .family-festival-dots { display: flex !important; gap: 6px; justify-content: center; margin-top: 12px; }
+
+  /* ── RollCall ── */
+  .roll-call-row { flex-direction: column !important; gap: 32px !important; align-items: center !important; }
+  .roll-call-mobile-h2 { display: block !important; order: 1; width: 100%; }
+  .roll-call-phone { order: 2; width: 100%; display: flex; justify-content: center; }
+  .roll-call-phone img { width: min(260px, 70vw) !important; }
+  .roll-call-text { order: 3; width: 100% !important; flex-shrink: 1 !important; gap: 16px !important; }
+  .roll-call-desktop-h2 { display: none !important; }
+  .roll-call-groups-img { width: 100% !important; }
+
+  /* ── SceneCreation ── */
+  #scene-creation [data-dev-type="doodle"] {
+    position: absolute !important;
+    top: 16px !important;
+    right: 24px !important;
+    width: 72px !important;
+    transform: none !important;
+    z-index: 0 !important;
+  }
+
+  /* ── MoreFriends ── */
+  .more-friends-row {
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    margin-left: -60px;
+    margin-right: -60px;
+    padding-left: 60px !important;
+    padding-right: 60px !important;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .more-friends-row::-webkit-scrollbar { display: none; }
+  .more-friends-row > div { scroll-snap-align: start; }
+  .more-friends-dots { display: flex !important; gap: 6px; justify-content: center; margin-top: 10px; }
+
+  /* ── CaseSplitPanel ── */
+  .csp-section { flex-direction: column !important; height: auto !important; }
+  .csp-right { flex: 0 0 auto !important; order: 1; width: 100% !important; padding: 32px !important; }
+  .csp-right-fullbleed { padding: 0 !important; }
+  .csp-left { flex: 0 0 auto !important; order: 2; width: 100% !important; padding: 40px 32px 48px !important; align-items: flex-start !important; }
+  .csp-left p { font-size: 16px !important; line-height: 1.6 !important; margin-bottom: 20px !important; }
+  /* ai-assessment: text panel on top, chart below; tighten bar gaps */
+  #ai-assessment .csp-left { order: 1 !important; }
+  #ai-assessment .csp-right { order: 2 !important; }
+  #ai-assessment .csp-right > div > div { margin-bottom: 16px !important; }
+  /* ai-education: pull object position up so logo isn't cropped at top */
+  #ai-education video { object-position: center 20% !important; }
+
+  /* ── MushroomFriend ── */
+  #mushroom-friend { flex-direction: column !important; height: auto !important; }
+  .mushroom-video-panel { flex: 0 0 auto !important; order: 1; overflow: hidden !important; }
+  .mushroom-video { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; transform: translateY(0px) !important; }
+  .mushroom-text-panel { flex: 0 0 auto !important; order: 2; padding: 40px 32px 48px !important; align-items: flex-start !important; }
+  .mushroom-text-panel p { font-size: 16px !important; line-height: 1.6 !important; margin-bottom: 20px !important; }
+
+  /* ── HowItStarted ── */
+  .how-it-started-row { flex-direction: column !important; gap: 0 !important; }
+  .how-it-started-img-wrap { flex: 0 0 auto !important; width: 100% !important; }
+  .how-it-started-img { aspect-ratio: 16 / 9 !important; }
+  .how-it-started-text { margin-top: 24px !important; }
+
   /* Project overview section — 60px top, collapse row, hide doodle */
   #project-overview .cs-inner { padding-top: 60px !important; }
   .project-overview-row { flex-direction: column !important; gap: 0 !important; }
@@ -509,17 +632,44 @@ body {
   #what-it-became .cs-inner { padding-top: 24px !important; }
 
   /* Mobile type system */
+  .cs-mono { font-size: 12px !important; }
   .cs-h2 {
-    font-size: 24px !important;
+    font-size: 32px !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
-    margin-bottom: 16px !important;
+    margin-bottom: 12px !important;
   }
   .cs-body {
     font-size: 16px !important;
     font-weight: 400 !important;
     line-height: 1.5 !important;
   }
+
+  /* ── FilmmakingPrinciples ── */
+  #principles [data-dev-type="doodle"] { display: none !important; }
+  .principles-subtitle { font-size: 16px !important; max-width: 100% !important; }
+  .principles-carousel-wrap { padding-bottom: 40px !important; }
+
+  /* ── WorkshopCarousel (burketts-bees) ── */
+  .workshop-heading-wrap { padding-left: 60px !important; padding-right: 60px !important; }
+
+  /* ── TheTool (LTX Studio) ── */
+  #ltx-studio .cs-inner { padding-top: 40px !important; padding-bottom: 48px !important; }
+  .ltx-row { flex-direction: column !important; gap: 32px !important; }
+  .ltx-image-wrap { flex: none !important; width: 100% !important; order: 1 !important; }
+  .ltx-text { flex: none !important; width: 100% !important; order: 2 !important; }
+  .ltx-labels { gap: 16px !important; flex-wrap: wrap !important; }
+
+  /* ── BlooperReel burst doodles — pulled from mid-section to section boundary ── */
+  #blooper-reel [data-dev-id="burst-blooper-left"] {
+    top: -36px !important; left: 20px !important;
+    width: 60px !important; transform: none !important;
+  }
+  #blooper-reel [data-dev-id="burst-blooper-right"] {
+    top: -24px !important; bottom: auto !important; right: 20px !important;
+    width: 48px !important; transform: none !important;
+  }
+  #blooper-reel .cs-inner { padding-top: 40px !important; padding-bottom: 48px !important; }
 }
 
 /* ── Phone: ≤414px ── */
@@ -550,6 +700,20 @@ body {
     padding-left: 24px !important;
     padding-right: 24px !important;
   }
+
+  /* CharacterCreation photo strip breakout at 24px */
+  .char-mobile-photos-wrap { margin-left: -24px; margin-right: -24px; }
+  .char-mobile-photos { padding-left: 24px; padding-right: 24px; }
+
+  /* MoreFriends breakout at 24px */
+  .more-friends-row { margin-left: -24px; margin-right: -24px; padding-left: 24px !important; padding-right: 24px !important; }
+
+  /* FamilyPhoto breakout at 24px */
+  .family-photo-wrap { margin-left: -24px !important; margin-right: -24px !important; width: calc(100% + 48px) !important; }
+  .family-festival-strip { margin-left: -24px !important; margin-right: -24px !important; padding-left: 24px !important; padding-right: 24px !important; }
+
+  /* WorkshopCarousel heading */
+  .workshop-heading-wrap { padding-left: 24px !important; padding-right: 24px !important; }
 }
 
 /* ══════════════════════════════════════════

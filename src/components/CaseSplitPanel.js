@@ -20,17 +20,20 @@ import { useState, useEffect, useRef } from 'react';
  */
 export default function CaseSplitPanel({
   id,
-  leftColor      = '#3975A7',
-  rightColor     = '#CADCEF',
+  leftColor        = '#3975A7',
+  rightColor       = '#CADCEF',
   eyebrow,
-  eyebrowStyle   = {},
-  text           = '',
-  textColor      = '#ffffff',
+  eyebrowStyle     = {},
+  text             = '',
+  textColor        = '#ffffff',
   leftContent,
-  rightFullBleed = false,
+  rightFullBleed   = false,
+  rightHeightOffset = 0,
   children,
 }) {
-  const sectionRef = useRef(null);
+  const sectionRef    = useRef(null);
+  const leftPanelRef  = useRef(null);
+  const rightPanelRef = useRef(null);
 
   const [typed,    setTyped]    = useState('');
   const [started,  setStarted]  = useState(false);
@@ -61,6 +64,26 @@ export default function CaseSplitPanel({
     return () => clearInterval(t);
   }, []);
 
+  // On mobile: sync right panel height to left panel height (fullbleed video needs a set height)
+  useEffect(() => {
+    if (!rightFullBleed) return;
+    const syncHeight = () => {
+      const left  = leftPanelRef.current;
+      const right = rightPanelRef.current;
+      if (!left || !right) return;
+      if (window.innerWidth <= 768) {
+        right.style.height = (left.offsetHeight + rightHeightOffset) + 'px';
+      } else {
+        right.style.height = '';
+      }
+    };
+    const ro = new ResizeObserver(syncHeight);
+    if (leftPanelRef.current) ro.observe(leftPanelRef.current);
+    syncHeight();
+    window.addEventListener('resize', syncHeight);
+    return () => { ro.disconnect(); window.removeEventListener('resize', syncHeight); };
+  }, [rightFullBleed, rightHeightOffset]);
+
   const paragraphs = typed.split('\n\n');
   const done       = typed.length >= text.length;
 
@@ -78,10 +101,11 @@ export default function CaseSplitPanel({
     <section
       id={id}
       ref={sectionRef}
+      className="csp-section"
       style={{ display: 'flex', width: '100%', height: '800px', position: 'relative', zIndex: 2, backgroundColor: leftColor }}
     >
       {/* Left panel — static content OR typewriter */}
-      <div style={{
+      <div ref={leftPanelRef} className="csp-left" style={{
         flex:            '0 0 50%',
         backgroundColor: leftColor,
         display:         'flex',
@@ -132,7 +156,7 @@ export default function CaseSplitPanel({
       </div>
 
       {/* Right panel — consumer-supplied content */}
-      <div style={{
+      <div ref={rightPanelRef} className={rightFullBleed ? 'csp-right csp-right-fullbleed' : 'csp-right'} style={{
         flex:            '0 0 50%',
         backgroundColor: rightColor,
         display:         'flex',

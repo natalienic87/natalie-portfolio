@@ -288,7 +288,62 @@ Full-width horizontal divider used between major sections:
 
 ---
 
-## 3. Build Order
+## 3. Mobile
+
+### Breakpoints
+- `@media (max-width: 768px)` — tablet / large phone
+- `@media (max-width: 414px)` — small phone
+
+### Spacing system (multiples of 8)
+- **Section padding:** `32px` top/bottom — auto-applied via `.cs-inner` in the 768px block; gives **64px** total visual gap between adjacent sections
+- **Image → heading:** `24px` margin-top on the text column
+- **Heading → first body paragraph:** `12px` (`.cs-h2` has `margin-bottom: 12px`)
+- **Section-specific overrides** use `#section-id .cs-inner` — ID selector wins over the base `.cs-inner` rule even when both have `!important`
+
+### Typography classes — always add these to mobile-targeted elements
+| Element | Class | Mobile value |
+|---|---|---|
+| Section subhead (33px desktop) | `.cs-h2` | 24px / 700 / lh 1.2 / mb 12px |
+| Body copy (20px desktop) | `.cs-body` | 16px / 400 / lh 1.5 |
+| Fira Mono labels / callouts (16px desktop) | `.cs-mono` | 12px |
+| Section horizontal padding | `.cs-inner` | 60px (768px) → 24px (414px), auto |
+
+### Layout pattern: stacked image + text
+For side-by-side desktop layouts that stack on mobile:
+1. Add a wrapper class to the flex row (e.g. `section-row`)
+2. Add a wrapper **div** around the image — **never put className on `<Reveal>`**, it doesn't pass through
+3. Add a class to the text column div
+4. CSS: `flex-direction: column; gap: 0` on the row; image wrapper `flex: 0 0 auto; width: 100%`
+5. Image aspect ratio on mobile: `aspect-ratio: 16 / 9` on the inner container
+6. Text column: `margin-top: 24px` for the image→heading gap
+
+### Layout pattern: mobile photo strip
+Swipeable horizontal image row shown only on mobile (hidden on desktop via `style={{ display: 'none' }}`):
+- Outer wrapper: CSS `display: block !important` enables on mobile
+- Break out of `.cs-inner` padding with `margin-left: -60px; margin-right: -60px` (768px) / `-24px` (414px)
+- Inner scroll container: `display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-left: 60/24px`
+- Images: `height: 200px; width: auto; flex-shrink: 0; object-fit: cover; scroll-snap-align: start`
+
+### Layout pattern: responsive card stack
+- Wrap `<Reveal>` in a plain div with class — Reveal doesn't accept className
+- Move `gridColumn` from the Reveal `style` prop to the outer wrapper div
+- Card stack container: `width: 100% !important; height: auto !important; aspect-ratio: 622 / 763`
+- Nav row below the deck uses class `cs-deck-nav` → mobile: `justify-content: space-between; width: 100%` with order ← label →
+- All three case study pages share this pattern: `rules-we-made-up.js`, `burketts-bees.js`, `add-refresh.js`
+
+### What to hide on mobile
+- Desktop doodles, decorative stars, collage photos replaced by mobile photo strip: `display: none !important`
+- Multi-column grid gaps / star filler columns: `display: none !important`
+
+### Critical rules
+- **Never add `className` to `<Reveal>`** — it doesn't forward to the DOM. Wrap Reveal in a div instead.
+- CSS `!important` overrides inline `style` props — class-based mobile overrides work on inline-styled elements.
+- Both `CaseStudySection` and `CaseStudyFullBleed` apply `.cs-inner` to their inner div — padding rules apply to both.
+- All new mobile CSS goes in the existing `@media (max-width: 768px)` and `@media (max-width: 414px)` blocks in `globals.css`. No new breakpoints.
+
+---
+
+## 4. Build Order
 
 When starting work on any case study page:
 

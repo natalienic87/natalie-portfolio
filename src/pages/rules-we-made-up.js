@@ -493,27 +493,30 @@ function HowItStarted() {
       sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
       doodle={undefined}
     >
-      <div style={{ display: 'flex', gap: '50px', alignItems: 'center' }}>
+      <div className="how-it-started-row" style={{ display: 'flex', gap: '50px', alignItems: 'center' }}>
 
         {/* Left: square image — 6 of 12 columns */}
-        <Reveal style={{ flex: '0 0 590px' }}>
-          <div
-            style={{ width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' }}
-            onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
-            onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
-          >
-            <img
-              src="/rules-we-made-up/3-how-it-started/Storyboard 1.jpg"
-              alt="Storyboard planning documents"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
-            />
-          </div>
-        </Reveal>
+        <div className="how-it-started-img-wrap" style={{ flex: '0 0 590px' }}>
+          <Reveal>
+            <div
+              className="how-it-started-img"
+              style={{ width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' }}
+              onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
+              onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
+            >
+              <img
+                src="/rules-we-made-up/3-how-it-started/Storyboard 1.jpg"
+                alt="Storyboard planning documents"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
+              />
+            </div>
+          </Reveal>
+        </div>
 
         {/* Right: text group, vertically centered */}
-        <div style={{ flex: 1 }}>
+        <div className="how-it-started-text" style={{ flex: 1 }}>
           <Reveal delay={0}>
-            <h2 className="font-body" style={{
+            <h2 className="font-body cs-h2" style={{
               fontWeight: 700,
               fontSize:   '33px',
               lineHeight: 1.2,
@@ -522,14 +525,14 @@ function HowItStarted() {
             }}>It started with a storyboard</h2>
           </Reveal>
           <Reveal delay={100}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
               Before touching animation, I needed a map. I adapted the poem into lyrics, built the
               song in Suno, and used the final track as my runtime. Once I had the song (80
               generations later), I storyboarded the film scene by scene.
             </p>
           </Reveal>
           <Reveal delay={150}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 32px' }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 32px' }}>
               That storyboard gave the project a spine. It was the thing I came back to whenever
               the tools got too shiny, too chaotic, or too far from the point.
             </p>
@@ -725,8 +728,26 @@ function CharacterCreation() {
     <CaseStudySection id="characters" style={{ paddingTop: '80px', paddingBottom: '120px' }}
       doodle={undefined}
     >
+      {/* ── Mobile photo strip — hidden on desktop ── */}
+      <div className="char-mobile-photos-wrap" style={{ display: 'none' }}>
+        <div className="char-mobile-photos">
+          {[
+            { src: '/rules-we-made-up/4-character-creation/IMG_3329_mbl_4.jpg', alt: 'Young Natalie cooking' },
+            { src: '/rules-we-made-up/4-character-creation/IMG_3329_mbl_3.jpg', alt: 'Young Natalie with sibling' },
+            { src: '/rules-we-made-up/4-character-creation/IMG_3329_mbl_1.jpg', alt: 'Young Natalie at the beach' },
+            { src: '/rules-we-made-up/4-character-creation/IMG_3329_mbl_2.jpg', alt: 'Young Natalie smiling' },
+          ].map(({ src, alt }) => (
+            <img key={src} src={src} alt={alt} />
+          ))}
+        </div>
+        <div className="char-photo-dots">
+          {[0,1,2,3].map(i => <span key={i} className="char-photo-dot" />)}
+        </div>
+      </div>
+
       <div
         ref={contentRef}
+        className="char-grid"
         style={{
           display:         'grid',
           gridTemplateColumns: 'repeat(12, 1fr)',
@@ -740,22 +761,24 @@ function CharacterCreation() {
       >
 
         {/* ── Left: collage image + heading + text (cols 1–5) ── */}
-        <div style={{ gridColumn: '1 / 6' }}>
+        <div className="char-text-col" style={{ gridColumn: '1 / 6' }}>
+          <div className="char-collage-photo">
+            <Reveal delay={0}>
+              <div
+                style={{ width: '284px', height: '284px', overflow: 'hidden', boxShadow: '0px 4px 20px rgba(0,0,0,0.12)', marginBottom: '50px' }}
+                onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
+                onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
+              >
+                <img
+                  src="/rules-we-made-up/4-character-creation/collage-nat-photos.jpg"
+                  alt="Childhood reference photos"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
+                />
+              </div>
+            </Reveal>
+          </div>
           <Reveal delay={0}>
-            <div
-              style={{ width: '284px', height: '284px', overflow: 'hidden', boxShadow: '0px 4px 20px rgba(0,0,0,0.12)', marginBottom: '50px' }}
-              onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
-              onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
-            >
-              <img
-                src="/rules-we-made-up/4-character-creation/collage-nat-photos.jpg"
-                alt="Childhood reference photos"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={0}>
-            <h2 className="font-body" style={{
+            <h2 className="font-body cs-h2" style={{
               fontWeight: 700,
               fontSize:   '33px',
               lineHeight: 1.2,
@@ -764,14 +787,14 @@ function CharacterCreation() {
             }}>Building the cast</h2>
           </Reveal>
           <Reveal delay={100}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
               I started with the main character (me!) because the whole film depended on her
               feeling specific. I used old photos of myself as a kid as reference, and developed
               her in Nano Banana, with all my favorite outfits throughout the years.
             </p>
           </Reveal>
           <Reveal delay={150}>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               The goal was not a perfect likeness to myself (I don't really have fox ears), but
               recognition as the timeline progressed. Once I had her down, I began building out
               the rest of the crew.
@@ -780,7 +803,7 @@ function CharacterCreation() {
         </div>
 
         {/* ── Star doodle in the gap (col 6) ── */}
-        <div style={{ gridColumn: '6 / 7', alignSelf: 'flex-start', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '106px', transform: 'translateX(-100px)' }}>
+        <div className="char-star-doodle" style={{ gridColumn: '6 / 7', alignSelf: 'flex-start', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', paddingTop: '106px', transform: 'translateX(-100px)' }}>
           <img
             src="/ELEMENTS/Yellow Star_.png"
             alt=""
@@ -789,37 +812,39 @@ function CharacterCreation() {
         </div>
 
         {/* ── Right: card stack + arrows (cols 7–12) ── */}
-        <Reveal delay={0} style={{ gridColumn: '7 / 13', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
+        <div className="char-card-reveal" style={{ gridColumn: '7 / 13' }}>
+          <Reveal delay={0} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '32px' }}>
 
-          {/* Stack container */}
-          <div style={{ position: 'relative', width: '622px', height: '763px' }}>
-            {slides.map((s, si) => {
-              const base = getCardStyle(si);
-              return (
-                <div key={si} style={base}>
-                  <img
-                    src={s.img}
-                    alt={`Character slide ${si + 1}`}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
-                  />
-                </div>
-              );
-            })}
-          </div>
+            {/* Stack container */}
+            <div className="char-card-stack" style={{ position: 'relative', width: '622px', height: '763px' }}>
+              {slides.map((s, si) => {
+                const base = getCardStyle(si);
+                return (
+                  <div key={si} style={base}>
+                    <img
+                      src={s.img}
+                      alt={`Character slide ${si + 1}`}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
 
-          {/* Label + arrows */}
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <span style={{
-              fontFamily: 'Fira Mono, monospace',
-              fontWeight: 400,
-              fontSize:   '16px',
-              lineHeight: 1.2,
-              color:      '#101010',
-            }}>flip through the deck</span>
-            <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
-            <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
-          </div>
-        </Reveal>
+            {/* Label + arrows */}
+            <div className="cs-deck-nav" style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+              <ArrowBtn onClick={() => go('prev')}>←</ArrowBtn>
+              <span className="cs-mono" style={{
+                fontFamily: 'Fira Mono, monospace',
+                fontWeight: 400,
+                fontSize:   '16px',
+                lineHeight: 1.2,
+                color:      '#101010',
+              }}>flip through the deck</span>
+              <ArrowBtn onClick={() => go('next')}>→</ArrowBtn>
+            </div>
+          </Reveal>
+        </div>
 
       </div>
     </CaseStudySection>
@@ -842,7 +867,7 @@ function MoreFriends() {
       doodle={undefined}
     >
       <Reveal delay={0}>
-        <p style={{
+        <p className="cs-mono" style={{
           fontFamily:   'Fira Mono, monospace',
           fontWeight:   400,
           fontSize:     '16px',
@@ -852,7 +877,7 @@ function MoreFriends() {
           marginBottom: '40px',
         }}>More friends and family</p>
       </Reveal>
-      <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'nowrap' }}>
+      <div className="more-friends-row" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'nowrap' }}>
         {friends.map(({ file, label }, i) => (
           <Reveal key={file} delay={100 + i * 90} distance={32} style={{ flexShrink: 0, width: '205px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
             <div
@@ -892,16 +917,21 @@ function MoreFriends() {
           </Reveal>
         ))}
       </div>
+      <div className="more-friends-dots" style={{ display: 'none' }}>
+        {friends.map((_, i) => <span key={i} className="char-photo-dot" />)}
+      </div>
     </CaseStudySection>
   );
 }
 
 // ── Mushroom Friend ───────────────────────────────────────────────────────────
-const MUSHROOM_TEXT = "The Mushroom Friend is creativity — the kind you had as a kid, before self-doubt got in the way. The kind that rescues you later.\n\nMushrooms are the earth's greatest underground connectors, linking forests invisibly. Creativity flows the same way.";
+const MUSHROOM_TEXT = "Mushrooms are the earth's greatest underground connectors, linking entire forests and keeping hidden systems alive.\n\nThe character I developed became a symbol for creativity: flowing beneath the surface, connecting what seems separate, and showing up in unexpected places.";
 
 function MushroomFriend() {
-  const sectionRef = useRef(null);
-  const videoRef   = useRef(null);
+  const sectionRef   = useRef(null);
+  const videoRef     = useRef(null);
+  const textPanelRef = useRef(null);
+  const vidPanelRef  = useRef(null);
   const [typed, setTyped]       = useState('');
   const [started, setStarted]   = useState(false);
   const [cursorOn, setCursorOn] = useState(true);
@@ -922,6 +952,10 @@ function MushroomFriend() {
       const el  = sectionRef.current;
       const vid = videoRef.current;
       if (!el || !vid) return;
+      if (window.innerWidth <= 768) {
+        vid.style.transform = 'translateY(0px)';
+        return;
+      }
       const rect     = el.getBoundingClientRect();
       const progress = (window.innerHeight / 2 - (rect.top + rect.height / 2)) / (window.innerHeight / 2);
       const offset   = progress * 80;
@@ -943,6 +977,24 @@ function MushroomFriend() {
     return () => clearInterval(t);
   }, []);
 
+  useEffect(() => {
+    const syncHeight = () => {
+      const textPanel = textPanelRef.current;
+      const vidPanel  = vidPanelRef.current;
+      if (!textPanel || !vidPanel) return;
+      if (window.innerWidth <= 768) {
+        vidPanel.style.height = textPanel.offsetHeight + 'px';
+      } else {
+        vidPanel.style.height = '';
+      }
+    };
+    const ro = new ResizeObserver(syncHeight);
+    if (textPanelRef.current) ro.observe(textPanelRef.current);
+    syncHeight();
+    window.addEventListener('resize', syncHeight);
+    return () => { ro.disconnect(); window.removeEventListener('resize', syncHeight); };
+  }, []);
+
   const paragraphs = typed.split('\n\n');
   const done = typed.length >= MUSHROOM_TEXT.length;
   const textStyle = {
@@ -959,7 +1011,7 @@ function MushroomFriend() {
     <section id="mushroom-friend" ref={sectionRef} style={{ display: 'flex', width: '100%', height: '800px', position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8' }}>
 
       {/* Left — red panel with typewriter text */}
-      <div style={{
+      <div ref={textPanelRef} className="mushroom-text-panel" style={{
         flex:            '0 0 50%',
         backgroundColor: '#C2311E',
         display:         'flex',
@@ -992,9 +1044,10 @@ function MushroomFriend() {
       </div>
 
       {/* Right — looping video, parallax */}
-      <div style={{ flex: '0 0 50%', position: 'relative', overflow: 'hidden' }}>
+      <div ref={vidPanelRef} className="mushroom-video-panel" style={{ flex: '0 0 50%', position: 'relative', overflow: 'hidden' }}>
         <video
           ref={videoRef}
+          className="mushroom-video"
           autoPlay muted loop playsInline
           style={{ position: 'absolute', left: 0, right: 0, top: '-15%', width: '100%', height: '130%', objectFit: 'cover', objectPosition: 'center top', willChange: 'transform' }}
         >
@@ -1038,7 +1091,7 @@ const principles = [
 
 function BlooperReel() {
   return (
-    <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '120px' }}
+    <CaseStudySection id="blooper-reel" style={{ paddingTop: '80px', paddingBottom: '120px' }}
       doodle={
         <>
           <div data-dev-id="burst-blooper-left" data-dev-type="doodle"
@@ -1054,7 +1107,7 @@ function BlooperReel() {
     >
 
       <Reveal delay={0}>
-        <h2 className="font-body" style={{
+        <h2 className="font-body cs-h2" style={{
           fontWeight:  600,
           fontSize:    '33px',
           lineHeight:  1.2,
@@ -1067,7 +1120,7 @@ function BlooperReel() {
       </Reveal>
 
       <Reveal delay={100}>
-        <p style={{
+        <p className="cs-body" style={{
           fontFamily: 'Fraunces, serif',
           fontWeight: 300,
           fontSize:   '20px',
@@ -1123,12 +1176,12 @@ function TheTool() {
     <CaseStudySection id="ltx-studio" style={{ paddingTop: '80px', paddingBottom: '120px' }}
       doodle={undefined}
     >
-      <div style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
+      <div className="ltx-row" style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
 
         {/* Left — text */}
-        <div style={{ flex: '0 0 30%' }}>
+        <div className="ltx-text" style={{ flex: '0 0 30%' }}>
           <Reveal delay={0}>
-            <h2 className="font-body" style={{
+            <h2 className="font-body cs-h2" style={{
               fontWeight: 700,
               fontSize:   '33px',
               lineHeight: 1.2,
@@ -1139,7 +1192,7 @@ function TheTool() {
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <p style={{
+            <p className="cs-body" style={{
               fontFamily: 'Fraunces, serif',
               fontWeight: 300,
               fontSize:   '20px',
@@ -1151,7 +1204,7 @@ function TheTool() {
             </p>
           </Reveal>
           <Reveal delay={150}>
-            <p style={{
+            <p className="cs-mono" style={{
               fontFamily: 'Fira Mono, monospace',
               fontWeight: 400,
               fontSize:   '16px',
@@ -1180,31 +1233,33 @@ function TheTool() {
         </div>
 
         {/* Right — screenshot + caption with 3D tilt */}
-        <Reveal delay={0} style={{ flex: 1, width: 'auto', minWidth: 0 }}>
-          <div
-            ref={ltxRef}
-            onMouseMove={handleTiltMove}
-            onMouseLeave={handleTiltLeave}
-            style={{ display: 'block', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)' }}
-          >
-            <img
-              src="/rules-we-made-up/9-the-tool/LTX.jpg"
-              alt="LTX Studio interface"
-              style={{ width: '100%', display: 'block' }}
-            />
-          </div>
-          <div style={{ display: 'flex', gap: '32px', marginTop: '16px' }}>
-            {['Elements', 'Editor', 'Character consistency'].map(label => (
-              <span key={label} style={{
-                fontFamily: 'Fira Mono, monospace',
-                fontWeight: 400,
-                fontSize:   '16px',
-                lineHeight: 1.2,
-                color:      '#101010',
-              }}>{label}</span>
-            ))}
-          </div>
-        </Reveal>
+        <div className="ltx-image-wrap" style={{ flex: 1, minWidth: 0 }}>
+          <Reveal delay={0} style={{ width: '100%' }}>
+            <div
+              ref={ltxRef}
+              onMouseMove={handleTiltMove}
+              onMouseLeave={handleTiltLeave}
+              style={{ display: 'block', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.25)' }}
+            >
+              <img
+                src="/rules-we-made-up/9-the-tool/LTX.jpg"
+                alt="LTX Studio interface"
+                style={{ width: '100%', display: 'block' }}
+              />
+            </div>
+            <div className="ltx-labels" style={{ display: 'flex', gap: '32px', marginTop: '16px' }}>
+              {['Elements', 'Editor', 'Character consistency'].map(label => (
+                <span key={label} className="cs-mono" style={{
+                  fontFamily: 'Fira Mono, monospace',
+                  fontWeight: 400,
+                  fontSize:   '16px',
+                  lineHeight: 1.2,
+                  color:      '#101010',
+                }}>{label}</span>
+              ))}
+            </div>
+          </Reveal>
+        </div>
 
       </div>
     </CaseStudySection>
@@ -1223,7 +1278,7 @@ function FilmmakingPrinciples() {
         }
       >
         <Reveal>
-          <h2 className="font-heading" style={{
+          <h2 className="font-heading cs-h2" style={{
             fontWeight: 700,
             fontSize:   '64px',
             lineHeight: 1.05,
@@ -1232,7 +1287,7 @@ function FilmmakingPrinciples() {
           }}>What I learned</h2>
         </Reveal>
         <Reveal delay={100}>
-          <p style={{
+          <p className="principles-subtitle" style={{
             fontFamily: 'Fraunces, serif',
             fontWeight: 300,
             fontSize:   '20px',
@@ -1247,7 +1302,7 @@ function FilmmakingPrinciples() {
       </CaseStudyFullBleed>
 
       {/* Carousel */}
-      <div style={{ backgroundColor: '#FFFBF8', paddingBottom: '80px', position: 'relative', zIndex: 2 }}>
+      <div className="principles-carousel-wrap" style={{ backgroundColor: '#FFFBF8', paddingBottom: '80px', position: 'relative', zIndex: 2 }}>
         <DashedCardCarousel items={principles} />
       </div>
     </>
@@ -1326,7 +1381,7 @@ function SceneCreation() {
     >
       {/* Heading */}
       <Reveal delay={0}>
-        <h2 className="font-body" style={{
+        <h2 className="font-body cs-h2" style={{
           fontWeight:   700,
           fontSize:     '33px',
           lineHeight:   1.2,
@@ -1337,7 +1392,7 @@ function SceneCreation() {
 
       {/* Body copy */}
       <Reveal delay={100}>
-        <p style={{
+        <p className="cs-body" style={{
           fontFamily: 'Fraunces, serif',
           fontWeight: 300,
           fontSize:   '20px',
@@ -1453,28 +1508,37 @@ function RollCall() {
         id="roll-call"
         style={{ paddingTop: '80px', paddingBottom: '120px' }}
       >
-        <div style={{ display: 'flex', gap: '100px', alignItems: 'center' }}>
+        <div className="roll-call-row" style={{ display: 'flex', gap: '100px', alignItems: 'center' }}>
 
-          {/* Left — phone mockup 488px wide */}
-          <Reveal delay={0} style={{ flexShrink: 0, width: 'auto' }}>
-            <div
-              ref={phoneRef}
-              onMouseMove={handleTiltMove}
-              onMouseLeave={handleTiltLeave}
-              style={{ display: 'inline-block', borderRadius: '30px', boxShadow: '4px 4px 90px 0px rgba(0,0,0,0.10)' }}
-            >
-              <img
-                src="/rules-we-made-up/7-roll-call/Roll-call-mockup.png"
-                alt="Substack roll call post on phone"
-                style={{ width: '488px', height: 'auto', display: 'block', borderRadius: '30px' }}
-              />
-            </div>
-          </Reveal>
+          {/* H2 — mobile only, ordered first; hidden on desktop */}
+          <div className="roll-call-mobile-h2">
+            <h2 className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: 0 }}>
+              Inviting the Substack community into the film
+            </h2>
+          </div>
 
-          {/* Right — heading + body + image, starts at x=710 */}
-          <div style={{ width: '488px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {/* Phone mockup */}
+          <div className="roll-call-phone">
+            <Reveal delay={0} style={{ flexShrink: 0, width: 'auto' }}>
+              <div
+                ref={phoneRef}
+                onMouseMove={handleTiltMove}
+                onMouseLeave={handleTiltLeave}
+                style={{ display: 'inline-block', borderRadius: '30px', boxShadow: '4px 4px 90px 0px rgba(0,0,0,0.10)' }}
+              >
+                <img
+                  src="/rules-we-made-up/7-roll-call/Roll-call-mockup.png"
+                  alt="Substack roll call post on phone"
+                  style={{ width: '488px', height: 'auto', display: 'block', borderRadius: '30px' }}
+                />
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Right — heading (hidden on mobile) + body + groups image */}
+          <div className="roll-call-text" style={{ width: '488px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <Reveal delay={0}>
-              <h2 className="font-body" style={{
+              <h2 className="font-body cs-h2 roll-call-desktop-h2" style={{
                 fontWeight: 700,
                 fontSize:   '33px',
                 lineHeight: 1.2,
@@ -1486,20 +1550,21 @@ function RollCall() {
               </h2>
             </Reveal>
             <Reveal delay={100}>
-              <p style={{ ...body, maxWidth: '488px', margin: 0 }}>
+              <p className="cs-body" style={{ ...body, maxWidth: '488px', margin: 0 }}>
                 My film had a festival scene near the end — about 30 seconds of runtime — and I needed
                 a crowd. That's when I invited my Substack community to make themselves a claymation
                 character and I'd put them in the film. I provided the prompt, and eighteen people showed up.
               </p>
             </Reveal>
             <Reveal delay={150}>
-              <p style={{ ...body, maxWidth: '488px', margin: 0 }}>
+              <p className="cs-body" style={{ ...body, maxWidth: '488px', margin: 0 }}>
                 I divided all the characters into groups by scene so I could animate each cluster
                 separately and control the lighting as the night progressed.
               </p>
             </Reveal>
             <Reveal delay={200}>
               <img
+                className="roll-call-groups-img"
                 src="/rules-we-made-up/7-roll-call/SupportingCast-groups.png"
                 alt="Supporting cast character groups"
                 style={{ width: '488px', display: 'block' }}
@@ -1511,6 +1576,7 @@ function RollCall() {
       </CaseStudySection>
 
       <CaseStudyFullBleed
+        id="family-photo"
         background="#F5F0EC"
         sectionStyle={{
           backgroundImage:    'url(/Medium-beige-darker-bg2.jpg)',
@@ -1535,7 +1601,7 @@ function RollCall() {
 
         {/* Fira Mono label above family photo */}
         <Reveal delay={0}>
-          <p style={{
+          <p className="cs-mono" style={{
             fontFamily: 'Fira Mono, monospace',
             fontWeight: 400,
             fontSize:   '16px',
@@ -1548,6 +1614,7 @@ function RollCall() {
         {/* Family photo — full width within section padding */}
         <Reveal delay={100}>
           <div
+            className="family-photo-wrap"
             onClick={() => setFamilyOpen(true)}
             style={{ cursor: 'pointer', overflow: 'hidden' }}
             onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.03)'}
@@ -1561,39 +1628,13 @@ function RollCall() {
           </div>
         </Reveal>
 
-        {/* Family photo lightbox */}
-        {familyOpen && (
-          <div
-            onClick={() => setFamilyOpen(false)}
-            style={{
-              position:        'fixed',
-              inset:           0,
-              backgroundColor: 'rgba(0,0,0,0.88)',
-              zIndex:          1000,
-              display:         'flex',
-              alignItems:      'center',
-              justifyContent:  'center',
-            }}
-          >
-            <img
-              src="/rules-we-made-up/7-roll-call/GENERATED FAMILY PHOTO 1.jpg"
-              alt="The full cast of claymation characters"
-              onClick={e => e.stopPropagation()}
-              style={{ maxHeight: '90vh', maxWidth: '90vw', objectFit: 'contain', display: 'block' }}
-            />
-            <button
-              onClick={() => setFamilyOpen(false)}
-              style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: '#fff', fontSize: '28px', cursor: 'pointer', lineHeight: 1 }}
-            >×</button>
-          </div>
-        )}
-
         {/* Five festival stills */}
         <Reveal delay={100}>
-          <div style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
+          <div className="family-festival-strip" style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
             {festivalImages.map(({ src, alt }, i) => (
               <div
                 key={src}
+                className="family-festival-item"
                 style={{ flex: 1, overflow: 'hidden', cursor: 'pointer', transition: 'transform 0.3s ease' }}
                 onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-8px)'}
                 onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0px)'}
@@ -1608,9 +1649,12 @@ function RollCall() {
             ))}
           </div>
         </Reveal>
+        <div className="family-festival-dots" style={{ display: 'none' }}>
+          {festivalImages.map((_, i) => <span key={i} className="char-photo-dot" />)}
+        </div>
 
         <Reveal delay={200}>
-          <p style={{
+          <p className="cs-body" style={{
             fontFamily: 'Fraunces, serif',
             fontWeight: 300,
             fontSize:   '20px',
@@ -1624,42 +1668,69 @@ function RollCall() {
           </p>
         </Reveal>
 
-        {/* Festival stills lightbox */}
-        {lightboxIdx !== null && (
-          <div
-            onClick={() => setLightboxIdx(null)}
-            style={{
-              position:        'fixed',
-              inset:           0,
-              backgroundColor: 'rgba(0,0,0,0.88)',
-              zIndex:          1000,
-              display:         'flex',
-              alignItems:      'center',
-              justifyContent:  'center',
-            }}
-          >
-            <button
-              onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx - 1 + n) % n); }}
-              style={{ position: 'absolute', left: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            >←</button>
-            <img
-              src={`/rules-we-made-up/7-roll-call/${festivalImages[lightboxIdx].src}`}
-              alt={festivalImages[lightboxIdx].alt}
-              onClick={e => e.stopPropagation()}
-              style={{ maxHeight: '90vh', maxWidth: '90vw', objectFit: 'contain', display: 'block' }}
-            />
-            <button
-              onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx + 1) % n); }}
-              style={{ position: 'absolute', right: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            >→</button>
-            <button
-              onClick={() => setLightboxIdx(null)}
-              style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: '#fff', fontSize: '28px', cursor: 'pointer', lineHeight: 1 }}
-            >×</button>
-          </div>
-        )}
-
       </CaseStudyFullBleed>
+
+      {/* Family photo lightbox — outside CaseStudyFullBleed to escape its stacking context */}
+      {familyOpen && (
+        <div
+          onClick={() => setFamilyOpen(false)}
+          style={{
+            position:        'fixed',
+            inset:           0,
+            backgroundColor: 'rgba(0,0,0,0.88)',
+            zIndex:          1000,
+            display:         'flex',
+            alignItems:      'center',
+            justifyContent:  'center',
+          }}
+        >
+          <img
+            src="/rules-we-made-up/7-roll-call/GENERATED FAMILY PHOTO 1.jpg"
+            alt="The full cast of claymation characters"
+            onClick={e => e.stopPropagation()}
+            style={{ maxHeight: '90vh', maxWidth: '90vw', objectFit: 'contain', display: 'block' }}
+          />
+          <button
+            onClick={() => setFamilyOpen(false)}
+            style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: '#fff', fontSize: '28px', cursor: 'pointer', lineHeight: 1 }}
+          >×</button>
+        </div>
+      )}
+
+      {/* Festival stills lightbox — outside CaseStudyFullBleed to escape its stacking context */}
+      {lightboxIdx !== null && (
+        <div
+          onClick={() => setLightboxIdx(null)}
+          style={{
+            position:        'fixed',
+            inset:           0,
+            backgroundColor: 'rgba(0,0,0,0.88)',
+            zIndex:          1000,
+            display:         'flex',
+            alignItems:      'center',
+            justifyContent:  'center',
+          }}
+        >
+          <button
+            onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx - 1 + n) % n); }}
+            style={{ position: 'absolute', left: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >←</button>
+          <img
+            src={`/rules-we-made-up/7-roll-call/${festivalImages[lightboxIdx].src}`}
+            alt={festivalImages[lightboxIdx].alt}
+            onClick={e => e.stopPropagation()}
+            style={{ maxHeight: '90vh', maxWidth: '90vw', objectFit: 'contain', display: 'block' }}
+          />
+          <button
+            onClick={e => { e.stopPropagation(); setLightboxIdx((lightboxIdx + 1) % n); }}
+            style={{ position: 'absolute', right: '32px', background: 'none', border: '1.5px solid rgba(255,255,255,0.4)', borderRadius: '50%', width: '48px', height: '48px', color: '#fff', fontSize: '18px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          >→</button>
+          <button
+            onClick={() => setLightboxIdx(null)}
+            style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 'none', color: '#fff', fontSize: '28px', cursor: 'pointer', lineHeight: 1 }}
+          >×</button>
+        </div>
+      )}
     </>
   );
 }

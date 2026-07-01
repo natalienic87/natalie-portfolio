@@ -11,11 +11,10 @@ import { useState, useRef, useEffect } from 'react';
  *   imageRatio  — CSS aspect-ratio for the image (default '4 / 3', use '1 / 1' for square)
  */
 export default function DashedCardCarousel({ items = [], cardWidth = 500, gap = 50, imageRatio = '4 / 3' }) {
-  const [windowWidth, setWindowWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : 1200
-  );
+  const [windowWidth, setWindowWidth] = useState(1200);
 
   useEffect(() => {
+    setWindowWidth(window.innerWidth);
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);

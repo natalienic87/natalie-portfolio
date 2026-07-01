@@ -319,6 +319,8 @@ body {
 /* Torn edge — swap between desktop (dramatic) and mobile (subtle) versions */
 .torn-edge-mobile { display: none; }
 .roll-call-mobile-h2 { display: none; }
+.toolkit-dots, .sprint-dots, .use-cases-dots { display: none; }
+.use-cases-accordion { display: none; }
 
 /* ── Case study section horizontal padding (responsive) ── */
 .cs-inner {
@@ -629,12 +631,18 @@ body {
   .project-headphones-doodle { display: none !important; }
 
   /* "What it became" — 24px below body copy */
-  #what-it-became .cs-inner { padding-top: 24px !important; }
+  #what-it-became .cs-inner { padding-top: 60px !important; padding-bottom: 60px !important; }
 
   /* Mobile type system */
   .cs-mono { font-size: 12px !important; }
   .cs-h2 {
     font-size: 32px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
+  }
+  .cs-h3 {
+    font-size: 24px !important;
     font-weight: 700 !important;
     line-height: 1.2 !important;
     margin-bottom: 12px !important;
@@ -652,6 +660,201 @@ body {
 
   /* ── WorkshopCarousel (burketts-bees) ── */
   .workshop-heading-wrap { padding-left: 60px !important; padding-right: 60px !important; }
+
+  /* ── Heading → carousel gap ── */
+  .carousel-heading-wrap { margin-bottom: 24px !important; }
+
+  /* ── burketts-bees torn edges → toned down on mobile ── */
+  .bb-torn-edge { height: 20px !important; }
+
+  /* ── burketts-bees section padding ── */
+  #built-with-ai { padding-top: 40px !important; padding-bottom: 48px !important; }
+  #putting-to-work { padding-top: 40px !important; padding-bottom: 48px !important; }
+
+  /* ── Sun doodle → above heading on mobile ── */
+  .toolkit-header-row { flex-direction: column !important; gap: 24px !important; align-items: flex-start !important; }
+  .toolkit-sun { width: 96px !important; align-self: center !important; margin: 0 auto 8px !important; display: block !important; order: -1 !important; }
+
+  /* ── Small image box rows → horizontal swipe carousel ── */
+  .toolkit-row, .sprint-row {
+    overflow-x: auto !important; scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    justify-content: flex-start !important; gap: 16px !important;
+    margin-left: -60px !important; margin-right: -60px !important;
+    padding-left: 60px !important; padding-right: 60px !important;
+    padding-bottom: 4px; scrollbar-width: none;
+  }
+  .toolkit-row::-webkit-scrollbar, .sprint-row::-webkit-scrollbar { display: none; }
+  .toolkit-row > div, .sprint-row > div { scroll-snap-align: start !important; flex: 0 0 auto !important; width: calc(100vw - 140px) !important; }
+  .toolkit-row > div > div, .sprint-row > div > div { width: 100% !important; }
+  .toolkit-row > div > div > div:first-child, .sprint-row > div > div > div:first-child { width: 100% !important; height: auto !important; aspect-ratio: 1 / 1 !important; }
+  .toolkit-dots, .sprint-dots { display: flex !important; gap: 6px; justify-content: center; margin-top: 12px; }
+
+  /* ── Bee-hind the scenes row (burketts-bees) ── */
+  .beehind-row { flex-direction: column !important; gap: 32px !important; margin-bottom: 40px !important; }
+  .beehind-text { flex: none !important; width: 100% !important; }
+  .beehind-image { flex: none !important; width: 100% !important; }
+
+  /* ── Original concepts mosaic (burketts-bees) ── */
+  .concepts-grid { display: flex !important; flex-direction: column !important; gap: 32px !important; }
+  .concepts-image { grid-column: unset !important; }
+  .concepts-text { grid-column: unset !important; padding-left: 0 !important; }
+
+  /* ── Realistic use cases (burketts-bees) ── */
+  .use-cases-row { flex-direction: column !important; gap: 32px !important; }
+  .use-cases-text { flex: none !important; width: 100% !important; }
+  .use-cases-cards {
+    flex: none !important; display: flex !important;
+    overflow-x: auto !important; scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 16px !important;
+    margin-left: -60px !important; margin-right: -60px !important;
+    padding-left: 60px !important; padding-right: 60px !important;
+    padding-bottom: 4px; scrollbar-width: none;
+  }
+  .use-cases-cards::-webkit-scrollbar { display: none; }
+  .use-cases-cards > div { scroll-snap-align: start !important; flex: 0 0 calc(100vw - 140px) !important; }
+  .use-cases-dots { display: flex !important; gap: 6px; justify-content: center; margin-top: 12px; }
+
+  /* ── Putting the toolkit to work: mobile accordion ── */
+  .use-cases-desktop-grid { display: none !important; }
+  .use-cases-accordion { display: block !important; margin-top: 32px; }
+  .use-cases-acc-item {
+    border: 1px solid rgba(16,16,16,0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    background: #fff;
+  }
+  .use-cases-acc-trigger {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; padding: 16px 20px;
+    background: transparent; border: none; text-align: left; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .use-cases-acc-label {
+    font-family: Fraunces, serif; font-weight: 400; font-size: 17px;
+    line-height: 1.2; color: #101010;
+  }
+  .use-cases-acc-caret {
+    flex-shrink: 0; margin-left: 12px;
+    transition: transform 0.25s ease;
+  }
+  .use-cases-acc-caret.open { transform: rotate(180deg); }
+  .use-cases-acc-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .use-cases-acc-body.open { max-height: 600px; }
+  .use-cases-acc-img {
+    display: block; width: calc(100% - 40px);
+    margin: 0 20px 20px; border-radius: 8px;
+  }
+
+  /* ── Tools + What carried forward (burketts-bees) ── */
+  .tools-grid { display: flex !important; flex-direction: column !important; gap: 32px !important; }
+  .tools-text { grid-column: unset !important; padding-right: 0 !important; }
+  .tools-images { grid-column: unset !important; order: -1 !important; }
+  .carried-grid { display: flex !important; flex-direction: column !important; gap: 32px !important; }
+  .carried-text { grid-column: unset !important; }
+  .carried-image { grid-column: unset !important; order: -1 !important; }
+
+  /* ── Section-level padding → zero out so cs-inner (32px) handles spacing ── */
+  #beehind-scenes { padding-top: 0 !important; padding-bottom: 0 !important; }
+  #tools-section { padding-bottom: 0 !important; }
+  #role-in-practice { padding-top: 0 !important; padding-bottom: 0 !important; }
+  #three-cs { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+  /* ── Internal dashed section dividers → tighten on mobile ── */
+  .bb-section-divider { margin: 40px 0 !important; }
+  .bb-bottom-divider { margin-bottom: 40px !important; }
+
+  /* ── Three C's cards → horizontal swipe carousel ── */
+  .three-cs-grid {
+    display: flex !important; flex-direction: row !important;
+    overflow-x: auto !important; scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 12px !important;
+    margin-left: -60px !important; margin-right: -60px !important;
+    padding-left: 60px !important; padding-right: 60px !important;
+    scrollbar-width: none !important; padding-bottom: 4px;
+  }
+  .three-cs-grid::-webkit-scrollbar { display: none; }
+  .three-cs-grid > * { width: 270px !important; min-width: 270px !important; flex-shrink: 0 !important; scroll-snap-align: start; }
+
+  /* ── Role in Practice ticker ── */
+  .role-ticker-wrap { margin-top: 24px !important; }
+
+  /* ── add-refresh section padding ── */
+  #ar-started { padding-top: 60px !important; padding-bottom: 60px !important; }
+  #ar-started .cs-inner { padding-left: 24px !important; padding-right: 24px !important; }
+  #ar-collage-heading .cs-inner { padding-top: 60px !important; padding-bottom: 40px !important; }
+  #ar-concept-system .cs-inner { padding-top: 60px !important; padding-bottom: 60px !important; }
+  .ar-next-step { padding-top: 60px !important; padding-bottom: 60px !important; }
+  .ar-sprint-bg { padding-top: 60px !important; padding-bottom: 60px !important; }
+  .ar-hq-section { padding-top: 60px !important; padding-bottom: 60px !important; }
+  .ar-system-section { padding-top: 60px !important; padding-bottom: 60px !important; }
+  .ar-collage-section { padding-top: 0 !important; padding-bottom: 60px !important; }
+  .ar-deck-section { padding-top: 0 !important; padding-bottom: 60px !important; }
+  .ar-posters-section { padding-top: 0 !important; padding-bottom: 60px !important; }
+  .ar-totes-section { padding-top: 60px !important; padding-bottom: 60px !important; }
+  .ar-social-section { padding-top: 60px !important; padding-bottom: 60px !important; padding-left: 24px !important; padding-right: 24px !important; }
+  .ar-website-section { padding-top: 60px !important; padding-bottom: 60px !important; }
+
+  /* ── add-refresh: hide decorative SVG dividers on mobile (they add 60px blank) ── */
+  .ar-system-section .cs-inner > svg { display: none !important; }
+  .ar-website-section > svg { display: none !important; }
+
+  /* ── add-refresh: zero cs-inner vertical padding (section handles spacing) ── */
+  #ar-started .cs-inner { padding-top: 0 !important; padding-bottom: 0 !important; }
+  .ar-next-step .cs-inner,
+  .ar-hq-section .cs-inner,
+  .ar-system-section .cs-inner,
+  .ar-collage-section .cs-inner,
+  .ar-deck-section .cs-inner,
+  .ar-posters-section .cs-inner,
+  .ar-totes-section .cs-inner,
+  .ar-social-section .cs-inner,
+  .ar-website-section .cs-inner { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+  /* ── add-refresh image layout stacks ── */
+  .ar-2col { display: flex !important; flex-direction: column !important; gap: 24px !important; margin-top: 0 !important; margin-bottom: 32px !important; }
+  /* Collage mosaic — let images show at natural height, no cropping */
+  .ar-collage-flex { flex-direction: column !important; height: auto !important; gap: 12px !important; }
+  .ar-collage-flex > div { flex: none !important; width: 100% !important; height: auto !important; overflow: visible !important; }
+  .ar-collage-flex > div:first-child { height: auto !important; }
+  .ar-collage-flex > div > div { flex: none !important; height: auto !important; overflow: visible !important; }
+  .ar-collage-flex img { width: 100% !important; height: auto !important; object-fit: unset !important; }
+  .ar-deck-fan { width: 100% !important; height: auto !important; aspect-ratio: 800 / 450; }
+  .ar-posters-flex { gap: 12px !important; }
+  .ar-posters-flex img { width: calc(50% - 6px) !important; }
+  .ar-merch-row { flex-wrap: wrap !important; gap: 16px !important; }
+  .ar-merch-img { width: 100% !important; }
+  /* Phone mockups — horizontal swipe carousel, all same width → same height */
+  .ar-phones-row {
+    flex-direction: row !important; justify-content: flex-start !important;
+    align-items: flex-start !important;
+    overflow-x: auto !important; scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 16px !important;
+    margin-left: -24px !important; margin-right: -24px !important;
+    padding-left: 24px !important; padding-right: 40px !important;
+    padding-top: 20px !important; padding-bottom: 20px !important;
+    scrollbar-width: none !important;
+  }
+  .ar-phones-row::-webkit-scrollbar { display: none; }
+  .ar-phones-row > div { flex: 0 0 calc(100vw - 80px) !important; width: calc(100vw - 80px) !important; scroll-snap-align: start !important; margin-bottom: 0 !important; }
+  .ar-phones-row > div > div { width: 100% !important; }
+
+  /* ── Epic HQ image + text (add-refresh) ── */
+  .hq-grid { display: flex !important; flex-direction: column !important; gap: 32px !important; }
+  .hq-image { grid-column: unset !important; }
+  .hq-text { grid-column: unset !important; }
+
+  /* ── "Turning a concept" heading + credits (add-refresh) ── */
+  .system-grid { display: flex !important; flex-direction: column !important; gap: 32px !important; margin-bottom: 40px !important; }
+  .system-heading { grid-column: unset !important; }
+  .system-credits { grid-column: unset !important; padding-top: 0 !important; }
 
   /* ── TheTool (LTX Studio) ── */
   #ltx-studio .cs-inner { padding-top: 40px !important; padding-bottom: 48px !important; }
@@ -780,6 +983,7 @@ body {
   /* ── Footer ── */
   .footer-inner-body { font-size: 16px !important; }
   .footer-links      { gap: 20px !important; flex-wrap: wrap !important; justify-content: center !important; }
+  .footer-content    { padding-bottom: 180px !important; }
   .footer-deco       { display: none !important; }
   .career-deco       { display: none !important; }
 }

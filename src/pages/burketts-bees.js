@@ -622,7 +622,7 @@ function ProjectPurpose() {
         {/* Left: heading + text (cols 1–5) */}
         <div className="char-text-col" style={{ gridColumn: '1 / 6' }}>
           <Reveal delay={0}>
-            <h2 className="font-body cs-h2" style={{
+            <h2 className="font-body cs-h3" style={{
               fontWeight: 700, fontSize: '33px', lineHeight: 1.2,
               color: '#101010', margin: '0 0 20px',
             }}>Building the flavor system</h2>
@@ -800,7 +800,7 @@ function WorkshopCarousel() {
         paddingBottom:      '80px',
       }}>
         {/* Top torn edge */}
-        <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
+        <svg className="bb-torn-edge" viewBox="0 0 1440 50" preserveAspectRatio="none"
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}>
           <path d="M0,0 L0,28 L48,6 L95,35 L148,8 L200,38 L260,4 L315,32 L370,15 L425,40 L480,10 L535,34 L595,18 L650,42 L710,6 L765,28 L820,10 L875,38 L930,14 L985,40 L1040,5 L1095,30 L1150,12 L1210,38 L1270,8 L1330,32 L1390,15 L1440,25 L1440,0 Z" fill="#FFFBF8" />
         </svg>
@@ -808,7 +808,7 @@ function WorkshopCarousel() {
         {/* Heading */}
         <div className="workshop-heading-wrap" style={{ textAlign: 'center', maxWidth: '1440px', margin: '0 auto', padding: '0 120px 10px', boxSizing: 'border-box' }}>
           <Reveal>
-            <h3 className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+            <h3 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
               Running monthly workshops &amp; discussions
             </h3>
           </Reveal>
@@ -827,7 +827,7 @@ function WorkshopCarousel() {
         </div>
 
         {/* Bottom torn edge */}
-        <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
+        <svg className="bb-torn-edge" viewBox="0 0 1440 50" preserveAspectRatio="none"
           style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}>
           <path d="M0,50 L0,22 L55,45 L110,18 L168,44 L225,10 L280,38 L335,20 L390,46 L445,12 L500,40 L558,8 L615,36 L675,22 L735,48 L792,10 L845,38 L900,18 L958,44 L1015,6 L1070,34 L1128,16 L1185,42 L1245,8 L1300,36 L1360,20 L1440,38 L1440,50 Z" fill="#FFFBF8" />
         </svg>
@@ -904,11 +904,21 @@ function AIAssessment() {
 
 const BAKED_EXTRAS = [];
 
+const USE_CASES = [
+  { label: 'Social Media Campaigns', src: '/burketts-bees/6_Mockups-usecases/6_BB_PhoneMockup.png',    alt: 'Social media phone mockup' },
+  { label: 'Website Design',         src: '/burketts-bees/6_Mockups-usecases/6_BB_ComputerMockup.png', alt: 'Website laptop mockup' },
+  { label: 'Merch / Apparel',        src: '/burketts-bees/6_Mockups-usecases/6_BB_MerchHats.png',      alt: 'Merch hats mockup' },
+  { label: 'Sustainability',         src: '/burketts-bees/6_Mockups-usecases/6_BB_Sustainability.png', alt: 'Sustainability report mockup' },
+  { label: 'Corporate Gifting',      src: '/burketts-bees/6_Mockups-usecases/6_BB_Gifting.png',        alt: 'Corporate gifting box mockup' },
+  { label: 'Events',                 src: '/burketts-bees/6_Mockups-usecases/6_BB_Event.png',          alt: 'Event signage mockup' },
+];
+
 export default function BurkettsBees() {
   const [doodleEditEnabled, setDoodleEditEnabled] = useState(false);
   const [doodlePositions, setDoodlePositions]     = useState({});
   const [extraDoodles, setExtraDoodles]           = useState([]);
   const [deletedDoodles, setDeletedDoodles]       = useState(new Set());
+  const [activeUseCase, setActiveUseCase]         = useState(null);
 
   const deleteDoodle        = (id) => setDeletedDoodles(prev => new Set([...prev, id]));
   const updateDoodlePosition = (id, pos) => setDoodlePositions(prev => ({ ...prev, [id]: pos }));
@@ -1136,7 +1146,7 @@ export default function BurkettsBees() {
         style={{ paddingTop: '50px', paddingBottom: '120px' }}
       >
         <Reveal>
-          <h3 style={{
+          <h3 className="cs-mono" style={{
             fontFamily: 'Fira Mono, monospace',
             fontWeight: 400,
             fontSize:   '16px',
@@ -1238,7 +1248,7 @@ export default function BurkettsBees() {
           {/* Right: text group, vertically centered */}
           <div className="how-it-started-text" style={{ flex: 1 }}>
             <Reveal delay={0}>
-              <h2 className="font-body cs-h2" style={{
+              <h2 className="font-body cs-h3" style={{
                 fontWeight: 700,
                 fontSize:   '33px',
                 lineHeight: 1.2,
@@ -1270,7 +1280,7 @@ export default function BurkettsBees() {
 
 
       {/* ── Built With AI: SmallBoxRow ── */}
-      <section style={{
+      <section id="built-with-ai" style={{
         backgroundImage:    'url(/Medium-beige-darker-bg2.jpg)',
         backgroundSize:     'cover',
         backgroundPosition: 'center',
@@ -1281,22 +1291,22 @@ export default function BurkettsBees() {
       }}>
 
         {/* Top torn edge — #FFFBF8 tears down into the beige section */}
-        <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
+        <svg className="bb-torn-edge" viewBox="0 0 1440 50" preserveAspectRatio="none"
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}>
           <path d="M0,0 L0,28 L48,6 L95,35 L148,8 L200,38 L260,4 L315,32 L370,15 L425,40 L480,10 L535,34 L595,18 L650,42 L710,6 L765,28 L820,10 L875,38 L930,14 L985,40 L1040,5 L1095,30 L1150,12 L1210,38 L1270,8 L1330,32 L1390,15 L1440,25 L1440,0 Z" fill="#FFFBF8" />
         </svg>
 
         {/* Centered heading + body */}
         <Reveal>
-          <div style={{ textAlign: 'center', marginBottom: '50px', maxWidth: '1440px', margin: '0 auto 50px', padding: '0 120px', boxSizing: 'border-box' }}>
-            <h3 className="font-body" style={{
+          <div className="cs-inner carousel-heading-wrap" style={{ textAlign: 'center', marginBottom: '50px', maxWidth: '1440px', margin: '0 auto 50px', padding: '0 120px', boxSizing: 'border-box' }}>
+            <h3 className="font-body cs-h3" style={{
               fontWeight: 700,
               fontSize:   '33px',
               lineHeight: 1.2,
               color:      '#101010',
               margin:     '0 0 16px',
             }}>Built with AI. Art Directed by Me</h3>
-            <p style={{
+            <p className="cs-body" style={{
               fontFamily: 'Fraunces, serif',
               fontWeight: 300,
               fontSize:   '20px',
@@ -1314,8 +1324,8 @@ export default function BurkettsBees() {
         </Reveal>
 
         {/* 4-box image row */}
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+          <div className="toolkit-row" style={{ display: 'flex', justifyContent: 'space-between' }}>
             {[
               { src: '/burketts-bees/5_carousel_toolit/5_BB_Color.jpg',       label: 'Color' },
               { src: '/burketts-bees/5_carousel_toolit/5_BB_Logo.jpg',        label: 'Lockup' },
@@ -1355,10 +1365,15 @@ export default function BurkettsBees() {
               </Reveal>
             ))}
           </div>
+          <div className="toolkit-dots" style={{ display: 'none' }}>
+            {['Color', 'Lockup', 'Illustrations', 'Product photography'].map((_, i) => (
+              <span key={i} className="char-photo-dot" />
+            ))}
+          </div>
         </div>
 
         {/* Bottom torn edge — #FFFBF8 tears up into the beige section */}
-        <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
+        <svg className="bb-torn-edge" viewBox="0 0 1440 50" preserveAspectRatio="none"
           style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}>
           <path d="M0,50 L0,22 L55,45 L110,18 L168,44 L225,10 L280,38 L335,20 L390,46 L445,12 L500,40 L558,8 L615,36 L675,22 L735,48 L792,10 L845,38 L900,18 L958,44 L1015,6 L1070,34 L1128,16 L1185,42 L1245,8 L1300,36 L1360,20 L1440,38 L1440,50 Z" fill="#FFFBF8" />
         </svg>
@@ -1366,27 +1381,28 @@ export default function BurkettsBees() {
       </section>
 
       {/* ── Putting the Toolkit to Work ── */}
-      <section style={{ backgroundColor: '#FFFBF8', position: 'relative', zIndex: 2, paddingTop: '80px', paddingBottom: '120px' }}>
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section id="putting-to-work" style={{ backgroundColor: '#FFFBF8', position: 'relative', zIndex: 2, paddingTop: '80px', paddingBottom: '120px' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
           {/* Heading + body + sun */}
           <Reveal>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px' }}>
+            <div className="toolkit-header-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px' }}>
               <div style={{ maxWidth: '794px' }}>
-                <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+                <h2 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
                   Putting the toolkit to work
                 </h2>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+                <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                   Once I started applying the brand across different assets, AI's value became much
                   clearer. It could make early concepts visible enough for a team to discuss, critique,
                   and build on. Traditionally, that kind of ideation costs real time and money before a
                   single thing gets approved.
                 </p>
               </div>
-              <img src="/ELEMENTS/Sun@2x.png" alt="" style={{ width: '180px', flexShrink: 0, pointerEvents: 'none' }} />
+              <img className="toolkit-sun" src="/ELEMENTS/Sun@2x.png" alt="" style={{ width: '180px', flexShrink: 0, pointerEvents: 'none' }} />
             </div>
           </Reveal>
 
+          <div className="use-cases-desktop-grid">
           {/* Top divider */}
           <div style={{ borderTop: '1px dashed #C4B8A8', margin: '48px 0' }} />
 
@@ -1492,6 +1508,28 @@ export default function BurkettsBees() {
 
             </div>
           </Reveal>
+          </div>{/* /use-cases-desktop-grid */}
+
+          {/* Mobile accordion — hidden on desktop */}
+          <div className="use-cases-accordion">
+            {USE_CASES.map((item, i) => (
+              <div key={item.label} className="use-cases-acc-item">
+                <button
+                  className="use-cases-acc-trigger"
+                  onClick={() => setActiveUseCase(activeUseCase === i ? null : i)}
+                >
+                  <span className="use-cases-acc-label">{item.label}</span>
+                  <svg className={`use-cases-acc-caret${activeUseCase === i ? ' open' : ''}`}
+                    width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 6L8 11L13 6" stroke="#101010" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+                <div className={`use-cases-acc-body${activeUseCase === i ? ' open' : ''}`}>
+                  <img src={item.src} alt={item.alt} className="use-cases-acc-img" />
+                </div>
+              </div>
+            ))}
+          </div>
 
         </div>
       </section>
@@ -1500,22 +1538,22 @@ export default function BurkettsBees() {
       <AIAssessment />
 
       {/* ── Bee-hind the Scenes + Realistic Use Cases ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section id="beehind-scenes" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
           {/* Row 1: heading + body left | presentation slides right */}
-          <div style={{ display: 'flex', gap: '50px', alignItems: 'flex-start', marginBottom: '60px' }}>
-            <div style={{ flex: '0 0 490px' }}>
+          <div className="beehind-row" style={{ display: 'flex', gap: '50px', alignItems: 'flex-start', marginBottom: '60px' }}>
+            <div className="beehind-text" style={{ flex: '0 0 490px' }}>
               <Reveal>
-                <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 20px' }}>
+                <h2 className="font-heading cs-h2" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 20px' }}>
                   Bee-hind the scenes of working with AI
                 </h2>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+                <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                   It was important that my team saw the weird AI-isms and behind-the-scenes work that it took to create the brand. I presented my findings with honesty. While AI's capabilities were impressive, the tool could also be frustrating and full of surprises.
                 </p>
               </Reveal>
             </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
+            <div className="beehind-image" style={{ flex: 1, minWidth: 0 }}>
               <Reveal>
                 <img
                   src="/burketts-bees/7_BeeHindScenes/7_BeeHindScenes1.png"
@@ -1527,15 +1565,15 @@ export default function BurkettsBees() {
           </div>
 
           {/* Row 2: mosaic image + caption left | text cols 8–11 */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'center' }}>
-            <div style={{ gridColumn: '1 / 8' }}>
+          <div className="concepts-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'center' }}>
+            <div className="concepts-image" style={{ gridColumn: '1 / 8' }}>
               <Reveal>
                 <img
                   src="/burketts-bees/7_BeeHindScenes/7_BeeHindScenes2.jpg"
                   alt="Original AI-generated flower and bee pattern concepts"
                   style={{ width: '100%', display: 'block' }}
                 />
-                <p style={{
+                <p className="cs-mono" style={{
                   fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px',
                   lineHeight: 1.2, color: '#101010', margin: '12px 0 0',
                 }}>
@@ -1543,9 +1581,9 @@ export default function BurkettsBees() {
                 </p>
               </Reveal>
             </div>
-            <div style={{ gridColumn: '8 / 12', paddingLeft: '97px' }}>
+            <div className="concepts-text" style={{ gridColumn: '8 / 12', paddingLeft: '97px' }}>
               <Reveal>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+                <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                   Even if the outputs were not production-ready, the early concepts still made it
                   easier to discuss direction, spot potential, and decide what was worth making or
                   editing ourselves.
@@ -1555,23 +1593,23 @@ export default function BurkettsBees() {
           </div>
 
           {/* Dashed section divider */}
-          <div style={{ borderTop: '1px dashed #C4B8A8', margin: '80px 0' }} />
+          <div className="bb-section-divider" style={{ borderTop: '1px dashed #C4B8A8', margin: '80px 0' }} />
 
           {/* Realistic use cases */}
-          <div style={{ display: 'flex', gap: '50px', alignItems: 'flex-start' }}>
+          <div className="use-cases-row" style={{ display: 'flex', gap: '50px', alignItems: 'flex-start' }}>
 
             {/* Left: heading + body */}
-            <div style={{ flex: '0 0 387px' }}>
+            <div className="use-cases-text" style={{ flex: '0 0 387px' }}>
               <Reveal>
-                <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+                <h3 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
                   Realistic use cases
                 </h3>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+                <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                   Working with Fortune 500 clients meant working inside strict brand systems. In that
                   reality, AI-generated creative was not always something we could use as a final asset.
                   The output often did not fit tightly enough within existing guidelines.
                 </p>
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '20px 0 0' }}>
+                <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '20px 0 0' }}>
                   The question became: Where could AI make the process easier without making the work
                   feel cheaper?
                 </p>
@@ -1579,7 +1617,7 @@ export default function BurkettsBees() {
             </div>
 
             {/* Right: 2×2 card grid */}
-            <div style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+            <div className="use-cases-cards" style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
               {[
                 { n: 1, title: 'Creative exploration',      body: 'Generate early visual directions, thought-starters, and styles so the team could compare options before committing to one.' },
                 { n: 2, title: 'RFPs & new business',       body: 'Build quick spec visuals that helped teams respond faster, shape a pitch, and make new business ideas easier to understand.' },
@@ -1597,19 +1635,22 @@ export default function BurkettsBees() {
                     height:          '100%',
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-                      <div style={{
+                      <div className="wib-badge" style={{
                         flexShrink: 0, width: '60px', height: '60px',
                         backgroundColor: '#D2D7F5', borderRadius: '10px',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                       }}>
-                        <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{n}</span>
+                        <span className="wib-badge-num" style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{n}</span>
                       </div>
-                      <h4 style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', lineHeight: '24px', color: '#101010', margin: 0 }}>{title}</h4>
+                      <h4 className="wib-title" style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', lineHeight: '24px', color: '#101010', margin: 0 }}>{title}</h4>
                     </div>
-                    <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '16px', lineHeight: '160%', color: '#404040', margin: 0 }}>{body}</p>
+                    <p className="wib-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '16px', lineHeight: '160%', color: '#404040', margin: 0 }}>{body}</p>
                   </div>
                 </Reveal>
               ))}
+            </div>
+            <div className="use-cases-dots" style={{ display: 'none' }}>
+              {[1, 2, 3, 4].map((_, i) => <span key={i} className="char-photo-dot" />)}
             </div>
 
           </div>
@@ -1618,20 +1659,20 @@ export default function BurkettsBees() {
       </section>
 
       {/* ── Tools ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingBottom: '120px' }}>
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section id="tools-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingBottom: '120px' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
         {/* Dashed separator — no paddingTop so the line sits flush at the section boundary */}
-        <div style={{ borderTop: '1px dashed #C4B8A8', marginBottom: '80px' }} />
+        <div className="bb-bottom-divider" style={{ borderTop: '1px dashed #C4B8A8', marginBottom: '80px' }} />
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'start' }}>
+        <div className="tools-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'start' }}>
 
           {/* Left: heading + body + tag pills */}
-          <div style={{ gridColumn: '1 / 5', paddingRight: '30px' }}>
+          <div className="tools-text" style={{ gridColumn: '1 / 5', paddingRight: '30px' }}>
             <Reveal>
-              <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+              <h2 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
                 Helping designers design, not design <em>for</em> them
               </h2>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 32px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 32px' }}>
                 Creative tools aren't just about image generation. I explored tools that could reduce
                 tedious parts of the design process: organizing assets, naming layers, checking
                 accessibility, supporting onboarding, managing brand assets, and speeding up
@@ -1641,7 +1682,7 @@ export default function BurkettsBees() {
           </div>
 
           {/* Right: image grid — full-width top + two bottom */}
-          <div style={{ gridColumn: '5 / 13', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="tools-images" style={{ gridColumn: '5 / 13', display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <Reveal>
               <img
                 src="/burketts-bees/8_tools-grid/8_Tools_Grid1.jpg"
@@ -1701,17 +1742,17 @@ export default function BurkettsBees() {
       </CaseSplitPanel>
 
       {/* ── The Role in Practice ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section id="role-in-practice" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
           <Reveal>
             <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+              <p className="cs-mono" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
                 A new role in the company
               </p>
-              <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 28px' }}>
+              <h2 className="font-heading cs-h2" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 28px' }}>
                 Art Director, AI Integration
               </h2>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                 What the role looked like in practice: I kept my art direction responsibilities while
                 researching tools, testing workflows, leading discussions, and helping the team figure
                 out what was useful, safe, and realistic for both internal and client work.
@@ -1720,7 +1761,7 @@ export default function BurkettsBees() {
           </Reveal>
 
           {/* Scrolling ticker */}
-          <div style={{ marginTop: '60px' }}>
+          <div className="role-ticker-wrap" style={{ marginTop: '60px' }}>
             <TickerStrip duration={40} items={[
               'Monthly Workshops', 'Demos', 'One-on-one mentoring', 'Art Direction',
               'Ethics', 'Image Gen', 'Custom Models', 'Discussion',
@@ -1736,23 +1777,23 @@ export default function BurkettsBees() {
       <WorkshopCarousel />
 
       {/* ── Three C's + What Carried Forward ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section id="three-cs" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
         {/* Testing AI against the Three C's — centered heading */}
         <Reveal>
           <div style={{ textAlign: 'center', maxWidth: '640px', margin: '0 auto 48px' }}>
-            <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+            <h2 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
               Testing AI against the &ldquo;Three C&rsquo;s&rdquo;
             </h2>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               I developed a simple framework to evaluate AI tools against real agency needs — from presentation makers and image generators to plug-ins, internal GPTs and DAM capabilities.
             </p>
           </div>
         </Reveal>
 
         {/* Three cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+        <div className="three-cs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
           {[
             { num: 1, title: 'Collaboration', body: 'Does it help teams work better together? Can it speed up ideation, review and shared decision-making?' },
             { num: 2, title: 'Consistency',   body: 'Can it stay on brand and on brief across multiple outputs, formats and teams? Where do we lose cohesion?' },
@@ -1769,7 +1810,7 @@ export default function BurkettsBees() {
                 height:          '100%',
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-                  <div style={{
+                  <div className="wib-badge" style={{
                     flexShrink:      0,
                     width:           '60px',
                     height:          '60px',
@@ -1779,9 +1820,9 @@ export default function BurkettsBees() {
                     alignItems:      'center',
                     justifyContent:  'center',
                   }}>
-                    <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{num}</span>
+                    <span className="wib-badge-num" style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: '#101010', lineHeight: 1 }}>{num}</span>
                   </div>
-                  <h4 style={{
+                  <h4 className="wib-title" style={{
                     fontFamily: 'Fraunces, serif',
                     fontWeight: 700,
                     fontSize:   '24px',
@@ -1790,7 +1831,7 @@ export default function BurkettsBees() {
                     margin:     0,
                   }}>{title}</h4>
                 </div>
-                <p style={{
+                <p className="wib-body" style={{
                   fontFamily: 'Fraunces, serif',
                   fontWeight: 300,
                   fontSize:   '16px',
@@ -1804,27 +1845,27 @@ export default function BurkettsBees() {
         </div>
 
         {/* Dashed divider */}
-        <div style={{ borderTop: '1px dashed #C4B8A8', margin: '80px 0' }} />
+        <div className="bb-section-divider" style={{ borderTop: '1px dashed #C4B8A8', margin: '80px 0' }} />
 
         {/* What carried forward */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
-          <div style={{ gridColumn: '1 / 6' }}>
+        <div className="carried-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
+          <div className="carried-text" style={{ gridColumn: '1 / 6' }}>
             <Reveal>
-              <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+              <h2 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
                 What carried forward
               </h2>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 The use cases I identified through Burkett&rsquo;s Bees ended up being the same places AI proved useful inside the agency: RFPs, notionals, pitch materials, social content, mockups and early creative exploration.
               </p>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 When (add)ventures later explored a new internal brand direction, AI-assisted collage became part of the visual identity.
               </p>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                 AI may have replaced a few pricey stock photos, but it did not replace the people behind the craft. Designers still had to direct, edit, combine, refine and turn those pieces into usable brand assets.
               </p>
             </Reveal>
           </div>
-          <div style={{ gridColumn: '6 / 13' }}>
+          <div className="carried-image" style={{ gridColumn: '6 / 13' }}>
             <Reveal>
               <img
                 src="/burketts-bees/10_what-carried-forward.jpg"

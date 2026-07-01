@@ -10,7 +10,7 @@ export default function Footer() {
     <footer style={{ position: 'relative', zIndex: 2, backgroundColor: '#101010', overflow: 'hidden' }}>
 
       {/* ── Content ── */}
-      <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '80px 40px 60px' }}>
+      <div className="footer-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '80px 40px 60px' }}>
 
         {/* Mail icon */}
         <div style={{

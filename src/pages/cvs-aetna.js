@@ -181,10 +181,10 @@ function BeyondCarousel({ slides }) {
 
       {/* Slide caption */}
       <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto' }}>
-        <p className="font-body" style={{ fontWeight: 700, fontSize: '33px', color: '#101010', margin: '0 0 16px' }}>
+        <p className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', color: '#101010', margin: '0 0 16px' }}>
           {slide.title}
         </p>
-        <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+        <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
           {slide.body}
         </p>
       </div>
@@ -499,7 +499,7 @@ export default function CvsAetna() {
         style={{ paddingTop: '50px', paddingBottom: '120px' }}
       >
         <Reveal>
-          <h3 style={{
+          <h3 className="cs-mono" style={{
             fontFamily: 'Fira Mono, monospace',
             fontWeight: 400,
             fontSize:   '16px',
@@ -574,7 +574,7 @@ export default function CvsAetna() {
       </CaseStudySection>
 
       {/* ── How it started ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
+      <section className="cs-inner" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
         <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '2fr 3fr', alignItems: 'center', gap: '0' }}>
 
           {/* Left: mascara image */}
@@ -586,13 +586,13 @@ export default function CvsAetna() {
           {/* Right: heading + body, dashed left border */}
           <Reveal>
             <div style={{ paddingLeft: '64px', borderLeft: '2px dashed #5B9BD5' }}>
-              <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 24px' }}>
+              <h3 className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 24px' }}>
                 How it started
               </h3>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 When I was first hired, I was put on the CVS Shop Page. If you&apos;ve ever been on CVS.com, you&apos;ve likely seen it. It&apos;s the weekly deals engine. Fast cycles, constant production, lots of moving parts. Heavy on implementation, light on creativity. But even inside a rigid template without much safe space, I was pushing. Experimenting with elevated shadows, white space, new visual treatments — figuring out how much creative range really lived inside those components.
               </p>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                 I learned the system fast. A colleague and I were put in charge of onboarding, where we built out interactive Murals, process docs, and even gamified some of the training. We were looking for ways to simplify the workflow rather than add to it. This all got the attention of the Art Director. So when a project came around that needed both creative range and systems thinking, I was called into the kickoff meeting.
               </p>
             </div>
@@ -610,7 +610,7 @@ export default function CvsAetna() {
         </svg>
 
         <Reveal>
-          <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', letterSpacing: '0.22em', textTransform: 'uppercase', color: '#888888', margin: '0 0 40px' }}>
+          <p className="cs-mono" style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', letterSpacing: '0.22em', textTransform: 'uppercase', color: '#888888', margin: '0 0 40px' }}>
             Proposed User Journey
           </p>
         </Reveal>
@@ -625,25 +625,25 @@ export default function CvsAetna() {
       </section>
 
       {/* ── The brief: reimagine CVS shop ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
+      <section className="cs-inner" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', paddingLeft: '120px', paddingRight: '120px', boxSizing: 'border-box' }}>
         <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
 
           {/* Left: text */}
           <Reveal>
             <div>
-              <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 24px' }}>
+              <h3 className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 24px' }}>
                 The brief: reimagine CVS shop
               </h3>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 16px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 16px' }}>
                 I wanted creative freedom, and I got that. I also got a taste of what it was like working past midnight on a sprint like this one.
               </p>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 16px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 16px' }}>
                 The brief: reimagine the entire CVS.com shopping experience. Then build a full pitch deck for senior executives to present with. &ldquo;Blue-sky&rdquo; thinking. Meeting in less than two weeks.
               </p>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 16px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 16px' }}>
                 We heard &ldquo;sky&rsquo;s the limit&rdquo; but knew what that meant at a national retail scale. We needed a system ambitious enough to excite a room full of executives and grounded enough that they could actually envision it happening.
               </p>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                 Facial Care alone had 2,000+ SKUs. Vitamins over 450+. All of it had to hold together. So we built a system that could. To survive that kind of scale, we engineered a highly modular UI built on a few core pillars:
               </p>
             </div>
@@ -667,7 +667,7 @@ export default function CvsAetna() {
       </section>
 
       {/* ── Core pillars ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '80px 120px 120px', boxSizing: 'border-box' }}>
+      <section className="cs-inner" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', padding: '80px 120px 120px', boxSizing: 'border-box' }}>
         <Reveal>
           <FourBy accentColor="#CC0000" items={[
             { title: 'Strategic Badging',      body: 'Tags that actually communicate value – clean ingredients, dermatologist-tested, FSA eligible and more.' },
@@ -734,10 +734,10 @@ export default function CvsAetna() {
         {/* ZONE 1: Centered header */}
         <Reveal>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-            <h1 className="font-heading" style={{ fontWeight: 700, fontSize: '80px', lineHeight: '80px', color: '#101010', margin: '0 0 28px' }}>
+            <h1 className="font-heading hero-title" style={{ fontWeight: 700, fontSize: '80px', lineHeight: '80px', color: '#101010', margin: '0 0 28px' }}>
               Twelve Department Pages
             </h1>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', maxWidth: '680px', margin: '0 auto' }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', maxWidth: '680px', margin: '0 auto' }}>
               Shortly after the sprint, I was assigned to another high-stakes CVS.com project. At the time, there was no real content or commerce layer for the department pages, no visual system and no templates. Every page was a one off. We built a reusable system that balances commerce, content and category personality – then scaled it across twelve pages to launch a consistent experience.
             </p>
           </div>
@@ -801,7 +801,7 @@ export default function CvsAetna() {
                 ].map((img, i) => (
                   <div key={i}>
                     <img src={img.src} alt="" style={{ width: '100%', display: 'block', borderRadius: '8px', marginBottom: '10px' }} />
-                    <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#888888', margin: 0, lineHeight: 1.5 }}>{img.caption}</p>
+                    <p className="cs-mono" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#888888', margin: 0, lineHeight: 1.5 }}>{img.caption}</p>
                   </div>
                 ))}
               </div>
@@ -818,7 +818,7 @@ export default function CvsAetna() {
                 <img src="/cvs-agency-work/7-sys-artifacts/7-sys-artifact-Dsktp.png" alt="" style={{ width: '100%', display: 'block', borderRadius: '8px' }} />
                 <img src="/cvs-agency-work/7-sys-artifacts/7-sys-artifact-mbl.png" alt="" style={{ width: '100%', display: 'block', borderRadius: '8px' }} />
               </div>
-              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#888888', margin: 0, lineHeight: 1.6 }}>
+              <p className="cs-mono" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#888888', margin: 0, lineHeight: 1.6 }}>
                 Before AI could do everything for you we built responsive padding guidelines for desktop, tablet and mobile
               </p>
             </Reveal>
@@ -846,17 +846,17 @@ export default function CvsAetna() {
               </p>
             </Reveal>
             <Reveal delay={60}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 Each department page needed its own curated mix of weekly deals — from seasonal stories to HSA-eligible products, trending shelves to favorite-brand modules.
               </p>
             </Reveal>
             <Reveal delay={80}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 We designed the pages around modular content blocks that could move, update and cross-pollinate across departments without requiring a redesign each time. The system had to work before every possible combination happened.
               </p>
             </Reveal>
             <Reveal delay={100}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                 Introducing the department pages was more than a new aesthetic. Once the visual direction was established, I helped translate it into a repeatable production system: templates, naming conventions, folder structures, XD components and PSD files that made the system usable across design, production and leadership.
               </p>
             </Reveal>
@@ -888,27 +888,27 @@ export default function CvsAetna() {
           {/* LEFT — story + numbered steps */}
           <div>
             <Reveal>
-              <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.1, color: '#101010', margin: '0 0 32px' }}>
+              <h2 className="font-heading cs-h2" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.1, color: '#101010', margin: '0 0 32px' }}>
                 And then one morning, everything was broken
               </h2>
             </Reveal>
             <Reveal delay={60}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 One morning, we signed onto CVS.com and the site just looked ... broken.
               </p>
             </Reveal>
             <Reveal delay={80}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 Images were warping. Products were cropping incorrectly. Faces, logos and text was getting cut off.
               </p>
             </Reveal>
             <Reveal delay={100}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 We learned that CVS had migrated to a new CMS, and the new components were not handling content the way their old system had. It looked like a visual problem, but it was a giant accessibility issue that needed to be fixed, fast.
               </p>
             </Reveal>
             <Reveal delay={120}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 48px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 48px' }}>
                 I was part of a small group given sandbox access to understand how the new components actually worked, so we could make them usable. We diagnosed the issue and created a rollout plan to re-deliver thousands of assets while the weekly Shop cycle continued.
               </p>
             </Reveal>
@@ -939,17 +939,17 @@ export default function CvsAetna() {
             <Reveal>
               <img src="/cvs-agency-work/8-history-mural.jpg" alt=""
                 style={{ width: '100%', display: 'block', marginBottom: '12px' }} />
-              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#888888', margin: '0 0 40px', lineHeight: 1.6, textAlign: 'center' }}>
+              <p className="cs-mono" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#888888', margin: '0 0 40px', lineHeight: 1.6, textAlign: 'center' }}>
                 This was the scale of the migration: every tiny rectangle is a full page that had to be checked, rebuilt and QA&rsquo;d without stopping the weekly Shop cycle.
               </p>
             </Reveal>
             <Reveal delay={60}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 The CMS migration was meant to reduce dependence on outside production support. Instead, it revealed that the value of our team was not just execution — it was system knowledge, brand judgment and the ability to translate between creative, technical, accessibility and merchandising teams.
               </p>
             </Reveal>
             <Reveal delay={80}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 40px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 40px' }}>
                 After the rollout was complete, the relationship changed. It became a defining moment of trust between the client and agency.
               </p>
             </Reveal>
@@ -989,10 +989,10 @@ export default function CvsAetna() {
         {/* Centered heading + intro */}
         <Reveal>
           <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.1, color: '#101010', margin: '0 0 24px' }}>
+            <h2 className="font-heading cs-h2" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.1, color: '#101010', margin: '0 0 24px' }}>
               Beyond DotCom
             </h2>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', maxWidth: '680px', margin: '0 auto' }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', maxWidth: '680px', margin: '0 auto' }}>
               We had proven we could do more than execute inside the system, the scope widened. Here&rsquo;s a look at a few of the campaigns and brand workstreams where I had a bigger hand, both on and off DotCom.
             </p>
           </div>
@@ -1014,10 +1014,10 @@ export default function CvsAetna() {
         {/* Centered heading + intro */}
         <Reveal>
           <div style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 56px' }}>
-            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.1, color: '#101010', margin: '0 0 24px' }}>
+            <h2 className="font-heading cs-h2" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.1, color: '#101010', margin: '0 0 24px' }}>
               Platform Playbook
             </h2>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               The ask was no longer just to design another page, asset or seasonal system. It was to help turn a national brand platform into a playbook every agency partner and internal team could use.
             </p>
           </div>
@@ -1041,7 +1041,7 @@ export default function CvsAetna() {
               <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '28px', lineHeight: 1.25, color: '#101010', margin: '0 0 20px' }}>
                 The enterprise needed to signal its shift from individual businesses to an integrated health solutions company
               </p>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 40px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 40px' }}>
                 At a time when health care felt expensive, fragmented and hard to navigate, the brand needed a clearer, more human platform.
               </p>
             </Reveal>
@@ -1051,7 +1051,7 @@ export default function CvsAetna() {
               <div style={{ backgroundColor: '#6B4C9A', borderRadius: '14px', padding: '36px 32px' }}>
                 <img src="/cvs-agency-work/10-healthier-happens-togegther/hht-31M.gif" alt="31M"
                   style={{ width: '160px', display: 'block', marginBottom: '12px' }} />
-                <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.5, color: '#ffffff', margin: 0 }}>
+                <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.5, color: '#ffffff', margin: 0 }}>
                   people under the age of 65 are uninsured.
                 </p>
               </div>

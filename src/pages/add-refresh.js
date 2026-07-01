@@ -82,9 +82,9 @@ const collageItems = [
 function CollageCarousel() {
   return (
     <>
-      <CaseStudyFullBleed background="#FFFBF8" style={{ paddingTop: '80px', paddingBottom: '10px', textAlign: 'center' }}>
+      <CaseStudyFullBleed id="ar-collage-heading" background="#FFFBF8" style={{ paddingTop: '80px', paddingBottom: '10px', textAlign: 'center' }}>
         <Reveal>
-          <h2 className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+          <h2 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
             Collage as an Expression
           </h2>
         </Reveal>
@@ -202,7 +202,7 @@ function ConceptSystem() {
   );
 
   return (
-    <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '120px' }}>
+    <CaseStudySection id="ar-concept-system" style={{ paddingTop: '80px', paddingBottom: '120px' }}>
       <div ref={contentRef} className="char-grid" style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(12, 1fr)',
@@ -216,7 +216,7 @@ function ConceptSystem() {
         {/* Left: heading + text (cols 1–5) */}
         <div className="char-text-col" style={{ gridColumn: '1 / 6' }}>
           <Reveal delay={0}>
-            <h2 className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+            <h2 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
               Familiar enough to belong. Flexible enough to grow.
             </h2>
           </Reveal>
@@ -539,43 +539,25 @@ export default function AddRefresh() {
       </CaseStudySection>
 
       {/* ── How it started ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section id="ar-started" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
-        {/* Top row: heading + body (8 cols) | pencil (4 cols) */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'flex-start', marginBottom: '50px' }}>
-
-          <div style={{ gridColumn: '1 / 9' }}>
-            <Reveal>
-              <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
-                It started with a seemingly small ask
-              </h3>
-            </Reveal>
-            <Reveal delay={100}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
-                The project began with a focused request: explore a new illustration style for the (add)ventures agency. But as we sketched and tested, we hit the same roadblocks as other parallel internal workstreams.
-              </p>
-            </Reveal>
-          </div>
-
-          <div style={{ gridColumn: '9 / 13', position: 'relative' }}>
-            <div style={{ position: 'absolute', right: 0, top: 0 }}>
-              <Reveal delay={200} style={{ width: 'auto' }}>
-                <img
-                  src="/ELEMENTS/Pencil@2x.png"
-                  alt=""
-                  className="animate-pencil-hover"
-                  style={{ width: '60px' }}
-                />
-              </Reveal>
-            </div>
-          </div>
-
+        <div style={{ marginBottom: '50px' }}>
+          <Reveal>
+            <h3 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+              It started with a seemingly small ask
+            </h3>
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              The project began with a focused request: explore a new illustration style for the (add)ventures agency. But as we sketched and tested, we hit the same roadblocks as other parallel internal workstreams.
+            </p>
+          </Reveal>
         </div>
 
         {/* Video card */}
         <Reveal>
-          <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+          <p className="cs-mono" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
             Initial Character Illustrations. Drawn on Procreate.
           </p>
           <div
@@ -593,17 +575,17 @@ export default function AddRefresh() {
       </section>
 
       {/* ── The natural next step for the brand ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '40px', paddingBottom: '120px' }}>
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section className="ar-next-step" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '40px', paddingBottom: '120px' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
           <Reveal>
             <div style={{ textAlign: 'center', maxWidth: '793px', margin: '0 auto' }}>
-              <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+              <h3 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
                 The natural next step for the brand
               </h3>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
                 The agency was evolving, and the brand needed room to evolve with it. What started as an illustration exploration quickly raised bigger questions about type, color, motion, tone, and how the system should behave across channels.
               </p>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                 We were bringing that kind of strategic thinking to client work every day. This became a chance to bring it back to ourselves.
               </p>
             </div>
@@ -620,7 +602,7 @@ export default function AddRefresh() {
       </section>
 
       {/* ── The Concept Sprint: SmallBoxRow ── */}
-      <section style={{
+      <section className="ar-sprint-bg" style={{
         backgroundImage:    'url(/Medium-beige-darker-bg2.jpg)',
         backgroundSize:     'cover',
         backgroundPosition: 'center',
@@ -638,19 +620,19 @@ export default function AddRefresh() {
 
         {/* Centered heading + body */}
         <Reveal>
-          <div style={{ maxWidth: '740px', margin: '0 auto', textAlign: 'center', marginBottom: '56px' }}>
-            <h3 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+          <div className="carousel-heading-wrap" style={{ maxWidth: '740px', margin: '0 auto', textAlign: 'center', marginBottom: '56px' }}>
+            <h3 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
               Let the Concept Sprint Begin!
             </h3>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               In a fast-paced sprint, a small group of art directors developed independent visions for the brand&apos;s evolution.
             </p>
           </div>
         </Reveal>
 
         {/* 3-box image row */}
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+          <div className="sprint-row" style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
             {[
               { src: '/add-refresh/4_carousel_concepts/4_Concept1.jpg', label: 'Back to the Future' },
               { src: '/add-refresh/4_carousel_concepts/4_Concept2.png', label: 'Found in Translation' },
@@ -686,6 +668,11 @@ export default function AddRefresh() {
               </Reveal>
             ))}
           </div>
+          <div className="sprint-dots" style={{ display: 'none' }}>
+            {['Back to the Future', 'Found in Translation', 'Night at the Muse-eum'].map((_, i) => (
+              <span key={i} className="char-photo-dot" />
+            ))}
+          </div>
         </div>
 
         {/* Bottom torn edge */}
@@ -699,12 +686,12 @@ export default function AddRefresh() {
       <ConceptSystem />
 
       {/* ── The answer was in the building ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
+      <section className="ar-hq-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+        <div className="hq-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
 
           {/* Left: image mosaic */}
-          <div style={{ gridColumn: '1 / 8' }}>
+          <div className="hq-image" style={{ gridColumn: '1 / 8' }}>
             <Reveal>
               <div style={{ display: 'flex', gap: '8px', aspectRatio: '1 / 1' }}>
                 {/* Left column: car + plane */}
@@ -734,19 +721,19 @@ export default function AddRefresh() {
                   </div>
                 </div>
               </div>
-              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '12px 0 0' }}>
+              <p className="cs-mono" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '12px 0 0' }}>
                 Image in the Epic HQ
               </p>
             </Reveal>
           </div>
 
           {/* Right: heading + body */}
-          <div style={{ gridColumn: '8 / 13' }}>
+          <div className="hq-text" style={{ gridColumn: '8 / 13' }}>
             <Reveal>
-              <h2 className="font-body" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
+              <h2 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
                 The answer was in the building
               </h2>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                 We realized the most authentic way to refresh the brand was to build from the inside out. EPIC Headquarters wasn&apos;t just an office; it was a creative archive. By pulling inspiration directly from the space&apos;s layered history&mdash;vintage typewriters, airplane seats, and unexpected props&mdash;we let the physical culture dictate the new visual direction.
               </p>
             </Reveal>
@@ -759,8 +746,8 @@ export default function AddRefresh() {
       <CollageCarousel />
 
       {/* ── Turning a concept into a working system ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section className="ar-system-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
         {/* Dashed divider */}
         <svg width="100%" height="2" style={{ display: 'block', marginBottom: '60px' }} preserveAspectRatio="none">
@@ -768,22 +755,22 @@ export default function AddRefresh() {
         </svg>
 
         {/* Heading (left) + Credits (right) */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'start', marginBottom: '60px' }}>
+        <div className="system-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'start', marginBottom: '60px' }}>
 
-          <div style={{ gridColumn: '1 / 8' }}>
+          <div className="system-heading" style={{ gridColumn: '1 / 8' }}>
             <Reveal>
-              <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 20px' }}>
+              <h2 className="font-heading cs-h2" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 20px' }}>
                 Turning a concept into a working system
               </h2>
             </Reveal>
             <Reveal delay={100}>
-              <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
                 Members from the (add)ventures Creative Team and I tested the direction across various touchpoints: presentation decks, social media, logo expression, brand marks, shapes, gradients, text treatments, doodles, illustrations, swag, wayfinding, headlines, internal initiatives, podcast graphics, and the virtual production studio.
               </p>
             </Reveal>
           </div>
 
-          <div style={{ gridColumn: '9 / 13', display: 'flex', flexDirection: 'column', gap: '24px', paddingTop: '8px' }}>
+          <div className="system-credits" style={{ gridColumn: '9 / 13', display: 'flex', flexDirection: 'column', gap: '24px', paddingTop: '8px' }}>
             {[
               { label: 'Creative Direction',        value: 'Meagan Driscoll' },
               { label: 'Art Direction + Design',    value: 'Natalie Nicholson' },
@@ -820,10 +807,10 @@ export default function AddRefresh() {
         </Reveal>
 
         {/* Row 1: gradient rules (left) + color grid (right) */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'start', marginBottom: '60px' }}>
+        <div className="ar-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'start', marginBottom: '60px' }}>
           <Reveal>
             <div>
-              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+              <p className="cs-mono" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
                 Creating rules around color and gradients
               </p>
               <img src="/add-refresh/8-working-sytem/8_ws-gradient-rules.png" alt="" style={{ width: '100%', display: 'block' }} />
@@ -835,13 +822,13 @@ export default function AddRefresh() {
         </div>
 
         {/* Row 2: mark GIF (left) + mark cleanup caption + image (right) */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'start' }}>
+        <div className="ar-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'start' }}>
           <Reveal>
             <img src="/add-refresh/8-working-sytem/MARK%20GIF.png" alt="" style={{ width: '100%', display: 'block' }} />
           </Reveal>
           <Reveal>
             <div>
-              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+              <p className="cs-mono" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
                 Brand mark cleanup, parentheses behavior
               </p>
               <img src="/add-refresh/8-working-sytem/8_ws-addmark.png" alt="" style={{ width: '100%', display: 'block' }} />
@@ -850,7 +837,7 @@ export default function AddRefresh() {
         </div>
 
         {/* Row 3: parens banner (left, wider) + arrow square (right, smaller) */}
-        <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '40px', alignItems: 'start', marginTop: '60px' }}>
+        <div className="ar-2col" style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '40px', alignItems: 'start', marginTop: '60px' }}>
           <Reveal>
             <img src="/add-refresh/8-working-sytem/8_ws-parens.jpg" alt="" style={{ width: '100%', display: 'block' }} />
           </Reveal>
@@ -860,10 +847,10 @@ export default function AddRefresh() {
         </div>
 
         {/* Row 4: caption + type specimen (left, narrower) | GIF texture + decks stacked (right, wider) */}
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '40px', alignItems: 'start', marginTop: '60px' }}>
+        <div className="ar-2col" style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '40px', alignItems: 'start', marginTop: '60px' }}>
           <Reveal>
             <div>
-              <p style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
+              <p className="cs-mono" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
                 Defining roles for headlines, wayfinding, and expressive type
               </p>
               <img src="/add-refresh/8-working-sytem/8_ws-typography.png" alt="" style={{ width: '100%', display: 'block' }} />
@@ -881,17 +868,17 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Integrating collage, shape language, doodles, and patterns ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section className="ar-collage-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
 
         <Reveal>
-          <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 28px' }}>
+          <p className="cs-mono" style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 28px' }}>
             Integrating collage, shape language, doodles, and patterns
           </p>
         </Reveal>
 
         <Reveal>
-          <div style={{ display: 'flex', gap: '16px', height: '620px' }}>
+          <div className="ar-collage-flex" style={{ display: 'flex', gap: '16px', height: '620px' }}>
             {/* Left: tall collage 787px */}
             <div style={{ flex: '0 0 787px', overflow: 'hidden' }}>
               <img src="/add-refresh/8-working-sytem/8_ws-grid-collage1.jpg" alt=""
@@ -915,11 +902,11 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Deck fan ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section className="ar-deck-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Reveal style={{ width: 'auto' }}>
-            <div style={{ position: 'relative', width: '800px', height: '450px' }}>
+            <div className="ar-deck-fan" style={{ position: 'relative', width: '800px', height: '450px' }}>
               {[
                 { src: '/add-refresh/8-working-sytem/8_ws-deck-b.jpg', rot: -8, z: 1 },
                 { src: '/add-refresh/8-working-sytem/8_ws-deck-c.png', rot:  0, z: 2 },
@@ -944,10 +931,10 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Two posters, centered ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '100px' }}>
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', display: 'flex', justifyContent: 'center' }}>
+      <section className="ar-posters-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '100px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', display: 'flex', justifyContent: 'center' }}>
         <Reveal style={{ width: 'auto' }}>
-          <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
+          <div className="ar-posters-flex" style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
             <img src="/add-refresh/8-working-sytem/8_ws-poster1.jpg" alt=""
               style={{ width: '290px', display: 'block', borderRadius: '8px' }} />
             <img src="/add-refresh/8-working-sytem/8_ws-poster2.jpg" alt=""
@@ -958,21 +945,21 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Totes, apparel, and swag ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section className="ar-totes-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
         <Reveal>
-          <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 24px' }}>
+          <p className="cs-mono" style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 24px' }}>
             Totes, apparel, and swag
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <img src="/add-refresh/8-working-sytem/8_ws-totes.jpg" alt=""
               style={{ width: '100%', display: 'block' }} />
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <img src="/add-refresh/8-working-sytem/8_ws-waterbottle.png" alt=""
+            <div className="ar-merch-row" style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <img className="ar-merch-img" src="/add-refresh/8-working-sytem/8_ws-waterbottle.png" alt=""
                 style={{ width: '386px', display: 'block' }} />
-              <img src="/add-refresh/8-working-sytem/8_ws-sweatshirt.jpg" alt=""
+              <img className="ar-merch-img" src="/add-refresh/8-working-sytem/8_ws-sweatshirt.jpg" alt=""
                 style={{ width: '453px', display: 'block' }} />
-              <img src="/add-refresh/8-working-sytem/8_ws-bs-mug.png" alt=""
+              <img className="ar-merch-img" src="/add-refresh/8-working-sytem/8_ws-bs-mug.png" alt=""
                 style={{ width: '283px', display: 'block' }} />
             </div>
           </div>
@@ -981,13 +968,13 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Social media and podcast graphics ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', boxSizing: 'border-box', width: '100%' }}>
+      <section className="ar-social-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', boxSizing: 'border-box', width: '100%' }}>
         <Reveal>
-          <p style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 48px' }}>
+          <p className="cs-mono" style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 48px' }}>
             Social media and podcast graphics
           </p>
         </Reveal>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end', gap: '24px', width: '100%' }}>
+        <div className="ar-phones-row" style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end', gap: '24px', width: '100%' }}>
           <Reveal delay={0} style={{ width: '300px', flexShrink: 0 }}>
             <PhoneCard src="/add-refresh/8-working-sytem/8_ws-phonemockup1.png" width="300px" />
           </Reveal>
@@ -1001,7 +988,7 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Carrying the system to a brand new website ── */}
-      <section style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', boxSizing: 'border-box' }}>
+      <section className="ar-website-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', boxSizing: 'border-box' }}>
 
         {/* Dotted divider */}
         <svg width="100%" height="2" style={{ display: 'block', marginBottom: '64px' }} preserveAspectRatio="none">
@@ -1010,17 +997,17 @@ export default function AddRefresh() {
 
         <Reveal>
           <div style={{ textAlign: 'center', maxWidth: '842px', margin: '0 auto' }}>
-            <h2 className="font-heading" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 24px' }}>
+            <h2 className="font-heading cs-h2" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 24px' }}>
               Carrying the system to create a brand new website
             </h2>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
               As the refresh gained momentum, the system moved directly into a website sprint. In a short timeline, the team began translating the new direction into digital structure, page design, content hierarchy, and interactive brand moments.
             </p>
           </div>
         </Reveal>
 
         <Reveal>
-          <div style={{ maxWidth: '1440px', margin: '60px auto 0', padding: '0 120px', boxSizing: 'border-box' }}>
+          <div className="cs-inner" style={{ maxWidth: '1440px', margin: '60px auto 0', padding: '0 120px', boxSizing: 'border-box' }}>
             <video
               autoPlay muted loop playsInline
               style={{ width: '100%', display: 'block' }}

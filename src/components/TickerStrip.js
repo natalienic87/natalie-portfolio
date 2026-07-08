@@ -10,12 +10,6 @@ export default function TickerStrip({ items = [], duration = 40 }) {
 
   return (
     <>
-      <style>{`
-        @keyframes ticker-strip {
-          from { transform: translate3d(0, 0, 0); }
-          to   { transform: translate3d(-50%, 0, 0); }
-        }
-      `}</style>
       <div style={{
         overflow:        'hidden',
         WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
@@ -51,3 +45,4 @@ export default function TickerStrip({ items = [], duration = 40 }) {
     </>
   );
 }
+

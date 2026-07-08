@@ -243,6 +243,7 @@ All case study hero sections use `minHeight` and `maxHeight` of `max(800px, 90vh
 | FourBy card title + body | Fraunces | 700 / 300 | **17px** | — |
 | Captions / labels | Fira Mono **500** | — | 11px | uppercase, `letterSpacing: 0.1em` |
 | Meta values | Fira Mono 500 | — | 14px | — |
+| Mono display / typewriter | Fira Mono 400 | — | 22px | animated text in full-bleed split panels (see `CaseSplitPanel`, `MushroomFriend`) |
 
 ### Color palette
 | Token | Value | Use |

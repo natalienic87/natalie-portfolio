@@ -157,17 +157,17 @@ export default function About() {
   return (
     <>
       {/* ── Section 1: Fun ideas, made functional ── */}
-      <section style={{ position: 'relative', backgroundImage: "url('/Medium-beige-darker-bg2.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', paddingTop: '100px', paddingBottom: '100px', zIndex: 2 }}>
+      <section style={{ position: 'relative', backgroundImage: "url('/Medium-beige-darker-bg2.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', paddingTop: '140px', paddingBottom: '140px', zIndex: 2 }}>
 
         {/* Top torn edge — desktop (full drama) */}
         <svg className="torn-edge-desktop" width="100%" height="50" viewBox="0 0 1440 50" preserveAspectRatio="none"
           style={{ position: 'absolute', top: 0, left: 0, display: 'block' }}>
-          <path d="M0,0 L1440,0 L1440,22 L1370,36 L1310,10 L1250,42 L1190,15 L1135,38 L1080,8 L1020,44 L965,18 L910,42 L855,12 L800,32 L740,5 L680,45 L620,20 L560,36 L505,8 L450,44 L395,18 L340,35 L285,5 L230,42 L175,12 L120,40 L60,8 L0,30 Z" fill="#101010" />
+          <path d="M0,0 L1440,0 L1440,25 C1380,42 1320,42 1260,25 C1200,8 1140,8 1080,25 C1020,42 960,42 900,25 C840,8 780,8 720,25 C660,42 600,42 540,25 C480,8 420,8 360,25 C300,42 240,42 180,25 C120,8 60,8 0,25 Z" fill="#101010" />
         </svg>
         {/* Top torn edge — mobile (subtle) */}
         <svg className="torn-edge-mobile" width="100%" height="50" viewBox="0 0 1440 50" preserveAspectRatio="none"
           style={{ position: 'absolute', top: 0, left: 0, display: 'none' }}>
-          <path d="M0,0 L1440,0 L1440,37 L1370,41 L1310,34 L1250,43 L1190,35 L1135,42 L1080,33 L1020,44 L965,36 L910,43 L855,34 L800,40 L740,32 L680,44 L620,37 L560,41 L505,33 L450,44 L395,36 L340,41 L285,32 L230,43 L175,34 L120,43 L60,33 L0,40 Z" fill="#101010" />
+          <path d="M0,0 L1440,0 L1440,43 C1380,48 1320,48 1260,43 C1200,38 1140,38 1080,43 C1020,48 960,48 900,43 C840,38 780,38 720,43 C660,48 600,48 540,43 C480,38 420,38 360,43 C300,48 240,48 180,43 C120,38 60,38 0,43 Z" fill="#101010" />
         </svg>
 
         <div className="about-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
@@ -227,12 +227,12 @@ export default function About() {
         {/* Bottom torn edge — desktop (full drama) */}
         <svg className="torn-edge-desktop" width="100%" height="50" viewBox="0 0 1440 50" preserveAspectRatio="none"
           style={{ position: 'absolute', bottom: 0, left: 0, display: 'block' }}>
-          <path d="M0,50 L0,30 L60,8 L120,40 L175,12 L230,42 L285,5 L340,35 L395,18 L450,44 L505,8 L560,36 L620,20 L680,45 L740,5 L800,32 L855,12 L910,42 L965,18 L1020,44 L1080,8 L1135,38 L1190,15 L1250,42 L1310,10 L1370,36 L1440,22 L1440,50 Z" fill="#68512F" />
+          <path d="M0,25 C60,8 120,8 180,25 C240,42 300,42 360,25 C420,8 480,8 540,25 C600,42 660,42 720,25 C780,8 840,8 900,25 C960,42 1020,42 1080,25 C1140,8 1200,8 1260,25 C1320,42 1380,42 1440,25 L1440,50 L0,50 Z" fill="#68512F" />
         </svg>
         {/* Bottom torn edge — mobile (subtle) */}
         <svg className="torn-edge-mobile" width="100%" height="50" viewBox="0 0 1440 50" preserveAspectRatio="none"
           style={{ position: 'absolute', bottom: 0, left: 0, display: 'none' }}>
-          <path d="M0,50 L0,42 L60,40 L120,45 L175,40 L230,46 L285,39 L340,44 L395,41 L450,47 L505,39 L560,44 L620,41 L680,47 L740,38 L800,43 L855,40 L910,45 L965,41 L1020,46 L1080,39 L1135,44 L1190,40 L1250,45 L1310,39 L1370,43 L1440,41 L1440,50 Z" fill="#68512F" />
+          <path d="M0,43 C60,38 120,38 180,43 C240,48 300,48 360,43 C420,38 480,38 540,43 C600,48 660,48 720,43 C780,38 840,38 900,43 C960,48 1020,48 1080,43 C1140,38 1200,38 1260,43 C1320,48 1380,48 1440,43 L1440,50 L0,50 Z" fill="#68512F" />
         </svg>
 
       </section>

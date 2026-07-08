@@ -313,6 +313,17 @@ body {
   100%    { opacity: 0; }
 }
 
+@keyframes dept-cycle {
+  0%    { opacity: 1; }
+  25%   { opacity: 0; }
+  100%  { opacity: 0; }
+}
+
+@keyframes ticker-strip {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
 /* Headphones hidden on desktop, shown on mobile via media query */
 .headphones-mobile { display: none; }
 

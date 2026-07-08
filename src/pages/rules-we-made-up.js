@@ -516,7 +516,7 @@ function HowItStarted() {
         {/* Right: text group, vertically centered */}
         <div className="how-it-started-text" style={{ flex: 1 }}>
           <Reveal delay={0}>
-            <h2 className="font-body cs-h2" style={{
+            <h2 className="font-body cs-h3" style={{
               fontWeight: 700,
               fontSize:   '33px',
               lineHeight: 1.2,
@@ -778,7 +778,7 @@ function CharacterCreation() {
             </Reveal>
           </div>
           <Reveal delay={0}>
-            <h2 className="font-body cs-h2" style={{
+            <h2 className="font-body cs-h3" style={{
               fontWeight: 700,
               fontSize:   '33px',
               lineHeight: 1.2,
@@ -1107,8 +1107,8 @@ function BlooperReel() {
     >
 
       <Reveal delay={0}>
-        <h2 className="font-body cs-h2" style={{
-          fontWeight:  600,
+        <h2 className="font-body cs-h3" style={{
+          fontWeight:  700,
           fontSize:    '33px',
           lineHeight:  1.2,
           color:       '#101010',
@@ -1181,7 +1181,7 @@ function TheTool() {
         {/* Left — text */}
         <div className="ltx-text" style={{ flex: '0 0 30%' }}>
           <Reveal delay={0}>
-            <h2 className="font-body cs-h2" style={{
+            <h2 className="font-body cs-h3" style={{
               fontWeight: 700,
               fontSize:   '33px',
               lineHeight: 1.2,
@@ -1381,7 +1381,7 @@ function SceneCreation() {
     >
       {/* Heading */}
       <Reveal delay={0}>
-        <h2 className="font-body cs-h2" style={{
+        <h2 className="font-body cs-h3" style={{
           fontWeight:   700,
           fontSize:     '33px',
           lineHeight:   1.2,
@@ -1512,7 +1512,7 @@ function RollCall() {
 
           {/* H2 — mobile only, ordered first; hidden on desktop */}
           <div className="roll-call-mobile-h2">
-            <h2 className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: 0 }}>
+            <h2 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: 0 }}>
               Inviting the Substack community into the film
             </h2>
           </div>
@@ -1538,7 +1538,7 @@ function RollCall() {
           {/* Right — heading (hidden on mobile) + body + groups image */}
           <div className="roll-call-text" style={{ width: '488px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <Reveal delay={0}>
-              <h2 className="font-body cs-h2 roll-call-desktop-h2" style={{
+              <h2 className="font-body cs-h3 roll-call-desktop-h2" style={{
                 fontWeight: 700,
                 fontSize:   '33px',
                 lineHeight: 1.2,
@@ -1588,12 +1588,12 @@ function RollCall() {
             {/* Top torn edge — #FFFBF8 tears down into the beige section */}
             <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
               style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}>
-              <path d="M0,0 L0,28 L48,6 L95,35 L148,8 L200,38 L260,4 L315,32 L370,15 L425,40 L480,10 L535,34 L595,18 L650,42 L710,6 L765,28 L820,10 L875,38 L930,14 L985,40 L1040,5 L1095,30 L1150,12 L1210,38 L1270,8 L1330,32 L1390,15 L1440,25 L1440,0 Z" fill="#FFFBF8" />
+              <path d="M0,0 L1440,0 L1440,25 C1380,42 1320,42 1260,25 C1200,8 1140,8 1080,25 C1020,42 960,42 900,25 C840,8 780,8 720,25 C660,42 600,42 540,25 C480,8 420,8 360,25 C300,42 240,42 180,25 C120,8 60,8 0,25 Z" fill="#FFFBF8" />
             </svg>
             {/* Bottom torn edge — #FFFBF8 tears up into the beige section */}
             <svg viewBox="0 0 1440 50" preserveAspectRatio="none"
               style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}>
-              <path d="M0,50 L0,22 L55,45 L110,18 L168,44 L225,10 L280,38 L335,20 L390,46 L445,12 L500,40 L558,8 L615,36 L675,22 L735,48 L792,10 L845,38 L900,18 L958,44 L1015,6 L1070,34 L1128,16 L1185,42 L1245,8 L1300,36 L1360,20 L1440,38 L1440,50 Z" fill="#FFFBF8" />
+              <path d="M0,25 C60,8 120,8 180,25 C240,42 300,42 360,25 C420,8 480,8 540,25 C600,42 660,42 720,25 C780,8 840,8 900,25 C960,42 1020,42 1080,25 C1140,8 1200,8 1260,25 C1320,42 1380,42 1440,25 L1440,50 L0,50 Z" fill="#FFFBF8" />
             </svg>
           </>
         }
@@ -1856,7 +1856,7 @@ export default function RulesWeMadeUp() {
           justifyContent: 'center',
           paddingLeft:    '120px',
           paddingRight:   '120px',
-          paddingTop:     '80px',
+          paddingTop:     '160px',
           paddingBottom:  '80px',
           boxSizing:      'border-box',
           position:       'relative',
@@ -1914,7 +1914,7 @@ export default function RulesWeMadeUp() {
       </StickyHero>
 
       {/* ── Video + Intro ── */}
-      <section className="video-intro-section" style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '80px' }}>
+      <section className="video-intro-section" style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '140px' }}>
 
         {/* Video — 100px padding, section #F5F0EC IS the frame */}
         <div className="video-intro-inner" style={{ paddingTop: '120px', paddingBottom: '80px', maxWidth: '1440px', margin: '0 auto', boxSizing: 'border-box' }}>
@@ -2008,7 +2008,7 @@ export default function RulesWeMadeUp() {
           preserveAspectRatio="none"
           style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'block', zIndex: 3, pointerEvents: 'none' }}
         >
-          <path d="M0,50 L0,30 L60,8 L120,40 L175,12 L230,42 L285,5 L340,35 L395,18 L450,44 L505,8 L560,36 L620,20 L680,45 L740,5 L800,32 L855,12 L910,42 L965,18 L1020,44 L1080,8 L1135,38 L1190,15 L1250,42 L1310,10 L1370,36 L1440,22 L1440,50 Z" fill="#FFFBF8" />
+          <path d="M0,25 C60,8 120,8 180,25 C240,42 300,42 360,25 C420,8 480,8 540,25 C600,42 660,42 720,25 C780,8 840,8 900,25 C960,42 1020,42 1080,25 C1140,8 1200,8 1260,25 C1320,42 1380,42 1440,25 L1440,50 L0,50 Z" fill="#FFFBF8" />
         </svg>
 
         {/* Torn paper edge — mobile (subtle, shallow peaks) */}
@@ -2018,7 +2018,7 @@ export default function RulesWeMadeUp() {
           preserveAspectRatio="none"
           style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '50px', display: 'none', zIndex: 3, pointerEvents: 'none' }}
         >
-          <path d="M0,50 L0,42 L60,40 L120,45 L175,40 L230,46 L285,39 L340,44 L395,41 L450,47 L505,39 L560,44 L620,41 L680,47 L740,38 L800,43 L855,40 L910,45 L965,41 L1020,46 L1080,39 L1135,44 L1190,40 L1250,45 L1310,39 L1370,43 L1440,41 L1440,50 Z" fill="#FFFBF8" />
+          <path d="M0,43 C60,38 120,38 180,43 C240,48 300,48 360,43 C420,38 480,38 540,43 C600,48 660,48 720,43 C780,38 840,38 900,43 C960,48 1020,48 1080,43 C1140,38 1200,38 1260,43 C1320,48 1380,48 1440,43 L1440,50 L0,50 Z" fill="#FFFBF8" />
         </svg>
 
         <Script src="https://player.vimeo.com/api/player.js" />

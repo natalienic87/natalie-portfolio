@@ -1,33 +1,48 @@
-export default function FourBy({ items, accentColor = '#E8973A' }) {
+export default function FourBy({ items, accentColor = '#E8973A', badgeTextColor = '#ffffff', columns = 4 }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+    <div className="what-it-became-grid" style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, gap: '20px' }}>
       {items.map((item, i) => (
         <div key={i} style={{
-          border: '1px solid rgba(16,16,16,0.12)',
-          borderRadius: '14px',
-          padding: '24px',
           backgroundColor: '#ffffff',
+          border:          '1px solid #E8E0D8',
+          borderRadius:    '16px',
+          padding:         '28px',
+          boxSizing:       'border-box',
+          boxShadow:       '0px 4px 20px rgba(0,0,0,0.06)',
+          height:          '100%',
         }}>
-          {/* Badge + title */}
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '16px' }}>
-            <div style={{
-              width: '36px', height: '36px', borderRadius: '10px',
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+            <div className="wib-badge" style={{
+              flexShrink:      0,
+              width:           '60px',
+              height:          '60px',
               backgroundColor: accentColor,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              flexShrink: 0,
+              borderRadius:    '10px',
+              display:         'flex',
+              alignItems:      'center',
+              justifyContent:  'center',
             }}>
-              <span style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '17px', color: '#ffffff' }}>
+              <span className="wib-badge-num" style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '24px', color: badgeTextColor, lineHeight: 1 }}>
                 {item.number ?? i + 1}
               </span>
             </div>
-            <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 700, fontSize: '17px', color: '#101010', margin: 0, lineHeight: 1.3 }}>
-              {item.title}
-            </p>
+            <h4 className="wib-title" style={{
+              fontFamily: 'Fraunces, serif',
+              fontWeight: 700,
+              fontSize:   '24px',
+              lineHeight: '24px',
+              color:      '#101010',
+              margin:     0,
+            }}>{item.title}</h4>
           </div>
-          {/* Body */}
-          <p style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '17px', lineHeight: 1.65, color: '#404040', margin: 0 }}>
-            {item.body}
-          </p>
+          <p className="wib-body" style={{
+            fontFamily: 'Fraunces, serif',
+            fontWeight: 300,
+            fontSize:   '16px',
+            lineHeight: '160%',
+            color:      '#404040',
+            margin:     0,
+          }}>{item.body}</p>
         </div>
       ))}
     </div>

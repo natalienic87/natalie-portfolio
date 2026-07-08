@@ -19,7 +19,7 @@ export default function CaseStudyNav() {
         display:        'flex',
         alignItems:     'center',
         justifyContent: 'space-between',
-        padding:        '20px 120px',
+        padding:        '20px 80px',
       }}>
         {/* ← HOME */}
         <Link

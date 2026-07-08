@@ -170,7 +170,7 @@ export default function About() {
           <path d="M0,0 L1440,0 L1440,43 C1380,48 1320,48 1260,43 C1200,38 1140,38 1080,43 C1020,48 960,48 900,43 C840,38 780,38 720,43 C660,48 600,48 540,43 C480,38 420,38 360,43 C300,48 240,48 180,43 C120,38 60,38 0,43 Z" fill="#101010" />
         </svg>
 
-        <div className="about-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+        <div className="about-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
 
           {/* 12-col grid: image left, text right */}
           <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '20px', alignItems: 'center' }}>

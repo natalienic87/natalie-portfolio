@@ -100,7 +100,7 @@ export default function Exhibition() {
 
   return (
     <section style={{ marginTop: '60px', paddingBottom: '120px' }}>
-      <div className="ex-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <div className="ex-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
 
         {/* Header row */}
         <div className="flex justify-between items-start">

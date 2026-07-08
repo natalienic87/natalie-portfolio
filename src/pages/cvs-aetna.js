@@ -488,7 +488,7 @@ export default function CvsAetna() {
 
         {/* Full-bleed journey phones image */}
         <Reveal>
-          <div style={{ marginLeft: '-120px', marginRight: '-120px' }}>
+          <div style={{ marginLeft: '-80px', marginRight: '-80px' }}>
             <img src="/cvs-agency-work/4-north-star-journey-phones.jpg" alt=""
               style={{ width: '100%', display: 'block' }} />
           </div>
@@ -574,7 +574,7 @@ export default function CvsAetna() {
 
           {/* Full-bleed cycling department page images */}
           <Reveal>
-            <div style={{ marginLeft: '-120px', marginRight: '-120px', position: 'relative', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.18)' }}>
+            <div style={{ marginLeft: '-80px', marginRight: '-80px', position: 'relative', boxShadow: '0px 5px 65px 0px rgba(0,0,0,0.18)' }}>
               {[
                 '/cvs-agency-work/6-dept-pgs/3-dp-personalcare.jpg',
                 '/cvs-agency-work/6-dept-pgs/2-dp-household.jpg',

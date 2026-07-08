@@ -6,38 +6,11 @@ import Footer from '../components/Footer';
 import CaseStudySection  from '../components/CaseStudySection';
 import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
 import CaseSplitPanel    from '../components/CaseSplitPanel';
-import StickyHero        from '../components/StickyHero';
+import CaseStudyHero     from '../components/CaseStudyHero';
 import TickerStrip         from '../components/TickerStrip';
 import DashedCardCarousel  from '../components/DashedCardCarousel';
 
 
-// ── Metadata label/value pair ─────────────────────────────────────────────────
-function MetaItem({ label, value }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', gap: '24px', width: '500px' }}>
-      <span className="hero-meta-label" style={{
-        fontFamily:    'Fira Mono, monospace',
-        fontWeight:    400,
-        fontSize:      '11px',
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
-        lineHeight:    1.5,
-        color:         '#888888',
-        minWidth:      '72px',
-        flexShrink:    0,
-      }}>{label}</span>
-      <span className="hero-meta-value" style={{
-        fontFamily:  'Fira Mono, monospace',
-        fontWeight:  400,
-        fontSize:    '14px',
-        lineHeight:  1.5,
-        color:       '#101010',
-        flex:        1,
-        whiteSpace:  'nowrap',
-      }}>{value}</span>
-    </div>
-  );
-}
 
 // ── Doodle shapes ─────────────────────────────────────────────────────────────
 function DoodleCircle({ size = 80 }) {
@@ -990,75 +963,13 @@ export default function BurkettsBees() {
         </div>
       ))}
 
-      {/* ── Hero: 50/50 split ── */}
-      <StickyHero backgroundColor="#FFFBF8">
-
-        {/* Left — 50%, stacked content */}
-        <div className="hero-panel-left" style={{
-          flex:           '0 0 50%',
-          display:        'flex',
-          flexDirection:  'column',
-          justifyContent: 'center',
-          paddingLeft:    '80px',
-          paddingRight:   '80px',
-          paddingTop:     '160px',
-          paddingBottom:  '80px',
-          boxSizing:      'border-box',
-          backgroundColor: '#FFFBF8',
-          position:       'relative',
-          zIndex:         1,
-        }}>
-
-          {/* Eyebrow */}
-          <div className="hero-eyebrow" style={{ display: 'flex', alignItems: 'center', gap: '5px', width: '500px', marginBottom: '50px' }}>
-            <style>{`@keyframes slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
-            <svg width="22" height="22" viewBox="0 0 16 16" fill="#101010" style={{ flexShrink: 0, animation: 'slow-spin 12s linear infinite', transformOrigin: 'center' }}>
-              <path d="M8,1 L9.2,5.3 L13.5,3.7 L10.9,7.3 L14.8,9.6 L10.4,9.9 L10.9,14.4 L8,11 L5.1,14.4 L5.6,9.9 L1.2,9.6 L5.1,7.3 L2.5,3.7 L6.8,5.3 Z"/>
-            </svg>
-            <span className="hero-eyebrow-text" style={{
-              fontFamily:    'Fira Mono, monospace',
-              fontWeight:    400,
-              fontSize:      '18px',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color:         '#101010',
-            }}>Case Study</span>
-          </div>
-
-          <h1 className="font-heading hero-title" style={{
-            fontWeight: 700,
-            fontSize:   '80px',
-            lineHeight: '80px',
-            color:      '#101010',
-            margin:     '0 0 28px',
-          }}>
-            From Branding Experiment to AI Integration
-          </h1>
-
-          {/* Dashed divider */}
-          <svg className="hero-divider" width="500" height="2" style={{ display: 'block', margin: '32px 0' }} preserveAspectRatio="none">
-            <line x1="0" y1="1" x2="100%" y2="1" stroke="rgba(16,16,16,0.25)" strokeWidth="2" strokeDasharray="4 4" />
-          </svg>
-
-          {/* Meta */}
-          <div className="hero-meta-container" style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
-            <MetaItem label="Year"   value="2024" />
-            <MetaItem label="Role"   value="Creative Director & AI Strategist" />
-            <MetaItem label="Medium" value="Branding, AI Integration, Education" />
-          </div>
-        </div>
-
-        {/* Right — 50%, full-height looping video */}
-        <div className="hero-panel-right" style={{ flex: '0 0 50%', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
-          <video
-            autoPlay muted loop playsInline
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
-          >
-            <source src="/burketts-bees/1_looping_video_flowers_sway_in_a_light.mp4" type="video/mp4" />
-          </video>
-        </div>
-
-      </StickyHero>
+      <CaseStudyHero
+        title="From Branding Experiment to AI Integration"
+        year="2024"
+        role="Creative Director & AI Strategist"
+        medium="Branding, AI Integration, Education"
+        video="/burketts-bees/1_looping_video_flowers_sway_in_a_light.mp4"
+      />
 
       {/* ── MediaFrame: Product Shot ── */}
       <section className="video-intro-section" style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '140px' }}>

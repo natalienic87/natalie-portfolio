@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Cursor from '../components/Cursor';
 import CaseStudyNav from '../components/CaseStudyNav';
 import Footer from '../components/Footer';
-import StickyHero from '../components/StickyHero';
+import CaseStudyHero from '../components/CaseStudyHero';
 import PhoneCarousel from '../components/PhoneCarousel';
 import FourBy from '../components/FourBy';
 import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
@@ -11,31 +11,6 @@ import CaseStudySection from '../components/CaseStudySection';
 import TickerStrip from '../components/TickerStrip';
 
 
-// ── Metadata label/value pair ─────────────────────────────────────────────────
-function MetaItem({ label, value }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', gap: '24px' }}>
-      <span className="hero-meta-label" style={{
-        fontFamily:    'Fira Mono, monospace',
-        fontWeight:    400,
-        fontSize:      '11px',
-        letterSpacing: '0.1em',
-        textTransform: 'uppercase',
-        lineHeight:    1.5,
-        color:         '#888888',
-        minWidth:      '72px',
-        flexShrink:    0,
-      }}>{label}</span>
-      <span className="hero-meta-value" style={{
-        fontFamily: 'Fira Mono, monospace',
-        fontWeight: 400,
-        fontSize:   '14px',
-        lineHeight: 1.5,
-        color:      '#101010',
-      }}>{value}</span>
-    </div>
-  );
-}
 
 // ── Scroll-reveal wrapper ─────────────────────────────────────────────────────
 function Reveal({ children, delay = 0, distance = 48, style = {} }) {
@@ -69,15 +44,6 @@ function Reveal({ children, delay = 0, distance = 48, style = {} }) {
   );
 }
 
-// ── Hero cycling images ───────────────────────────────────────────────────────
-const heroImages = [
-  '/cvs-agency-work/1-heart-art-hero/1_outline.jpg',
-  '/cvs-agency-work/1-heart-art-hero/2_Graphic-heart.jpg',
-  '/cvs-agency-work/1-heart-art-hero/3_breakout-transparency.jpg',
-  '/cvs-agency-work/1-heart-art-hero/4_Window-heart.jpg',
-  '/cvs-agency-work/1-heart-art-hero/5_Outline-pool.jpg',
-  '/cvs-agency-work/1-heart-art-hero/6_Breakout-no-transparency.jpg',
-];
 
 // ── Beyond DotCom carousel ───────────────────────────────────────────────────
 const beyondSlides = [
@@ -297,95 +263,15 @@ export default function CvsAetna() {
       <CaseStudyNav />
 
       {/* ── Hero ── */}
-      <StickyHero backgroundColor="#FFFBF8">
-
-        {/* Left — 50%, stacked content */}
-        <div className="hero-panel-left" style={{
-          flex:            '0 0 50%',
-          display:         'flex',
-          flexDirection:   'column',
-          justifyContent:  'center',
-          paddingLeft:     '80px',
-          paddingRight:    '80px',
-          paddingTop:      '160px',
-          paddingBottom:   '80px',
-          boxSizing:       'border-box',
-          backgroundColor: '#FFFBF8',
-          position:        'relative',
-          zIndex:          1,
-        }}>
-
-          {/* Eyebrow */}
-          <div className="hero-eyebrow" style={{ display: 'flex', alignItems: 'center', gap: '5px', width: '500px', marginBottom: '50px' }}>
-            <style>{`@keyframes slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
-            <svg width="22" height="22" viewBox="0 0 16 16" fill="#101010" style={{ flexShrink: 0, animation: 'slow-spin 12s linear infinite', transformOrigin: 'center' }}>
-              <path d="M8,1 L9.2,5.3 L13.5,3.7 L10.9,7.3 L14.8,9.6 L10.4,9.9 L10.9,14.4 L8,11 L5.1,14.4 L5.6,9.9 L1.2,9.6 L5.1,7.3 L2.5,3.7 L6.8,5.3 Z"/>
-            </svg>
-            <span className="hero-eyebrow-text" style={{
-              fontFamily:    'Fira Mono, monospace',
-              fontWeight:    400,
-              fontSize:      '18px',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color:         '#101010',
-            }}>Case Study</span>
-          </div>
-
-          <h1 className="font-heading hero-title" data-dev-text="hero-title" style={{
-            fontWeight: 700,
-            fontSize:   '90px',
-            lineHeight: '80px',
-            color:      '#101010',
-            margin:     '0 0 28px',
-          }}>
-            CVS Health: Designing for Retail Scale
-          </h1>
-
-          {/* Dashed divider */}
-          <svg className="hero-divider" width="500" height="2" style={{ display: 'block', margin: '32px 0' }} preserveAspectRatio="none">
-            <line x1="0" y1="1" x2="100%" y2="1" stroke="rgba(16,16,16,0.25)" strokeWidth="2" strokeDasharray="4 4" />
-          </svg>
-
-          {/* Meta */}
-          <div className="hero-meta-container" style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
-            <MetaItem label="Year"  value="2020 – 2024" />
-            <MetaItem label="Role"  value="Senior Designer & Art Director" />
-            <MetaItem label="Scope" value="CVS.com systems, ecommerce, campaign design, platform playbooks" />
-          </div>
-        </div>
-
-        {/* Right — CVS red with cycling heart-art images */}
-        <div className="hero-panel-right" style={{
-          flex:            '0 0 50%',
-          position:        'relative',
-          overflow:        'hidden',
-          backgroundColor: '#CC0000',
-          zIndex:          1,
-          minHeight:       'max(700px, 75vh)',
-          maxHeight:       'max(700px, 75vh)',
-        }}>
-          {heroImages.map((src, i) => (
-            <img
-              key={i}
-              src={src}
-              alt=""
-              style={{
-                position:       'absolute',
-                top:            0,
-                left:           0,
-                width:          '100%',
-                height:         '100%',
-                objectFit:      'cover',
-                objectPosition: 'center',
-                opacity:        0,
-                animation:      'cvs-cycle 9s step-end infinite',
-                animationDelay: `${i * 1.5}s`,
-              }}
-            />
-          ))}
-        </div>
-
-      </StickyHero>
+      <CaseStudyHero
+        title="CVS Health: Designing for Retail Scale"
+        year="2020 – 2024"
+        role="Senior Designer & Art Director"
+        mediumLabel="Scope"
+        medium="CVS.com systems, ecommerce, campaign design, platform playbooks"
+        image="/cvs-agency-work/1-heart-art-hero/1_outline.jpg"
+        accentColor="#CC0000"
+      />
 
       {/* ── MediaFrame ── */}
       <section className="video-intro-section" style={{

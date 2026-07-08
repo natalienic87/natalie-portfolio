@@ -15,11 +15,7 @@ export default function CaseStudyNav() {
   return (
     <>
       <nav className="case-study-nav" style={{
-        position:       'absolute',
-        top:            0,
-        left:           0,
-        right:          0,
-        zIndex:         50,
+        position:       'relative',
         display:        'flex',
         alignItems:     'center',
         justifyContent: 'space-between',

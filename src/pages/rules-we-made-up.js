@@ -6,34 +6,9 @@ import CaseStudyNav from '../components/CaseStudyNav';
 import Footer from '../components/Footer';
 import CaseStudySection  from '../components/CaseStudySection';
 import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
-import StickyHero           from '../components/StickyHero';
+import CaseStudyHero        from '../components/CaseStudyHero';
 import DashedCardCarousel   from '../components/DashedCardCarousel';
 
-// ── Metadata label/value pair ─────────────────────────────────────────────────
-function MetaItem({ label, value }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', gap: '24px' }}>
-      <span className="hero-meta-label" style={{
-        fontFamily: 'Fira Mono, monospace',
-        fontWeight: 400,
-        fontSize:   '16px',
-        lineHeight: 1.2,
-        color:      '#101010',
-        minWidth:   '72px',
-        flexShrink: 0,
-      }}>{label}</span>
-      <span className="hero-meta-value" style={{
-        fontFamily: 'Fira Mono, monospace',
-        fontWeight: 400,
-        fontSize:   '16px',
-        lineHeight: 1.2,
-        color:      '#101010',
-        width:      '264px',
-        flexShrink: 0,
-      }}>{value}</span>
-    </div>
-  );
-}
 
 // ── Doodle shapes ────────────────────────────────────────────────────────────
 function DoodleCircle({ size = 80 }) {
@@ -1843,75 +1818,13 @@ export default function RulesWeMadeUp() {
       ))}
 
 
-      {/* ── Hero: 50/50 split ── */}
-      <StickyHero>
-
-
-
-        {/* Left — 50%, stacked content */}
-        <div className="hero-panel-left" style={{
-          flex:           '0 0 50%',
-          display:        'flex',
-          flexDirection:  'column',
-          justifyContent: 'center',
-          paddingLeft:    '80px',
-          paddingRight:   '80px',
-          paddingTop:     '160px',
-          paddingBottom:  '80px',
-          boxSizing:      'border-box',
-          position:       'relative',
-          zIndex:         1,
-        }}>
-
-          {/* Eyebrow */}
-          <div className="hero-eyebrow" style={{ display: 'flex', alignItems: 'center', gap: '5px', alignSelf: 'flex-start', marginBottom: '50px' }}>
-            <style>{`@keyframes slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
-            <svg width="22" height="22" viewBox="0 0 16 16" fill="#101010" style={{ flexShrink: 0, animation: 'slow-spin 12s linear infinite', transformOrigin: 'center' }}>
-              <path d="M8,1 L9.2,5.3 L13.5,3.7 L10.9,7.3 L14.8,9.6 L10.4,9.9 L10.9,14.4 L8,11 L5.1,14.4 L5.6,9.9 L1.2,9.6 L5.1,7.3 L2.5,3.7 L6.8,5.3 Z"/>
-            </svg>
-            <span className="hero-eyebrow-text" style={{
-              fontFamily: 'Fira Mono, monospace',
-              fontWeight: 400,
-              fontSize:   '16px',
-              lineHeight: 1.2,
-              color:      '#101010',
-            }}>Case Study</span>
-          </div>
-
-          <h1 className="font-heading hero-title" style={{
-            fontWeight:  700,
-            fontSize:    '80px',
-            lineHeight:  '80px',
-            color:       '#101010',
-            margin:      '0 0 28px',
-          }}>
-            The Making of an Animated Short with AI
-          </h1>
-
-          {/* Dashed divider — 2px stroke, 4px dashes */}
-          <svg className="hero-divider" width="100%" height="2" style={{ display: 'block', margin: '32px 0' }} preserveAspectRatio="none">
-            <line x1="0" y1="1" x2="100%" y2="1" stroke="rgba(16,16,16,0.25)" strokeWidth="2" strokeDasharray="4 4" />
-          </svg>
-
-          {/* Meta */}
-          <div className="hero-meta-container" style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
-            <MetaItem label="Year"   value="2025" />
-            <MetaItem label="Role"   value="Director, Writer, Art Director" />
-            <MetaItem label="Medium" value="AI-assisted animation, music, character design, visual storytelling" />
-          </div>
-        </div>
-
-        {/* Right — 50%, full-height image */}
-        <div className="hero-panel-right" style={{ flex: '0 0 50%', overflow: 'hidden', position: 'relative', zIndex: 1 }}>
-          <video
-            autoPlay muted loop playsInline
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', cursor: 'default' }}
-          >
-            <source src="/rules-we-made-up/1-hero/king-loop.mp4" type="video/mp4" />
-          </video>
-        </div>
-
-      </StickyHero>
+      <CaseStudyHero
+        title="The Making of an Animated Short with AI"
+        year="2025"
+        role="Director, Writer, Art Director"
+        medium="AI-assisted animation, music, character design, visual storytelling"
+        video="/rules-we-made-up/1-hero/king-loop.mp4"
+      />
 
       {/* ── Video + Intro ── */}
       <section className="video-intro-section" style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '140px' }}>

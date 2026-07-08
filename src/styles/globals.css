@@ -305,13 +305,6 @@ body {
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ── CVS hero image hard-cut cycle (9s total, 1.5s per image) ── */
-@keyframes cvs-cycle {
-  0%      { opacity: 1; }
-  16.67%  { opacity: 1; }
-  16.68%  { opacity: 0; }
-  100%    { opacity: 0; }
-}
 
 @keyframes dept-cycle {
   0%    { opacity: 1; }
@@ -1013,4 +1006,14 @@ body {
   .ex-inner        { padding-left: 24px !important; padding-right: 24px !important; }
   .about-inner     { padding-left: 24px !important; padding-right: 24px !important; }
   .career-content  { padding-left: 24px !important; padding-right: 24px !important; }
+}
+
+/* ── CaseStudyHero responsive ── */
+@media (max-width: 768px) {
+  .cs-hero-title { font-size: 48px !important; line-height: 1.05 !important; }
+  .cs-hero-grid  { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .cs-hero-right { order: -1; }
+}
+@media (max-width: 414px) {
+  .cs-hero-title { font-size: 36px !important; }
 }

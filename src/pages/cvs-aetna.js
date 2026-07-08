@@ -305,8 +305,8 @@ export default function CvsAetna() {
           display:         'flex',
           flexDirection:   'column',
           justifyContent:  'center',
-          paddingLeft:     '120px',
-          paddingRight:    '120px',
+          paddingLeft:     '80px',
+          paddingRight:    '80px',
           paddingTop:      '160px',
           paddingBottom:   '80px',
           boxSizing:       'border-box',
@@ -439,7 +439,7 @@ export default function CvsAetna() {
       <CaseStudySection
         id="project-overview"
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
-        style={{ paddingTop: '80px', paddingBottom: '0px' }}
+        style={{ paddingTop: '120px', paddingBottom: '0px' }}
       >
         <div className="project-overview-row" style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
@@ -672,7 +672,7 @@ export default function CvsAetna() {
         zIndex:             2,
         paddingBottom:      '80px',
       }}>
-        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '120px 120px 0', boxSizing: 'border-box' }}>
+        <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '120px 80px 0', boxSizing: 'border-box' }}>
 
           {/* Zone 1: Centered header */}
           <Reveal>
@@ -849,7 +849,7 @@ export default function CvsAetna() {
       </CaseStudyFullBleed>
 
       {/* ── Platform Playbook intro ── */}
-      <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '80px' }}>
+      <CaseStudySection style={{ paddingTop: '120px', paddingBottom: '120px' }}>
 
         {/* Dotted top divider */}
         <svg width="100%" height="2" style={{ display: 'block', marginBottom: '64px' }} preserveAspectRatio="none">
@@ -877,7 +877,7 @@ export default function CvsAetna() {
       </CaseStudySection>
 
       {/* ── 01 The Shift ── */}
-      <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '80px' }}>
+      <CaseStudySection style={{ paddingTop: '120px', paddingBottom: '120px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '5fr 7fr', gap: '80px', alignItems: 'start' }}>
 
           {/* LEFT */}
@@ -923,7 +923,7 @@ export default function CvsAetna() {
       </CaseStudySection>
 
       {/* ── 02 The Playbook ── */}
-      <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '80px' }}>
+      <CaseStudySection style={{ paddingTop: '120px', paddingBottom: '120px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '5fr 7fr', gap: '80px', alignItems: 'start' }}>
 
           {/* LEFT */}
@@ -982,7 +982,7 @@ export default function CvsAetna() {
       </CaseStudySection>
 
       {/* ── 03 The Impact ── */}
-      <CaseStudySection style={{ paddingTop: '80px', paddingBottom: '120px' }}>
+      <CaseStudySection style={{ paddingTop: '120px', paddingBottom: '120px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '5fr 7fr', gap: '80px', alignItems: 'start' }}>
 
           {/* LEFT */}

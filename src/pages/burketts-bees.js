@@ -608,7 +608,7 @@ function ProjectPurpose() {
   );
 
   return (
-    <CaseStudySection id="project-purpose" style={{ paddingTop: '80px', paddingBottom: '120px' }} doodle={undefined}>
+    <CaseStudySection id="project-purpose" style={{ paddingTop: '120px', paddingBottom: '120px' }} doodle={undefined}>
       <div ref={contentRef} className="char-grid" style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(12, 1fr)',
@@ -806,7 +806,7 @@ function WorkshopCarousel() {
         </svg>
 
         {/* Heading */}
-        <div className="workshop-heading-wrap" style={{ textAlign: 'center', maxWidth: '1440px', margin: '0 auto', padding: '0 120px 10px', boxSizing: 'border-box' }}>
+        <div className="workshop-heading-wrap" style={{ textAlign: 'center', maxWidth: '1440px', margin: '0 auto', padding: '0 80px 10px', boxSizing: 'border-box' }}>
           <Reveal>
             <h3 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
               Running monthly workshops &amp; discussions
@@ -999,8 +999,8 @@ export default function BurkettsBees() {
           display:        'flex',
           flexDirection:  'column',
           justifyContent: 'center',
-          paddingLeft:    '120px',
-          paddingRight:   '120px',
+          paddingLeft:    '80px',
+          paddingRight:   '80px',
           paddingTop:     '160px',
           paddingBottom:  '80px',
           boxSizing:      'border-box',
@@ -1095,7 +1095,7 @@ export default function BurkettsBees() {
       <CaseStudySection
         id="project-overview"
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
-        style={{ paddingTop: '80px', paddingBottom: '0px' }}
+        style={{ paddingTop: '120px', paddingBottom: '0px' }}
       >
         <div className="project-overview-row" style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
@@ -1221,7 +1221,7 @@ export default function BurkettsBees() {
       </CaseStudySection>
 
       {/* ── It started with a muse ── */}
-      <CaseStudySection id="how-it-started" style={{ paddingTop: '80px', paddingBottom: '120px' }}
+      <CaseStudySection id="how-it-started" style={{ paddingTop: '120px', paddingBottom: '120px' }}
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
         doodle={undefined}
       >
@@ -1298,7 +1298,7 @@ export default function BurkettsBees() {
 
         {/* Centered heading + body */}
         <Reveal>
-          <div className="cs-inner carousel-heading-wrap" style={{ textAlign: 'center', marginBottom: '50px', maxWidth: '1440px', margin: '0 auto 50px', padding: '0 120px', boxSizing: 'border-box' }}>
+          <div className="cs-inner carousel-heading-wrap" style={{ textAlign: 'center', marginBottom: '50px', maxWidth: '1440px', margin: '0 auto 50px', padding: '0 80px', boxSizing: 'border-box' }}>
             <h3 className="font-body cs-h3" style={{
               fontWeight: 700,
               fontSize:   '33px',
@@ -1324,7 +1324,7 @@ export default function BurkettsBees() {
         </Reveal>
 
         {/* 4-box image row */}
-        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
           <div className="toolkit-row" style={{ display: 'flex', justifyContent: 'space-between' }}>
             {[
               { src: '/burketts-bees/5_carousel_toolit/5_BB_Color.jpg',       label: 'Color' },
@@ -1381,8 +1381,8 @@ export default function BurkettsBees() {
       </section>
 
       {/* ── Putting the Toolkit to Work ── */}
-      <section id="putting-to-work" style={{ backgroundColor: '#FFFBF8', position: 'relative', zIndex: 2, paddingTop: '80px', paddingBottom: '120px' }}>
-        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section id="putting-to-work" style={{ backgroundColor: '#FFFBF8', position: 'relative', zIndex: 2, paddingTop: '120px', paddingBottom: '120px' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
 
           {/* Heading + body + sun */}
           <Reveal>
@@ -1538,8 +1538,8 @@ export default function BurkettsBees() {
       <AIAssessment />
 
       {/* ── Bee-hind the Scenes + Realistic Use Cases ── */}
-      <section id="beehind-scenes" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section id="beehind-scenes" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
 
           {/* Row 1: heading + body left | presentation slides right */}
           <div className="beehind-row" style={{ display: 'flex', gap: '50px', alignItems: 'flex-start', marginBottom: '60px' }}>
@@ -1659,8 +1659,8 @@ export default function BurkettsBees() {
       </section>
 
       {/* ── Tools ── */}
-      <section id="tools-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingBottom: '120px' }}>
-        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section id="tools-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
         {/* Dashed separator — no paddingTop so the line sits flush at the section boundary */}
         <div className="bb-bottom-divider" style={{ borderTop: '1px dashed #C4B8A8', marginBottom: '80px' }} />
 
@@ -1742,8 +1742,8 @@ export default function BurkettsBees() {
       </CaseSplitPanel>
 
       {/* ── The Role in Practice ── */}
-      <section id="role-in-practice" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section id="role-in-practice" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
           <Reveal>
             <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
               <p className="cs-mono" style={{ fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
@@ -1778,7 +1778,7 @@ export default function BurkettsBees() {
 
       {/* ── Three C's + What Carried Forward ── */}
       <section id="three-cs" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
-      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
 
         {/* Testing AI against the Three C's — centered heading */}
         <Reveal>

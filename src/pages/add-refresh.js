@@ -82,7 +82,7 @@ const collageItems = [
 function CollageCarousel() {
   return (
     <>
-      <CaseStudyFullBleed id="ar-collage-heading" background="#FFFBF8" style={{ paddingTop: '80px', paddingBottom: '10px', textAlign: 'center' }}>
+      <CaseStudyFullBleed id="ar-collage-heading" background="#FFFBF8" style={{ paddingTop: '120px', paddingBottom: '10px', textAlign: 'center' }}>
         <Reveal>
           <h2 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
             Collage as an Expression
@@ -202,7 +202,7 @@ function ConceptSystem() {
   );
 
   return (
-    <CaseStudySection id="ar-concept-system" style={{ paddingTop: '80px', paddingBottom: '120px' }}>
+    <CaseStudySection id="ar-concept-system" style={{ paddingTop: '120px', paddingBottom: '120px' }}>
       <div ref={contentRef} className="char-grid" style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(12, 1fr)',
@@ -303,8 +303,8 @@ export default function AddRefresh() {
           display:         'flex',
           flexDirection:   'column',
           justifyContent:  'center',
-          paddingLeft:     '120px',
-          paddingRight:    '120px',
+          paddingLeft:     '80px',
+          paddingRight:    '80px',
           paddingTop:      '160px',
           paddingBottom:   '80px',
           boxSizing:       'border-box',
@@ -416,7 +416,7 @@ export default function AddRefresh() {
       <CaseStudySection
         id="project-overview"
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
-        style={{ paddingTop: '80px', paddingBottom: '0px' }}
+        style={{ paddingTop: '120px', paddingBottom: '0px' }}
       >
         <div className="project-overview-row" style={{ display: 'flex', gap: '60px', alignItems: 'center' }}>
 
@@ -539,8 +539,8 @@ export default function AddRefresh() {
       </CaseStudySection>
 
       {/* ── How it started ── */}
-      <section id="ar-started" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section id="ar-started" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
 
         <div style={{ marginBottom: '50px' }}>
           <Reveal>
@@ -575,8 +575,8 @@ export default function AddRefresh() {
       </section>
 
       {/* ── The natural next step for the brand ── */}
-      <section className="ar-next-step" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '40px', paddingBottom: '120px' }}>
-        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section className="ar-next-step" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
           <Reveal>
             <div style={{ textAlign: 'center', maxWidth: '793px', margin: '0 auto' }}>
               <h3 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
@@ -631,7 +631,7 @@ export default function AddRefresh() {
         </Reveal>
 
         {/* 3-box image row */}
-        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+        <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
           <div className="sprint-row" style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
             {[
               { src: '/add-refresh/4_carousel_concepts/4_Concept1.jpg', label: 'Back to the Future' },
@@ -687,7 +687,7 @@ export default function AddRefresh() {
 
       {/* ── The answer was in the building ── */}
       <section className="ar-hq-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
-      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
         <div className="hq-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', columnGap: '40px', alignItems: 'center' }}>
 
           {/* Left: image mosaic */}
@@ -747,7 +747,7 @@ export default function AddRefresh() {
 
       {/* ── Turning a concept into a working system ── */}
       <section className="ar-system-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
-      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
 
         {/* Dashed divider */}
         <svg width="100%" height="2" style={{ display: 'block', marginBottom: '60px' }} preserveAspectRatio="none">
@@ -868,8 +868,8 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Integrating collage, shape language, doodles, and patterns ── */}
-      <section className="ar-collage-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section className="ar-collage-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
 
         <Reveal>
           <p className="cs-mono" style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 28px' }}>
@@ -902,8 +902,8 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Deck fan ── */}
-      <section className="ar-deck-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section className="ar-deck-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Reveal style={{ width: 'auto' }}>
             <div className="ar-deck-fan" style={{ position: 'relative', width: '800px', height: '450px' }}>
@@ -931,8 +931,8 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Two posters, centered ── */}
-      <section className="ar-posters-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '100px' }}>
-      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box', display: 'flex', justifyContent: 'center' }}>
+      <section className="ar-posters-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box', display: 'flex', justifyContent: 'center' }}>
         <Reveal style={{ width: 'auto' }}>
           <div className="ar-posters-flex" style={{ display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
             <img src="/add-refresh/8-working-sytem/8_ws-poster1.jpg" alt=""
@@ -945,8 +945,8 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Totes, apparel, and swag ── */}
-      <section className="ar-totes-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px' }}>
-      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 120px', boxSizing: 'border-box' }}>
+      <section className="ar-totes-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px' }}>
+      <div className="cs-inner" style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 80px', boxSizing: 'border-box' }}>
         <Reveal>
           <p className="cs-mono" style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 24px' }}>
             Totes, apparel, and swag
@@ -968,7 +968,7 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Social media and podcast graphics ── */}
-      <section className="ar-social-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', boxSizing: 'border-box', width: '100%' }}>
+      <section className="ar-social-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', boxSizing: 'border-box', width: '100%' }}>
         <Reveal>
           <p className="cs-mono" style={{ textAlign: 'center', fontFamily: 'Fira Mono, monospace', fontWeight: 400, fontSize: '16px', lineHeight: 1.2, color: '#101010', margin: '0 0 48px' }}>
             Social media and podcast graphics
@@ -988,7 +988,7 @@ export default function AddRefresh() {
       </section>
 
       {/* ── Carrying the system to a brand new website ── */}
-      <section className="ar-website-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '80px', paddingBottom: '120px', boxSizing: 'border-box' }}>
+      <section className="ar-website-section" style={{ position: 'relative', zIndex: 2, backgroundColor: '#FFFBF8', paddingTop: '120px', paddingBottom: '120px', boxSizing: 'border-box' }}>
 
         {/* Dotted divider */}
         <svg width="100%" height="2" style={{ display: 'block', marginBottom: '64px' }} preserveAspectRatio="none">
@@ -1007,7 +1007,7 @@ export default function AddRefresh() {
         </Reveal>
 
         <Reveal>
-          <div className="cs-inner" style={{ maxWidth: '1440px', margin: '60px auto 0', padding: '0 120px', boxSizing: 'border-box' }}>
+          <div className="cs-inner" style={{ maxWidth: '1440px', margin: '60px auto 0', padding: '0 80px', boxSizing: 'border-box' }}>
             <video
               autoPlay muted loop playsInline
               style={{ width: '100%', display: 'block' }}

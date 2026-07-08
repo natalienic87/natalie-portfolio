@@ -489,7 +489,7 @@ function DoodleEditorToggle({ enabled, onToggle }) {
 // ── But first, a storyboard ───────────────────────────────────────────────────
 function HowItStarted() {
   return (
-    <CaseStudySection id="how-it-started" style={{ paddingTop: '80px', paddingBottom: '120px' }}
+    <CaseStudySection id="how-it-started" style={{ paddingTop: '120px', paddingBottom: '120px' }}
       sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
       doodle={undefined}
     >
@@ -725,7 +725,7 @@ function CharacterCreation() {
   );
 
   return (
-    <CaseStudySection id="characters" style={{ paddingTop: '80px', paddingBottom: '120px' }}
+    <CaseStudySection id="characters" style={{ paddingTop: '120px', paddingBottom: '120px' }}
       doodle={undefined}
     >
       {/* ── Mobile photo strip — hidden on desktop ── */}
@@ -863,7 +863,7 @@ const friends = [
 function MoreFriends() {
   const [hovered, setHovered] = useState(null);
   return (
-    <CaseStudySection style={{ paddingLeft: '120px', paddingRight: '120px', paddingTop: '80px', paddingBottom: '120px' }}
+    <CaseStudySection style={{ paddingTop: '120px', paddingBottom: '120px' }}
       doodle={undefined}
     >
       <Reveal delay={0}>
@@ -1091,7 +1091,7 @@ const principles = [
 
 function BlooperReel() {
   return (
-    <CaseStudySection id="blooper-reel" style={{ paddingTop: '80px', paddingBottom: '120px' }}
+    <CaseStudySection id="blooper-reel" style={{ paddingTop: '120px', paddingBottom: '120px' }}
       doodle={
         <>
           <div data-dev-id="burst-blooper-left" data-dev-type="doodle"
@@ -1173,7 +1173,7 @@ function TheTool() {
   };
 
   return (
-    <CaseStudySection id="ltx-studio" style={{ paddingTop: '80px', paddingBottom: '120px' }}
+    <CaseStudySection id="ltx-studio" style={{ paddingTop: '120px', paddingBottom: '120px' }}
       doodle={undefined}
     >
       <div className="ltx-row" style={{ display: 'flex', gap: '80px', alignItems: 'flex-start' }}>
@@ -1269,7 +1269,7 @@ function TheTool() {
 function FilmmakingPrinciples() {
   return (
     <>
-      <CaseStudyFullBleed id="principles" background="#FFFBF8" sectionStyle={{ overflowX: 'clip' }} style={{ paddingTop: '80px', paddingBottom: '10px', textAlign: 'center' }}
+      <CaseStudyFullBleed id="principles" background="#FFFBF8" sectionStyle={{ overflowX: 'clip' }} style={{ paddingTop: '120px', paddingBottom: '10px', textAlign: 'center' }}
         doodle={
           <div data-dev-id="burst-principles-left" data-dev-type="doodle"
             style={{ position: 'absolute', top: '80px', left: '20px', width: '160px', zIndex: 0, transform: 'translate(-72px, -39px) scale(0.891)', transformOrigin: 'top left' }}>
@@ -1365,7 +1365,7 @@ function SceneCreation() {
   return (
     <CaseStudySection
       id="scene-creation"
-      style={{ paddingTop: '80px', paddingBottom: '120px', textAlign: 'center' }}
+      style={{ paddingTop: '120px', paddingBottom: '120px', textAlign: 'center' }}
       doodle={
         <>
           {/* Saturn — upper right, outside content margins */}
@@ -1506,7 +1506,7 @@ function RollCall() {
     <>
       <CaseStudySection
         id="roll-call"
-        style={{ paddingTop: '80px', paddingBottom: '120px' }}
+        style={{ paddingTop: '120px', paddingBottom: '120px' }}
       >
         <div className="roll-call-row" style={{ display: 'flex', gap: '100px', alignItems: 'center' }}>
 
@@ -1854,8 +1854,8 @@ export default function RulesWeMadeUp() {
           display:        'flex',
           flexDirection:  'column',
           justifyContent: 'center',
-          paddingLeft:    '120px',
-          paddingRight:   '120px',
+          paddingLeft:    '80px',
+          paddingRight:   '80px',
           paddingTop:     '160px',
           paddingBottom:  '80px',
           boxSizing:      'border-box',
@@ -2028,7 +2028,7 @@ export default function RulesWeMadeUp() {
       <CaseStudySection
         id="project-overview"
         sectionStyle={{ zIndex: 2, backgroundColor: '#FFFBF8' }}
-        style={{ paddingTop: '80px', paddingBottom: '0px' }}
+        style={{ paddingTop: '120px', paddingBottom: '0px' }}
         doodle={
           <img
             src="/ELEMENTS/headphones.png"

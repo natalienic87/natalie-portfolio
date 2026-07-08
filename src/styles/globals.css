@@ -335,8 +335,18 @@ body {
 
 /* ── Case study section horizontal padding (responsive) ── */
 .cs-inner {
-  padding-left: 120px;
-  padding-right: 120px;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+/* ── Body paragraph text cap (readability) ── */
+.cs-body {
+  max-width: 600px;
+}
+
+/* ── Exceptions: sections where text must fill the full column ── */
+#putting-to-work .cs-body {
+  max-width: none;
 }
 
 /* ── Mobile: ≤768px ── */

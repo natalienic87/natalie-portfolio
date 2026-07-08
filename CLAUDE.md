@@ -26,7 +26,7 @@ Sticky hero wrapper for all case study pages. Renders a `<section>` with `positi
 ### `CaseStudySection` — `src/components/CaseStudySection.js`
 Standard section wrapper. Already provides `position: 'relative'`, `zIndex: 2`, `backgroundColor: '#FFFBF8'`.
 
-- Inner div: `maxWidth: 1440px`, `margin: 0 auto`, `paddingLeft/Right: 120px`, `paddingTop/Bottom: 120px`, `boxSizing: 'border-box'`
+- Inner div: `maxWidth: 1440px`, `margin: 0 auto`, `paddingLeft/Right: 80px`, `paddingTop/Bottom: 120px`, `boxSizing: 'border-box'`
 - Props: `id`, `style` (overrides inner div), `sectionStyle` (overrides outer section), `doodle`
 - **Never wrap in a bare `<section>` tag** — it IS the section.
 - Override padding: `<CaseStudySection style={{ paddingTop: '80px' }}>`
@@ -36,7 +36,7 @@ Standard section wrapper. Already provides `position: 'relative'`, `zIndex: 2`, 
 ### `CaseStudyFullBleed` — `src/components/CaseStudyFullBleed.js`
 Full-bleed section wrapper. Same guarantees as `CaseStudySection` but with tighter padding.
 
-- Inner div: `maxWidth: 1440px`, `margin: 0 auto`, `paddingLeft/Right: 120px`, `paddingTop/Bottom: 120px`, `boxSizing: 'border-box'`
+- Inner div: `maxWidth: 1440px`, `margin: 0 auto`, `paddingLeft/Right: 80px`, `paddingTop/Bottom: 120px`, `boxSizing: 'border-box'`
 - Props: `id`, `background`, `style`, `sectionStyle`, `doodle`
 - For custom internal layouts (splits, grids): `<CaseStudyFullBleed style={{ padding: 0 }}>`
 - **Never wrap in a bare `<section>` tag.**
@@ -257,15 +257,15 @@ All case study hero sections use `minHeight` and `maxHeight` of `max(800px, 90vh
 
 ### Layout system
 - **Full bleed:** 100vw — hero images, colored sections, videos. No `maxWidth` constraint.
-- **Content sections:** `maxWidth: '1440px'`, `padding: '0 120px'`, `margin: '0 auto'`, `boxSizing: 'border-box'`
-- **Text blocks:** `maxWidth: '640px'` within content sections for body/intro copy
-- **Section vertical padding:** 120px top and bottom
-- **No 175px horizontal padding anywhere** — that value is retired
+- **Content sections:** `maxWidth: '1440px'`, `padding: '0 80px'`, `margin: '0 auto'`, `boxSizing: 'border-box'`
+- **Text blocks:** `maxWidth: '600px'` within content sections for body/intro copy — enforced via `.cs-body { max-width: 600px }` in globals.css
+- **Section vertical padding:** 120px top and bottom — baseline, never go below
+- **No 175px or 120px horizontal padding anywhere** — both values are retired
 
 ### Spacing defaults
-- Section horizontal padding: **120px** on all sections
-- Section vertical padding: **120px** top and bottom
-- Carousel outer margins: **120px** unless specified otherwise
+- Section horizontal padding: **80px** on all sections
+- Section vertical padding: **120px** top and bottom (baseline)
+- Carousel outer margins: **80px** unless specified otherwise
 
 ### Borrowing patterns
 Never invent new visual styles. Always borrow exactly from an existing case study page. Before building any new section, identify which existing page has the closest pattern and replicate it exactly — same shadows, same border radii, same font sizes, same spacing.

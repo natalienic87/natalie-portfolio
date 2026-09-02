@@ -10,7 +10,7 @@ export default function Footer() {
     <footer style={{ position: 'relative', zIndex: 2, backgroundColor: '#101010', overflow: 'hidden' }}>
 
       {/* ── Content ── */}
-      <div className="footer-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '80px 40px 60px' }}>
+      <div className="footer-content" style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '80px 40px 0' }}>
 
         {/* Mail icon */}
         <div style={{
@@ -89,7 +89,7 @@ export default function Footer() {
         style={{ position: 'absolute', top: '460px', left: 'calc(3% + 280px)', width: '36px', zIndex: 3, pointerEvents: 'none' }} />
 
       {/* ── Bottom zone: floating elements + botanical strip ── */}
-      <div style={{ position: 'relative', lineHeight: 0 }}>
+      <div style={{ position: 'relative', lineHeight: 0, marginTop: '-100px' }}>
 
         {/* Orange flower — sitting on purple stem, far left */}
         <img src="/homepage/7-footer/Yellow Flower 1 (1).png" alt=""

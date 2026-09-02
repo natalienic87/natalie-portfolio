@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const HEADING = "Hi I'm Natalie.";
+const HEADING = "Hi, I'm Natalie.";
 const COLORS  = ['#E35038', '#FDB154', '#8286F7', '#FBC1C2', '#6374E4', '#FB5755'];
 
 // Decorative collage elements — back to front

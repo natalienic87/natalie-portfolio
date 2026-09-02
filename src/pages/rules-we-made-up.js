@@ -2,11 +2,11 @@ import { useState, useRef, useEffect, createContext, useContext } from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
 import Cursor from '../components/Cursor';
-import CaseStudyNav from '../components/CaseStudyNav';
+import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import CaseStudySection  from '../components/CaseStudySection';
 import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
-import CaseStudyHero        from '../components/CaseStudyHero';
+import StickyHero           from '../components/StickyHero';
 import DashedCardCarousel   from '../components/DashedCardCarousel';
 
 
@@ -1102,7 +1102,7 @@ function BlooperReel() {
           lineHeight: 1.6,
           color:      '#404040',
           textAlign:  'center',
-          margin:     '0 0 48px',
+          margin:     '0 auto 48px',
         }}>
           Every film deserves one. This says more about the process than the final cut does.
         </p>
@@ -1800,7 +1800,7 @@ export default function RulesWeMadeUp() {
     <DoodleEditContext.Provider value={{ enabled: doodleEditEnabled, positions: doodlePositions, updatePosition: updateDoodlePosition, deletedDoodles, deleteDoodle }}>
     <main className="main-clip-mobile" style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
       <Cursor />
-      <CaseStudyNav />
+      <Nav light />
 
       {/* Baked page-level doodles */}
       {BAKED_EXTRAS.map(d => (
@@ -1818,13 +1818,86 @@ export default function RulesWeMadeUp() {
       ))}
 
 
-      <CaseStudyHero
-        title="The Making of an Animated Short with AI"
-        year="2025"
-        role="Director, Writer, Art Director"
-        medium="AI-assisted animation, music, character design, visual storytelling"
-        video="/rules-we-made-up/1-hero/king-loop.mp4"
-      />
+      <StickyHero minHeight="max(800px, 90vh)" maxHeight="max(800px, 90vh)">
+
+        {/* Left panel — pill → H1 → intro */}
+        <div className="hero-panel-left" style={{
+          flex:           '0 0 50%',
+          display:        'flex',
+          flexDirection:  'column',
+          justifyContent: 'center',
+          paddingLeft:    '80px',
+          paddingRight:   '80px',
+          paddingTop:     '80px',
+          paddingBottom:  '80px',
+          boxSizing:      'border-box',
+          position:       'relative',
+          zIndex:         1,
+        }}>
+
+          {/* CASE STUDY pill badge */}
+          <div className="hero-eyebrow" style={{ marginBottom: '32px', alignSelf: 'flex-start' }}>
+            <div style={{
+              display:      'inline-flex',
+              alignItems:   'center',
+              border:       '1.5px dashed #101010',
+              borderRadius: '100px',
+              padding:      '6px 18px',
+            }}>
+              <span className="hero-eyebrow-text" style={{
+                fontFamily:    'Fira Mono, monospace',
+                fontWeight:    400,
+                fontSize:      '11px',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                lineHeight:    1.5,
+                color:         '#101010',
+              }}>Case Study</span>
+            </div>
+          </div>
+
+          <h1 className="font-heading hero-title" style={{
+            fontWeight: 700,
+            fontSize:   '90px',
+            lineHeight: 1.0,
+            color:      '#101010',
+            margin:     '0 0 28px',
+          }}>
+            The Making of an Animated Short with AI
+          </h1>
+
+          <p className="cs-body" style={{
+            fontFamily: 'Fraunces, serif',
+            fontWeight: 300,
+            fontSize:   '20px',
+            lineHeight: 1.6,
+            color:      '#404040',
+            margin:     0,
+          }}>
+            This short film, "Rules We Made Up," is adapted from a poem I wrote years ago —
+            exploring music creation, character design, storyboarding, and a community scene.
+          </p>
+
+        </div>
+
+        {/* Right panel — full-height looping video, explicit height anchors the percentage */}
+        <div className="hero-panel-right" style={{
+          flex:      '0 0 50%',
+          minHeight: 'max(800px, 90vh)',
+          maxHeight: 'max(800px, 90vh)',
+          overflow:  'hidden',
+          position:  'relative',
+          zIndex:    1,
+        }}>
+          <video
+            autoPlay muted loop playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', cursor: 'default' }}
+          >
+            <source src="/rules-we-made-up/1-hero/king-loop.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+      </StickyHero>
 
       {/* ── Video + Intro ── */}
       <section className="video-intro-section" style={{ backgroundColor: '#F5F0EC', backgroundImage: 'url(/Medium-beige-darker-bg2.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative', zIndex: 2, borderRadius: '24px 24px 0 0', boxShadow: '0 -8px 40px rgba(0,0,0,0.10)', paddingBottom: '140px' }}>

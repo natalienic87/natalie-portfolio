@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Cursor from '../components/Cursor';
-import CaseStudyNav from '../components/CaseStudyNav';
+import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import CaseStudySection  from '../components/CaseStudySection';
 import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
-import CaseStudyHero       from '../components/CaseStudyHero';
+import StickyHero          from '../components/StickyHero';
 import DashedCardCarousel  from '../components/DashedCardCarousel';
 import TickerStrip         from '../components/TickerStrip';
 
@@ -264,15 +264,76 @@ export default function AddRefresh() {
   return (
     <main className="main-clip-mobile" style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
       <Cursor />
-      <CaseStudyNav />
+      <Nav light />
 
-      <CaseStudyHero
-        title="Refreshing the (add)ventures brand from the inside out"
-        year="2025"
-        role="Sr. Designer & Art Director"
-        medium="Brand Identity, Visual Systems, Web"
-        video="/add-refresh/1_Hero_LoopingVideo_bee.mp4"
-      />
+      <StickyHero minHeight="max(800px, 90vh)" maxHeight="max(800px, 90vh)">
+
+        {/* Left panel — pill → H1 */}
+        <div className="hero-panel-left" style={{
+          flex:           '0 0 50%',
+          display:        'flex',
+          flexDirection:  'column',
+          justifyContent: 'center',
+          paddingLeft:    '80px',
+          paddingRight:   '80px',
+          paddingTop:     '80px',
+          paddingBottom:  '80px',
+          boxSizing:      'border-box',
+          position:       'relative',
+          zIndex:         1,
+        }}>
+
+          {/* CASE STUDY pill badge */}
+          <div className="hero-eyebrow" style={{ marginBottom: '32px', alignSelf: 'flex-start' }}>
+            <div style={{
+              display:      'inline-flex',
+              alignItems:   'center',
+              border:       '1.5px dashed #101010',
+              borderRadius: '100px',
+              padding:      '6px 18px',
+            }}>
+              <span className="hero-eyebrow-text" style={{
+                fontFamily:    'Fira Mono, monospace',
+                fontWeight:    400,
+                fontSize:      '11px',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                lineHeight:    1.5,
+                color:         '#101010',
+              }}>Case Study</span>
+            </div>
+          </div>
+
+          <h1 className="font-heading hero-title" style={{
+            fontWeight: 700,
+            fontSize:   '90px',
+            lineHeight: 1.0,
+            color:      '#101010',
+            margin:     0,
+          }}>
+            Refreshing the (add)ventures brand from the inside out
+          </h1>
+
+        </div>
+
+        {/* Right panel — full-height looping video */}
+        <div className="hero-panel-right" style={{
+          flex:      '0 0 50%',
+          minHeight: 'max(800px, 90vh)',
+          maxHeight: 'max(800px, 90vh)',
+          overflow:  'hidden',
+          position:  'relative',
+          zIndex:    1,
+        }}>
+          <video
+            autoPlay muted loop playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', cursor: 'default' }}
+          >
+            <source src="/add-refresh/1_Hero_LoopingVideo_bee.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+      </StickyHero>
 
       {/* ── MediaFrame ── */}
       <section className="video-intro-section" style={{
@@ -492,10 +553,10 @@ export default function AddRefresh() {
               <h3 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 20px' }}>
                 The natural next step for the brand
               </h3>
-              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 0 20px' }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto 20px' }}>
                 The agency was evolving, and the brand needed room to evolve with it. What started as an illustration exploration quickly raised bigger questions about type, color, motion, tone, and how the system should behave across channels.
               </p>
-              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+              <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto' }}>
                 We were bringing that kind of strategic thinking to client work every day. This became a chance to bring it back to ourselves.
               </p>
             </div>
@@ -534,7 +595,7 @@ export default function AddRefresh() {
             <h3 className="font-body cs-h3" style={{ fontWeight: 700, fontSize: '33px', lineHeight: 1.2, color: '#101010', margin: '0 0 16px' }}>
               Let the Concept Sprint Begin!
             </h3>
-            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto' }}>
               In a fast-paced sprint, a small group of art directors developed independent visions for the brand&apos;s evolution.
             </p>
           </div>
@@ -910,7 +971,7 @@ export default function AddRefresh() {
             <h2 className="font-heading cs-h2" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.05, color: '#101010', margin: '0 0 24px' }}>
               Carrying the system to create a brand new website
             </h2>
-            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto' }}>
               As the refresh gained momentum, the system moved directly into a website sprint. In a short timeline, the team began translating the new direction into digital structure, page design, content hierarchy, and interactive brand moments.
             </p>
           </div>

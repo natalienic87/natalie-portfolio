@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Cursor from '../components/Cursor';
-import CaseStudyNav from '../components/CaseStudyNav';
+import Nav from '../components/Nav';
 import Footer from '../components/Footer';
-import CaseStudyHero from '../components/CaseStudyHero';
+import StickyHero    from '../components/StickyHero';
 import PhoneCarousel from '../components/PhoneCarousel';
 import FourBy from '../components/FourBy';
 import CaseStudyFullBleed from '../components/CaseStudyFullBleed';
@@ -151,7 +151,7 @@ function BeyondCarousel({ slides }) {
         <p className="font-body cs-h2" style={{ fontWeight: 700, fontSize: '33px', color: '#101010', margin: '0 0 16px' }}>
           {slide.title}
         </p>
-        <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+        <p className="cs-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto' }}>
           {slide.body}
         </p>
       </div>
@@ -159,12 +159,31 @@ function BeyondCarousel({ slides }) {
   );
 }
 
-// ── Page ─────────────────────────────────────────────────────────────────────
-function RequestAccessWall() {
+// ── Gate constants ────────────────────────────────────────────────────────────
+// DEV is a compile-time constant: true only during `next dev`, dead-code-
+// eliminated to false in every production build. The wall always shows in prod.
+const DEV         = process.env.NODE_ENV === 'development';
+const STORAGE_KEY = 'cvs_unlocked';
+
+// ── Password wall ─────────────────────────────────────────────────────────────
+function RequestAccessWall({ onUnlock }) {
+  const [input, setInput] = useState('');
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = ''; };
   }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (input === process.env.NEXT_PUBLIC_CVS_PASSWORD) {
+      onUnlock();
+    } else {
+      setError(true);
+      setInput('');
+    }
+  };
 
   return (
     <div style={{
@@ -203,39 +222,86 @@ function RequestAccessWall() {
           fontSize:   '16px',
           lineHeight: 1.7,
           color:      '#404040',
-          margin:     '0 0 36px',
+          margin:     '0 0 28px',
         }}>
           Five years of omnichannel campaigns, brand systems, and platform work I&apos;m happy to walk you through directly.
         </p>
-        <a
-          href="mailto:natalienic87@gmail.com"
-          style={{
-            display:         'inline-block',
-            backgroundColor: '#E35038',
-            color:           '#ffffff',
-            fontFamily:      'Poppins, sans-serif',
-            fontWeight:      600,
-            fontSize:        '15px',
-            letterSpacing:   '0.03em',
-            padding:         '14px 32px',
-            borderRadius:    '8px',
-            textDecoration:  'none',
-            marginBottom:    '20px',
-          }}
-        >
-          Request Access →
-        </a>
+
+        {/* Password form */}
+        <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
+          <input
+            type="password"
+            value={input}
+            onChange={e => { setInput(e.target.value); setError(false); }}
+            placeholder="Enter password"
+            autoFocus
+            style={{
+              display:         'block',
+              width:           '100%',
+              boxSizing:       'border-box',
+              fontFamily:      'Poppins, sans-serif',
+              fontWeight:      400,
+              fontSize:        '15px',
+              padding:         '12px 16px',
+              border:          error ? '1.5px solid #E35038' : '1.5px solid rgba(16,16,16,0.20)',
+              borderRadius:    '8px',
+              outline:         'none',
+              marginBottom:    error ? '8px' : '16px',
+              backgroundColor: '#ffffff',
+              color:           '#101010',
+            }}
+          />
+          {error && (
+            <p style={{
+              fontFamily:  'Fira Mono, monospace',
+              fontWeight:  400,
+              fontSize:    '12px',
+              color:       '#E35038',
+              margin:      '0 0 12px',
+              textAlign:   'left',
+            }}>
+              Incorrect password. Try again.
+            </p>
+          )}
+          <button
+            type="submit"
+            style={{
+              display:         'block',
+              width:           '100%',
+              backgroundColor: '#E35038',
+              color:           '#ffffff',
+              fontFamily:      'Poppins, sans-serif',
+              fontWeight:      600,
+              fontSize:        '15px',
+              letterSpacing:   '0.03em',
+              padding:         '14px 32px',
+              borderRadius:    '8px',
+              border:          'none',
+              cursor:          'pointer',
+            }}
+          >
+            View work →
+          </button>
+        </form>
+
+        {/* Fallback for people without a password */}
         <p style={{
           fontFamily: 'Fira Mono, monospace',
           fontWeight: 400,
-          fontSize:   '13px',
+          fontSize:   '12px',
           lineHeight: 1.5,
           color:      '#888888',
-          margin:     '0 0 28px',
-          userSelect: 'all',
+          margin:     '0 0 24px',
         }}>
-          natalienic87@gmail.com
+          Don&apos;t have a password?{' '}
+          <a
+            href="mailto:natalienic87@gmail.com"
+            style={{ color: '#101010', textDecoration: 'underline' }}
+          >
+            Request access →
+          </a>
         </p>
+
         <Link href="/" style={{
           fontFamily:     'Fira Mono, monospace',
           fontWeight:     400,
@@ -253,25 +319,123 @@ function RequestAccessWall() {
 }
 
 export default function CvsAetna() {
+  const [unlocked, setUnlocked] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem(STORAGE_KEY) === '1') setUnlocked(true);
+  }, []);
+
+  const locked = !DEV && !unlocked;
+
   return (
     <>
-      <RequestAccessWall />
-      {/* Page content — blurred and non-interactive behind the wall */}
-      <div style={{ filter: 'blur(8px)', pointerEvents: 'none', userSelect: 'none', overflow: 'hidden' }}>
+      {locked && (
+        <RequestAccessWall onUnlock={() => {
+          localStorage.setItem(STORAGE_KEY, '1');
+          setUnlocked(true);
+        }} />
+      )}
+      <div style={locked ? { filter: 'blur(8px)', pointerEvents: 'none', userSelect: 'none', overflow: 'hidden' } : undefined}>
       <main className="main-clip-mobile" style={{ position: 'relative', minHeight: '100vh', backgroundColor: '#FFFBF8', color: '#101010' }}>
       <Cursor />
-      <CaseStudyNav />
+      <Nav light />
 
       {/* ── Hero ── */}
-      <CaseStudyHero
-        title="CVS Health: Designing for Retail Scale"
-        year="2020 – 2024"
-        role="Senior Designer & Art Director"
-        mediumLabel="Scope"
-        medium="CVS.com systems, ecommerce, campaign design, platform playbooks"
-        image="/cvs-agency-work/1-heart-art-hero/1_outline.jpg"
-        accentColor="#CC0000"
-      />
+      <StickyHero minHeight="max(800px, 90vh)" maxHeight="max(800px, 90vh)">
+
+        {/* Left panel — pill → H1 */}
+        <div className="hero-panel-left" style={{
+          flex:           '0 0 50%',
+          display:        'flex',
+          flexDirection:  'column',
+          justifyContent: 'center',
+          paddingLeft:    '80px',
+          paddingRight:   '80px',
+          paddingTop:     '80px',
+          paddingBottom:  '80px',
+          boxSizing:      'border-box',
+          position:       'relative',
+          zIndex:         1,
+        }}>
+
+          {/* CASE STUDY pill badge */}
+          <div className="hero-eyebrow" style={{ marginBottom: '32px', alignSelf: 'flex-start' }}>
+            <div style={{
+              display:      'inline-flex',
+              alignItems:   'center',
+              border:       '1.5px dashed #101010',
+              borderRadius: '100px',
+              padding:      '6px 18px',
+            }}>
+              <span className="hero-eyebrow-text" style={{
+                fontFamily:    'Fira Mono, monospace',
+                fontWeight:    400,
+                fontSize:      '11px',
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                lineHeight:    1.5,
+                color:         '#101010',
+              }}>Case Study</span>
+            </div>
+          </div>
+
+          <h1 className="font-heading hero-title" style={{
+            fontWeight: 700,
+            fontSize:   '90px',
+            lineHeight: 1.0,
+            color:      '#101010',
+            margin:     0,
+          }}>
+            CVS Health: Designing for Retail Scale
+          </h1>
+
+        </div>
+
+        {/* Right panel — 6-image crossfade cycle, 0.5s per image */}
+        <div className="hero-panel-right" style={{
+          flex:      '0 0 50%',
+          minHeight: 'max(800px, 90vh)',
+          maxHeight: 'max(800px, 90vh)',
+          overflow:  'hidden',
+          position:  'relative',
+          zIndex:    1,
+        }}>
+          <style>{`
+            @keyframes cvs-hero-fade {
+              0%      { opacity: 1; }
+              16.66%  { opacity: 1; }
+              16.67%  { opacity: 0; }
+              100%    { opacity: 0; }
+            }
+          `}</style>
+          {[
+            '1_outline.jpg',
+            '2_Graphic-heart.jpg',
+            '3_breakout-transparency.jpg',
+            '4_Window-heart.jpg',
+            '5_Outline-pool.jpg',
+            '6_Breakout-no-transparency.jpg',
+          ].map((file, i) => (
+            <img
+              key={file}
+              src={`/cvs-agency-work/1-heart-art-hero/${file}`}
+              alt=""
+              style={{
+                position:       'absolute',
+                inset:          0,
+                width:          '100%',
+                height:         '100%',
+                objectFit:      'cover',
+                objectPosition: 'center top',
+                display:        'block',
+                animation:      'cvs-hero-fade 6s linear infinite',
+                animationDelay: `${-(6 - i) * 1}s`,
+              }}
+            />
+          ))}
+        </div>
+
+      </StickyHero>
 
       {/* ── MediaFrame ── */}
       <section className="video-intro-section" style={{
@@ -748,7 +912,7 @@ export default function CvsAetna() {
             <h2 className="font-heading cs-h2" data-dev-text="playbook-h2" style={{ fontWeight: 700, fontSize: '64px', lineHeight: 1.1, color: '#101010', margin: '0 0 24px' }}>
               Platform Playbook
             </h2>
-            <p className="cs-body" data-dev-text="playbook-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: 0 }}>
+            <p className="cs-body" data-dev-text="playbook-body" style={{ fontFamily: 'Fraunces, serif', fontWeight: 300, fontSize: '20px', lineHeight: 1.6, color: '#404040', margin: '0 auto' }}>
               The ask was no longer just to design another page, asset or seasonal system. It was to help turn a national brand platform into a playbook every agency partner and internal team could use.
             </p>
           </div>

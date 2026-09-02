@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-const navLinkStyle = (hovered) => ({
+const navLinkStyle = (hovered, light) => ({
   position:       'relative',
   fontFamily:     'Fira Mono, monospace',
   fontWeight:     500,
@@ -9,13 +9,15 @@ const navLinkStyle = (hovered) => ({
   letterSpacing:  '0.12em',
   textTransform:  'uppercase',
   textDecoration: 'none',
-  color:          hovered ? '#ffffff' : '#D9D9D9',
+  color:          light
+    ? (hovered ? '#101010' : '#404040')
+    : (hovered ? '#ffffff' : '#D9D9D9'),
   paddingBottom:  '5px',
   transition:     'color 0.2s ease',
   display:        'inline-block',
 });
 
-function NavLink({ href, children }) {
+function NavLink({ href, children, light }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -23,7 +25,7 @@ function NavLink({ href, children }) {
       href={href}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={navLinkStyle(hovered)}
+      style={navLinkStyle(hovered, light)}
     >
       {children}
       <span style={{
@@ -47,8 +49,8 @@ const caseStudies = [
   { label: '(add)ventures Brand Refresh', href: '/add-refresh'     },
 ];
 
-function CaseStudiesDropdown() {
-  const [open, setOpen]         = useState(false);
+function CaseStudiesDropdown({ light }) {
+  const [open, setOpen]               = useState(false);
   const [labelHovered, setLabelHovered] = useState(false);
 
   return (
@@ -57,8 +59,7 @@ function CaseStudiesDropdown() {
       onMouseEnter={() => { setOpen(true);  setLabelHovered(true);  }}
       onMouseLeave={() => { setOpen(false); setLabelHovered(false); }}
     >
-      {/* Trigger */}
-      <span style={{ ...navLinkStyle(labelHovered), cursor: 'default' }}>
+      <span style={{ ...navLinkStyle(labelHovered, light), cursor: 'default' }}>
         Case Studies
         <span style={{
           position:        'absolute',
@@ -72,7 +73,6 @@ function CaseStudiesDropdown() {
         }} />
       </span>
 
-      {/* Dropdown panel */}
       {open && (
         <div style={{
           position:        'absolute',
@@ -104,18 +104,18 @@ function DropdownItem({ href, children }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        display:        'block',
-        padding:        '10px 20px',
-        fontFamily:     'Poppins, sans-serif',
-        fontWeight:     600,
-        fontSize:       '11px',
-        letterSpacing:  '0.12em',
-        textTransform:  'uppercase',
-        textDecoration: 'none',
-        color:          hovered ? '#ffffff' : '#D9D9D9',
+        display:         'block',
+        padding:         '10px 20px',
+        fontFamily:      'Poppins, sans-serif',
+        fontWeight:      600,
+        fontSize:        '11px',
+        letterSpacing:   '0.12em',
+        textTransform:   'uppercase',
+        textDecoration:  'none',
+        color:           hovered ? '#ffffff' : '#D9D9D9',
         backgroundColor: hovered ? 'rgba(255,255,255,0.06)' : 'transparent',
-        transition:     'color 0.15s ease, background-color 0.15s ease',
-        whiteSpace:     'nowrap',
+        transition:      'color 0.15s ease, background-color 0.15s ease',
+        whiteSpace:      'nowrap',
       }}
     >
       {children}
@@ -123,14 +123,22 @@ function DropdownItem({ href, children }) {
   );
 }
 
-function Divider() {
+function Divider({ light }) {
   return (
-    <span style={{ display: 'inline-block', width: '1px', height: '14px', backgroundColor: 'rgba(255,255,255,0.25)' }} />
+    <span style={{
+      display:         'inline-block',
+      width:           '1px',
+      height:          '14px',
+      backgroundColor: light ? 'rgba(16,16,16,0.25)' : 'rgba(255,255,255,0.25)',
+    }} />
   );
 }
 
-export default function Nav() {
+export default function Nav({ light = false }) {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const logoColor      = light ? '#101010' : '#ffffff';
+  const hamburgerColor = light ? '#101010' : '#ffffff';
 
   return (
     <>
@@ -144,17 +152,17 @@ export default function Nav() {
           letterSpacing:  '0.06em',
           textTransform:  'uppercase',
           textDecoration: 'none',
-          color:          '#ffffff',
+          color:          logoColor,
         }}>
           Natalie Nicholson
         </Link>
 
-        {/* RIGHT — desktop: case studies + contact + substack */}
+        {/* RIGHT — desktop links */}
         <div className="nav-right" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          <CaseStudiesDropdown />
-          <Divider />
-          <NavLink href="mailto:natalienic87@gmail.com">Contact</NavLink>
-          <Divider />
+          <CaseStudiesDropdown light={light} />
+          <Divider light={light} />
+          <NavLink href="mailto:natalienic87@gmail.com" light={light}>Contact</NavLink>
+          <Divider light={light} />
           <a
             href="https://crankthatnat.substack.com/"
             target="_blank"
@@ -166,7 +174,7 @@ export default function Nav() {
               letterSpacing:  '0.12em',
               textTransform:  'uppercase',
               textDecoration: 'none',
-              color:          '#D9D9D9',
+              color:          light ? '#404040' : '#D9D9D9',
             }}
           >
             The Off Hours Substack↗
@@ -179,9 +187,9 @@ export default function Nav() {
           aria-label="Open menu"
           onClick={() => setMenuOpen(true)}
         >
-          <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#ffffff' }} />
-          <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#ffffff' }} />
-          <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: '#ffffff' }} />
+          <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: hamburgerColor }} />
+          <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: hamburgerColor }} />
+          <span style={{ display: 'block', width: '20px', height: '1px', backgroundColor: hamburgerColor }} />
         </button>
 
       </nav>
@@ -191,14 +199,21 @@ export default function Nav() {
         <div onClick={() => setMenuOpen(false)} style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.4)', zIndex: 998 }} />
       )}
 
-      {/* Slide-in panel */}
+      {/* Slide-in panel — always dark */}
       <div style={{
-        position: 'fixed', top: 0, right: 0, bottom: 0, width: '320px',
-        backgroundColor: '#101010', zIndex: 999,
-        padding: '40px', display: 'flex', flexDirection: 'column',
-        transform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
-        transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-        boxShadow: '-8px 0 40px rgba(0,0,0,0.25)',
+        position:        'fixed',
+        top:             0,
+        right:           0,
+        bottom:          0,
+        width:           '320px',
+        backgroundColor: '#101010',
+        zIndex:          999,
+        padding:         '40px',
+        display:         'flex',
+        flexDirection:   'column',
+        transform:       menuOpen ? 'translateX(0)' : 'translateX(100%)',
+        transition:      'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+        boxShadow:       '-8px 0 40px rgba(0,0,0,0.25)',
       }}>
         <button onClick={() => setMenuOpen(false)} aria-label="Close menu" style={{ alignSelf: 'flex-end', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', fontSize: '24px', lineHeight: 1, padding: 0, marginBottom: '48px' }}>✕</button>
 
